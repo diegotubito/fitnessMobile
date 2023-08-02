@@ -24,16 +24,19 @@ struct LoginView: View {
                             .padding()
                             .background(Color.gray.opacity(0.2))
                             .cornerRadius(5)
-                        Button(action: {
+                        
+                        BasicButton(title: "Login", style: .primary, isEnabled: .constant(true)) {
                             Task {
                                 await viewmodel.doLogin()
                             }
-                        }) {
-                            Text("Login")
-                                .padding()
-                                .background(Color.blue)
-                                .foregroundColor(.white)
-                                .cornerRadius(5)
+                        }
+                        .padding(.bottom)
+                        NavigationLink("Sign Up") {
+                            SignUp()
+                        }
+                        .padding(.bottom)
+                        BasicButton(title: "Close View", style: .secondary, isEnabled: .constant(true)) {
+                            dismiss()
                         }
                     }
                     .padding()

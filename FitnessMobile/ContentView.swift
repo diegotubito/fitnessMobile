@@ -8,29 +8,27 @@
 import SwiftUI
 
 struct ContentView: View {
-    
-    @StateObject private var socketIOManager = SocketIOManager()
-    
-    @State var presentLogin = false
+    @StateObject private var connection = Connection()
+    @StateObject var router = Router()
     
     var body: some View {
         VStack {
-            Image(systemName: "globe")
-                .imageScale(.large)
-                .foregroundColor(.accentColor)
-            Text("Hello, world!")
-            Button("Login") {
-                presentLogin = true
+            switch connection.state {
+            case .connected:
+                HomeView()
+            case .noInternet:
+                OfflineView()
+            case .noServer:
+                OfflineView()
+            case .noUser:
+                LoginView()
+            case .waiting:
+                SplashView()
             }
         }
         .padding()
-        .onAppear {
-            presentLogin = true
-        }
-        .onDisappear {
-            socketIOManager.socket.disconnect()
-        }
-        .presentLoginAsModal(shouldNavigate: $presentLogin)
+        .environmentObject(connection)
+        .environmentObject(router)
     }
 }
 

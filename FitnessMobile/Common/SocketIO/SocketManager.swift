@@ -10,8 +10,8 @@ import SocketIO
 import Combine
 
 struct CurrentHost {
-    static let local = "http://127.0.0.1:3000"
-    static let remote = "https://ddg-testing-app-01.herokuapp.com"
+    static let local = "http://127.0.0.1:3001"
+    static let remote = "https://obscure-ravine-72715.herokuapp.com"
     
     static func getHost() -> String {
         #if targetEnvironment(simulator)
@@ -71,12 +71,7 @@ class SocketIOManager: ObservableObject {
                 }
             }
         })
-
-        
-
         self.socket.connect()
-    
-        
         self.socket.on("new-message") { [weak self] (dataArray, ack) -> Void in
             if let message = dataArray[0] as? [String: Any] {
                 print("Socket: received message: \(message)")
@@ -94,7 +89,6 @@ class SocketIOManager: ObservableObject {
                 }
             }
         }
-      
     }
     // Add your custom event listeners here
     

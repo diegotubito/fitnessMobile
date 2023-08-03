@@ -9,9 +9,12 @@ import SwiftUI
 
 @main
 struct FitnessMobileApp: App {
+    @StateObject var socketIOManager = SocketIOManager()
+
     var body: some Scene {
         WindowGroup {
             ContentView()
+                .environmentObject(socketIOManager)
         }
     }
 }

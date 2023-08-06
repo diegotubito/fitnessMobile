@@ -10,11 +10,13 @@ import SwiftUI
 @main
 struct FitnessMobileApp: App {
     @StateObject var socketIOManager = SocketIOManager()
+    @StateObject var coordinator = Coordinator()
 
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            MainView()
                 .environmentObject(socketIOManager)
+                .environmentObject(coordinator)
         }
     }
 }

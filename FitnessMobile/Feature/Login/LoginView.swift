@@ -8,55 +8,51 @@
 import SwiftUI
 
 struct LoginView: View {
-    @ObservedObject var viewmodel = LoginViewModel()
+    @StateObject var viewmodel = LoginViewModel()
     @EnvironmentObject var coordinator: Coordinator
-
+    @State var showAlert = false
     var body: some View {
-        NavigationStack {
-            ZStack {
-                ScrollView {
-                    VStack {
-                        TextField("Username", text: $viewmodel.username)
-                            .padding()
-                            .background(Color.gray.opacity(0.2))
-                            .cornerRadius(5)
-                        SecureField("Password", text: $viewmodel.password)
-                            .padding()
-                            .background(Color.gray.opacity(0.2))
-                            .cornerRadius(5)
-                        
-                        BasicButton(title: "Login", style: .primary, isEnabled: .constant(true)) {
-                            Task {
-                                await viewmodel.doLogin()
-                            }
-                        }
-                        .padding(.bottom)
-                        NavigationLink("Sign Up") {
-                            SignUp()
-                        }
-                        .padding(.bottom)
-                       
-                    }
+        ScrollView {
+            VStack {
+                TextField("Username", text: $viewmodel.username)
                     .padding()
+                    .background(Color.gray.opacity(0.2))
+                    .cornerRadius(5)
+                SecureField("Password", text: $viewmodel.password)
+                    .padding()
+                    .background(Color.gray.opacity(0.2))
+                    .cornerRadius(5)
+                
+                BasicButton(title: "Login", style: .primary, isEnabled: .constant(true)) {
+                    perfomrLogin()
                 }
+                .padding(.bottom)
+                
             }
-            .alert(isPresented: $viewmodel.showAlert) {
-                Alert(title: Text(viewmodel.alertTitle),
-                      message: Text(viewmodel.alertMessage),
-                      dismissButton: .default(Text(viewmodel.alertButtonTitle)))
-            }
-            .navigationTitle("Login")
+            .alert(isPresented: $showAlert, content: {
+                Alert(title: Text("Something went wrong"), message: Text("el usuario o contraseña son incorrectos."))
+            })
+            .padding()
         }
-        .onChange(of: viewmodel.onLoginSuccess) { success in
-            if success {
+        .navigationTitle("Login")
+    }
+    
+    func perfomrLogin() {
+        viewmodel.doLogin(completion: { result in
+            if result {
                 coordinator.closeModal()
+            } else {
+                showAlert = true
             }
-        }
+        })
     }
 }
 
 struct LoginView_Previews: PreviewProvider {
+    @State static var coordinator = Coordinator()
     static var previews: some View {
-        LoginView()
+        NavigationStack {
+            LoginView()
+        }.environmentObject(coordinator)
     }
 }

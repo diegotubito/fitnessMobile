@@ -8,31 +8,22 @@
 import Foundation
 
 class LoginViewModel: ObservableObject {
-    var alertTitle: String = "Login Error"
-    var alertMessage: String = ""
-    var alertButtonTitle: String = "OK"
-    @Published var showAlert: Bool = false
-    
-    var loginUseCase = LoginUseCase()
     @Published var username: String = "diegodavid@icloud.com"
     @Published var password: String = "admin1234"
-    @Published var onLoginSuccess: Bool = false
 
     @MainActor
-    func doLogin() async {
-        
+    func doLogin(completion: @escaping (Bool) -> Void) {
+        let loginUseCase = LoginUseCase()
         let input = LoginEntity.Input(email: username, password: password)
-        do {
-            let response = try await loginUseCase.doLogin(input: input)
-            UserSessionManager.saveUser(user: response.user, token: response.token)
-            onLoginSuccess = true
-        } catch let error as APIError {
-            self.showAlert = true
-            alertMessage = error.message ?? ""
-        }
-        catch  {
-            self.showAlert = true
-            alertMessage = error.localizedDescription
+        
+        Task {
+            do {
+                let response = try await loginUseCase.doLogin(input: input)
+                UserSessionManager.saveUser(user: response.user, token: response.token)
+                completion(true)
+            } catch {
+                completion(false)
+            }
         }
     }
 }

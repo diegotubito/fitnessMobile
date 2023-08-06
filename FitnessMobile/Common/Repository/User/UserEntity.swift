@@ -24,4 +24,12 @@ struct UserEntity {
             let user: User
         }
     }
+    
+    struct Get {
+        struct Request: Codable {}
+        
+        struct Response: Decodable {
+            let users: [User]
+        }
+    }
 }

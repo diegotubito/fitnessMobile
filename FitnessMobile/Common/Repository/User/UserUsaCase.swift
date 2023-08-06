@@ -29,5 +29,9 @@ class UserUseCase {
     func deleteUser() async throws -> DeleteUserResult {
         return try await repository.deleteUser()
     }
+    
+    func getUsers() async throws -> GetUserResult {
+        return try await repository.getUsers()
+    }
 }
 

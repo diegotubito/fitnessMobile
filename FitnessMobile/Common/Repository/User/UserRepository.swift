@@ -8,10 +8,12 @@
 import Foundation
 typealias CreateUserResult = UserEntity.Create.Response
 typealias DeleteUserResult = Data
+typealias GetUserResult = UserEntity.Get.Response
 
 protocol UserRepositoryProtocol {
     func doCreate(request: UserEntity.Create.Request) async throws -> CreateUserResult
-    func deleteUser() async throws -> DeleteUserResult 
+    func deleteUser() async throws -> DeleteUserResult
+    func getUsers() async throws -> GetUserResult
 }
 
 class UserRepository: ApiNetworkAsync, UserRepositoryProtocol {
@@ -26,6 +28,12 @@ class UserRepository: ApiNetworkAsync, UserRepositoryProtocol {
         config.path = "/api/v1/user"
         config.method = .delete
         config.addQueryItem(key: "_id", value: UserSessionManager().getUserSession()?.user._id ?? "")
+        return try await apiCall()
+    }
+    
+    func getUsers() async throws -> GetUserResult {
+        config.path = "/api/v1/user"
+        config.method = .get
         return try await apiCall()
     }
 }

@@ -12,24 +12,22 @@ struct TabBarView: View {
         UITabBar.appearance().backgroundColor = UIColor(Color.Blue.midnight)
     }
     
-    @EnvironmentObject var coordinator: Coordinator
-    
-    
-    @State var shouldShowSplah = false
-    
     var body: some View {
         VStack {
-            if shouldShowSplah {
-                SplashView(shouldShowSplash: $shouldShowSplah)
-            } else {
-                TabView {
-                    HomeView()
-                        .frame(maxHeight: .infinity)
-                        .tabItem {
-                            Image(systemName: "mappin.and.ellipse")
-                            Text("Around")
-                        }
-                }
+            TabView {
+                HomeView()
+                    .frame(maxHeight: .infinity)
+                    .tabItem {
+                        Image(systemName: "mappin.and.ellipse")
+                        Text("Around")
+                    }
+                
+                SettingView()
+                    .frame(maxHeight: .infinity)
+                    .tabItem {
+                        Image(systemName: "mappin.and.ellipse")
+                        Text("Around")
+                    }
             }
         }
         .onAppear {

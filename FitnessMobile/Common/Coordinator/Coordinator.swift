@@ -91,6 +91,7 @@ class Coordinator: ObservableObject {
         case tabbar
         case home
         case pushView
+        case deleteAccount
     }
     
     enum SheetView: Identifiable {
@@ -126,6 +127,8 @@ class Coordinator: ObservableObject {
             HomeView()
         case .pushView:
             HomeView()
+        case .deleteAccount:
+            DeleteAccountView()
         }
     }
     

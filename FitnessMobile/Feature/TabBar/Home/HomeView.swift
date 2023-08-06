@@ -33,12 +33,8 @@ struct HomeView: View {
 
             })
             
-            Button("Log Out", action: {
-                UserSessionManager.removeUserSession()
-                coordinator.presentModal(.login)
-            })
+           
         }
-        .navigationTitle("Root view")
     }
 }
 

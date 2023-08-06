@@ -9,38 +9,42 @@ import SwiftUI
 
 struct LoginView: View {
     @StateObject var viewmodel = LoginViewModel()
-    @EnvironmentObject var coordinator: Coordinator
     @State var showAlert = false
+    @Environment(\.dismiss) private var dismiss
     var body: some View {
-        ScrollView {
-            VStack {
-                TextField("Username", text: $viewmodel.username)
+        NavigationStack {
+            ScrollView {
+                VStack {
+                    TextField("Username", text: $viewmodel.username)
+                        .padding()
+                        .background(Color.gray.opacity(0.2))
+                        .cornerRadius(5)
+                    SecureField("Password", text: $viewmodel.password)
+                        .padding()
+                        .background(Color.gray.opacity(0.2))
+                        .cornerRadius(5)
+                    
+                    BasicButton(title: "Login", style: .primary, isEnabled: .constant(true)) {
+                        perfomrLogin()
+                    }
                     .padding()
-                    .background(Color.gray.opacity(0.2))
-                    .cornerRadius(5)
-                SecureField("Password", text: $viewmodel.password)
-                    .padding()
-                    .background(Color.gray.opacity(0.2))
-                    .cornerRadius(5)
-                
-                BasicButton(title: "Login", style: .primary, isEnabled: .constant(true)) {
-                    perfomrLogin()
+                    NavigationLink("Sign Up") {
+                        SignUp()
+                    }
                 }
-                .padding(.bottom)
-                
+                .alert(isPresented: $showAlert, content: {
+                    Alert(title: Text("Something went wrong"), message: Text("el usuario o contraseña son incorrectos."))
+                })
+                .padding()
             }
-            .alert(isPresented: $showAlert, content: {
-                Alert(title: Text("Something went wrong"), message: Text("el usuario o contraseña son incorrectos."))
-            })
-            .padding()
+            .navigationTitle("Login")
         }
-        .navigationTitle("Login")
     }
     
     func perfomrLogin() {
         viewmodel.doLogin(completion: { result in
             if result {
-                coordinator.closeModal()
+                dismiss()
             } else {
                 showAlert = true
             }

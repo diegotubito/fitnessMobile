@@ -7,12 +7,12 @@
 
 import Foundation
 
-class LoginViewModel: ObservableObject {
+class LoginViewModel: BaseViewModel {
     @Published var username: String = ""
     @Published var password: String = ""
     @Published var users: [User] = []
     @Published var isLoading: Bool = false
-
+    
     @MainActor
     func doLogin(completion: @escaping (LoginEntity.Response?) -> Void) {
         let loginUseCase = LoginUseCase()
@@ -25,6 +25,7 @@ class LoginViewModel: ObservableObject {
                 completion(response)
             } catch {
                 isLoading = false
+                handleError(error: error)
                 completion(nil)
             }
         }
@@ -33,17 +34,12 @@ class LoginViewModel: ObservableObject {
     @MainActor
     func loadUsers() {
         let usecase = UserUseCase()
-        
         Task {
             do {
                 let response = try await usecase.getUsers()
-                DispatchQueue.main.async {
-                    self.users = response.users
-                }
+                self.users = response.users
             } catch {
-                DispatchQueue.main.async {
-                    self.users = []
-                }
+                self.handleError(error: error)
             }
         }
     }

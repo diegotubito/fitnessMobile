@@ -76,7 +76,7 @@ open class ApiNetwork {
     private func doTask(request: URLRequest, completion: @escaping (Result<Data, APIError>) -> Void) {
         let task = session.dataTask(with: request) {(data, response, error) in
             if error != nil {
-                completion(.failure(.serverError(message: "Unknown error")))
+                completion(.failure(.serverError(title: "_500_SERVER_TITLE", message: "_NOT_KNOWN_MESSAGE")))
                 return
             }
             
@@ -100,9 +100,9 @@ open class ApiNetwork {
                      */
                 }
                 else if status == 500 {
-                    completion(.failure(.serverError(message: "show be error message here")))
+                    completion(.failure(.serverError(title: "", message: "show be error message here")))
                 } else {
-                    completion(.failure(.serverError(message: "unknow error")))
+                    completion(.failure(.serverError(title: "", message: "unknow error")))
                 }
                 return
             }

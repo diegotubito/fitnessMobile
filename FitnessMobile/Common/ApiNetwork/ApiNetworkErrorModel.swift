@@ -16,7 +16,7 @@ public enum APIError: Error, CustomStringConvertible, Equatable {
     case userSessionNotFound
     case notFound(url: String?)
     case rateLimitExceeded
-    case serverError(message: String)
+    case serverError(title: String, message: String)
     case serialization
     case jsonFileNotFound(filename: String?)
     case mockFailed
@@ -112,7 +112,7 @@ public enum APIError: Error, CustomStringConvertible, Equatable {
             }
         case .rateLimitExceeded:
             return defaultMessage.appending("Rate limit exceeded")
-        case .serverError(message: let message):
+        case .serverError(title: let _, message: let message):
             return defaultMessage.appending(message)
         case .serialization:
             return defaultMessage.appending("Serialization error")

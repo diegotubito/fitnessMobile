@@ -13,15 +13,17 @@ struct LoginView: View {
     @EnvironmentObject var userSession: UserSessionManager
     @EnvironmentObject var coordinator: Coordinator
     
+    @State var shouldReload = true
+    
     var body: some View {
         VStack {
             ScrollView {
                 VStack {
-                    TextField("Username", text: $viewmodel.username)
+                    TextField("_USERNAME", text: $viewmodel.username)
                         .padding()
                         .background(Color.gray.opacity(0.2))
                         .cornerRadius(5)
-                    SecureField("Password", text: $viewmodel.password)
+                    SecureField("_PASSWORD", text: $viewmodel.password)
                         .padding()
                         .background(Color.gray.opacity(0.2))
                         .cornerRadius(5)
@@ -34,7 +36,7 @@ struct LoginView: View {
                     Button {
                         coordinator.push(.signUp)
                     } label: {
-                        Text("Sign Up")
+                        Text("_SIGNUP")
                     }
                 }
                 
@@ -49,16 +51,20 @@ struct LoginView: View {
                     self.viewmodel.password = "admin1234"
                 }
             }
+           
         }
         .overlay(content: {
             if viewmodel.isLoading {
                 ProgressView()
             }
         })
-        .onAppear {
-            viewmodel.loadUsers()
-        }
-        .navigationTitle("Login")
+        .onAppear(perform: {
+            if shouldReload {
+                viewmodel.loadUsers()
+                shouldReload = false
+            }
+        })
+        .navigationTitle("_LOGIN_TITLE")
         
     }
     
@@ -68,8 +74,7 @@ struct LoginView: View {
                 if let response = response {
                     userSession.saveUser(user: response.user, token: response.token)
                 } else {
-                    coordinator.presentPrimaryAlert(title: "Login Error", message: "wrong user/password") {
-                        
+                    coordinator.presentPrimaryAlert(title: viewmodel.errorTitle, message: viewmodel.errorMessage) {
                     }
                 }
             }

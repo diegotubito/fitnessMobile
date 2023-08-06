@@ -1,0 +1,24 @@
+/* 
+  Login.strings
+  FitnessMobile
+
+  Created by David Diego Gomez on 06/08/2023.
+  
+*/
+
+"_USERNAME" = "Usuario";
+"_PASSWORD" = "Clave";
+"_SIGNUP" = "Registrarse";
+"_LOGIN_TITLE" = "Autenticación";
+
+// BACKEND RESPONSE
+"_LOGIN_ERROR" = "Error de Autenticación";
+"_WRONG_USER_PASSWORD" = "El usuario o contraseña son incorrectos.";
+// ERROR HANDLER
+"_404_TITLE" = "Error";
+"_404_MESSAGE" = "404 - Url no encontrada.";
+"_500_SERVER_TITLE" = "Error de Servidor";
+"_NOT_KNOWN_TITLE" = "Error Desconocido";
+"_NOT_KNOWN_MESSAGE" = "Ocurrio un error";
+"_SERIALIZE_TITLE" = "Error";
+"_SERIALIZE_MESSAGE" = "No se pudo serializar los datos.";

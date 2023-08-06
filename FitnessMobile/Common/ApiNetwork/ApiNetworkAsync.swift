@@ -77,7 +77,7 @@ open class ApiNetworkAsync {
         let (data, response) = try await session.data(for: request)
         
         guard let httpResponse = response as? HTTPURLResponse else {
-            throw APIError.serverError(message: "Unknown error")
+            throw APIError.serverError(title: "_NOT_KNOWN_TITLE", message: "_NOT_KNOWN_MESSAGE")
         }
         
         logResponse(request: request, data: data, httpResponse: httpResponse)
@@ -101,10 +101,11 @@ open class ApiNetworkAsync {
                 throw APIError.notFound(url: request.url?.absoluteString)
             case 500:
                 let json = try JSONSerialization.jsonObject(with: data) as? [String: Any]
+                let title = json?["title"] as? String
                 let message = json?["message"] as? String
-                throw APIError.serverError(message: message ?? "")
+                throw APIError.serverError(title: title ?? "", message: message ?? "")
             default:
-                throw APIError.serverError(message: "Unknown error")
+                throw APIError.serverError(title: "_NOT_KNOWN_TITLE", message: "_NOT_KNOWN_MESSAGE")
             }
         }
 

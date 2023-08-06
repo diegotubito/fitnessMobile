@@ -12,28 +12,7 @@ struct HomeView: View {
     
     var body: some View {
         VStack {
-            Button("Push View", action: {
-                coordinator.push(.pushView)
-            })
-            
-            Button("Sheet View", action: {
-                coordinator.presentSheet(.tac)
-            })
-
-            Button("Fullscreen View", action: {
-                coordinator.presentModal(.fullscreenView(text: "this text is from other view"))
-            })
-            
-            Button("Alert", action: {
-                coordinator.presentDesctructiveAlert(title: "Title", message: "Message") {
-                    print("primary tapped")
-                } secondaryTapped: {
-                    print("secondary tapped")
-                }
-
-            })
-            
-           
+            Text("Home")
         }
     }
 }

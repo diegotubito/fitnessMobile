@@ -18,15 +18,15 @@ struct TabBarView: View {
                 HomeView()
                     .frame(maxHeight: .infinity)
                     .tabItem {
-                        Image(systemName: "mappin.and.ellipse")
-                        Text("Around")
+                        Image(systemName: "house")
+                        Text("Home")
                     }
                 
                 SettingView()
                     .frame(maxHeight: .infinity)
                     .tabItem {
-                        Image(systemName: "mappin.and.ellipse")
-                        Text("Around")
+                        Image(systemName: "gearshape")
+                        Text("Setting")
                     }
             }
         }

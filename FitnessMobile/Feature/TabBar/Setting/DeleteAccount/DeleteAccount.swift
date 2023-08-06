@@ -26,11 +26,9 @@ struct DeleteAccountView: View {
             Spacer()
             HStack {
                 BasicButton(title: "Delete Account", style: .destructive, isEnabled: .constant(true)) {
-                    coordinator.presentDesctructiveAlert(title: "Account", message: "Sure") {
+                    coordinator.presentDesctructiveAlert(title: "Delete Account", message: "Are you sure you want to delete this account?") {
                         deleteAccount()
-                    } secondaryTapped: {
-                        print("no")
-                    }
+                    } secondaryTapped: { }
                 }
             }
         }

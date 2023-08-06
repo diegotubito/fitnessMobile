@@ -68,10 +68,10 @@ struct CoordinatorMainView: View {
                     }
                 }
                 .onChange(of: userSession.didLogOut) { _ in
-                    coordinator.presentModal(.login)
+                    currentPage = .login
                 }
                 .onChange(of: userSession.didLogIn) { _ in
-                    coordinator.closeModal()
+                    currentPage = .tabbar
                 }
         }
     }

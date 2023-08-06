@@ -10,44 +10,48 @@ import SwiftUI
 struct LoginView: View {
     @StateObject var viewmodel = LoginViewModel()
     @State var showAlert = false
-    @Environment(\.dismiss) private var dismiss
     @EnvironmentObject var userSession: UserSessionManager
+    @EnvironmentObject var coordinator: Coordinator
     var body: some View {
-        NavigationStack {
-            ScrollView {
-                VStack {
-                    TextField("Username", text: $viewmodel.username)
-                        .padding()
-                        .background(Color.gray.opacity(0.2))
-                        .cornerRadius(5)
-                    SecureField("Password", text: $viewmodel.password)
-                        .padding()
-                        .background(Color.gray.opacity(0.2))
-                        .cornerRadius(5)
-                    
-                    BasicButton(title: "Login", style: .primary, isEnabled: .constant(true)) {
-                        perfomrLogin()
-                    }
+        ScrollView {
+            VStack {
+                TextField("Username", text: $viewmodel.username)
                     .padding()
-                    NavigationLink("Sign Up") {
-                        SignUp()
-                    }
+                    .background(Color.gray.opacity(0.2))
+                    .cornerRadius(5)
+                SecureField("Password", text: $viewmodel.password)
+                    .padding()
+                    .background(Color.gray.opacity(0.2))
+                    .cornerRadius(5)
+                
+                BasicButton(title: "Login", style: .primary, isEnabled: .constant(true)) {
+                    perfomrLogin()
                 }
-                .alert(isPresented: $showAlert, content: {
-                    Alert(title: Text("Something went wrong"), message: Text("el usuario o contraseña son incorrectos."))
-                })
                 .padding()
+                
+                Button {
+                    coordinator.push(.signUp)
+                } label: {
+                    Text("Sign Up")
+                }
             }
-            .navigationTitle("Login")
+            
+            .padding()
         }
+        .navigationTitle("Login")
+        
     }
     
     func perfomrLogin() {
         viewmodel.doLogin(completion: { response in
-            if let response = response {
-                userSession.saveUser(user: response.user, token: response.token)
-            } else {
-                showAlert = true
+            DispatchQueue.main.async {
+                if let response = response {
+                    userSession.saveUser(user: response.user, token: response.token)
+                } else {
+                    coordinator.presentPrimaryAlert(title: "Login Error", message: "wrong user/password") {
+                        
+                    }
+                }
             }
         })
     }

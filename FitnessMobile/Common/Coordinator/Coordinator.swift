@@ -90,9 +90,9 @@ class Coordinator: ObservableObject {
     enum PageView: Hashable {
         case tabbar
         case home
-        case pushView
         case deleteAccount
         case login
+        case signUp
     }
     
     enum SheetView: Identifiable {
@@ -107,13 +107,11 @@ class Coordinator: ObservableObject {
     }
     
     enum ModalView: Identifiable {
-        case fullscreenView(text: String)
         case noInternet
-        case login
-
+      
         var id: UUID {
             switch self {
-            case .fullscreenView, .noInternet, .login:
+            case .noInternet:
                 return UUID()
             }
         }
@@ -126,12 +124,12 @@ class Coordinator: ObservableObject {
             TabBarView()
         case .home:
             HomeView()
-        case .pushView:
-            HomeView()
         case .deleteAccount:
             DeleteAccountView()
         case .login:
             LoginView()
+        case .signUp:
+            SignUp()
         }
     }
     
@@ -146,12 +144,8 @@ class Coordinator: ObservableObject {
    @ViewBuilder
     func getModal(_ modal: ModalView) -> some View {
         switch modal {
-        case .fullscreenView(let text):
-            FullscreenView(text: text)
         case .noInternet:
             OfflineInternetView()
-        case .login:
-            LoginView()
         }
     }
 }

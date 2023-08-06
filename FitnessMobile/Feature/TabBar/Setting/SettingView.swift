@@ -9,14 +9,14 @@ import SwiftUI
 
 struct SettingView: View {
     @EnvironmentObject var coordinator: Coordinator
+    @EnvironmentObject var userSession: UserSessionManager
     
     var body: some View {
         ScrollView {
             VStack {
                 
                 Button("Log Out", action: {
-                    UserSessionManager.removeUserSession()
-                    coordinator.presentModal(.login)
+                    userSession.removeUserSession()
                 })
                 Spacer()
                 Button("Delete Account", action: {

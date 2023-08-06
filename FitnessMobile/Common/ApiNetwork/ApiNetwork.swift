@@ -54,9 +54,13 @@ open class ApiNetwork {
         request.httpMethod = method.rawValue
         request.addValue("application/json", forHTTPHeaderField: "Content-Type")
       
-        if let token = UserSessionManager.getToken() {
+        if let token = UserSessionManager().getToken() {
             let authorization = "Bearer \(token)"
             request.addValue(authorization, forHTTPHeaderField: "Authorization")
+        }
+        
+        if let deviceToken = UserSessionManager().getDeviceToken() {
+            request.setValue(deviceToken, forHTTPHeaderField: "DeviceToken")
         }
         
         for header in config.headers {
@@ -70,11 +74,6 @@ open class ApiNetwork {
     }
     
     private func doTask(request: URLRequest, completion: @escaping (Result<Data, APIError>) -> Void) {
-        if UserSessionManager.getUserSession() == nil && config.userIsNeeded  {
-            completion(.failure(.userSessionNotFound))
-            return
-        }
-
         let task = session.dataTask(with: request) {(data, response, error) in
             if error != nil {
                 completion(.failure(.serverError(message: "Unknown error")))

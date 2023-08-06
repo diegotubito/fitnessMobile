@@ -12,6 +12,7 @@ struct FitnessMobileApp: App {
     @StateObject var networkMonitor = NetworkMonitor()
     @StateObject var socketIOManager = SocketIOManager()
     @StateObject var coordinator = Coordinator()
+    @StateObject var userSession = UserSessionManager()
   
     var body: some Scene {
         WindowGroup {
@@ -19,6 +20,7 @@ struct FitnessMobileApp: App {
                 .environmentObject(socketIOManager)
                 .environmentObject(coordinator)
                 .environmentObject(networkMonitor)
+                .environmentObject(userSession)
         }
     }
 }

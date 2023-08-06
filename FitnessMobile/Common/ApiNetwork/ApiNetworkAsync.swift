@@ -54,12 +54,12 @@ open class ApiNetworkAsync {
         request.httpMethod = method.rawValue
         request.addValue("application/json", forHTTPHeaderField: "Content-Type")
       
-        if let token = UserSessionManager.getToken() {
+        if let token = UserSessionManager().getToken() {
             let authorization = "\(token)"
             request.addValue(authorization, forHTTPHeaderField: "Authorization")
         }
         
-        if let deviceToken = UserSessionManager.getDeviceToken() {
+        if let deviceToken = UserSessionManager().getDeviceToken() {
             request.setValue(deviceToken, forHTTPHeaderField: "DeviceToken")
         }
          
@@ -74,10 +74,6 @@ open class ApiNetworkAsync {
     }
     
     private func doTask(request: URLRequest) async throws -> Data {
-        if UserSessionManager.getUserSession() == nil && config.userIsNeeded {
-            throw APIError.userSessionNotFound
-        }
-
         let (data, response) = try await session.data(for: request)
         
         guard let httpResponse = response as? HTTPURLResponse else {

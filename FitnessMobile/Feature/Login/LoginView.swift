@@ -11,6 +11,7 @@ struct LoginView: View {
     @StateObject var viewmodel = LoginViewModel()
     @State var showAlert = false
     @Environment(\.dismiss) private var dismiss
+    @EnvironmentObject var userSession: UserSessionManager
     var body: some View {
         NavigationStack {
             ScrollView {
@@ -42,9 +43,9 @@ struct LoginView: View {
     }
     
     func perfomrLogin() {
-        viewmodel.doLogin(completion: { result in
-            if result {
-                dismiss()
+        viewmodel.doLogin(completion: { response in
+            if let response = response {
+                userSession.saveUser(user: response.user, token: response.token)
             } else {
                 showAlert = true
             }

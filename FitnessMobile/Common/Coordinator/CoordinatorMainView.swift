@@ -11,10 +11,13 @@ struct CoordinatorMainView: View {
     @EnvironmentObject var coordinator: Coordinator
     @EnvironmentObject var networkMonitor: NetworkMonitor
     @Environment(\.scenePhase) var scenePhase
+    @EnvironmentObject var userSession: UserSessionManager
+    
+    @State var currentPage: Coordinator.PageView = .tabbar
    
     var body: some View {
         NavigationStack(path: $coordinator.path) {
-            coordinator.getPage(.tabbar)
+            coordinator.getPage(currentPage)
                 .sheet(item: $coordinator.sheet) { sheet in
                     coordinator.getSheet(sheet)
                         .presentationDetents([.medium])
@@ -57,14 +60,18 @@ struct CoordinatorMainView: View {
                 .onChange(of: scenePhase) { newPhase in
                     if newPhase == .active {
                         print("Active")
-                        if UserSessionManager.getUserSession() == nil {
-                            coordinator.presentModal(.login)
-                        }
+                        userSession.checkUser()
                     } else if newPhase == .inactive {
                         print("Inactive")
                     } else if newPhase == .background {
                         print("Background")
                     }
+                }
+                .onChange(of: userSession.didLogOut) { _ in
+                    coordinator.presentModal(.login)
+                }
+                .onChange(of: userSession.didLogIn) { _ in
+                    coordinator.closeModal()
                 }
         }
     }

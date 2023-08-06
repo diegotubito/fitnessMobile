@@ -5,35 +5,39 @@
 //  Created by David Gomez on 01/05/2023.
 //
 
-import Foundation
+import SwiftUI
 
 struct UserSessionModel: Codable {
     let user: User
     let token: String
 }
 
-extension UserSessionModel {
-
-}
-
-class UserSessionManager {
-    static let shared = UserSessionManager()
-    static private let userSessionKey = "UserSessionKey"
-    static private let deviceTokenKey = "DeviceToken"
+class UserSessionManager: ObservableObject {
+    private let userSessionKey = "UserSessionKey"
+    private let deviceTokenKey = "DeviceToken"
+    @Published var didLogOut: Bool = false
+    @Published var didLogIn: Bool = false
     
-    static func saveUser(user: User, token: String) {
+    init() {
+        if getUserSession() == nil {
+            didLogOut.toggle()
+        }
+    }
+    
+    func saveUser(user: User, token: String) {
         do {
             let userSession = UserSessionModel(user: user, token: token)
             let encoder = JSONEncoder()
             let data = try encoder.encode(userSession)
             _ = KeychainManager.shared.save(key: userSessionKey, data: data)
+            didLogIn.toggle()
         } catch {
             print("Error encoding person: \(error)")
         }
         
     }
     
-    static func getUserSession() -> UserSessionModel? {
+    func getUserSession() -> UserSessionModel? {
         do {
             if let data = KeychainManager.shared.load(key: userSessionKey) {
                 let decoder = JSONDecoder()
@@ -46,7 +50,7 @@ class UserSessionManager {
         }
     }
     
-    static func getToken() -> String? {
+    func getToken() -> String? {
         do {
             if let data = KeychainManager.shared.load(key: userSessionKey) {
                 let decoder = JSONDecoder()
@@ -59,15 +63,22 @@ class UserSessionManager {
         }
     }
     
-    static func removeUserSession() {
-        let _ = KeychainManager.shared.delete(key: userSessionKey)
+    func checkUser() {
+        if getUserSession() == nil {
+            didLogOut.toggle()
+        }
     }
     
-    static func saveDeviceToken(data: Data) {
+    func removeUserSession() {
+        let _ = KeychainManager.shared.delete(key: userSessionKey)
+        didLogOut.toggle()
+    }
+    
+    func saveDeviceToken(data: Data) {
         _ = KeychainManager.shared.save(key: deviceTokenKey, data: data)
     }
     
-    static func getDeviceToken() -> String? {
+    func getDeviceToken() -> String? {
         guard let deviceTokenData = KeychainManager.shared.load(key: deviceTokenKey) else {
             return nil
         }

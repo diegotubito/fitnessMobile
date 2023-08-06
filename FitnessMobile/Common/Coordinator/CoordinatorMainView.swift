@@ -7,9 +7,7 @@
 
 import SwiftUI
 
-
-
-struct MainView: View {
+struct CoordinatorMainView: View {
     @EnvironmentObject var coordinator: Coordinator
     
     var body: some View {
@@ -50,7 +48,6 @@ struct MainView: View {
                     }
                 }
         }
-        .environmentObject(coordinator)
     }
 }
 
@@ -59,7 +56,7 @@ struct MainView_Previews: PreviewProvider {
     
     static var previews: some View {
         NavigationStack {
-            MainView()
+            CoordinatorMainView()
         }
         .environmentObject(coordinator)
     }

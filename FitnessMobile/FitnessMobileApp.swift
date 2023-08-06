@@ -14,7 +14,7 @@ struct FitnessMobileApp: App {
 
     var body: some Scene {
         WindowGroup {
-            MainView()
+            CoordinatorMainView()
                 .environmentObject(socketIOManager)
                 .environmentObject(coordinator)
         }

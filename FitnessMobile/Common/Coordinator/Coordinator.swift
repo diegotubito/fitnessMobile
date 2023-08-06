@@ -129,7 +129,7 @@ class Coordinator: ObservableObject {
         case .login:
             LoginView()
         case .signUp:
-            SignUp()
+            SignUpView()
         }
     }
     

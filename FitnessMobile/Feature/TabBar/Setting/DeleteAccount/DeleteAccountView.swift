@@ -10,6 +10,7 @@ import SwiftUI
 struct DeleteAccountView: View {
     @StateObject var viewmodel = DeleteAccountViewModel()
     @EnvironmentObject var coordinator: Coordinator
+    @EnvironmentObject var userSession: UserSessionManager
     
     var body: some View {
         VStack {
@@ -41,13 +42,12 @@ struct DeleteAccountView: View {
     }
     
     func deleteAccount() {
-        viewmodel.deleteAccount { errorMessage in
-            if let errorMessage = errorMessage {
-                coordinator.presentPrimaryAlert(title: "Account Delete", message: errorMessage) {
-                    
-                }
+        viewmodel.deleteAccount { response in
+            if response == nil {
+                coordinator.presentPrimaryAlert(title: "Account Delete", message: "Something went wrong") {}
             } else {
-                coordinator.path.removeLast()
+                userSession.removeUserSession()
+                coordinator.path = NavigationPath()
             }
         }
     }

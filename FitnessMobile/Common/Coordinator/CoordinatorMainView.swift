@@ -9,7 +9,9 @@ import SwiftUI
 
 struct CoordinatorMainView: View {
     @EnvironmentObject var coordinator: Coordinator
-    
+    @EnvironmentObject var networkMonitor: NetworkMonitor
+    @Environment(\.scenePhase) var scenePhase
+   
     var body: some View {
         NavigationStack(path: $coordinator.path) {
             coordinator.getPage(.tabbar)
@@ -45,6 +47,23 @@ struct CoordinatorMainView: View {
                             primaryButton: .destructive(Text(coordinator.alertDetail?.primaryButtonTitle ?? "Remove"), action: coordinator.primaryTapped),
                             secondaryButton: .cancel(Text(coordinator.alertDetail?.secondaryButtonTitle ?? "Cancel"), action: coordinator.secondaryTapped)
                         )
+                    }
+                }
+                .onChange(of: networkMonitor.isConnected, perform: { isConnected in
+                    if !isConnected {
+                        coordinator.presentModal(.noInternet)
+                    }
+                })
+                .onChange(of: scenePhase) { newPhase in
+                    if newPhase == .active {
+                        print("Active")
+                        if UserSessionManager.getUserSession() == nil {
+                            coordinator.presentModal(.login)
+                        }
+                    } else if newPhase == .inactive {
+                        print("Inactive")
+                    } else if newPhase == .background {
+                        print("Background")
                     }
                 }
         }

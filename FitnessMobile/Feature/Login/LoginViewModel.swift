@@ -28,7 +28,7 @@ class LoginViewModel: ObservableObject {
             onLoginSuccess = true
         } catch let error as APIError {
             self.showAlert = true
-            alertMessage = error.description
+            alertMessage = error.message ?? ""
         }
         catch  {
             self.showAlert = true

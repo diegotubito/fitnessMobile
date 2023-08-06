@@ -7,7 +7,7 @@
 
 import Foundation
 
-public enum APIError: Error, CustomStringConvertible {
+public enum APIError: Error, CustomStringConvertible, Equatable {
     case customError(title: String?, message: String?)
     case badRequest(title: String?, message: String?)
     case invalidURL

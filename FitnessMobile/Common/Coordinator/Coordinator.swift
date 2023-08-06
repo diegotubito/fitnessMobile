@@ -22,7 +22,7 @@ class Coordinator: ObservableObject {
     var primaryTapped: (() -> Void)?
     var secondaryTapped: (() -> Void)?
 
-    func presentPrimaryAlert(title: String, message: String, buttonTitle: String? = nil, completion: (() -> Void)? = nil) {
+    func presentPrimaryAlert(title: String, message: String, buttonTitle: String? = nil, completion: (() -> Void)?) {
         alertDetail = AlertDetail(title: title, message: message, alertStyle: .primary, primaryButtonTitle: buttonTitle, secondaryButtonTitle: nil)
         self.completion = completion
         showAlert = true
@@ -106,10 +106,12 @@ class Coordinator: ObservableObject {
     
     enum ModalView: Identifiable {
         case fullscreenView(text: String)
+        case noInternet
+        case login
 
         var id: UUID {
             switch self {
-            case .fullscreenView:
+            case .fullscreenView, .noInternet, .login:
                 return UUID()
             }
         }
@@ -140,6 +142,10 @@ class Coordinator: ObservableObject {
         switch modal {
         case .fullscreenView(let text):
             FullscreenView(text: text)
+        case .noInternet:
+            OfflineInternetView()
+        case .login:
+            LoginView()
         }
     }
 }

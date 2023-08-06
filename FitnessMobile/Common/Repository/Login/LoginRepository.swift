@@ -16,7 +16,7 @@ protocol LoginRepositoryProtocol {
 class LoginRepository: ApiNetworkAsync, LoginRepositoryProtocol {
     func doLogin(request: LoginEntity.Request) async throws -> LoginResult {
         config.userIsNeeded = false
-        config.path = "/api/v1/auth/login"
+        config.path = "/api/v1/login"
         config.method = .post
         config.addRequestBody(request)
         

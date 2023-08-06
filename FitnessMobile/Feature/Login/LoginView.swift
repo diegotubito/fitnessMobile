@@ -9,7 +9,7 @@ import SwiftUI
 
 struct LoginView: View {
     @ObservedObject var viewmodel = LoginViewModel()
-    @Environment(\.dismiss) private var dismiss
+    @EnvironmentObject var coordinator: Coordinator
 
     var body: some View {
         NavigationStack {
@@ -35,9 +35,7 @@ struct LoginView: View {
                             SignUp()
                         }
                         .padding(.bottom)
-                        BasicButton(title: "Close View", style: .secondary, isEnabled: .constant(true)) {
-                            dismiss()
-                        }
+                       
                     }
                     .padding()
                 }
@@ -51,7 +49,7 @@ struct LoginView: View {
         }
         .onChange(of: viewmodel.onLoginSuccess) { success in
             if success {
-                dismiss()
+                coordinator.closeModal()
             }
         }
     }

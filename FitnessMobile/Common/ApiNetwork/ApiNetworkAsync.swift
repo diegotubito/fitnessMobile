@@ -5,7 +5,7 @@
 //  Created by David Gomez on 10/04/2023.
 //
 
-import Foundation
+import SwiftUI
 
 open class ApiNetworkAsync {
     public var config: ApiRequestConfiguration
@@ -29,7 +29,6 @@ open class ApiNetworkAsync {
             let genericData = try decoder.decode(T.self, from: data)
             return genericData
         } catch let error as APIError {
-            print(error.message)
             throw error
         } catch {
             print(error.localizedDescription)
@@ -85,30 +84,57 @@ open class ApiNetworkAsync {
             throw APIError.serverError(message: "Unknown error")
         }
         
+        logResponse(request: request, data: data, httpResponse: httpResponse)
+
         guard (200...299).contains(httpResponse.statusCode)
         else {
-            let json = try JSONSerialization.jsonObject(with: data) as? [String: Any]
-            let title = json?["title"] as? String
-            let message = json?["message"] as? String
-            
             switch httpResponse.statusCode {
             case 400:
+                let json = try JSONSerialization.jsonObject(with: data) as? [String: Any]
+                let title = json?["title"] as? String
+                let message = json?["message"] as? String
                 throw APIError.badRequest(title: title, message: message)
             case 432:
+                let json = try JSONSerialization.jsonObject(with: data) as? [String: Any]
+                let title = json?["title"] as? String
+                let message = json?["message"] as? String
                 throw APIError.customError(title: title, message: message)
             case 401:
                 throw APIError.authentication
             case 404:
                 throw APIError.notFound(url: request.url?.absoluteString)
             case 500:
+                let json = try JSONSerialization.jsonObject(with: data) as? [String: Any]
+                let message = json?["message"] as? String
                 throw APIError.serverError(message: message ?? "")
             default:
                 throw APIError.serverError(message: "Unknown error")
             }
         }
-        let json = try? JSONSerialization.jsonObject(with: data)
-        print("🟢🟢🟢", request.url, "\nJSON Reponse: ", json, "🟢")
 
         return data
+    }
+    
+    func logResponse(request: URLRequest, data: Data?, httpResponse: HTTPURLResponse) {
+        var error = false
+        if !(200...299).contains(httpResponse.statusCode) {
+            error = true
+        }
+        print(error ? "🔴" : "🟢")
+        print("url:", request.url ?? "")
+        print("method:", request.httpMethod ?? "")
+        print("headers:", request.allHTTPHeaderFields ?? "")
+        if let httpBody = request.httpBody {
+            print("body:", String(data: httpBody, encoding: .utf8) ?? "none")
+        } else {
+            print("body: none")
+        }
+        
+        print("response:", httpResponse)
+
+        if let data = data, let json = try? JSONSerialization.jsonObject(with: data) {
+            print("response:", json)
+        }
+        print(error ? "🔴" : "🟢")
     }
 }

@@ -24,7 +24,7 @@ struct LoginView: View {
                 .background(Color.gray.opacity(0.2))
                 .cornerRadius(5)
             
-            BasicButton(title: "Login", style: .primary, isEnabled: .constant(true)) {
+            BasicButton(title: "Login", style: .primary, isEnabled: .constant(viewmodel.loginButtonEnabled)) {
                 perfomrLogin()
             }
             .padding()
@@ -61,6 +61,7 @@ struct LoginView: View {
             }
             
         })
+        .navigationTitle("_LOGIN_TITLE")
         
     }
     

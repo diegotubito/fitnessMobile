@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-class DeleteAccountViewModel: ObservableObject {
+class DeleteAccountViewModel: BaseViewModel {
     @Published var isLoading = false
     
     func deleteAccount(completion: @escaping (DeleteUserResult?) -> Void) {
@@ -22,8 +22,9 @@ class DeleteAccountViewModel: ObservableObject {
                 }
             } catch {
                 DispatchQueue.main.async {                    
-                    completion(nil)
                     self.isLoading = false
+                    self.handleError(error: error)
+                    completion(nil)
                 }
             }
         }

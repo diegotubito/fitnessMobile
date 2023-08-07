@@ -20,15 +20,18 @@ class SignUpViewModel: BaseViewModel {
     func doSighUp(completion: @escaping (CreateUserResult?) -> Void) {
         let usecase = UserUseCase()
         isLoading = true
+        createButtonIsEnabled = false
         Task {
             do {
                 let response = try await usecase.doCreate(username: usernameTextFieldManager.text, email: emailTextFieldManager.text, password: passwordTextFieldManager.text)
                 DispatchQueue.main.async {
+                    self.createButtonIsEnabled = true
                     self.isLoading = false
                     completion(response)
                 }
             } catch {
                 DispatchQueue.main.async {
+                    self.createButtonIsEnabled = true
                     self.showAlert = true
                     self.isLoading = false
                     self.handleError(error: error)

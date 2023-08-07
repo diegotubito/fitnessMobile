@@ -15,19 +15,19 @@ struct DeleteAccountView: View {
     var body: some View {
         VStack {
             HStack {
-                Text("¿Deseas borrar la cuenta permanentemente?")
+                Text("_DELETE_ACCOUNT_TITLE")
                     .font(.title)
                 Spacer()
             }
             .padding(.bottom)
             HStack {
-                Text("Esta acción borrará todos tus datos permanentemente de todas las bases de datos y no podra recuperarse.")
+                Text("_DELETE_ACCOUNT_SUBTITLE")
                 Spacer()
             }
             Spacer()
             HStack {
-                BasicButton(title: "Delete Account", style: .destructive, isEnabled: .constant(true)) {
-                    coordinator.presentDesctructiveAlert(title: "Delete Account", message: "Are you sure you want to delete this account?") {
+                BasicButton(title: "_DELETE_ACCOUNT".localized, style: .destructive, isEnabled: .constant(true)) {
+                    coordinator.presentDesctructiveAlert(title: "_DELETE_ACCOUNT_BUTTON_TITLE".localized, message: "_DELETE_ACCOUNT_BUTTON_MESSAGE".localized) {
                         deleteAccount()
                     } secondaryTapped: { }
                 }
@@ -44,7 +44,7 @@ struct DeleteAccountView: View {
     func deleteAccount() {
         viewmodel.deleteAccount { response in
             if response == nil {
-                coordinator.presentPrimaryAlert(title: "Account Delete", message: "Something went wrong") {}
+                coordinator.presentPrimaryAlert(title: viewmodel.errorTitle, message: viewmodel.errorMessage) {}
             } else {
                 userSession.removeUserSession()
                 coordinator.path = NavigationPath()

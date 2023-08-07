@@ -19,19 +19,16 @@ struct TabBarView: View {
                     .frame(maxHeight: .infinity)
                     .tabItem {
                         Image(systemName: "house")
-                        Text("Home")
+                        Text("_TAB_BAR_HOME")
                     }
                 
                 SettingView()
                     .frame(maxHeight: .infinity)
                     .tabItem {
                         Image(systemName: "gearshape")
-                        Text("Setting")
+                        Text("_TAB_BAR_SETTING")
                     }
             }
-        }
-        .onAppear {
-            print("tabbar appeared")
         }
     }
 }

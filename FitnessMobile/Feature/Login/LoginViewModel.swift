@@ -12,22 +12,26 @@ class LoginViewModel: BaseViewModel {
     @Published var password: String = ""
     @Published var users: [User] = []
     @Published var isLoading: Bool = false
+    @Published var loginButtonEnabled = true
     
     @MainActor
     func doLogin(completion: @escaping (LoginEntity.Response?) -> Void) {
         let loginUseCase = LoginUseCase()
         let input = LoginEntity.Input(email: username, password: password)
         isLoading = true
+        loginButtonEnabled = false
         Task {
             do {
                 let response = try await loginUseCase.doLogin(input: input)
 
                 DispatchQueue.main.async {
+                    self.loginButtonEnabled = true
                     self.isLoading = false
                     completion(response)
                 }
             } catch {
                 DispatchQueue.main.async {
+                    self.loginButtonEnabled = true
                     self.isLoading = false
                     self.handleError(error: error)
                     completion(nil)

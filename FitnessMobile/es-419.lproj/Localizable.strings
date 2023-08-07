@@ -5,7 +5,16 @@
   Created by David Diego Gomez on 06/08/2023.
   
 */
+// Mark: Tab Bar
+"_TAB_BAR_HOME" = "Inicio";
+"_TAB_BAR_SETTING" = "Configuración";
 
+// Mark: ALERT
+"_ALERT_CANCEL" = "Cancelar";
+"_ALERT_ACCEPT" = "Aceptar";
+"_ALERT_REMOVE" = "Borrar";
+
+// Mark: LOGIN VIEW
 "_USERNAME" = "Usuario";
 "_EMAIL" = "Correo";
 "_PASSWORD" = "Clave";
@@ -13,6 +22,16 @@
 "_SIGNUP" = "Registrarse";
 "_LOGIN_TITLE" = "Autenticación";
 "_CREATE" = "Crear";
+
+// Mark: Seeting View
+"_LOGOUT" = "Cerrar Sesión";
+"_DELETE_ACCOUNT" = "Borrar Cuenta";
+"_DELETE_ACCOUNT_BUTTON_TITLE" = "Borrar Cuenta";
+"_DELETE_ACCOUNT_BUTTON_MESSAGE" = "¿Estás seguro de que quieres borrar esta cuenta?";
+
+// Mark: Delete Account
+"_DELETE_ACCOUNT_TITLE" = "¿Deseas borrar la cuenta permanentemente?";
+"_DELETE_ACCOUNT_SUBTITLE" = "Esta acción borrará todos tus datos permanentemente de todas las bases de datos y no podrá recuperarse.";
 
 // BACKEND RESPONSE
 "_LOGIN_ERROR" = "Error de Autenticación";

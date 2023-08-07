@@ -15,11 +15,11 @@ struct SettingView: View {
         ScrollView {
             VStack {
                 
-                Button("Log Out", action: {
+                Button("_LOGOUT", action: {
                     userSession.removeUserSession()
                 })
                 Spacer()
-                Button("Delete Account", action: {
+                Button("_DELETE_ACCOUNT", action: {
                     coordinator.push(.deleteAccount)
                 })
             }

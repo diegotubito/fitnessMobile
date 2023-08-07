@@ -21,26 +21,29 @@ class LoginViewModel: BaseViewModel {
         Task {
             do {
                 let response = try await loginUseCase.doLogin(input: input)
-                isLoading = false
-                completion(response)
+
+                DispatchQueue.main.async {
+                    self.isLoading = false
+                    completion(response)
+                }
             } catch {
-                isLoading = false
-                handleError(error: error)
-                completion(nil)
+                DispatchQueue.main.async {
+                    self.isLoading = false
+                    self.handleError(error: error)
+                    completion(nil)
+                }
             }
         }
     }
     
     @MainActor
-    func loadUsers() {
+    func loadUsers() async {
         let usecase = UserUseCase()
-        Task {
-            do {
-                let response = try await usecase.getUsers()
-                self.users = response.users
-            } catch {
-                self.handleError(error: error)
-            }
+        do {
+            let response = try await usecase.getUsers()
+            self.users = response.users
+        } catch {
+            self.handleError(error: error)
         }
     }
 }

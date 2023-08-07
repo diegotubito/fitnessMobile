@@ -7,9 +7,12 @@
 */
 
 "_USERNAME" = "Usuario";
+"_EMAIL" = "Correo";
 "_PASSWORD" = "Clave";
+"_PASSWORD_REPEAT" = "Repetir clave";
 "_SIGNUP" = "Registrarse";
 "_LOGIN_TITLE" = "Autenticación";
+"_CREATE" = "Crear";
 
 // BACKEND RESPONSE
 "_LOGIN_ERROR" = "Error de Autenticación";
@@ -18,6 +21,9 @@
 "_404_TITLE" = "Error";
 "_404_MESSAGE" = "404 - Url no encontrada.";
 "_500_SERVER_TITLE" = "Error de Servidor";
+"_500_SERVER_MESSAGE" = "Hubo un error en el servicio. Puede que exista un dato duplicado.";
+"_400_ERROR_TITLE" = "Error de Request";
+"_400_ERROR_MESSAGE" = "Revisa tu body y headers.";
 "_NOT_KNOWN_TITLE" = "Error Desconocido";
 "_NOT_KNOWN_MESSAGE" = "Ocurrio un error";
 "_SERIALIZE_TITLE" = "Error";

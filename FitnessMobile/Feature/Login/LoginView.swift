@@ -8,39 +8,32 @@
 import SwiftUI
 
 struct LoginView: View {
-    @ObservedObject var viewmodel = LoginViewModel()
+    @StateObject var viewmodel = LoginViewModel()
     @State var showAlert = false
     @EnvironmentObject var userSession: UserSessionManager
     @EnvironmentObject var coordinator: Coordinator
     
-    @State var shouldReload = true
-    
     var body: some View {
         VStack {
-            ScrollView {
-                VStack {
-                    TextField("_USERNAME", text: $viewmodel.username)
-                        .padding()
-                        .background(Color.gray.opacity(0.2))
-                        .cornerRadius(5)
-                    SecureField("_PASSWORD", text: $viewmodel.password)
-                        .padding()
-                        .background(Color.gray.opacity(0.2))
-                        .cornerRadius(5)
-                    
-                    BasicButton(title: "Login", style: .primary, isEnabled: .constant(true)) {
-                        perfomrLogin()
-                    }
-                    .padding()
-                    
-                    Button {
-                        coordinator.push(.signUp)
-                    } label: {
-                        Text("_SIGNUP")
-                    }
-                }
-                
+            TextField("_USERNAME", text: $viewmodel.username)
                 .padding()
+                .background(Color.gray.opacity(0.2))
+                .cornerRadius(5)
+            SecureField("_PASSWORD", text: $viewmodel.password)
+                .padding()
+                .background(Color.gray.opacity(0.2))
+                .cornerRadius(5)
+            
+            BasicButton(title: "Login", style: .primary, isEnabled: .constant(true)) {
+                perfomrLogin()
+            }
+            .padding()
+            
+            
+            Button {
+                coordinator.push(.signUp)
+            } label: {
+                Text("_SIGNUP")
             }
             List(viewmodel.users, id: \.self) { user in
                 VStack {
@@ -51,20 +44,23 @@ struct LoginView: View {
                     self.viewmodel.password = "admin1234"
                 }
             }
-           
+            
         }
+        .padding()
+        
+        
         .overlay(content: {
             if viewmodel.isLoading {
                 ProgressView()
             }
         })
         .onAppear(perform: {
-            if shouldReload {
-                viewmodel.loadUsers()
-                shouldReload = false
+            Task {
+                await viewmodel.loadUsers()
+                print("loading users")
             }
+            
         })
-        .navigationTitle("_LOGIN_TITLE")
         
     }
     

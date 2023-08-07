@@ -9,9 +9,12 @@
 
 // Mark: LOGIN VIEW
 "_USERNAME" = "Username";
+"_EMAIL" = "Email";
 "_PASSWORD" = "Password";
+"_PASSWORD_REPEAT" = "Repeat password";
 "_SIGNUP" = "Sign Up";
 "_LOGIN_TITLE" = "Authentication";
+"_CREATE" = "Create";
 
 // BACKEND RESPONSE
 "_LOGIN_ERROR" = "Authentication Failed";
@@ -20,6 +23,9 @@
 "_404_TITLE" = "Error";
 "_404_MESSAGE" = "404 - Url not found.";
 "_500_SERVER_TITLE" = "Server Error";
+"_500_SERVER_MESSAGE" = "There is a problem with the service. It may be a duplicated data.";
+"_400_ERROR_TITLE" = "Request Error";
+"_400_ERROR_MESSAGE" = "Look your body and headers.";
 "_NOT_KNOWN_TITLE" = "Unknown Error";
 "_NOT_KNOWN_MESSAGE" = "Something went wrong";
 "_SERIALIZE_TITLE" = "Error";

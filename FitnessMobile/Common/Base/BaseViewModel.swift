@@ -38,7 +38,7 @@ class BaseViewModel: ObservableObject {
                 break
             case .serverError(let title, let message):
                 errorTitle = title.localized
-                errorMessage = (message).localized
+                errorMessage = "_500_SERVER_MESSAGE".localized
                 break
             case .serialization:
                 errorTitle = "_SERIALIZE_TITLE".localized

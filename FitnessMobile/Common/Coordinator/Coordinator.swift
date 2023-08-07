@@ -11,7 +11,7 @@ import SwiftUI
 class Coordinator: ObservableObject {
     
     @Published var path: NavigationPath = NavigationPath()
-    @Published var page: PageView = .home
+    @Published var page: PageView = .tabbar
     @Published var sheet: SheetView?
     @Published var modal: ModalView?
     
@@ -108,10 +108,11 @@ class Coordinator: ObservableObject {
     
     enum ModalView: Identifiable {
         case noInternet
+        case login
       
         var id: UUID {
             switch self {
-            case .noInternet:
+            case .noInternet, .login:
                 return UUID()
             }
         }
@@ -146,6 +147,8 @@ class Coordinator: ObservableObject {
         switch modal {
         case .noInternet:
             OfflineInternetView()
+        case .login:
+            LoginView()
         }
     }
 }

@@ -14,32 +14,32 @@ struct SignUpView: View {
     var body: some View {
         ScrollView {
             VStack {
-                CustomTextField(customTextFieldManager: viewModel.usernameTextFieldManager, title: "Username", placeholder: "", footer: "")
+                CustomTextField(customTextFieldManager: viewModel.usernameTextFieldManager, title: "_USERNAME".localized, placeholder: "", footer: "")
                     .padding(.bottom)
                     .autocorrectionDisabled()
                     .autocapitalization(.none)
                 
-                CustomTextField(customTextFieldManager: viewModel.emailTextFieldManager, title: "Email", placeholder: "", footer: "")
+                CustomTextField(customTextFieldManager: viewModel.emailTextFieldManager, title: "_EMAIL".localized, placeholder: "", footer: "")
                     .padding(.bottom)
                     .autocorrectionDisabled()
                     .autocapitalization(.none)
-                CustomTextField(customTextFieldManager: viewModel.passwordTextFieldManager, title: "Password", placeholder: "", footer: "")
+                CustomTextField(customTextFieldManager: viewModel.passwordTextFieldManager, title: "_PASSWORD".localized, placeholder: "", footer: "")
                     .padding(.bottom)
                     .autocorrectionDisabled()
                     .autocapitalization(.none)
 
-                CustomTextField(customTextFieldManager: viewModel.repeatPasswordTextFieldManager, title: "Repeat password", placeholder: "", footer: "")
+                CustomTextField(customTextFieldManager: viewModel.repeatPasswordTextFieldManager, title: "_PASSWORD_REPEAT".localized, placeholder: "", footer: "")
                     .padding(.bottom, 32)
                     .autocorrectionDisabled()
                     .autocapitalization(.none)
 
 
-                BasicButton(title: "Create", style: .primary, isEnabled: .constant(viewModel.createButtonIsEnabled)) {
+                BasicButton(title: "_CREATE".localized, style: .primary, isEnabled: .constant(viewModel.createButtonIsEnabled)) {
                     viewModel.doSighUp { result in
                         if result != nil {
                             coordinator.path.removeLast()
                         } else {
-                            coordinator.presentPrimaryAlert(title: "Create", message: "Something went wrong") {
+                            coordinator.presentPrimaryAlert(title: viewModel.errorTitle, message: viewModel.errorMessage) {
                                 
                             }
                         }
@@ -48,7 +48,7 @@ struct SignUpView: View {
             }
             .padding()
         }
-        .navigationTitle("Sigh Up")
+        .navigationTitle("_SIGNUP")
         .navigationBarTitleDisplayMode(.inline)
     }
 }

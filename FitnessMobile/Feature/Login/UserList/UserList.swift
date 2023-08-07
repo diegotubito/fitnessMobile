@@ -9,7 +9,6 @@ import SwiftUI
 
 struct UserList: View {
     @EnvironmentObject var coordinator: Coordinator
-    
     @State var users: [User]
     
     var body: some View {

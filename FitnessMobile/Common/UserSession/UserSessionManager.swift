@@ -18,10 +18,13 @@ class UserSessionManager: ObservableObject {
     @Published var didLogOut: Bool = false
     @Published var didLogIn: Bool = false
     
+    var user: User?
+    
     init() {
         if getUserSession() == nil {
             didLogOut.toggle()
         }
+        self.user = getUserSession()?.user
     }
     
     func saveUser(user: User, token: String) {
@@ -85,6 +88,25 @@ class UserSessionManager: ObservableObject {
         
         let tokenString = deviceTokenData.reduce("", { $0 + String(format: "%02X", $1) })
         return tokenString
+    }
+    
+    func getFullName() -> String {
+        let user = getUserSession()
+        let lastName: String = user?.user.lastName ?? ""
+        let firstName: String = user?.user.firstName ?? ""
+        return "\(firstName), \(lastName)"
+    }
+    
+    func getUserName() -> String {
+        let user = getUserSession()
+        let username: String = user?.user.username ?? ""
+        return username
+    }
+    
+    func getEmail() -> String {
+        let user = getUserSession()
+        let email: String = user?.user.email ?? ""
+        return email
     }
 }
 

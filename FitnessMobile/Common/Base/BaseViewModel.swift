@@ -8,19 +8,19 @@
 import SwiftUI
 
 class BaseViewModel: ObservableObject {
-    var errorTitle: String = ""
-    var errorMessage: String = ""
+    var errorTitle: LocalizedStringKey = ""
+    var errorMessage: LocalizedStringKey = ""
     
     func handleError(error: Error) {
         if let apiError = error as? APIError {
             switch apiError {
             case .customError(let title, let message):
-                errorTitle = (title ?? "").localized
-                errorMessage = (message ?? "").localized
+                errorTitle = LocalizedStringKey((title ?? ""))
+                errorMessage = LocalizedStringKey((message ?? ""))
                 break
             case .badRequest(let title, let message):
-                errorTitle = (title ?? "").localized
-                errorMessage = (message ?? "").localized
+                errorTitle = LocalizedStringKey((title ?? ""))
+                errorMessage = LocalizedStringKey((message ?? ""))
                 break
             case .invalidURL:
                 break
@@ -31,18 +31,18 @@ class BaseViewModel: ObservableObject {
             case .userSessionNotFound:
                 break
             case .notFound(let url):
-                errorTitle = "_404_TITLE".localized
-                errorMessage = "_404_MESSAGE".localized
+                errorTitle = LocalizedStringKey("_404_TITLE")
+                errorMessage = LocalizedStringKey("_404_MESSAGE")
                 break
             case .rateLimitExceeded:
                 break
             case .serverError(let title, let message):
-                errorTitle = title.localized
-                errorMessage = "_500_SERVER_MESSAGE".localized
+                errorTitle = LocalizedStringKey(title)
+                errorMessage = LocalizedStringKey("_500_SERVER_MESSAGE")
                 break
             case .serialization:
-                errorTitle = "_SERIALIZE_TITLE".localized
-                errorMessage = "_SERIALIZE_MESSAGE".localized
+                errorTitle = LocalizedStringKey("_SERIALIZE_TITLE")
+                errorMessage = LocalizedStringKey("_SERIALIZE_MESSAGE")
                 break
             case .jsonFileNotFound(let filename):
                 break
@@ -52,8 +52,8 @@ class BaseViewModel: ObservableObject {
                 break
             }
         } else {
-            errorTitle = "_NOT_KNOWN_TITLE".localized
-            errorMessage = "_NOT_KNOWN_MESSAGE".localized
+            errorTitle = LocalizedStringKey("_NOT_KNOWN_TITLE")
+            errorMessage = LocalizedStringKey("_NOT_KNOWN_MESSAGE")
         }
     }
 }

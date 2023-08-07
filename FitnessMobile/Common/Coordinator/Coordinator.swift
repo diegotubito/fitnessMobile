@@ -22,21 +22,21 @@ class Coordinator: ObservableObject {
     var primaryTapped: (() -> Void)?
     var secondaryTapped: (() -> Void)?
 
-    func presentPrimaryAlert(title: String, message: String, buttonTitle: String? = nil, completion: (() -> Void)?) {
+    func presentPrimaryAlert(title: LocalizedStringKey, message: LocalizedStringKey, buttonTitle: LocalizedStringKey? = nil, completion: (() -> Void)?) {
         alertDetail = AlertDetail(title: title, message: message, alertStyle: .primary, primaryButtonTitle: buttonTitle, secondaryButtonTitle: nil)
         self.completion = completion
         showAlert = true
     }
     
-    func presentSecondaryAlert(title: String, message: String, primaryButtonTitle: String? = nil, secondaryButtonTitle: String? = nil, primaryTapped: @escaping (() -> Void), secondaryTapped: @escaping (() -> Void)) {
+    func presentSecondaryAlert(title: LocalizedStringKey, message: LocalizedStringKey, primaryButtonTitle: LocalizedStringKey? = nil, secondaryButtonTitle: LocalizedStringKey? = nil, primaryTapped: @escaping (() -> Void), secondaryTapped: @escaping (() -> Void)) {
         alertDetail = AlertDetail(title: title, message: message, alertStyle: .secondary, primaryButtonTitle: primaryButtonTitle, secondaryButtonTitle: secondaryButtonTitle)
         self.primaryTapped = primaryTapped
         self.secondaryTapped = secondaryTapped
         showAlert = true
     }
     
-    func presentDesctructiveAlert(title: String, message: String, primaryButtonTitle: String? = nil, secondaryButtonTitle: String? = nil, primaryTapped: @escaping (() -> Void), secondaryTapped: @escaping (() -> Void)) {
-        alertDetail = AlertDetail(title: title, message: message, alertStyle: .destructive, primaryButtonTitle: primaryButtonTitle, secondaryButtonTitle: secondaryButtonTitle)
+    func presentDesctructiveAlert(title: String, message: String, primaryButtonTitle: LocalizedStringKey? = nil, secondaryButtonTitle: LocalizedStringKey? = nil, primaryTapped: @escaping (() -> Void), secondaryTapped: @escaping (() -> Void)) {
+        alertDetail = AlertDetail(title: LocalizedStringKey(title), message: LocalizedStringKey(message), alertStyle: .destructive, primaryButtonTitle: primaryButtonTitle, secondaryButtonTitle: secondaryButtonTitle)
         self.primaryTapped = primaryTapped
         self.secondaryTapped = secondaryTapped
         showAlert = true
@@ -67,11 +67,11 @@ class Coordinator: ObservableObject {
     
     struct AlertDetail: Identifiable {
         let id = UUID()
-        var title: String
-        var message: String
+        var title: LocalizedStringKey
+        var message: LocalizedStringKey
         var alertStyle: AlertStyle?
-        var primaryButtonTitle: String?
-        var secondaryButtonTitle: String?
+        var primaryButtonTitle: LocalizedStringKey?
+        var secondaryButtonTitle: LocalizedStringKey?
     }
     
     enum AlertStyle: Identifiable {
@@ -93,6 +93,7 @@ class Coordinator: ObservableObject {
         case deleteAccount
         case login
         case signUp
+        case profile
     }
     
     enum SheetView: Identifiable {
@@ -131,6 +132,8 @@ class Coordinator: ObservableObject {
             LoginView()
         case .signUp:
             SignUpView()
+        case .profile:
+            ProfileView()
         }
     }
     

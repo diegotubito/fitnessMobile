@@ -28,8 +28,6 @@ struct LoginView: View {
                 perfomrLogin()
             }
             .padding()
-            
-            
             Button {
                 coordinator.push(.signUp)
             } label: {
@@ -47,8 +45,6 @@ struct LoginView: View {
             
         }
         .padding()
-        
-        
         .overlay(content: {
             if viewmodel.isLoading {
                 ProgressView()
@@ -57,9 +53,7 @@ struct LoginView: View {
         .onAppear(perform: {
             Task {
                 await viewmodel.loadUsers()
-                print("loading users")
             }
-            
         })
         .navigationTitle("_LOGIN_TITLE")
         

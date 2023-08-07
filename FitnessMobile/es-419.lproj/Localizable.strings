@@ -24,10 +24,14 @@
 "_CREATE" = "Crear";
 
 // Mark: Seeting View
+"_SETTING_PROFILE" = "Perfil";
 "_LOGOUT" = "Cerrar Sesión";
 "_DELETE_ACCOUNT" = "Borrar Cuenta";
 "_DELETE_ACCOUNT_BUTTON_TITLE" = "Borrar Cuenta";
 "_DELETE_ACCOUNT_BUTTON_MESSAGE" = "¿Estás seguro de que quieres borrar esta cuenta?";
+"_LOGOUT_ALERT_WARNING_TITLE" = "Cerrar Sesión";
+"_LOGOUT_ALERT_WARNING_MESSAGE" = "¿Estás seguro de cerrar sesión?";
+
 
 // Mark: Delete Account
 "_DELETE_ACCOUNT_TITLE" = "¿Deseas borrar la cuenta permanentemente?";

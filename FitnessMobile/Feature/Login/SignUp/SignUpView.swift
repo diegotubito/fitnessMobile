@@ -14,27 +14,27 @@ struct SignUpView: View {
     var body: some View {
         ScrollView {
             VStack {
-                CustomTextField(customTextFieldManager: viewModel.usernameTextFieldManager, title: "_USERNAME".localized, placeholder: "", footer: "")
+                CustomTextField(customTextFieldManager: viewModel.usernameTextFieldManager, title: "_USERNAME", placeholder: "", footer: "")
                     .padding(.bottom)
                     .autocorrectionDisabled()
                     .autocapitalization(.none)
                 
-                CustomTextField(customTextFieldManager: viewModel.emailTextFieldManager, title: "_EMAIL".localized, placeholder: "", footer: "")
+                CustomTextField(customTextFieldManager: viewModel.emailTextFieldManager, title: "_EMAIL", placeholder: "", footer: "")
                     .padding(.bottom)
                     .autocorrectionDisabled()
                     .autocapitalization(.none)
-                CustomTextField(customTextFieldManager: viewModel.passwordTextFieldManager, title: "_PASSWORD".localized, placeholder: "", footer: "")
+                CustomTextField(customTextFieldManager: viewModel.passwordTextFieldManager, title: "_PASSWORD", placeholder: "", footer: "")
                     .padding(.bottom)
                     .autocorrectionDisabled()
                     .autocapitalization(.none)
 
-                CustomTextField(customTextFieldManager: viewModel.repeatPasswordTextFieldManager, title: "_PASSWORD_REPEAT".localized, placeholder: "", footer: "")
+                CustomTextField(customTextFieldManager: viewModel.repeatPasswordTextFieldManager, title: "_PASSWORD_REPEAT", placeholder: "", footer: "")
                     .padding(.bottom, 32)
                     .autocorrectionDisabled()
                     .autocapitalization(.none)
 
 
-                BasicButton(title: "_CREATE".localized, style: .primary, isEnabled: .constant(viewModel.createButtonIsEnabled)) {
+                BasicButton(title: "_CREATE", style: .primary, isEnabled: .constant(viewModel.createButtonIsEnabled)) {
                     viewModel.doSighUp { result in
                         if result != nil {
                             coordinator.path.removeLast()

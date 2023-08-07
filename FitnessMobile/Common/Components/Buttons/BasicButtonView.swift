@@ -14,7 +14,7 @@ struct BasicButton: View {
         case destructive
     }
 
-    let title: String
+    let title: LocalizedStringKey
     let style: ButtonStyle
     @Binding var isEnabled: Bool
     let action: () -> Void

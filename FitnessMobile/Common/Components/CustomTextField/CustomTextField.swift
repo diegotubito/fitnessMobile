@@ -7,15 +7,27 @@
 
 import SwiftUI
 
+extension LocalizedStringKey {
+
+    // This will mirror the `LocalizedStringKey` so it can access its
+    // internal `key` property. Mirroring is rather expensive, but it
+    // should be fine performance-wise, unless you are
+    // using it too much or doing something out of the norm.
+    var stringKey: String {
+        (Mirror(reflecting: self).children.first(where: { $0.label == "key" })?.value ?? "") as! String
+    }
+}
+
+
 class CustomTextFieldManager: ObservableObject {
     @Published var text: String = ""
     @Published var footerIsVisible: Bool = true
     @Published var titleIsVisible = true
     @Published var isEditing: Bool = false
     @Published var shouldShowError: Bool = false
-    var message: String = ""
+    var message: LocalizedStringKey = ""
     
-    func showError(message: String) {
+    func showError(message: LocalizedStringKey) {
         withAnimation {
             shouldShowError = true
             self.message = message
@@ -65,9 +77,9 @@ struct CustomTextField: View {
         static let bodyHeight: CGFloat = 56
     }
     
-    @State var title: String
-    @State var placeholder: String
-    @State var footer: String
+    @State var title: LocalizedStringKey
+    @State var placeholder: LocalizedStringKey
+    @State var footer: LocalizedStringKey
     @State var textFieldType: TextFieldType = .ascii
     
     var onChanged: ((String) -> Void)?
@@ -115,7 +127,7 @@ struct CustomTextField: View {
                 .background(customTextFieldManager.shouldShowError ? Constants.secondaryColor : Constants.separatorColor)
                
             if customTextFieldManager.footerIsVisible {
-                if !(!customTextFieldManager.shouldShowError && footer.isEmpty) {
+                if !(!customTextFieldManager.shouldShowError && footer.stringKey.isEmpty) {
                     HStack {
                         Text(customTextFieldManager.shouldShowError ? customTextFieldManager.message : footer)
                             .font(Constants.footerFont)

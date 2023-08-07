@@ -40,15 +40,15 @@ struct CoordinatorMainView: View {
                         return Alert(
                             title: Text(coordinator.alertDetail?.title ?? ""),
                             message: Text(coordinator.alertDetail?.message ?? ""),
-                            primaryButton: .cancel(Text(coordinator.alertDetail?.primaryButtonTitle ?? "_ALERT_CANCEL".localized), action: coordinator.primaryTapped),
-                            secondaryButton: .default(Text(coordinator.alertDetail?.secondaryButtonTitle ?? "_ALERT_ACCEPT".localized), action: coordinator.secondaryTapped)
+                            primaryButton: .cancel(Text(coordinator.alertDetail?.primaryButtonTitle ?? "_ALERT_CANCEL"), action: coordinator.primaryTapped),
+                            secondaryButton: .default(Text(coordinator.alertDetail?.secondaryButtonTitle ?? "_ALERT_ACCEPT"), action: coordinator.secondaryTapped)
                         )
                     case .destructive:
                         return Alert(
                             title: Text(coordinator.alertDetail?.title ?? ""),
                             message: Text(coordinator.alertDetail?.message ?? ""),
-                            primaryButton: .destructive(Text(coordinator.alertDetail?.primaryButtonTitle ?? "_ALERT_REMOVE".localized), action: coordinator.primaryTapped),
-                            secondaryButton: .cancel(Text(coordinator.alertDetail?.secondaryButtonTitle ?? "_ALERT_CANCEL".localized), action: coordinator.secondaryTapped)
+                            primaryButton: .destructive(Text(coordinator.alertDetail?.primaryButtonTitle ?? "_ALERT_REMOVE"), action: coordinator.primaryTapped),
+                            secondaryButton: .cancel(Text(coordinator.alertDetail?.secondaryButtonTitle ?? "_ALERT_CANCEL"), action: coordinator.secondaryTapped)
                         )
                     }
                 }

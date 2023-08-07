@@ -26,8 +26,8 @@ struct DeleteAccountView: View {
             }
             Spacer()
             HStack {
-                BasicButton(title: "_DELETE_ACCOUNT".localized, style: .destructive, isEnabled: .constant(true)) {
-                    coordinator.presentDesctructiveAlert(title: "_DELETE_ACCOUNT_BUTTON_TITLE".localized, message: "_DELETE_ACCOUNT_BUTTON_MESSAGE".localized) {
+                BasicButton(title: "_DELETE_ACCOUNT", style: .destructive, isEnabled: .constant(true)) {
+                    coordinator.presentDesctructiveAlert(title: "_DELETE_ACCOUNT_BUTTON_TITLE", message: "_DELETE_ACCOUNT_BUTTON_MESSAGE") {
                         deleteAccount()
                     } secondaryTapped: { }
                 }

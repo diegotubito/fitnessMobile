@@ -24,10 +24,13 @@
 "_CREATE" = "Create";
 
 // Mark: Seeting View
+"_SETTING_PROFILE" = "Profile";
 "_LOGOUT" = "Log Out";
 "_DELETE_ACCOUNT" = "Delete Account";
 "_DELETE_ACCOUNT_BUTTON_TITLE" = "Delete Account";
 "_DELETE_ACCOUNT_BUTTON_MESSAGE" = "Are you sure you want to delete this account?";
+"_LOGOUT_ALERT_WARNING_TITLE" = "Close Session";
+"_LOGOUT_ALERT_WARNING_MESSAGE" = "Are you sure to close your session?";
 
 // Mark: Delete Account
 "_DELETE_ACCOUNT_TITLE" = "Delete account.";

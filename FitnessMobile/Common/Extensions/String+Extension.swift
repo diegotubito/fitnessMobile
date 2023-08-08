@@ -8,6 +8,16 @@
 import Foundation
 
 extension String {
+    func trimmedAndSingleSpaced() -> String {
+        // Trim spaces from the beginning and end
+        let trimmedString = self.trimmingCharacters(in: .whitespacesAndNewlines)
+        
+        // Replace double spaces (or more) with single space
+        return trimmedString.replacingOccurrences(of: "\\s+", with: " ", options: .regularExpression)
+    }
+}
+
+extension String {
     
     func toDate(format: String) -> Date? {
         let dateFormatter = DateFormatter()

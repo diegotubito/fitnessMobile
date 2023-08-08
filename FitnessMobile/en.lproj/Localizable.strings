@@ -5,6 +5,16 @@
   Created by David Diego Gomez on 06/08/2023.
   
 */
+
+// Mark: PROFILE VIEW
+"_FIRST_NAME" = "First name";
+"_FIRST_NAME_INCORRECT" = "First name is badly formatted.";
+"_LAST_NAME" = "Last name";
+"_LAST_NAME_INCORRECT" = "Last name is badly formatted.";
+"_PHONE_NUMBER" = "Phone number";
+"_PHONE_NUMBER_INCORRECT" = "Phone number format is badly formatted.";
+"_UPDATE_BUTTON" = "Update";
+
 // Mark: Tab Bar
 "_TAB_BAR_HOME" = "Home";
 "_TAB_BAR_SETTING" = "Setting";

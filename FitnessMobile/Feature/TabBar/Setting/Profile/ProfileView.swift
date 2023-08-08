@@ -20,47 +20,47 @@ struct ProfileView: View {
             ScrollView {
                 
                 VStack {
-                    CustomTextField(customTextFieldManager: viewmodel.firstNameTextField, title: "First name", placeholder: "", footer: "", textFieldType: .ascii) { newValue in
+                    CustomTextField(customTextFieldManager: viewmodel.firstNameTextField, title: "_FIRST_NAME", placeholder: "", footer: "", textFieldType: .ascii) { newValue in
                         viewmodel.validate()
                     } onDidBegin: { didBegin in
                         if didBegin {
                             viewmodel.firstNameTextField.shouldShowError = false
                         } else {
                             if !viewmodel.isValidFirstName {
-                                viewmodel.firstNameTextField.showError(message: "Must not be empty.")
+                                viewmodel.firstNameTextField.showError(message: "_FIRST_NAME_INCORRECT")
                             }
                         }
                     }
                     .padding(.bottom, 8)
                 
-                    CustomTextField(customTextFieldManager: viewmodel.lastNameTextField, title: "Last name", placeholder: "", footer: ""){ newValue in
+                    CustomTextField(customTextFieldManager: viewmodel.lastNameTextField, title: "_LAST_NAME", placeholder: "", footer: ""){ newValue in
                         viewmodel.validate()
                     } onDidBegin: { didBegin in
                         if didBegin {
                             viewmodel.lastNameTextField.shouldShowError = false
                         } else {
                             if !viewmodel.isValidLastName {
-                                viewmodel.lastNameTextField.showError(message: "Must not be empty.")
+                                viewmodel.lastNameTextField.showError(message: "_LAST_NAME_INCORRECT")
                             }
                         }
                     }
                     .padding(.bottom, 8)
 
-                    CustomTextField(customTextFieldManager: viewmodel.phoneNumberTextField, title: "Phone number", placeholder: "", footer: "", textFieldType: .phoneNumber) { newValue in
+                    CustomTextField(customTextFieldManager: viewmodel.phoneNumberTextField, title: "_PHONE_NUMBER", placeholder: "", footer: "", textFieldType: .phoneNumber) { newValue in
                         viewmodel.validate()
                     } onDidBegin: { didBegin in
                         if didBegin {
                             viewmodel.phoneNumberTextField.shouldShowError = false
                         } else {
                             if !viewmodel.isValidPhoneNumber {
-                                viewmodel.phoneNumberTextField.showError(message: "The format is not correct.")
+                                viewmodel.phoneNumberTextField.showError(message: "_PHONE_NUMBER_INCORRECT")
                             }
                         }
                     }
                     .padding(.bottom, 8)
 
                 }
-                BasicButton(title: "Update", style: .primary, isEnabled: .constant(viewmodel.updateButtonValueIsEnabled)) {
+                BasicButton(title: "_UPDATE_BUTTON", style: .primary, isEnabled: .constant(viewmodel.updateButtonValueIsEnabled)) {
                     
                     viewmodel.updateUser { response in
                         if let response = response {
@@ -86,7 +86,7 @@ struct ProfileView: View {
     func setupInitValues() {
         if let user = UserSessionManager().getUserSession()?.user {
             viewmodel.firstNameTextField.text = user.firstName
-            viewmodel.lastNameTextField.text = user.firstName
+            viewmodel.lastNameTextField.text = user.lastName
             viewmodel.phoneNumberTextField.text = user.phoneNumber
         }
     }

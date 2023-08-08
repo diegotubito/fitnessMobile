@@ -27,8 +27,8 @@ class ProfileViewModel: BaseViewModel {
         Task {
             do {
                 let phoneNumber = convertToNumber(phone: phoneNumberTextField.text)
-                let response = try await usecase.doUpdate(firstName: firstNameTextField.text,
-                                                          lastName: lastNameTextField.text,
+                let response = try await usecase.doUpdate(firstName: firstNameTextField.text.trimmedAndSingleSpaced(),
+                                                          lastName: lastNameTextField.text.trimmedAndSingleSpaced(),
                                                           phoneNumber: phoneNumber)
                 DispatchQueue.main.async {
                     self.updateButtonValueIsEnabled = true

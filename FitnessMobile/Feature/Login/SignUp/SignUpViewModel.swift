@@ -23,7 +23,9 @@ class SignUpViewModel: BaseViewModel {
         createButtonIsEnabled = false
         Task {
             do {
-                let response = try await usecase.doCreate(username: usernameTextFieldManager.text, email: emailTextFieldManager.text, password: passwordTextFieldManager.text)
+                let response = try await usecase.doCreate(username: usernameTextFieldManager.text.trimmedAndSingleSpaced(),
+                                                          email: emailTextFieldManager.text.trimmedAndSingleSpaced(),
+                                                          password: passwordTextFieldManager.text)
                 DispatchQueue.main.async {
                     self.createButtonIsEnabled = true
                     self.isLoading = false

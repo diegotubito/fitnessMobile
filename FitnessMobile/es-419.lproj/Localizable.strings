@@ -5,6 +5,15 @@
   Created by David Diego Gomez on 06/08/2023.
   
 */
+// Mark: PROFILE VIEW
+"_FIRST_NAME" = "Nombre";
+"_FIRST_NAME_INCORRECT" = "El nombre tiene un formato incorrecto.";
+"_LAST_NAME" = "Apellido";
+"_LAST_NAME_INCORRECT" = "El apellido tiene un formato incorrecto.";
+"_PHONE_NUMBER" = "Teléfono";
+"_PHONE_NUMBER_INCORRECT" = "El teléfono tiene un formato incorrecto.";
+"_UPDATE_BUTTON" = "Actualizar";
+
 // Mark: Tab Bar
 "_TAB_BAR_HOME" = "Inicio";
 "_TAB_BAR_SETTING" = "Configuración";

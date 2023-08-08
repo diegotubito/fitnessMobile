@@ -13,7 +13,7 @@ struct LoginView: View {
     @EnvironmentObject var userSession: UserSessionManager
     @EnvironmentObject var coordinator: Coordinator
     
-    var presentLoginAsModal: Bool
+    var presentingAsModal: Bool
     
     var body: some View {
         VStack {
@@ -30,11 +30,15 @@ struct LoginView: View {
                 perfomrLogin()
             }
             .padding()
-            Button {
-                coordinator.push(.signUp)
-            } label: {
-                Text("_SIGNUP")
+            
+            if !presentingAsModal {
+                Button {
+                    coordinator.push(.signUp)
+                } label: {
+                    Text("_SIGNUP")
+                }
             }
+            
             List(viewmodel.users, id: \.self) { user in
                 VStack {
                     Text(user.email)
@@ -66,7 +70,7 @@ struct LoginView: View {
             DispatchQueue.main.async {
                 if let response = response {
                     userSession.saveUser(user: response.user, token: response.token)
-                    if presentLoginAsModal {
+                    if presentingAsModal {
                         coordinator.closeModal()
                     } else {
                         userSession.didLogIn.toggle()
@@ -84,7 +88,7 @@ struct LoginView_Previews: PreviewProvider {
     @State static var coordinator = Coordinator()
     static var previews: some View {
         NavigationStack {
-            LoginView(presentLoginAsModal: true)
+            LoginView(presentingAsModal: true)
         }.environmentObject(coordinator)
     }
 }

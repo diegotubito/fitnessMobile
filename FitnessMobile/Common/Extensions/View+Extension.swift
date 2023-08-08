@@ -10,7 +10,7 @@ import SwiftUI
 extension View {
     func presentLoginAsModal(shouldNavigate: Binding<Bool>) -> some View {
         self.fullScreenCover(isPresented: shouldNavigate, content: {
-            LoginView(presentLoginAsModal: true)
+            LoginView(presentingAsModal: true)
         })
     }
 }

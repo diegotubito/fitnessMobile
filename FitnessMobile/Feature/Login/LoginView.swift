@@ -13,6 +13,8 @@ struct LoginView: View {
     @EnvironmentObject var userSession: UserSessionManager
     @EnvironmentObject var coordinator: Coordinator
     
+    var presentLoginAsModal: Bool
+    
     var body: some View {
         VStack {
             TextField("_USERNAME", text: $viewmodel.username)
@@ -64,6 +66,11 @@ struct LoginView: View {
             DispatchQueue.main.async {
                 if let response = response {
                     userSession.saveUser(user: response.user, token: response.token)
+                    if presentLoginAsModal {
+                        coordinator.closeModal()
+                    } else {
+                        userSession.didLogIn.toggle()
+                    }
                 } else {
                     coordinator.presentPrimaryAlert(title: viewmodel.errorTitle, message: viewmodel.errorMessage) {
                     }
@@ -77,7 +84,7 @@ struct LoginView_Previews: PreviewProvider {
     @State static var coordinator = Coordinator()
     static var previews: some View {
         NavigationStack {
-            LoginView()
+            LoginView(presentLoginAsModal: true)
         }.environmentObject(coordinator)
     }
 }

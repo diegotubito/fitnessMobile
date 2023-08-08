@@ -16,7 +16,7 @@ struct UserEntity {
             let firstName: String
             let lastName: String
             let role: String
-            let phoneNumber: Int
+            let phoneNumber: String
             let emailVerified: Bool
         }
         
@@ -30,6 +30,18 @@ struct UserEntity {
         
         struct Response: Decodable {
             let users: [User]
+        }
+    }
+    
+    struct Update {
+        struct Request: Codable {
+            let firstName: String
+            let lastName: String
+            let phoneNumber: String
+        }
+        
+        struct Response: Decodable {
+            let user: User
         }
     }
 }

@@ -9,17 +9,27 @@ import Foundation
 typealias CreateUserResult = UserEntity.Create.Response
 typealias DeleteUserResult = Data
 typealias GetUserResult = UserEntity.Get.Response
+typealias UpdateUserResult = UserEntity.Update.Response
 
 protocol UserRepositoryProtocol {
     func doCreate(request: UserEntity.Create.Request) async throws -> CreateUserResult
     func deleteUser() async throws -> DeleteUserResult
     func getUsers() async throws -> GetUserResult
+    func doUpdate(request: UserEntity.Update.Request) async throws -> UpdateUserResult
 }
 
 class UserRepository: ApiNetworkAsync, UserRepositoryProtocol {
     func doCreate(request: UserEntity.Create.Request) async throws -> CreateUserResult {
         config.path = "/api/v1/user"
         config.method = .post
+        config.addRequestBody(request)
+        return try await apiCall()
+    }
+    
+    func doUpdate(request: UserEntity.Update.Request) async throws -> UpdateUserResult {
+        config.path = "/api/v1/user"
+        config.method = .put
+        config.addQueryItem(key: "_id", value: UserSessionManager().getUserSession()?.user._id ?? "")
         config.addRequestBody(request)
         return try await apiCall()
     }

@@ -27,6 +27,11 @@ class BaseViewModel: ObservableObject {
             case .invalidMethod(let method):
                 break
             case .authentication:
+                NotificationCenter.default.post(Notification(name: .MustLogin))
+                
+                errorTitle = LocalizedStringKey("_401_TITLE")
+                errorMessage = LocalizedStringKey("_401_MESSAGE")
+                
                 break
             case .userSessionNotFound:
                 break

@@ -21,9 +21,16 @@ class UserUseCase {
                                                 firstName: "",
                                                 lastName: "",
                                                 role: "ADMIN_ROLE",
-                                                phoneNumber: 0,
+                                                phoneNumber: "",
                                                 emailVerified: false)
         return try await repository.doCreate(request: request)
+    }
+    
+    func doUpdate(firstName: String, lastName: String, phoneNumber: String) async throws -> UpdateUserResult {
+        let request = UserEntity.Update.Request(firstName: firstName,
+                                                lastName: lastName,
+                                                phoneNumber: phoneNumber)
+        return try await repository.doUpdate(request: request)
     }
     
     func deleteUser() async throws -> DeleteUserResult {

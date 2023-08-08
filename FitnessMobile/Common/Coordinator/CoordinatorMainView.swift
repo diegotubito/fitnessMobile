@@ -7,6 +7,10 @@
 
 import SwiftUI
 
+extension NSNotification.Name {
+    static let MustLogin: NSNotification.Name = .init(rawValue: "must_login")
+}
+
 struct CoordinatorMainView: View {
     @EnvironmentObject var coordinator: Coordinator
     @EnvironmentObject var networkMonitor: NetworkMonitor
@@ -72,6 +76,9 @@ struct CoordinatorMainView: View {
                 }
                 .onChange(of: userSession.didLogIn) { _ in
                     currentPage = .tabbar
+                }
+                .onReceive(NotificationCenter.default.publisher(for: .MustLogin)) { value in
+                    coordinator.presentModal(.login)
                 }
         }
     }

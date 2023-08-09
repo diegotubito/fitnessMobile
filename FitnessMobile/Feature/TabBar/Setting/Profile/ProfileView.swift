@@ -46,18 +46,7 @@ struct ProfileView: View {
                     }
                     .padding(.bottom, 8)
                  
-                    CustomTextField(customTextFieldManager: viewmodel.phoneNumberTextField, title: "_PHONE_NUMBER", placeholder: "", footer: "", textFieldType: .phoneNumber) { newValue in
-                        viewmodel.validate()
-                    } onDidBegin: { didBegin in
-                        if didBegin {
-                            viewmodel.phoneNumberTextField.shouldShowError = false
-                        } else {
-                            if !viewmodel.isValidPhoneNumber {
-                                viewmodel.phoneNumberTextField.showError(message: "_PHONE_NUMBER_INCORRECT")
-                            }
-                        }
-                    }
-                    .padding(.bottom, 8)
+                    PhoneNumberTextField(title: "Phone", initValue: userSession.getUserSession()?.user.phone)
 
                 }
                 BasicButton(title: "_UPDATE_BUTTON", style: .primary, isEnabled: .constant(viewmodel.updateButtonValueIsEnabled)) {
@@ -87,7 +76,7 @@ struct ProfileView: View {
         if let user = UserSessionManager().getUserSession()?.user {
             viewmodel.firstNameTextField.text = user.firstName
             viewmodel.lastNameTextField.text = user.lastName
-            viewmodel.phoneNumberTextField.text = user.phoneNumber
+            viewmodel.phoneNumberTextField.text = user.phone?.number ?? ""
         }
     }
 }

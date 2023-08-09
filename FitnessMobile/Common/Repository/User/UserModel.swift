@@ -17,8 +17,16 @@ struct User: Identifiable, Codable, Hashable {
     let lastName: String
     let isEnabled: Bool
     let role: String
-    let phoneNumber: String
+    let phone: Phone?
     let emailVerified: Bool
     let createdAt: String
     let updatedAt: String
+}
+
+struct Phone: Identifiable, Codable, Hashable {
+    var id: UUID? = UUID()
+    let countryName: String
+    let number: String
+    let phoneCode: String
+    let countryCode: String
 }

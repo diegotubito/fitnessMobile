@@ -27,8 +27,6 @@ class BaseViewModel: ObservableObject {
             case .invalidMethod(let method):
                 break
             case .authentication:
-                NotificationCenter.default.post(Notification(name: .MustLogin))
-                
                 errorTitle = LocalizedStringKey("_401_TITLE")
                 errorMessage = LocalizedStringKey("_401_MESSAGE")
                 
@@ -43,7 +41,7 @@ class BaseViewModel: ObservableObject {
                 break
             case .serverError(let title, let message):
                 errorTitle = LocalizedStringKey(title)
-                errorMessage = LocalizedStringKey("_500_SERVER_MESSAGE")
+                errorMessage = LocalizedStringKey(message)
                 break
             case .serialization:
                 errorTitle = LocalizedStringKey("_SERIALIZE_TITLE")
@@ -57,8 +55,8 @@ class BaseViewModel: ObservableObject {
                 break
             }
         } else {
-            errorTitle = LocalizedStringKey("_NOT_KNOWN_TITLE")
-            errorMessage = LocalizedStringKey("_NOT_KNOWN_MESSAGE")
+            errorTitle = LocalizedStringKey("_SERVER_ERROR_TITLE")
+            errorMessage = LocalizedStringKey("_SERVER_ERROR_MESSAGE")
         }
     }
 }

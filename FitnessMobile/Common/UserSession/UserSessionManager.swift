@@ -33,7 +33,7 @@ class UserSessionManager: ObservableObject {
             let encoder = JSONEncoder()
             let data = try encoder.encode(userSession)
             _ = KeychainManager.shared.save(key: userSessionKey, data: data)
-           
+            NotificationCenter.default.post(Notification(name: .UserSessionDidChanged))
         } catch {
             print("Error encoding person: \(error)")
         }

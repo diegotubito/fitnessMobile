@@ -96,6 +96,9 @@ open class ApiNetworkAsync {
                 let message = json?["message"] as? String
                 throw APIError.customError(title: title, message: message)
             case 401:
+                DispatchQueue.main.async {
+                    NotificationCenter.default.post(Notification(name: .MustLogin))
+                }
                 throw APIError.authentication
             case 404:
                 throw APIError.notFound(url: request.url?.absoluteString)
@@ -105,7 +108,11 @@ open class ApiNetworkAsync {
                 let message = json?["message"] as? String
                 throw APIError.serverError(title: title ?? "", message: message ?? "")
             default:
-                throw APIError.serverError(title: "_NOT_KNOWN_TITLE", message: "_NOT_KNOWN_MESSAGE")
+                let json = try JSONSerialization.jsonObject(with: data) as? [String: Any]
+                let title = json?["title"] as? String
+                let message = json?["message"] as? String
+
+                throw APIError.serverError(title: "_ERROR_NOT_HANDLED_TITLE", message: "\(httpResponse.statusCode) - \(message ?? "")")
             }
         }
 

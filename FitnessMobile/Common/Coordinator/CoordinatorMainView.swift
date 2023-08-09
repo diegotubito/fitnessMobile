@@ -9,6 +9,7 @@ import SwiftUI
 
 extension NSNotification.Name {
     static let MustLogin: NSNotification.Name = .init(rawValue: "must_login")
+    static let UserSessionDidChanged: NSNotification.Name = .init("user_changed")
 }
 
 struct CoordinatorMainView: View {

@@ -25,6 +25,7 @@ class CustomTextFieldManager: ObservableObject {
     @Published var titleIsVisible = true
     @Published var isEditing: Bool = false
     @Published var shouldShowError: Bool = false
+    @Published var isSelectable: Bool = true
     var message: LocalizedStringKey = ""
     
     func showError(message: LocalizedStringKey) {
@@ -81,13 +82,25 @@ struct CustomTextField: View {
     @State var title: LocalizedStringKey
     @State var placeholder: LocalizedStringKey
     @State var footer: LocalizedStringKey
-    @State var textFieldType: TextFieldType = .ascii
+    @State var textFieldType: TextFieldType = .ascii {
+        didSet {
+            switch textFieldType {
+            case .ascii:
+                break
+            case .currency(withDecimals: let decimals):
+                break
+            case .phoneNumber:
+                customTextFieldManager
+                break
+            }
+        }
+    }
     
     var onChanged: ((String) -> Void)?
     var onDidBegin: ((Bool) -> Void)?
 
     @FocusState private var focusedField: FocusedField?
-
+    
     var body: some View {
         VStack(spacing: 0) {
             Group {
@@ -118,6 +131,9 @@ struct CustomTextField: View {
                     onChanged?(newValue)
                 })
                 .padding(.top, 8)
+                .disabled(false)
+               
+                
                 
             }
             .padding(.horizontal)
@@ -142,6 +158,7 @@ struct CustomTextField: View {
         .cornerRadius(10)
         .onTapGesture {
             focusedField = .price
+                print("tapeo")
         }
     }
     

@@ -56,8 +56,12 @@
 "_500_SERVER_MESSAGE" = "Hubo un error en el servicio. Puede que exista un dato duplicado.";
 "_400_ERROR_TITLE" = "Error de Request";
 "_400_ERROR_MESSAGE" = "Revisa tu body y headers.";
-"_NOT_KNOWN_TITLE" = "Error Desconocido";
-"_NOT_KNOWN_MESSAGE" = "Ocurrio un error";
+"_SERVER_ERROR_TITLE" = "Error de servidor";
+"_SERVER_ERROR_MESSAGE" = "El servidor no response.";
+"_NOT_KNOWN_TITLE" = "The server doesn't respond.";
+"_NOT_KNOWN_MESSAGE" = "The server doesn't respond.";
+"_ERROR_NOT_HANDLED_TITLE" = "Error no manejado";
+"_ERROR_NOT_HANDLED_MESSAGE" = "El error es conocido pero no es manejado correctamente.";
 "_SERIALIZE_TITLE" = "Error";
 "_SERIALIZE_MESSAGE" = "No se pudo serializar los datos.";
 "_401_TITLE"="Autenticación";

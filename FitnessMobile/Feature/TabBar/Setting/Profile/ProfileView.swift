@@ -11,7 +11,7 @@ struct ProfileView: View {
     @StateObject var viewmodel = ProfileViewModel()
     @EnvironmentObject var coordinator: Coordinator
     @EnvironmentObject var userSession: UserSessionManager
-    
+   
     var body: some View {
         
         VStack {
@@ -45,7 +45,7 @@ struct ProfileView: View {
                         }
                     }
                     .padding(.bottom, 8)
-
+                 
                     CustomTextField(customTextFieldManager: viewmodel.phoneNumberTextField, title: "_PHONE_NUMBER", placeholder: "", footer: "", textFieldType: .phoneNumber) { newValue in
                         viewmodel.validate()
                     } onDidBegin: { didBegin in
@@ -80,7 +80,7 @@ struct ProfileView: View {
             .onAppear {
                 setupInitValues()
             }
-        }
+        }        
     }
     
     func setupInitValues() {

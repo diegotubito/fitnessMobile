@@ -26,7 +26,7 @@ struct User: Identifiable, Codable, Hashable {
 struct Phone: Identifiable, Codable, Hashable {
     var id: UUID? = UUID()
     let countryName: String
-    let number: String
+    var number: String
     let phoneCode: String
     let countryCode: String
 }

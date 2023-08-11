@@ -10,26 +10,46 @@ import SwiftUI
 class ProfileViewModel: BaseViewModel {
     @Published var firstNameTextField = CustomTextFieldManager()
     @Published var lastNameTextField = CustomTextFieldManager()
-    @Published var phoneNumberTextField = CustomTextFieldManager()
+    @Published var phoneNumberTextField = PhoneNumberTextFieldManager()
     @Published var updateButtonValueIsEnabled = false
     
     @Published var isLoading = false
     @Published var showAlert = false
     
+    func getPhone() -> Phone {
+        let user = UserSessionManager().getUserSession()?.user
+        let phone = Phone(countryName: user?.phone?.countryName ?? "",
+                                                                        number: user?.phone?.number ?? "",
+                                                                        phoneCode: user?.phone?.phoneCode ?? "",
+                                                                        countryCode: user?.phone?.countryCode ?? "")
+        return phone
+    }
+    
+    override init() {
+        super .init()
+    }
+    
     func convertToNumber(phone: String) -> String {
         return phone.filter { "0123456789".contains($0) }
+    }
+    
+    func setupInitValues() {
+        if let user = UserSessionManager().getUserSession()?.user {
+            firstNameTextField.text = user.firstName
+            lastNameTextField.text = user.lastName
+        }
     }
     
     func updateUser(completion: @escaping (UpdateUserResult?) -> Void) {
         let usecase = UserUseCase()
         isLoading = true
         updateButtonValueIsEnabled = false
+        phoneNumberTextField.phone.number = convertToNumber(phone: phoneNumberTextField.text)
         Task {
             do {
-                let phoneNumber = convertToNumber(phone: phoneNumberTextField.text)
                 let response = try await usecase.doUpdate(firstName: firstNameTextField.text.trimmedAndSingleSpaced(),
                                                           lastName: lastNameTextField.text.trimmedAndSingleSpaced(),
-                                                          phoneNumber: phoneNumber)
+                                                          phone: phoneNumberTextField.phone)
                 DispatchQueue.main.async {
                     self.updateButtonValueIsEnabled = true
                     self.isLoading = false

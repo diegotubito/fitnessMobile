@@ -26,10 +26,13 @@ class UserUseCase {
         return try await repository.doCreate(request: request)
     }
     
-    func doUpdate(firstName: String, lastName: String, phoneNumber: String) async throws -> UpdateUserResult {
+    func doUpdate(firstName: String, lastName: String, phone: Phone) async throws -> UpdateUserResult {
         let request = UserEntity.Update.Request(firstName: firstName,
                                                 lastName: lastName,
-                                                phoneNumber: phoneNumber)
+                                                phone: UserEntity.Update.RequestPhone(countryName: phone.countryName,
+                                                                   number: phone.number,
+                                                                   phoneCode: phone.phoneCode,
+                                                                   countryCode: phone.countryCode))
         return try await repository.doUpdate(request: request)
     }
     

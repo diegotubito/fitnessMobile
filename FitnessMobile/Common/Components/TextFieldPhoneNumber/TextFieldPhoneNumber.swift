@@ -18,37 +18,40 @@ func countryName(_ countryCode: String) -> String {
 }
 
 
+class PhoneNumberTextFieldManager: ObservableObject {
+    @Published var text: String = ""
+    @Published var countryCodeText: String = ""
+    @Published var phone: Phone = Phone(countryName: "", number: "", phoneCode: "", countryCode: "")
+}
 
 struct PhoneNumberTextField: View {
-    @State var text: String = ""
-    @State var countryCodeText: String = ""
-    
-    @State var title: String
-    @State var initValue: Phone?
-    
+    var phone: Phone
+    @Binding var textFieldManager: PhoneNumberTextFieldManager
     @State var showSheet: Bool = false
-    @State var selectedCountry: Phone? {
-        didSet {
-            if let selectedCountry = selectedCountry {
-                countryCodeText = "\(countryFlag(selectedCountry.countryCode))+\(selectedCountry.phoneCode)"
-            }
-        }
+ 
+    func setTextFields() {
+        let countryCode = textFieldManager.phone.countryCode
+        let countryName = textFieldManager.phone.countryName
+        let phoneCode = textFieldManager.phone.phoneCode
+        let flag = countryFlag(countryCode)
+        textFieldManager.countryCodeText = "\(flag) \(countryName)(+\(phoneCode))"
+        textFieldManager.text = textFieldManager.phone.number
     }
     
     var body: some View {
         VStack(spacing: 0) {
             
-            HStack {
+            VStack {
                 VStack(spacing: 0) {
                     HStack {
                         Text("Country")
                             .font(.callout)
                             .foregroundColor(Color.Dark.tone90)
+                        Spacer()
                        
                     }
-                    TextField("", text: $countryCodeText)
+                    TextField("", text: $textFieldManager.countryCodeText)
                         .padding(12)
-                        .multilineTextAlignment(.center)
                         .background(Color.gray.opacity(0.2))
                         .cornerRadius(10)
                         .disabled(true)
@@ -57,16 +60,15 @@ struct PhoneNumberTextField: View {
                         }
                     
                 }
-                .frame(maxWidth: 90)
                 
                 VStack(spacing: 0) {
                     HStack {
-                        Text(title)
+                        Text("Phone number")
                             .font(.callout)
                             .foregroundColor(Color.Dark.tone90)
                         Spacer()
                     }
-                    TextField("", text: $text)
+                    TextField("", text: $textFieldManager.text)
                         .padding(12)
                         .background(Color.gray.opacity(0.2))
                         .cornerRadius(10)
@@ -75,13 +77,17 @@ struct PhoneNumberTextField: View {
         }
         .sheet(isPresented: $showSheet) {
             CountryPickerView { country in
-                selectedCountry = country
+                // country comes with an empty number, let's fix that issue.
+                var selectedPhone = country
+                selectedPhone.number = phone.number
+                textFieldManager.phone = selectedPhone
+                setTextFields()
             }
         }
         .onAppear {
-            let string = "\(countryFlag(initValue?.countryCode ?? ""))+\(initValue?.phoneCode ?? "")"
-            countryCodeText = string
-            text = initValue?.number ?? ""
+            textFieldManager.phone = phone
+            textFieldManager.text = phone.number
+            setTextFields()
         }
     }
 }

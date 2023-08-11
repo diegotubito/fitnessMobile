@@ -37,7 +37,14 @@ struct UserEntity {
         struct Request: Codable {
             let firstName: String
             let lastName: String
-            let phoneNumber: String
+            let phone: RequestPhone
+        }
+        
+        struct RequestPhone: Codable {
+            let countryName: String
+            let number: String
+            let phoneCode: String
+            let countryCode: String
         }
         
         struct Response: Decodable {

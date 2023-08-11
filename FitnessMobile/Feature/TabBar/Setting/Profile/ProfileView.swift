@@ -46,7 +46,7 @@ struct ProfileView: View {
                     }
                     .padding(.bottom, 8)
                  
-                    PhoneNumberTextField(title: "Phone", initValue: userSession.getUserSession()?.user.phone)
+                    PhoneNumberTextField(phone: viewmodel.getPhone(), textFieldManager: $viewmodel.phoneNumberTextField)
 
                 }
                 BasicButton(title: "_UPDATE_BUTTON", style: .primary, isEnabled: .constant(viewmodel.updateButtonValueIsEnabled)) {
@@ -67,17 +67,9 @@ struct ProfileView: View {
             }
             .padding()
             .onAppear {
-                setupInitValues()
+                viewmodel.setupInitValues()
             }
         }        
-    }
-    
-    func setupInitValues() {
-        if let user = UserSessionManager().getUserSession()?.user {
-            viewmodel.firstNameTextField.text = user.firstName
-            viewmodel.lastNameTextField.text = user.lastName
-            viewmodel.phoneNumberTextField.text = user.phone?.number ?? ""
-        }
     }
 }
 

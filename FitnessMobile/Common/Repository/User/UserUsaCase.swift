@@ -14,7 +14,7 @@ class UserUseCase {
         self.repository = repository
     }
     
-    func doCreate(username: String, email: String, password: String) async throws -> CreateUserResult {
+    func doCreate(username: String, email: String, password: String, phone: Phone) async throws -> CreateUserResult {
         let request = UserEntity.Create.Request(username: username,
                                                 email: email,
                                                 password: password,
@@ -22,14 +22,18 @@ class UserUseCase {
                                                 lastName: "",
                                                 role: "ADMIN_ROLE",
                                                 phoneNumber: "",
-                                                emailVerified: false)
+                                                emailVerified: false,
+                                                phone: UserEntity.RequestPhone(countryName: phone.countryName,
+                                                                               number: phone.number,
+                                                                               phoneCode: phone.phoneCode,
+                                                                               countryCode: phone.countryCode))
         return try await repository.doCreate(request: request)
     }
     
     func doUpdate(firstName: String, lastName: String, phone: Phone) async throws -> UpdateUserResult {
         let request = UserEntity.Update.Request(firstName: firstName,
                                                 lastName: lastName,
-                                                phone: UserEntity.Update.RequestPhone(countryName: phone.countryName,
+                                                phone: UserEntity.RequestPhone(countryName: phone.countryName,
                                                                    number: phone.number,
                                                                    phoneCode: phone.phoneCode,
                                                                    countryCode: phone.countryCode))

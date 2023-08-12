@@ -11,6 +11,8 @@ struct ProfileView: View {
     @StateObject var viewmodel = ProfileViewModel()
     @EnvironmentObject var coordinator: Coordinator
     @EnvironmentObject var userSession: UserSessionManager
+    @State var shouldGoToOTP = false
+    @State var otpResult: OTPView.OPTResult = .none
    
     var body: some View {
         
@@ -46,30 +48,51 @@ struct ProfileView: View {
                     }
                     .padding(.bottom, 8)
                  
-                    PhoneNumberTextField(phone: viewmodel.getPhone(), textFieldManager: $viewmodel.phoneNumberTextField)
+                    PhoneTextField(phone: viewmodel.getPhone(), textFieldManager: $viewmodel.phoneNumberTextField) { newValue in
+                        
+                    } onDidBegin: { didBegin in
+                        
+                    }
 
                 }
+            
                 BasicButton(title: "_UPDATE_BUTTON", style: .primary, isEnabled: .constant(viewmodel.updateButtonValueIsEnabled)) {
-                    
-                    viewmodel.updateUser { response in
-                        if let response = response {
-                            let token = userSession.getToken()
-                            userSession.saveUser(user: response.user, token: token ?? "")
-                            coordinator.path.removeLast()
-                        } else {
-                            coordinator.presentPrimaryAlert(title: viewmodel.errorTitle, message: viewmodel.errorMessage) {
-                                
-                            }
-                        }
-                    }
+                    shouldGoToOTP = true
                 }
                 .padding()
             }
+            .navigationDestination(isPresented: $shouldGoToOTP, destination: {
+                OTPView(optResult: $otpResult)
+                
+            })
             .padding()
             .onAppear {
-                viewmodel.setupInitValues()
+                
+                switch otpResult {
+                case .none:
+                    viewmodel.setupInitValues()
+                case .otpBackButton:
+                    break
+                case .otpSuccess:
+                    updateUser()
+                case .optFailed:
+                    break
+                }
             }
         }        
+    }
+    
+    func updateUser() {
+        viewmodel.updateUser { response in
+            if let response = response {
+                let token = userSession.getToken()
+                userSession.saveUser(user: response.user, token: token ?? "")
+                coordinator.path.removeLast()
+            } else {
+                coordinator.presentPrimaryAlert(title: viewmodel.errorTitle, message: viewmodel.errorMessage) {
+                }
+            }
+        }
     }
 }
 

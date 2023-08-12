@@ -51,7 +51,6 @@ struct CustomTextField: View {
     enum TextFieldType {
         case currency(withDecimals: Bool)
         case ascii
-        case phoneNumber
     }
     
     enum FocusedField {
@@ -89,15 +88,12 @@ struct CustomTextField: View {
                 break
             case .currency(withDecimals: let decimals):
                 break
-            case .phoneNumber:
-                customTextFieldManager
-                break
             }
         }
     }
     
-    var onChanged: ((String) -> Void)?
-    var onDidBegin: ((Bool) -> Void)?
+    var onChanged: ((String) -> Void)
+    var onDidBegin: ((Bool) -> Void)
 
     @FocusState private var focusedField: FocusedField?
     
@@ -117,7 +113,7 @@ struct CustomTextField: View {
                 
                 TextField(placeholder, text: $customTextFieldManager.text) { beginEditing in
                     withAnimation {
-                        onDidBegin?(beginEditing)
+                        onDidBegin(beginEditing)
                         customTextFieldManager.isEditing = beginEditing
                     }
                 }
@@ -128,7 +124,7 @@ struct CustomTextField: View {
                 .foregroundColor(Constants.textFieldTextColor)
                 .onChange(of: customTextFieldManager.text, perform: { newValue in
                     validateText(newValue)
-                    onChanged?(newValue)
+                    onChanged(newValue)
                 })
                 .padding(.top, 8)
                 .disabled(false)
@@ -188,62 +184,9 @@ struct CustomTextField: View {
             }
         case .ascii:
             break
-        case .phoneNumber:
-            validatePhoneNumber(text)
         }
     }
     
     // Add a new property to your ViewModel to keep track of the last known count
     @State private var lastKnownCharacterCount = 0
-
-    func validatePhoneNumber(_ number: String) {
-        
-        // Strip the number of everything other than digits
-        let strippedNumber = number.filter { "0123456789".contains($0) }
-
-        // Detect if backspacing
-        let isBackspacing = strippedNumber.count < lastKnownCharacterCount
-
-        // Update the last known count
-        lastKnownCharacterCount = strippedNumber.count
-
-        // Handle the case of backspacing through the country code
-        if isBackspacing && strippedNumber.count == 2 {
-            self.customTextFieldManager.text = "(+" + strippedNumber.prefix(1)
-            return
-        }
-
-        // If more than 10 digits, do not proceed with further formatting.
-        guard strippedNumber.count <= 12 else {
-            self.customTextFieldManager.text.removeLast()
-            return
-        }
-
-        // Split the country code from the rest of the number
-        let countryCode = strippedNumber.prefix(2) // Take the first two digits for country code
-        let userEnteredNumber = strippedNumber.dropFirst(2) // Drop the country code
-
-        let formattedNumber: String
-        switch userEnteredNumber.count {
-        case 0 where countryCode.count == 1:
-            formattedNumber = "(+" + String(countryCode)
-        case 1:
-            formattedNumber = "(+" + String(countryCode) + ") " + String(userEnteredNumber)
-        case 2...4:
-            formattedNumber = "(+" + String(countryCode) + ") " + userEnteredNumber
-        case 5...7:
-            let endIndex = userEnteredNumber.index(userEnteredNumber.startIndex, offsetBy: 3)
-            formattedNumber = "(+" + String(countryCode) + ") " + userEnteredNumber[..<endIndex] + "-" + userEnteredNumber[endIndex...]
-        case 8...:
-            let firstIndex = userEnteredNumber.index(userEnteredNumber.startIndex, offsetBy: 3)
-            let secondIndex = userEnteredNumber.index(userEnteredNumber.startIndex, offsetBy: 6)
-            formattedNumber = "(+" + String(countryCode) + ") " + userEnteredNumber[..<firstIndex] + "-" + userEnteredNumber[firstIndex..<secondIndex] + "-" + userEnteredNumber[secondIndex...]
-        default:
-            formattedNumber = "(+" + String(countryCode) + ") " + userEnteredNumber
-        }
-
-        self.customTextFieldManager.text = formattedNumber
-    }
-
-
 }

@@ -8,9 +8,9 @@
 import SwiftUI
 
 func countryFlag(_ countryCode: String) -> String {
-  String(String.UnicodeScalarView(countryCode.unicodeScalars.compactMap {
-    UnicodeScalar(127397 + $0.value)
-  }))
+    String(String.UnicodeScalarView(countryCode.unicodeScalars.compactMap {
+        UnicodeScalar(127397 + $0.value)
+    }))
 }
 
 func countryName(_ countryCode: String) -> String {
@@ -24,11 +24,16 @@ class PhoneNumberTextFieldManager: ObservableObject {
     @Published var phone: Phone = Phone(countryName: "", number: "", phoneCode: "", countryCode: "")
 }
 
-struct PhoneNumberTextField: View {
+struct PhoneTextField: View {
     var phone: Phone
     @Binding var textFieldManager: PhoneNumberTextFieldManager
     @State var showSheet: Bool = false
- 
+    @FocusState var currentFocus: States?
+    
+    enum States: Hashable {
+        case phonenumber
+    }
+    
     func setTextFields() {
         let countryCode = textFieldManager.phone.countryCode
         let countryName = textFieldManager.phone.countryName
@@ -38,17 +43,20 @@ struct PhoneNumberTextField: View {
         textFieldManager.text = textFieldManager.phone.number
     }
     
+    var onChanged: ((String) -> Void)
+    var onDidBegin: ((Bool) -> Void)
+    
     var body: some View {
         VStack(spacing: 0) {
             
             VStack {
                 VStack(spacing: 0) {
                     HStack {
-                        Text("Country")
+                        Text("_COUNTRY_TEXTFIELD_TITLE")
                             .font(.callout)
                             .foregroundColor(Color.Dark.tone90)
                         Spacer()
-                       
+                        
                     }
                     TextField("", text: $textFieldManager.countryCodeText)
                         .padding(12)
@@ -57,30 +65,47 @@ struct PhoneNumberTextField: View {
                         .disabled(true)
                         .onTapGesture {
                             showSheet = true
+                            onDidBegin(true)
+                            currentFocus = .phonenumber
                         }
                     
                 }
                 
                 VStack(spacing: 0) {
                     HStack {
-                        Text("Phone number")
+                        Text("_PHONE_NUMBER_TEXTFIELD_TITLE")
                             .font(.callout)
                             .foregroundColor(Color.Dark.tone90)
                         Spacer()
                     }
-                    TextField("", text: $textFieldManager.text)
-                        .padding(12)
-                        .background(Color.gray.opacity(0.2))
-                        .cornerRadius(10)
+                    TextField("", text: $textFieldManager.text) { beginEditing in
+                        onDidBegin(beginEditing)
+                    }
+                    .keyboardType(.numberPad)
+                    .padding(12)
+                    .background(Color.gray.opacity(0.2))
+                    .cornerRadius(10)
+                    .focused($currentFocus, equals: .phonenumber)
+                    .onChange(of: textFieldManager.text) { newValue in
+                        textFieldManager.phone.number = newValue
+                        onChanged(newValue)
+                    }
+                    .toolbar {
+                        ToolbarItemGroup(placement: .keyboard) {
+                            Spacer()
+                            Button("_KEYBOARD_DONE_BUTTON") {
+                                currentFocus = nil
+                                onDidBegin(false)
+                            }
+                         }
+                    }
                 }
             }
         }
         .sheet(isPresented: $showSheet) {
             CountryPickerView { country in
-                // country comes with an empty number, let's fix that issue.
-                var selectedPhone = country
-                selectedPhone.number = phone.number
-                textFieldManager.phone = selectedPhone
+                textFieldManager.phone = country
+                textFieldManager.phone.number = textFieldManager.text
                 setTextFields()
             }
         }

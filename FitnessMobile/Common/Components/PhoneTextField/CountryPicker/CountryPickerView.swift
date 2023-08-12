@@ -7,7 +7,6 @@
 
 import SwiftUI
 
-
 struct CountryPickerView: View {
     @StateObject var viewmodel = CountryPickerViewModel()
     @Environment(\.dismiss) var dismiss

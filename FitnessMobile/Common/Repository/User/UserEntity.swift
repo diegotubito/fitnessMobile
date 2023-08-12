@@ -8,6 +8,13 @@
 import Foundation
 
 struct UserEntity {
+    struct RequestPhone: Codable {
+        let countryName: String
+        let number: String
+        let phoneCode: String
+        let countryCode: String
+    }
+    
     struct Create {
         struct Request: Codable {
             let username: String
@@ -18,6 +25,7 @@ struct UserEntity {
             let role: String
             let phoneNumber: String
             let emailVerified: Bool
+            let phone: RequestPhone
         }
         
         struct Response: Decodable {
@@ -38,13 +46,6 @@ struct UserEntity {
             let firstName: String
             let lastName: String
             let phone: RequestPhone
-        }
-        
-        struct RequestPhone: Codable {
-            let countryName: String
-            let number: String
-            let phoneCode: String
-            let countryCode: String
         }
         
         struct Response: Decodable {

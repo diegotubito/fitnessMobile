@@ -96,9 +96,7 @@ open class ApiNetworkAsync {
                 let message = json?["message"] as? String
                 throw APIError.customError(title: title, message: message)
             case 401:
-                DispatchQueue.main.async {
-                    NotificationCenter.default.post(Notification(name: .MustLogin))
-                }
+                
                 throw APIError.authentication
             case 404:
                 throw APIError.notFound(url: request.url?.absoluteString)

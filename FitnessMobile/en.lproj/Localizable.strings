@@ -6,6 +6,11 @@
   
 */
 
+// Mark: PHONE TEXTVIEW
+"_COUNTRY_TEXTFIELD_TITLE" = "Country";
+"_PHONE_NUMBER_TEXTFIELD_TITLE" = "Phone number";
+"_KEYBOARD_DONE_BUTTON" = "Done";
+
 // Mark: PROFILE VIEW
 "_FIRST_NAME" = "First name";
 "_FIRST_NAME_INCORRECT" = "First name is badly formatted.";

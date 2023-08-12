@@ -16,7 +16,7 @@ class ProfileViewModel: BaseViewModel {
     @Published var isLoading = false
     @Published var showAlert = false
     
-    func getPhone() -> Phone {
+    private func getPhone() -> Phone {
         let user = UserSessionManager().getUserSession()?.user
         let phone = Phone(countryName: user?.phone?.countryName ?? "",
                                                                         number: user?.phone?.number ?? "",
@@ -27,6 +27,7 @@ class ProfileViewModel: BaseViewModel {
     
     override init() {
         super .init()
+        phoneNumberTextField.phone = getPhone()
     }
     
     func convertToNumber(phone: String) -> String {
@@ -69,12 +70,12 @@ class ProfileViewModel: BaseViewModel {
     
     var isValidFirstName: Bool {
         // Check if the first name is not empty
-        return !firstNameTextField.text.isEmpty
+        return !firstNameTextField.text.isEmpty && firstNameTextField.text.count < 30
     }
     
     var isValidLastName: Bool {
         // Check if the last name is not empty
-        return !lastNameTextField.text.isEmpty
+        return !lastNameTextField.text.isEmpty && firstNameTextField.text.count < 30
     }
     
     var isValidPhoneNumber: Bool {

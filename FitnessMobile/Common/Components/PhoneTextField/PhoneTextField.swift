@@ -25,7 +25,6 @@ class PhoneNumberTextFieldManager: ObservableObject {
 }
 
 struct PhoneTextField: View {
-    var phone: Phone
     @Binding var textFieldManager: PhoneNumberTextFieldManager
     @State var showSheet: Bool = false
     @FocusState var currentFocus: States?
@@ -68,7 +67,6 @@ struct PhoneTextField: View {
                             onDidBegin(true)
                             currentFocus = .phonenumber
                         }
-                    
                 }
                 
                 VStack(spacing: 0) {
@@ -110,8 +108,6 @@ struct PhoneTextField: View {
             }
         }
         .onAppear {
-            textFieldManager.phone = phone
-            textFieldManager.text = phone.number
             setTextFields()
         }
     }

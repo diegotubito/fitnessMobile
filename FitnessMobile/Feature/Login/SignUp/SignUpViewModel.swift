@@ -45,13 +45,4 @@ class SignUpViewModel: BaseViewModel {
             }
         }
     }
-    
-    func getPhone() -> Phone {
-        let user = UserSessionManager().getUserSession()?.user
-        let phone = Phone(countryName: user?.phone?.countryName ?? "",
-                                                                        number: user?.phone?.number ?? "",
-                                                                        phoneCode: user?.phone?.phoneCode ?? "",
-                                                                        countryCode: user?.phone?.countryCode ?? "")
-        return phone
-    }
 }

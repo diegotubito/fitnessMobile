@@ -64,7 +64,7 @@ struct SignUpView: View {
                     .autocapitalization(.none)
                     .focused($currentFocus, equals: .repeatPassword)
                 
-                PhoneTextField(phone: viewModel.getPhone(), textFieldManager: $viewModel.phoneNumberTextField) { newValue in
+                PhoneTextField(textFieldManager: $viewModel.phoneNumberTextField) { newValue in
                     
                 } onDidBegin: { didBegin in
                     

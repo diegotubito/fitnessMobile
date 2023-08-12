@@ -48,7 +48,7 @@ struct ProfileView: View {
                     }
                     .padding(.bottom, 8)
                  
-                    PhoneTextField(phone: viewmodel.getPhone(), textFieldManager: $viewmodel.phoneNumberTextField) { newValue in
+                    PhoneTextField(textFieldManager: $viewmodel.phoneNumberTextField) { newValue in
                         
                     } onDidBegin: { didBegin in
                         

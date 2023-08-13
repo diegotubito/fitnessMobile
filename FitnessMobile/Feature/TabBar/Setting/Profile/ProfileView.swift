@@ -75,7 +75,7 @@ struct ProfileView: View {
                     break
                 case .otpSuccess:
                     updateUser()
-                case .optFailed:
+                case .otpBackButtonWithFailure:
                     break
                 }
             }

@@ -21,6 +21,8 @@ struct User: Identifiable, Codable, Hashable {
     let emailVerified: Bool
     let createdAt: String
     let updatedAt: String
+    let twoFactorEnabled: Bool
+    let twoFactorSecret: String
 }
 
 struct Phone: Identifiable, Codable, Hashable {

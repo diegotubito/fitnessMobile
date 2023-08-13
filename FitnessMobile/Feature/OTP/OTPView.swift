@@ -19,12 +19,13 @@ struct OTPView: View {
     @Environment(\.dismiss) var dismiss
  
     @Binding var optResult: OPTResult
+    @State var errorMessage: String = ""
     
     enum OPTResult {
         case none
         case otpBackButton
         case otpSuccess
-        case optFailed
+        case otpBackButtonWithFailure
     }
     
     enum FocusedDigit {
@@ -59,6 +60,7 @@ struct OTPView: View {
                             firstDigit = firstDigit.trimmingCharacters(in: .whitespaces)
                             firstDigit = String(firstDigit.prefix(1))
                             focusedField = .second
+                            errorMessage = ""
                         }
                     })
                     .onChange(of: focusedField) { newValue in
@@ -133,11 +135,11 @@ struct OTPView: View {
                     }
             }
             .padding()
-            
-            Text("Didn't get the code?")
-            BasicButton(title: "Resend", style: .primary, isEnabled: .constant(true)) {
-                
+            if !errorMessage.isEmpty {
+                Text(errorMessage)
+                    .foregroundColor(Color.Red.tone90)
             }
+            
         }
         .overlay(content: {
             if isLoading {
@@ -159,11 +161,20 @@ struct OTPView: View {
         }
         .onChange(of: shouldSendCode) { shouldSend in
             if shouldSend {
+                
                 isLoading = true
                 DispatchQueue.main.asyncAfter(deadline: .now() + 3, execute: {
                     isLoading = false
-                    optResult = .otpSuccess
-                    dismiss()
+                    // on success we dismiss with a optResult
+                    //optResult = .otpSuccess
+                    //dismiss()
+                    
+                    //on error we don't dismiss, and don't change optResult
+                    errorMessage = "Try again"
+                    focusedField = .first
+                    shouldSendCode.toggle()
+                    optResult = .otpBackButtonWithFailure
+                    
                 })
             }
         }

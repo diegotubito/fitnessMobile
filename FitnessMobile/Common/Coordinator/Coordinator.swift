@@ -94,6 +94,8 @@ class Coordinator: ObservableObject {
         case login
         case signUp
         case profile
+        case settingTwoFactor
+        case twoFactorEnableInformation
     }
     
     enum SheetView: Identifiable {
@@ -134,6 +136,10 @@ class Coordinator: ObservableObject {
             SignUpView()
         case .profile:
             ProfileView()
+        case .settingTwoFactor:
+            TwoFactorSettingView()
+        case .twoFactorEnableInformation:
+            TwoFactorEnableInformationView()
         }
     }
     

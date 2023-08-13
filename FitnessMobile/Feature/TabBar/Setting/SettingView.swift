@@ -25,6 +25,15 @@ struct SettingView: View {
                         Image(systemName: "chevron.right")
                     }
                     .foregroundColor(Color.Dark.tone90)
+                    
+                    HStack {
+                        Button("_SETTING_2FA", action: {
+                            coordinator.push(.settingTwoFactor)
+                        })
+                        Spacer()
+                        Image(systemName: "chevron.right")
+                    }
+                    .foregroundColor(Color.Dark.tone90)
                    
                 }
                 

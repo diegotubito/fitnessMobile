@@ -55,6 +55,9 @@ class BaseViewModel: ObservableObject {
                 break
             case .imageFailed:
                 break
+            case .notAuthorize:
+                errorTitle = LocalizedStringKey("_LOGIN_ERROR")
+                errorMessage = LocalizedStringKey("_LOGIN_NOT_AUTHORIZED")
             }
         } else {
             errorTitle = LocalizedStringKey("_SERVER_ERROR_TITLE")

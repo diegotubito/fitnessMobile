@@ -13,7 +13,9 @@ class OTPViewModel: BaseViewModel {
     @Published var secondDigit: String = ""
     @Published var thirdDigit: String = ""
     @Published var fourthDigit: String = ""
-    
+    @Published var fifthDigit: String = ""
+    @Published var sixthDigit: String = ""
+
     @MainActor
     func verify2FA(tempToken: String, completion: @escaping (TwoFactorEntity.Verify.Response?) -> Void) {
         Task {
@@ -36,6 +38,6 @@ class OTPViewModel: BaseViewModel {
     }
     
     func getDigits() -> String {
-        return firstDigit + secondDigit + thirdDigit + fourthDigit
+        return firstDigit + secondDigit + thirdDigit + fourthDigit + fifthDigit + sixthDigit
     }
 }

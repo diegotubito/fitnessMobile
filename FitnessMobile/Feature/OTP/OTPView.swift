@@ -17,7 +17,7 @@ struct OTPView: View {
     @Environment(\.dismiss) var dismiss
  
     @Binding var optResult: OPTResult
-    @State var errorMessage: String = ""
+    @State var errorMessage: LocalizedStringKey = ""
     
     enum OPTResult {
         case none
@@ -32,6 +32,8 @@ struct OTPView: View {
         case second
         case third
         case fourth
+        case fifth
+        case sixth
     }
     
     @ViewBuilder
@@ -68,6 +70,8 @@ struct OTPView: View {
                             viewmodel.secondDigit = " "
                             viewmodel.thirdDigit = " "
                             viewmodel.fourthDigit = " "
+                            viewmodel.fifthDigit = " "
+                            viewmodel.sixthDigit = " "
                         }
                     }
                 
@@ -90,6 +94,8 @@ struct OTPView: View {
                             viewmodel.secondDigit = " "
                             viewmodel.thirdDigit = " "
                             viewmodel.fourthDigit = " "
+                            viewmodel.fifthDigit = " "
+                            viewmodel.sixthDigit = " "
                         }
                     }
                 
@@ -110,6 +116,8 @@ struct OTPView: View {
                         if newValue == .third {
                             viewmodel.thirdDigit = " "
                             viewmodel.fourthDigit = " "
+                            viewmodel.fifthDigit = " "
+                            viewmodel.sixthDigit = " "
                         }
                     }
                 
@@ -122,19 +130,61 @@ struct OTPView: View {
                             } else {
                                 viewmodel.fourthDigit = viewmodel.fourthDigit.trimmingCharacters(in: .whitespaces)
                                 viewmodel.fourthDigit = String(viewmodel.fourthDigit.prefix(1))
-                                focusedField = nil
-                                shouldSendCode = true
+                                focusedField = .fifth
                             }
                         }
                     })
                     .onChange(of: focusedField) { newValue in
                         if newValue == .fourth {
                             viewmodel.fourthDigit = " "
+                            viewmodel.fifthDigit = " "
+                            viewmodel.sixthDigit = " "
+                        }
+                    }
+                
+                genericTextField(digit: $viewmodel.fifthDigit, currentTextField: .fifth)
+                    .onChange(of: viewmodel.fifthDigit, perform: { newValue in
+                        if focusedField == .fifth && newValue == " " { return }
+                        if focusedField == .fifth {
+                            if newValue.isEmpty {
+                                focusedField = .fourth
+                            } else {
+                                viewmodel.fifthDigit = viewmodel.fifthDigit.trimmingCharacters(in: .whitespaces)
+                                viewmodel.fifthDigit = String(viewmodel.fifthDigit.prefix(1))
+                                focusedField = .sixth
+                            }
+                        }
+                    })
+                    .onChange(of: focusedField) { newValue in
+                        if newValue == .fifth {
+                            viewmodel.fifthDigit = " "
+                            viewmodel.sixthDigit = " "
+                        }
+                    }
+                
+                
+                genericTextField(digit: $viewmodel.sixthDigit, currentTextField: .sixth)
+                    .onChange(of: viewmodel.sixthDigit, perform: { newValue in
+                        if focusedField == .sixth && newValue == " " { return }
+                        if focusedField == .sixth {
+                            if newValue.isEmpty {
+                                focusedField = .fifth
+                            } else {
+                                viewmodel.sixthDigit = viewmodel.sixthDigit.trimmingCharacters(in: .whitespaces)
+                                viewmodel.sixthDigit = String(viewmodel.sixthDigit.prefix(1))
+                                focusedField = nil
+                                shouldSendCode = true
+                            }
+                        }
+                    })
+                    .onChange(of: focusedField) { newValue in
+                        if newValue == .sixth {
+                            viewmodel.sixthDigit = " "
                         }
                     }
             }
             .padding()
-            if !errorMessage.isEmpty {
+            if !errorMessage.stringKey.isEmpty {
                 Text(errorMessage)
                     .foregroundColor(Color.Red.tone90)
             }
@@ -185,7 +235,7 @@ struct OTPView: View {
                 optResult = .otpSuccess
                 dismiss()
             } else {
-                errorMessage = "Try again"
+                errorMessage = viewmodel.errorMessage
                 focusedField = .first
                 shouldSendCode.toggle()
                 optResult = .otpBackButtonWithFailure

@@ -100,6 +100,8 @@ open class ApiNetworkAsync {
                 throw APIError.authentication
             case 404:
                 throw APIError.notFound(url: request.url?.absoluteString)
+            case 403:
+                throw APIError.notAuthorize
             case 500:
                 let json = try JSONSerialization.jsonObject(with: data) as? [String: Any]
                 let title = json?["title"] as? String

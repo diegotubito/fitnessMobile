@@ -70,11 +70,7 @@ struct TwoFactorSettingView: View {
                             }
                         }
                     })
-                    .onTapGesture {
-                        coordinator.presentSecondaryAlert(title: "Disablle 2FA", message: "Disabling this security layer is not recomended.") {
-                            disable2FA()
-                        } secondaryTapped: { }
-                    }
+                    
                 Spacer()
             }
             

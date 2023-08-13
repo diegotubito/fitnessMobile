@@ -56,6 +56,7 @@
 "_LOGIN_ERROR" = "Authentication Failed";
 "_WRONG_USER_PASSWORD" = "Wrong Email or Password.";
 // ERROR HANDLER
+"_INVALID_OTP" = "Invalid Code";
 "_404_TITLE" = "Error";
 "_404_MESSAGE" = "404 - Url not found.";
 "_500_SERVER_TITLE" = "Server Error";

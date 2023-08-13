@@ -21,6 +21,7 @@ public enum APIError: Error, CustomStringConvertible, Equatable {
     case jsonFileNotFound(filename: String?)
     case mockFailed
     case imageFailed
+    case notAuthorize
     
     public var defaultDescription: String {
         return "\n🧨⎽⎽⎽⎽⎽⎽⎽⎽⎽⎽⎽💣⎽⎽⎽⎽⎽⎽⎽⎽⎽⎽⎽⎽⎽🚒\n"
@@ -58,6 +59,8 @@ public enum APIError: Error, CustomStringConvertible, Equatable {
             return 432
         case .imageFailed:
             return 400
+        case .notAuthorize:
+            return 403
         }
     }
     
@@ -88,6 +91,8 @@ public enum APIError: Error, CustomStringConvertible, Equatable {
         case .mockFailed:
             return ""
         case .imageFailed:
+            return ""
+        case .notAuthorize:
             return ""
         }
      }
@@ -124,6 +129,8 @@ public enum APIError: Error, CustomStringConvertible, Equatable {
             return message
         case .imageFailed:
             return defaultMessage.appending("Could not cast image from data. Bad format.")
+        case .notAuthorize:
+            return defaultMessage.appending("Not Authorized.")
         }
     }
         
@@ -159,6 +166,8 @@ public enum APIError: Error, CustomStringConvertible, Equatable {
             return message ?? defaultDescription
         case .imageFailed:
             return defaultDescription.appending("Could not cast image from data. Bad format.")
+        case .notAuthorize:
+            return defaultDescription.appending("Not Authorized.")
         }
     }
 }

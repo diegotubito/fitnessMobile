@@ -39,6 +39,7 @@
 "_CREATE" = "Crear";
 
 // Mark: Seeting View
+"_SETTING_2FA" = "Autenticación Doble Factor";
 "_SETTING_PROFILE" = "Perfil";
 "_LOGOUT" = "Cerrar Sesión";
 "_DELETE_ACCOUNT" = "Borrar Cuenta";

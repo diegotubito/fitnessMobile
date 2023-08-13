@@ -10,17 +10,45 @@ import SwiftUI
 class TwoFactorSettingViewModel: BaseViewModel {
     @Published var isLoading = false
     
-    func enable2FA(completion: @escaping (Data?) -> Void) {
-        DispatchQueue.main.async {
-            self.handleError(error: APIError.badRequest(title: "bad", message: "request"))
-            completion(Data())
+    @MainActor
+    func enable2FA(completion: @escaping (TwoFactorEntity.Enable.Response?) -> Void) {
+        Task {
+            let usecase = TwoFactorUseCase()
+            isLoading = true
+            do {
+                let response = try await usecase.enable2FA()
+                DispatchQueue.main.async {
+                    self.isLoading = false
+                    completion(response)
+                }
+            } catch {
+                DispatchQueue.main.async {
+                    self.isLoading = false
+                    self.handleError(error: error)
+                    completion(nil)
+                }
+            }
         }
     }
 
-    func disable2FA(completion: @escaping (Data?) -> Void) {
-        DispatchQueue.main.async {
-            self.handleError(error: APIError.badRequest(title: "bad", message: "request"))
-            completion(Data())
+    @MainActor
+    func disable2FA(completion: @escaping (TwoFactorEntity.Disable.Response?) -> Void) {
+        Task {
+            let usecase = TwoFactorUseCase()
+            isLoading = true
+            do {
+                let response = try await usecase.disable2FA()
+                DispatchQueue.main.async {
+                    self.isLoading = false
+                    completion(response)
+                }
+            } catch {
+                DispatchQueue.main.async {
+                    self.isLoading = false
+                    self.handleError(error: error)
+                    completion(nil)
+                }
+            }
         }
     }
 }

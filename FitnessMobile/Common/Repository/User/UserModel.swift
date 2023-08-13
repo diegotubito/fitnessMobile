@@ -22,7 +22,7 @@ struct User: Identifiable, Codable, Hashable {
     let createdAt: String
     let updatedAt: String
     let twoFactorEnabled: Bool
-    let twoFactorSecret: String
+    let twoFactorSecret: String?
 }
 
 struct Phone: Identifiable, Codable, Hashable {

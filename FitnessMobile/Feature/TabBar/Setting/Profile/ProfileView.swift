@@ -11,8 +11,6 @@ struct ProfileView: View {
     @StateObject var viewmodel = ProfileViewModel()
     @EnvironmentObject var coordinator: Coordinator
     @EnvironmentObject var userSession: UserSessionManager
-    @State var shouldGoToOTP = false
-    @State var otpResult: OTPView.OPTResult = .none
    
     var body: some View {
         
@@ -57,36 +55,23 @@ struct ProfileView: View {
                 }
             
                 BasicButton(title: "_UPDATE_BUTTON", style: .primary, isEnabled: .constant(viewmodel.updateButtonValueIsEnabled)) {
-                    shouldGoToOTP = true
+                    updateUser()
                 }
                 .padding()
             }
-            .navigationDestination(isPresented: $shouldGoToOTP, destination: {
-                OTPView(optResult: $otpResult)
-                
-            })
             .padding()
-            .onAppear {
-                
-                switch otpResult {
-                case .none:
-                    viewmodel.setupInitValues()
-                case .otpBackButton:
-                    break
-                case .otpSuccess:
-                    updateUser()
-                case .otpBackButtonWithFailure:
-                    break
-                }
-            }
-        }        
+        }
+        .onAppear {
+            viewmodel.setupInitValues()
+        }
     }
     
     func updateUser() {
         viewmodel.updateUser { response in
             if let response = response {
                 let token = userSession.getToken()
-                userSession.saveUser(user: response.user, token: token ?? "")
+                let tempToken = userSession.getTempToken()
+                userSession.saveUser(user: response.user, token: token ?? "", tempToken: tempToken)
                 coordinator.path.removeLast()
             } else {
                 coordinator.presentPrimaryAlert(title: viewmodel.errorTitle, message: viewmodel.errorMessage) {

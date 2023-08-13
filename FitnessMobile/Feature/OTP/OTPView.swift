@@ -8,11 +8,9 @@
 import SwiftUI
 
 struct OTPView: View {
+    @EnvironmentObject var userSession: UserSessionManager
     @StateObject var viewmodel = OTPViewModel()
-    @State var firstDigit: String = ""
-    @State var secondDigit: String = ""
-    @State var thirdDigit: String = ""
-    @State var fourthDigit: String = ""
+    
     @FocusState private var focusedField: FocusedDigit?
     @State var shouldSendCode = false
     @State var isLoading = false
@@ -26,6 +24,7 @@ struct OTPView: View {
         case otpBackButton
         case otpSuccess
         case otpBackButtonWithFailure
+        case enableConfirmed
     }
     
     enum FocusedDigit {
@@ -51,78 +50,78 @@ struct OTPView: View {
     var body: some View {
         VStack {
             HStack {
-                genericTextField(digit: $firstDigit, currentTextField: .first)
-                    .onChange(of: firstDigit, perform: { newValue in
+                genericTextField(digit: $viewmodel.firstDigit, currentTextField: .first)
+                    .onChange(of: viewmodel.firstDigit, perform: { newValue in
                         if focusedField == .first && newValue == " " { return }
                         if newValue.isEmpty {
                             focusedField = .first
                         } else {
-                            firstDigit = firstDigit.trimmingCharacters(in: .whitespaces)
-                            firstDigit = String(firstDigit.prefix(1))
+                            viewmodel.firstDigit = viewmodel.firstDigit.trimmingCharacters(in: .whitespaces)
+                            viewmodel.firstDigit = String(viewmodel.firstDigit.prefix(1))
                             focusedField = .second
                             errorMessage = ""
                         }
                     })
                     .onChange(of: focusedField) { newValue in
                         if newValue == .first {
-                            firstDigit = " "
-                            secondDigit = " "
-                            thirdDigit = " "
-                            fourthDigit = " "
+                            viewmodel.firstDigit = " "
+                            viewmodel.secondDigit = " "
+                            viewmodel.thirdDigit = " "
+                            viewmodel.fourthDigit = " "
                         }
                     }
                 
                 
-                genericTextField(digit: $secondDigit, currentTextField: .second)
-                    .onChange(of: secondDigit, perform: { newValue in
+                genericTextField(digit: $viewmodel.secondDigit, currentTextField: .second)
+                    .onChange(of: viewmodel.secondDigit, perform: { newValue in
                         if focusedField == .second && newValue == " " { return }
                         if focusedField == .second {
                             if newValue.isEmpty {
                                 focusedField = .first
                             } else {
-                                secondDigit = secondDigit.trimmingCharacters(in: .whitespaces)
-                                secondDigit = String(secondDigit.prefix(1))
+                                viewmodel.secondDigit = viewmodel.secondDigit.trimmingCharacters(in: .whitespaces)
+                                viewmodel.secondDigit = String(viewmodel.secondDigit.prefix(1))
                                 focusedField = .third
                             }
                         }
                     })
                     .onChange(of: focusedField) { newValue in
                         if newValue == .second {
-                            secondDigit = " "
-                            thirdDigit = " "
-                            fourthDigit = " "
+                            viewmodel.secondDigit = " "
+                            viewmodel.thirdDigit = " "
+                            viewmodel.fourthDigit = " "
                         }
                     }
                 
-                genericTextField(digit: $thirdDigit, currentTextField: .third)
-                    .onChange(of: thirdDigit, perform: { newValue in
+                genericTextField(digit: $viewmodel.thirdDigit, currentTextField: .third)
+                    .onChange(of: viewmodel.thirdDigit, perform: { newValue in
                         if focusedField == .third && newValue == " " { return }
                         if focusedField == .third {
                             if newValue.isEmpty {
                                 focusedField = .second
                             } else {
-                                thirdDigit = thirdDigit.trimmingCharacters(in: .whitespaces)
-                                thirdDigit = String(thirdDigit.prefix(1))
+                                viewmodel.thirdDigit = viewmodel.thirdDigit.trimmingCharacters(in: .whitespaces)
+                                viewmodel.thirdDigit = String(viewmodel.thirdDigit.prefix(1))
                                 focusedField = .fourth
                             }
                         }
                     })
                     .onChange(of: focusedField) { newValue in
                         if newValue == .third {
-                            thirdDigit = " "
-                            fourthDigit = " "
+                            viewmodel.thirdDigit = " "
+                            viewmodel.fourthDigit = " "
                         }
                     }
                 
-                genericTextField(digit: $fourthDigit, currentTextField: .fourth)
-                    .onChange(of: fourthDigit, perform: { newValue in
+                genericTextField(digit: $viewmodel.fourthDigit, currentTextField: .fourth)
+                    .onChange(of: viewmodel.fourthDigit, perform: { newValue in
                         if focusedField == .fourth && newValue == " " { return }
                         if focusedField == .fourth {
                             if newValue.isEmpty {
                                 focusedField = .third
                             } else {
-                                fourthDigit = fourthDigit.trimmingCharacters(in: .whitespaces)
-                                fourthDigit = String(fourthDigit.prefix(1))
+                                viewmodel.fourthDigit = viewmodel.fourthDigit.trimmingCharacters(in: .whitespaces)
+                                viewmodel.fourthDigit = String(viewmodel.fourthDigit.prefix(1))
                                 focusedField = nil
                                 shouldSendCode = true
                             }
@@ -130,7 +129,7 @@ struct OTPView: View {
                     })
                     .onChange(of: focusedField) { newValue in
                         if newValue == .fourth {
-                            fourthDigit = " "
+                            viewmodel.fourthDigit = " "
                         }
                     }
             }
@@ -141,11 +140,24 @@ struct OTPView: View {
             }
             
         }
-        .overlay(content: {
-            if isLoading {
-                ProgressView()
+        .overlay(
+            Group {
+                if viewmodel.isLoading {
+                    // A transparent view that captures all touches, making underlying views non-interactive
+                    ZStack {
+                        Color.clear
+                            .contentShape(Rectangle()) // Makes the entire view tappable
+                            .onTapGesture { }
+                            .allowsHitTesting(true) // Captures all touches
+                        ProgressView()
+                    }
+                } else {
+                    Color.clear
+                        .contentShape(Rectangle()) // Makes the entire view tappable
+                        .allowsHitTesting(false) // Captures all touches
+                }
             }
-        })
+        )
         .padding(.horizontal)
         .onAppear {
             focusedField = .first
@@ -161,21 +173,22 @@ struct OTPView: View {
         }
         .onChange(of: shouldSendCode) { shouldSend in
             if shouldSend {
-                
-                isLoading = true
-                DispatchQueue.main.asyncAfter(deadline: .now() + 3, execute: {
-                    isLoading = false
-                    // on success we dismiss with a optResult
-                    //optResult = .otpSuccess
-                    //dismiss()
-                    
-                    //on error we don't dismiss, and don't change optResult
-                    errorMessage = "Try again"
-                    focusedField = .first
-                    shouldSendCode.toggle()
-                    optResult = .otpBackButtonWithFailure
-                    
-                })
+                verify2FA()
+            }
+        }
+    }
+    
+    func verify2FA() {
+        viewmodel.verify2FA(tempToken: userSession.getTempToken()) { result in
+            if let result = result {
+                userSession.saveUser(user: result.user, token: result.token, tempToken: result.tempToken)
+                optResult = .otpSuccess
+                dismiss()
+            } else {
+                errorMessage = "Try again"
+                focusedField = .first
+                shouldSendCode.toggle()
+                optResult = .otpBackButtonWithFailure
             }
         }
     }

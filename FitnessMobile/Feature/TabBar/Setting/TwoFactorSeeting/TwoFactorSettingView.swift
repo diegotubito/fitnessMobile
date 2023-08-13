@@ -15,7 +15,7 @@ struct TwoFactorSettingView: View {
     @State var toggleIsEnabled: Bool = true
     
     var body: some View {
-        if !(userSession.user?.twoFactorEnabled ?? false) {
+        if !userSession.isTwoFactorEnabled {
             VStack {
                 HStack {
                     Text("Two factor authentication")
@@ -39,11 +39,24 @@ struct TwoFactorSettingView: View {
                 }
             }
             .padding()
-            .overlay {
-                if viewmodel.isLoading {
-                    ProgressView()
+            .overlay(
+                Group {
+                    if viewmodel.isLoading {
+                        // A transparent view that captures all touches, making underlying views non-interactive
+                        ZStack {
+                            Color.clear
+                                .contentShape(Rectangle()) // Makes the entire view tappable
+                                .onTapGesture { }
+                                .allowsHitTesting(true) // Captures all touches
+                            ProgressView()
+                        }
+                    } else {
+                        Color.clear
+                            .contentShape(Rectangle()) // Makes the entire view tappable
+                            .allowsHitTesting(false) // Captures all touches
+                    }
                 }
-            }
+            )
         } else {
             VStack {
                 Toggle("Two Factor Authentication", isOn: $toggleIsEnabled)
@@ -70,12 +83,26 @@ struct TwoFactorSettingView: View {
     }
     
     func enable2FA() {
-        coordinator.push(.twoFactorEnableInformation)
+        viewmodel.enable2FA { result in
+            if let result = result {
+                let user = userSession.getUserSession()?.user
+                let token = userSession.getToken()
+                userSession.saveUser(user: user!, token: token, tempToken: result.tempToken)
+                
+                let imageData = Data(base64Encoded: result.qrImage)
+                let image = UIImage(data: imageData ?? Data())
+                coordinator.push(.twoFactorEnableInformation(qrImage: image ?? UIImage()))
+                
+            } else {
+                coordinator.presentPrimaryAlert(title: viewmodel.errorTitle, message: viewmodel.errorMessage) {}
+            }
+        }
     }
     
     func disable2FA() {
         viewmodel.disable2FA { result in
             if result != nil {
+                userSession.removeUserSession()
                 coordinator.path.removeLast()
             } else {
                 coordinator.presentPrimaryAlert(title: viewmodel.errorTitle, message: viewmodel.errorMessage) {}

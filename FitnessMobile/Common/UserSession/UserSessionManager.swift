@@ -10,6 +10,7 @@ import SwiftUI
 struct UserSessionModel: Codable {
     let user: User
     let token: String
+    let tempToken: String
 }
 
 class UserSessionManager: ObservableObject {
@@ -27,9 +28,9 @@ class UserSessionManager: ObservableObject {
         self.user = getUserSession()?.user
     }
     
-    func saveUser(user: User, token: String) {
+    func saveUser(user: User, token: String, tempToken: String) {
         do {
-            let userSession = UserSessionModel(user: user, token: token)
+            let userSession = UserSessionModel(user: user, token: token, tempToken: tempToken)
             let encoder = JSONEncoder()
             let data = try encoder.encode(userSession)
             _ = KeychainManager.shared.save(key: userSessionKey, data: data)
@@ -53,21 +54,34 @@ class UserSessionManager: ObservableObject {
         }
     }
     
-    func getToken() -> String? {
+    func getToken() -> String {
         do {
             if let data = KeychainManager.shared.load(key: userSessionKey) {
                 let decoder = JSONDecoder()
                 let user = try decoder.decode(UserSessionModel.self, from: data)
                 return user.token
             }
-            return nil
+            return ""
         } catch {
-            return nil
+            return ""
+        }
+    }
+    
+    func getTempToken() -> String {
+        do {
+            if let data = KeychainManager.shared.load(key: userSessionKey) {
+                let decoder = JSONDecoder()
+                let user = try decoder.decode(UserSessionModel.self, from: data)
+                return user.tempToken
+            }
+            return ""
+        } catch {
+            return ""
         }
     }
     
     func checkUser() {
-        if getUserSession() == nil {
+        if getToken().isEmpty {
             didLogOut.toggle()
         }
     }
@@ -108,5 +122,12 @@ class UserSessionManager: ObservableObject {
         let email: String = user?.user.email ?? ""
         return email
     }
+    
+    var isTwoFactorEnabled: Bool {
+        let user = getUserSession()
+        let twoFactorEnabled: Bool = user?.user.twoFactorEnabled ?? false
+        return twoFactorEnabled
+    }
+    
 }
 

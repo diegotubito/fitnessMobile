@@ -21,5 +21,6 @@ struct LoginEntity {
     struct Response: Decodable {
         let user: User
         let token: String
+        let tempToken: String
     }
 }

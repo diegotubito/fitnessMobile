@@ -79,6 +79,7 @@ struct CoordinatorMainView: View {
                     currentPage = .tabbar
                 }
                 .onReceive(NotificationCenter.default.publisher(for: .MustLogin)) { value in
+                    userSession.removeUserSession()
                     coordinator.presentModal(.login)
                 }
         }

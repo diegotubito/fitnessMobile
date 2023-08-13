@@ -13,6 +13,9 @@ struct LoginView: View {
     @EnvironmentObject var userSession: UserSessionManager
     @EnvironmentObject var coordinator: Coordinator
     
+    @State var shouldGoToOTP = false
+    @State var otpResult: OTPView.OPTResult = .none
+    
     var presentingAsModal: Bool
     
     var body: some View {
@@ -62,6 +65,22 @@ struct LoginView: View {
             }
         })
         .navigationTitle("_LOGIN_TITLE")
+        .onChange(of: shouldGoToOTP, perform: { newValue in
+            switch otpResult {
+            case .none, .enableConfirmed:
+                break
+            case .otpBackButton:
+                break
+            case .otpSuccess:
+                closeLoginView()
+            case .otpBackButtonWithFailure:
+                break
+            }
+        })
+        .sheet(isPresented: $shouldGoToOTP, content: {
+            OTPView(optResult: $otpResult)
+
+        })
         
     }
     
@@ -69,18 +88,26 @@ struct LoginView: View {
         viewmodel.doLogin(completion: { response in
             DispatchQueue.main.async {
                 if let response = response {
-                    userSession.saveUser(user: response.user, token: response.token)
-                    if presentingAsModal {
-                        coordinator.closeModal()
-                    } else {
-                        userSession.didLogIn.toggle()
+                    userSession.saveUser(user: response.user, token: response.token, tempToken: response.tempToken)
+                    if response.user.twoFactorEnabled {
+                        shouldGoToOTP = true
+                        return
                     }
+                    closeLoginView()
                 } else {
                     coordinator.presentPrimaryAlert(title: viewmodel.errorTitle, message: viewmodel.errorMessage) {
                     }
                 }
             }
         })
+    }
+    
+    func closeLoginView() {
+        if presentingAsModal {
+            coordinator.closeModal()
+        } else {
+            userSession.didLogIn.toggle()
+        }
     }
 }
 

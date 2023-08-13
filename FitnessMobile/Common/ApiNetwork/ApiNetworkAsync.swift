@@ -54,10 +54,10 @@ open class ApiNetworkAsync {
         request.httpMethod = method.rawValue
         request.addValue("application/json", forHTTPHeaderField: "Content-Type")
       
-        if let token = UserSessionManager().getToken() {
-            let authorization = "\(token)"
-            request.addValue(authorization, forHTTPHeaderField: "Authorization")
-        }
+        let token = UserSessionManager().getToken()
+        let authorization = "\(token)"
+        request.addValue(authorization, forHTTPHeaderField: "Authorization")
+        
         
         if let deviceToken = UserSessionManager().getDeviceToken() {
             request.setValue(deviceToken, forHTTPHeaderField: "DeviceToken")

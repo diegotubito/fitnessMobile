@@ -87,7 +87,7 @@ struct TwoFactorSettingView: View {
                 
                 let imageData = Data(base64Encoded: result.qrImage)
                 let image = UIImage(data: imageData ?? Data())
-                coordinator.push(.twoFactorEnableInformation(qrImage: image ?? UIImage()))
+                coordinator.push(.twoFactorEnableInformation(qrImage: image ?? UIImage(), activationCode: result.activationCode))
                 
             } else {
                 coordinator.presentPrimaryAlert(title: viewmodel.errorTitle, message: viewmodel.errorMessage) {}
@@ -102,14 +102,16 @@ struct TwoFactorSettingView: View {
                 coordinator.path.removeLast()
             } else {
                 coordinator.presentPrimaryAlert(title: viewmodel.errorTitle, message: viewmodel.errorMessage) {}
-                toggleIsEnabled.toggle()
+                toggleIsEnabled = true
             }
         }
     }
 }
 
 struct TwoFactorSettingView_Previews: PreviewProvider {
+    @State static var userSession = UserSessionManager()
     static var previews: some View {
         TwoFactorSettingView()
+            .environmentObject(userSession)
     }
 }

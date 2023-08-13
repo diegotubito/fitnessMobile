@@ -13,6 +13,7 @@ struct TwoFactorEntity {
         struct Response: Decodable {
             let qrImage: String
             let tempToken: String
+            let activationCode: String
         }
     }
     

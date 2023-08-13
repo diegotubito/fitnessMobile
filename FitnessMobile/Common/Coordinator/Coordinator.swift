@@ -95,7 +95,7 @@ class Coordinator: ObservableObject {
         case signUp
         case profile
         case settingTwoFactor
-        case twoFactorEnableInformation(qrImage: UIImage)
+        case twoFactorEnableInformation(qrImage: UIImage, activationCode: String)
     }
     
     enum SheetView: Identifiable {
@@ -138,8 +138,8 @@ class Coordinator: ObservableObject {
             ProfileView()
         case .settingTwoFactor:
             TwoFactorSettingView()
-        case .twoFactorEnableInformation(qrImage: let qrImage):
-            TwoFactorEnableInformationView(qrImage: qrImage)
+        case .twoFactorEnableInformation(qrImage: let qrImage, activationCode: let activationCode):
+            TwoFactorEnableInformationView(qrImage: qrImage, activationCode: activationCode)
         }
     }
     

@@ -45,42 +45,57 @@ struct TwoFactorEnableInformationView: View {
     @State var shouldGoToRoor = false
     
     @State var qrImage: UIImage
+    @State var activationCode: String
     
     let imageUrl = "https://example.com/your-qr-code.png"
     
     @ViewBuilder
     func helpingInformationView() -> some View {
-        VStack(alignment: .leading, spacing: 20) {
-            Text("Configure 2-Factor Authentication")
-                .font(.title)
-                .foregroundColor(Color.blue)
-            Text("Follow the steps below to enhance your account's security:")
-                .font(.headline)
-                .foregroundColor(Color.Neutral.tone90)
-            HStack {
-                Image(systemName: "1.circle.fill")
-                    .foregroundColor(Color.orange)
-                Text("Scan the QR code below using a 2FA app like Google Authenticator, Guardian, Duo Mobile, etc.")
-                    .foregroundColor(Color.Neutral.tone90)
+        VStack {
+            ScrollView {
+                VStack(alignment: .leading, spacing: 20) {
+                    Text("Configure Two Factor Auth")
+                        .padding(.trailing, 64)
+                        .font(.largeTitle)
+                        .foregroundColor(Color.Neutral.tone80)
+                    Text("Follow the steps below to enhance your account's security: Also, this information has been sent to your email address.")
+                        .font(.headline)
+                        .foregroundColor(Color.Neutral.tone80)
+                    HStack(alignment: .top) {
+                        Image(systemName: "1.circle.fill")
+                            .resizable()
+                            .frame(width: 20, height: 20)
+                            .foregroundColor(Color.Yellow.trueYellow)
+                        Text("Scan the QR code below using a 2FA app like Google Authenticator, Guardian, Duo Mobile, etc.")
+                            .foregroundColor(Color.Neutral.tone90)
+                    }
+                    HStack(alignment: .center) {
+                        Spacer()
+                        Image(uiImage: qrImage)
+                            .resizable()
+                            .scaledToFit()
+                            .frame(width: 200, height: 200)
+                        Spacer()
+                    }
+                    HStack(alignment: .top) {
+                        Image(systemName: "2.circle.fill")
+                            .resizable()
+                            .frame(width: 20, height: 20)
+                            .foregroundColor(Color.Yellow.trueYellow)
+                        Text("Enter the code provided by the app to verify your device. You have to complete previous step first.")
+                            .foregroundColor(Color.Neutral.tone90)
+                    }
+                    Spacer()
+                   
+                }
             }
-            Image(uiImage: qrImage)
-                .resizable()
-                .scaledToFit()
-                .frame(width: 200, height: 200)
-            HStack {
-                Image(systemName: "2.circle.fill")
-                    .foregroundColor(Color.orange)
-                Text("Enter the code provided by the app to verify your device. You have to complete previous step first.")
-                    .foregroundColor(Color.Neutral.tone90)
-            }
-            Spacer()
-            BasicButton(title: "Enter The Code", style: .primary, isEnabled: .constant(true)) {
+            BasicButton(title: "Enter Code", style: .secondary, isEnabled: .constant(true)) {
                 shouldGoToOTP = true
             }
             .padding(.top, 10)
         }
         .padding()
-        .background(Color.Neutral.tone70)
+        .background(Color.Dark.tone100)
         .cornerRadius(10)
         .shadow(radius: 5)
     }
@@ -90,28 +105,31 @@ struct TwoFactorEnableInformationView: View {
             switch otpResult {
             case .none, .otpBackButton, .otpBackButtonWithFailure, .otpSuccess:
                 helpingInformationView()
+                    
+                    .onChange(of: shouldGoToOTP, perform: { newValue in
+                        switch otpResult {
+                        case .none, .enableConfirmed:
+                            break
+                        case .otpBackButton:
+                            break
+                        case .otpSuccess:
+                            confirm2FA()
+                        case .otpBackButtonWithFailure:
+                            break
+                        }
+                    })
+                    .sheet(isPresented: $shouldGoToOTP, content: {
+                        OTPView(optResult: $otpResult)
+                        
+                    })
+                
             case .enableConfirmed:
                 successView()
             }
         }
-        
-        .onChange(of: shouldGoToOTP, perform: { newValue in
-            switch otpResult {
-            case .none, .enableConfirmed:
-                break
-            case .otpBackButton:
-                break
-            case .otpSuccess:
-                confirm2FA()
-            case .otpBackButtonWithFailure:
-                break
-            }
-        })
-        .sheet(isPresented: $shouldGoToOTP, content: {
-            OTPView(optResult: $otpResult)
-
-        })
-        .padding()
+        .padding(.horizontal, 4)
+        .background( LinearGradient(gradient: Gradient(colors: [Color.Yellow.trueYellow, Color.Dark.tone90]), startPoint: .top, endPoint: .bottom))
+        .navigationTitle("Assignment List")
         .overlay(
             Group {
                 if viewmodel.isLoading {
@@ -169,6 +187,6 @@ struct TwoFactorEnableInformationView: View {
 
 struct InformationView_Previews: PreviewProvider {
     static var previews: some View {
-        TwoFactorEnableInformationView(qrImage: UIImage())
+        TwoFactorEnableInformationView(qrImage: UIImage(named: "qrExample")!, activationCode: "")
     }
 }

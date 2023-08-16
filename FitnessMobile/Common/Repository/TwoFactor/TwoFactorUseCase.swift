@@ -30,6 +30,11 @@ class TwoFactorUseCase {
         return try await repository.verify2FA(request: request)
     }
     
+    func verify2FANoTempToken(optToken: String) async throws -> ResultTwoFactorVerifyNoTempToken {
+        let request = TwoFactorEntity.VerifyNoTempToken.Request(otpToken: optToken)
+        return try await repository.verify2FANoTempToken(request: request)
+    }
+    
     func confirm2FA() async throws -> ResultTwoFactorConfirmEnable {
         let request = TwoFactorEntity.ConfirmEnable.Request()
         return try await repository.confirm2FA(request: request)

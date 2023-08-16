@@ -37,6 +37,17 @@ struct TwoFactorEntity {
         }
     }
     
+    struct VerifyNoTempToken {
+        struct Request: Encodable {
+            let otpToken: String
+        }
+        
+        struct Response: Decodable {
+            let user: User
+            let token: String
+        }
+    }
+    
     struct ConfirmEnable {
         struct Request: Encodable { }
         struct Response: Decodable { }

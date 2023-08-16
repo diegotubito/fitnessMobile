@@ -10,6 +10,7 @@ import Foundation
 typealias ResultTwoFactorEnable = TwoFactorEntity.Enable.Response
 typealias ResultTwoFactorDisable = TwoFactorEntity.Disable.Response
 typealias ResultTwoFactorVerify = TwoFactorEntity.Verify.Response
+typealias ResultTwoFactorVerifyNoTempToken = TwoFactorEntity.VerifyNoTempToken.Response
 typealias ResultTwoFactorConfirmEnable = TwoFactorEntity.ConfirmEnable.Response
 
 class TwoFactorRepository: ApiNetworkAsync {
@@ -27,6 +28,13 @@ class TwoFactorRepository: ApiNetworkAsync {
 
     func verify2FA(request: TwoFactorEntity.Verify.Request) async throws -> ResultTwoFactorVerify {
         config.path = "/api/v1/verify2FA"
+        config.method = .post
+        config.addRequestBody(request)
+        return try await apiCall()
+    }
+    
+    func verify2FANoTempToken(request: TwoFactorEntity.VerifyNoTempToken.Request) async throws -> ResultTwoFactorVerifyNoTempToken {
+        config.path = "/api/v1/verify2FA_withouth_temptoken"
         config.method = .post
         config.addRequestBody(request)
         return try await apiCall()

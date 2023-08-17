@@ -15,11 +15,10 @@ extension NSNotification.Name {
 struct CoordinatorMainView: View {
     @EnvironmentObject var coordinator: Coordinator
     @EnvironmentObject var networkMonitor: NetworkMonitor
-    @Environment(\.scenePhase) var scenePhase
     @EnvironmentObject var userSession: UserSessionManager
     
     @State var currentPage: Coordinator.PageView = .tabbar
-   
+       
     var body: some View {
         NavigationStack(path: $coordinator.path) {
             coordinator.getPage(currentPage)
@@ -62,24 +61,7 @@ struct CoordinatorMainView: View {
                         coordinator.presentModal(.noInternet)
                     }
                 })
-                .onChange(of: scenePhase) { newPhase in
-                    if newPhase == .active {
-                        print("Active")
-                        userSession.checkUser()
-                    } else if newPhase == .inactive {
-                        print("Inactive")
-                    } else if newPhase == .background {
-                        print("Background")
-                    }
-                }
-                .onChange(of: userSession.didLogOut) { _ in
-                    currentPage = .login
-                }
-                .onChange(of: userSession.didLogIn) { _ in
-                    currentPage = .tabbar
-                }
                 .onReceive(NotificationCenter.default.publisher(for: .MustLogin)) { value in
-                    userSession.removeUserSession()
                     coordinator.presentModal(.login)
                 }
         }

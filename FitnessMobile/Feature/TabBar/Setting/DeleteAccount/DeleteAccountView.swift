@@ -46,8 +46,8 @@ struct DeleteAccountView: View {
             if response == nil {
                 coordinator.presentPrimaryAlert(title: viewmodel.errorTitle, message: viewmodel.errorMessage) {}
             } else {
-                userSession.removeUserSession()
                 coordinator.path = NavigationPath()
+                NotificationCenter.default.post(Notification(name: .MustLogin))
             }
         }
     }

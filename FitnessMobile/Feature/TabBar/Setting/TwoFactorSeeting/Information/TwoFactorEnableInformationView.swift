@@ -154,7 +154,7 @@ struct TwoFactorEnableInformationView: View {
         viewmodel.confirm2FA() { result in
             if result != nil {
                 otpResult = .enableConfirmed
-                userSession.removeUserSession()
+                coordinator.path.removeLast()
             } else {
                 coordinator.presentPrimaryAlert(title: viewmodel.errorTitle, message: viewmodel.errorMessage, completion: nil)
             }

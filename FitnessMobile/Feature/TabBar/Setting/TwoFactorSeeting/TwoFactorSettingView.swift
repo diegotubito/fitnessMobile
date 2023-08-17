@@ -98,7 +98,6 @@ struct TwoFactorSettingView: View {
     func disable2FA() {
         viewmodel.disable2FA { result in
             if result != nil {
-                userSession.removeUserSession()
                 coordinator.path.removeLast()
             } else {
                 coordinator.presentPrimaryAlert(title: viewmodel.errorTitle, message: viewmodel.errorMessage) {}

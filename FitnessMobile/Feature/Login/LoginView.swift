@@ -16,7 +16,7 @@ struct LoginView: View {
     @State var shouldGoToOTP = false
     @State var otpResult: OTPView.OPTResult = .none
     
-    var presentingAsModal: Bool
+    var allowSighUp: Bool
     
     var body: some View {
         VStack {
@@ -34,7 +34,7 @@ struct LoginView: View {
             }
             .padding()
             
-            if !presentingAsModal {
+            if !allowSighUp {
                 Button {
                     coordinator.push(.signUp)
                 } label: {
@@ -60,6 +60,7 @@ struct LoginView: View {
             }
         })
         .onAppear(perform: {
+            userSession.removeUserSession()
             Task {
                 await viewmodel.loadUsers()
             }
@@ -103,11 +104,7 @@ struct LoginView: View {
     }
     
     func closeLoginView() {
-        if presentingAsModal {
-            coordinator.closeModal()
-        } else {
-            userSession.didLogIn.toggle()
-        }
+        coordinator.closeModal()
     }
 }
 
@@ -115,7 +112,7 @@ struct LoginView_Previews: PreviewProvider {
     @State static var coordinator = Coordinator()
     static var previews: some View {
         NavigationStack {
-            LoginView(presentingAsModal: true)
+            LoginView(allowSighUp: true)
         }.environmentObject(coordinator)
     }
 }

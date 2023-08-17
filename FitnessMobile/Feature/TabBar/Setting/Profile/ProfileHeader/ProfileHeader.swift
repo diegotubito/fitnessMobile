@@ -45,6 +45,13 @@ struct ProfileHeader: View {
                             
                             Spacer()
                         }
+                        HStack {
+                            Text(verbatim: String(UserSessionManager().getToken().prefix(10)))
+                                .font(.subheadline)
+                                .foregroundColor(Color.Dark.tone80)
+                            
+                            Spacer()
+                        }
                     }
                     
                     Spacer()

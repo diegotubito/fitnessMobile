@@ -58,7 +58,7 @@ struct SettingView: View {
     }
     
     func closeSession() {
-        userSession.removeUserSession()
+        NotificationCenter.default.post(Notification(name: .MustLogin))
     }
 }
 

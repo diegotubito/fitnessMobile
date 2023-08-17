@@ -131,7 +131,7 @@ class Coordinator: ObservableObject {
         case .deleteAccount:
             DeleteAccountView()
         case .login:
-            LoginView(presentingAsModal: false)
+            LoginView(allowSighUp: false)
         case .signUp:
             SignUpView()
         case .profile:
@@ -157,7 +157,7 @@ class Coordinator: ObservableObject {
         case .noInternet:
             OfflineInternetView()
         case .login:
-            LoginView(presentingAsModal: true)
+            LoginView(allowSighUp: true)
         }
     }
 }

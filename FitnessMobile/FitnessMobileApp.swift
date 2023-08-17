@@ -13,7 +13,8 @@ struct FitnessMobileApp: App {
     @StateObject var socketIOManager = SocketIOManager()
     @StateObject var coordinator = Coordinator()
     @StateObject var userSession = UserSessionManager()
-  
+    @Environment(\.scenePhase) var scenePhase
+   
     var body: some Scene {
         WindowGroup {
             CoordinatorMainView()
@@ -21,6 +22,15 @@ struct FitnessMobileApp: App {
                 .environmentObject(coordinator)
                 .environmentObject(networkMonitor)
                 .environmentObject(userSession)
+                .onChange(of: scenePhase) { newPhase in
+                    if newPhase == .active {
+                        print("Active")
+                    } else if newPhase == .inactive {
+                        print("Inactive")
+                    } else if newPhase == .background {
+                        print("Background")
+                    }
+                }
         }
     }
 }

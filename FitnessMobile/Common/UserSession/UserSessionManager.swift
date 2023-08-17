@@ -16,15 +16,11 @@ struct UserSessionModel: Codable {
 class UserSessionManager: ObservableObject {
     private let userSessionKey = "UserSessionKey"
     private let deviceTokenKey = "DeviceToken"
-    @Published var didLogOut: Bool = false
     @Published var didLogIn: Bool = false
     
     var user: User?
     
     init() {
-        if getUserSession() == nil {
-            didLogOut.toggle()
-        }
         self.user = getUserSession()?.user
     }
     
@@ -80,15 +76,8 @@ class UserSessionManager: ObservableObject {
         }
     }
     
-    func checkUser() {
-        if getToken().isEmpty {
-            didLogOut.toggle()
-        }
-    }
-    
     func removeUserSession() {
         let _ = KeychainManager.shared.delete(key: userSessionKey)
-        didLogOut.toggle()
     }
     
     func saveDeviceToken(data: Data) {

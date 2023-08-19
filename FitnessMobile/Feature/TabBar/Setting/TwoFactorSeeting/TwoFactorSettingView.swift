@@ -81,10 +81,9 @@ struct TwoFactorSettingView: View {
     func enable2FA() {
         viewmodel.enable2FA { result in
             if let result = result {
-                let user = userSession.getUserSession()?.user
-                userSession.saveUser(user: user!,
-                                     tempToken: result.tempToken)
-                
+                let user = userSession.getUser()
+                userSession.saveUser(user: user!)
+                userSession.saveTempToken(value: result.tempToken)
                 let imageData = Data(base64Encoded: result.qrImage)
                 let image = UIImage(data: imageData ?? Data())
                 coordinator.push(.twoFactorEnableInformation(qrImage: image ?? UIImage(), activationCode: result.activationCode))

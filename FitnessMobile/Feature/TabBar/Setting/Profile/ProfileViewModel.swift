@@ -17,7 +17,7 @@ class ProfileViewModel: BaseViewModel {
     @Published var showAlert = false
     
     private func getPhone() -> Phone {
-        let user = UserSessionManager().getUserSession()?.user
+        let user = UserSessionManager().getUser()
         let phone = Phone(countryName: user?.phone?.countryName ?? "",
                                                                         number: user?.phone?.number ?? "",
                                                                         phoneCode: user?.phone?.phoneCode ?? "",
@@ -35,7 +35,7 @@ class ProfileViewModel: BaseViewModel {
     }
     
     func setupInitValues() {
-        if let user = UserSessionManager().getUserSession()?.user {
+        if let user = UserSessionManager().getUser() {
             firstNameTextField.text = user.firstName
             lastNameTextField.text = user.lastName
         }

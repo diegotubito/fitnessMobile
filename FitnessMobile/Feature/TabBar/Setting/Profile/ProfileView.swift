@@ -69,9 +69,7 @@ struct ProfileView: View {
     func updateUser() {
         viewmodel.updateUser { response in
             if let response = response {
-                let tempToken = userSession.getTempToken()
-                userSession.saveUser(user: response.user,
-                                     tempToken: tempToken)
+                userSession.saveUser(user: response.user)
                 coordinator.path.removeLast()
             } else {
                 coordinator.presentPrimaryAlert(title: viewmodel.errorTitle, message: viewmodel.errorMessage) {

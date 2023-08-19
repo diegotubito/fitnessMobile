@@ -7,11 +7,6 @@
 
 import SwiftUI
 
-struct UserSessionModel: Codable {
-    let user: User
-    let tempToken: String
-}
-
 class UserSessionManager: ObservableObject {
     private let userSessionKey = "UserSessionKey"
     private let deviceTokenKey = "DeviceToken"
@@ -19,23 +14,11 @@ class UserSessionManager: ObservableObject {
     private let refreshTokenExpirationKey = "RefreshTokenExpirationKey"
     private let accessTokenKey = "AccessTokenKey"
     private let accessTokenExpirationKey = "AccessTokenExpirationKey"
-    
-    @Published var didLogIn: Bool = false
-    
-    var user: User?
-    
-    init() {
-        self.user = getUserSession()?.user
-    }
-    
-   
+    private let tempTokenKey = "TempTokenKey"
         
-    func saveUser(user: User, tempToken: String) {
+    func saveUser(user: User) {
         do {
-            let userSession = UserSessionModel(user: user,
-                                               tempToken: tempToken)
-            let encoder = JSONEncoder()
-            let data = try encoder.encode(userSession)
+            let data = try JSONEncoder().encode(user)
             _ = KeychainManager.shared.save(key: userSessionKey, data: data)
             NotificationCenter.default.post(Notification(name: .UserSessionDidChanged))
         } catch {
@@ -44,11 +27,10 @@ class UserSessionManager: ObservableObject {
         
     }
     
-    func getUserSession() -> UserSessionModel? {
+    func getUser() -> User? {
         do {
             if let data = KeychainManager.shared.load(key: userSessionKey) {
-                let decoder = JSONDecoder()
-                let user = try decoder.decode(UserSessionModel.self, from: data)
+                let user = try JSONDecoder().decode(User.self, from: data)
                 return user
             }
             return nil
@@ -56,22 +38,15 @@ class UserSessionManager: ObservableObject {
             return nil
         }
     }
-        
-    func getTempToken() -> String {
-        do {
-            if let data = KeychainManager.shared.load(key: userSessionKey) {
-                let decoder = JSONDecoder()
-                let user = try decoder.decode(UserSessionModel.self, from: data)
-                return user.tempToken
-            }
-            return ""
-        } catch {
-            return ""
-        }
-    }
     
     func removeUserSession() {
-        let _ = KeychainManager.shared.delete(key: userSessionKey)
+        _ = KeychainManager.shared.delete(key: userSessionKey)
+//        _ = KeychainManager.shared.delete(key: deviceTokenKey)
+        _ = KeychainManager.shared.delete(key: refreshTokenKey)
+        _ = KeychainManager.shared.delete(key: refreshTokenExpirationKey)
+        _ = KeychainManager.shared.delete(key: accessTokenKey)
+        _ = KeychainManager.shared.delete(key: accessTokenExpirationKey)
+        _ = KeychainManager.shared.delete(key: tempTokenKey)
     }
     
     func saveDeviceToken(data: Data) {
@@ -87,31 +62,45 @@ class UserSessionManager: ObservableObject {
         return tokenString
     }
     
-    func getFullName() -> String {
-        let user = getUserSession()
-        let lastName: String = user?.user.lastName ?? ""
-        let firstName: String = user?.user.firstName ?? ""
-        return "\(firstName), \(lastName)"
+    func getFullName() -> String? {
+        if let user = getUser() {
+            let lastName: String = user.lastName
+            let firstName: String = user.firstName
+            return "\(firstName), \(lastName)"
+        }
+        return nil
     }
     
-    func getUserName() -> String {
-        let user = getUserSession()
-        let username: String = user?.user.username ?? ""
-        return username
+    func getUserName() -> String? {
+        let user = getUser()
+        return  user?.username
     }
     
-    func getEmail() -> String {
-        let user = getUserSession()
-        let email: String = user?.user.email ?? ""
-        return email
+    func getEmail() -> String? {
+        let user = getUser()
+        return user?.email
     }
     
     var isTwoFactorEnabled: Bool {
-        let user = getUserSession()
-        let twoFactorEnabled: Bool = user?.user.twoFactorEnabled ?? false
+        let user = getUser()
+        let twoFactorEnabled: Bool = user?.twoFactorEnabled ?? false
         return twoFactorEnabled
     }
     
+}
+
+/// TEMP TOKEN
+extension UserSessionManager {
+    func saveTempToken(value: String) {
+        if let data = value.data(using: .utf8) {
+            _ = KeychainManager.shared.save(key: tempTokenKey, data: data)
+        }
+    }
+    
+    func getTempToken() -> String {
+        let data = KeychainManager.shared.load(key: tempTokenKey)
+        return String(data: data ?? Data(), encoding: .utf8) ?? ""
+    }
 }
 
 /// REFRESH TOKEN

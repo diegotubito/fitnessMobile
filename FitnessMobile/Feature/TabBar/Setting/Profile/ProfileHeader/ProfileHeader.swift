@@ -26,20 +26,20 @@ struct ProfileHeader: View {
                     
                     VStack(spacing: 2) {
                         HStack {
-                            Text(UserSessionManager().getFullName())
+                            Text(UserSessionManager().getFullName() ?? "")
                                 .font(.headline)
                                 .foregroundColor(Color.Dark.tone70)
                             Spacer()
                         }
                         HStack {
-                            Text(UserSessionManager().getUserName())
+                            Text(UserSessionManager().getUserName() ?? "")
                                 .font(.subheadline)
                                 .foregroundColor(Color.Dark.tone70)
                             Spacer()
                         }
                         .padding(.bottom, 4)
                         HStack {
-                            Text(verbatim: UserSessionManager().getEmail())
+                            Text(verbatim: UserSessionManager().getEmail() ?? "")
                                 .font(.subheadline)
                                 .foregroundColor(Color.Dark.tone80)
                             

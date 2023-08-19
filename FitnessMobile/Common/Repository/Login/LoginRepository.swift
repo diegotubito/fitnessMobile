@@ -20,12 +20,13 @@ class LoginRepository: ApiNetworkAsync, LoginRepositoryProtocol {
         config.path = "/api/v1/refresh"
         config.addCustomHeader(key: "Authorization", value: UserSessionManager().getRefreshToken())
         config.method = .post
+        config.refresingToken = true
         
         return try await apiCall()
     }
     
     func doLogin(request: LoginEntity.Request) async throws -> LoginResult {
-        config.userIsNeeded = false
+        config.noTokenNeeded = false
         config.path = "/api/v1/login"
         config.method = .post
         config.addRequestBody(request)

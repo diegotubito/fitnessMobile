@@ -18,7 +18,6 @@ open class ApiNetworkAsync {
     
     public func apiCall<T: Decodable>() async throws -> T {
         
-
         do {
             let data = try await performRequest()
             // If T is of type Data, return the data directly without decoding
@@ -37,8 +36,9 @@ open class ApiNetworkAsync {
             print(error)
             throw error
         }
+        
     }
-   
+    
     private func performRequest() async throws -> Data {
         guard let url = config.getUrl() else {
             throw APIError.invalidURL
@@ -48,7 +48,23 @@ open class ApiNetworkAsync {
             throw APIError.invalidMethod(method: config.method?.rawValue)
         }
         
+        if UserSessionManager().isAccessTokenExpired && !config.refresingToken && config.noTokenNeeded {
+            let loginUseCase = LoginUseCase()
+            do {
+                let response = try await loginUseCase.doRefresh()
+                UserSessionManager().saveAccessToken(value: response.accessToken)
+                UserSessionManager().saveAccessTokenExpirationDate(value: response.accessTokenExpirationDateString)
+                return try await doTask(request: createRequest(url: url, method: method))
+            } catch {
+                DispatchQueue.main.async {
+                    NotificationCenter.default.post(Notification(name: .MustLogin))
+                }
+                throw APIError.authentication
+            }
+        }
+        
         return try await doTask(request: createRequest(url: url, method: method))
+        
     }
     
     private func createRequest(url: URL, method: ApiRequestConfiguration.Method) -> URLRequest {

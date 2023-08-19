@@ -16,7 +16,7 @@ protocol ServerConnectionProtocol {
 class ServerConnection: ApiNetworkAsync, ServerConnectionProtocol {
     func isConnected() async throws -> ServerConnectionResult {
         config.path = "/server/connected"
-        config.userIsNeeded = false
+        config.noTokenNeeded = false
         config.method = .get
         return try await apiCall()
     }

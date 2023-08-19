@@ -52,6 +52,14 @@ struct ProfileHeader: View {
                             
                             Spacer()
                         }
+                        
+                        HStack {
+                            Text(getExpirationRefreshToken())
+                                .font(.subheadline)
+                                .foregroundColor(Color.Dark.tone80)
+                            
+                            Spacer()
+                        }
                     }
                     
                     Spacer()
@@ -69,7 +77,12 @@ struct ProfileHeader: View {
     
     func getExpirationAccessToken() -> String {
         let token = UserSessionManager().getAccessTokenExpirationDate().toString(format: "dd/MM/yy HH:mm:ss")
-        return "exp token: \(token)"
+        return "access token exp: \(token)"
+    }
+    
+    func getExpirationRefreshToken() -> String {
+        let token = UserSessionManager().getRefreshTokenExpirationDate().toString(format: "dd/MM/yy HH:mm:ss")
+        return "refresh token exp: \(token)"
     }
 }
 

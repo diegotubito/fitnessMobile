@@ -44,6 +44,7 @@ class UserRepository: ApiNetworkAsync, UserRepositoryProtocol {
     func getUsers() async throws -> GetUserResult {
         config.path = "/api/v1/user"
         config.method = .get
+        config.noTokenNeeded = false
         return try await apiCall()
     }
 }

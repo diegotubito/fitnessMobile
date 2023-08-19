@@ -8,7 +8,8 @@
 import Foundation
 
 public struct ApiRequestConfiguration {
-    public var userIsNeeded = true
+    public var noTokenNeeded = true
+    public var refresingToken = false
     public var path: String = ""
     public var method: Method?
     public var body: Data?

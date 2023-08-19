@@ -10,6 +10,7 @@ import Foundation
 protocol LoginUseCaseProtocol {
     init(repository: LoginRepositoryProtocol)
     func doLogin(input: LoginEntity.Input) async throws -> LoginResult
+    func doRefresh() async throws -> RefreshResult
 }
 
 class LoginUseCase: LoginUseCaseProtocol {
@@ -22,6 +23,10 @@ class LoginUseCase: LoginUseCaseProtocol {
     func doLogin(input: LoginEntity.Input) async throws -> LoginResult {
         let request = LoginEntity.Request(email: input.email, password: input.password)
         return try await repository.doLogin(request: request)
+    }
+    
+    func doRefresh() async throws -> RefreshResult {
+        return try await repository.refreshAccessToken()
     }
 }
 

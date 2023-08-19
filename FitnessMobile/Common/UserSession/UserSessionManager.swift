@@ -9,13 +9,17 @@ import SwiftUI
 
 struct UserSessionModel: Codable {
     let user: User
-    let token: String
     let tempToken: String
 }
 
 class UserSessionManager: ObservableObject {
     private let userSessionKey = "UserSessionKey"
     private let deviceTokenKey = "DeviceToken"
+    private let refreshTokenKey = "RefreshTokenKey"
+    private let refreshTokenExpirationKey = "RefreshTokenExpirationKey"
+    private let accessTokenKey = "AccessTokenKey"
+    private let accessTokenExpirationKey = "AccessTokenExpirationKey"
+    
     @Published var didLogIn: Bool = false
     
     var user: User?
@@ -24,9 +28,12 @@ class UserSessionManager: ObservableObject {
         self.user = getUserSession()?.user
     }
     
-    func saveUser(user: User, token: String, tempToken: String) {
+   
+        
+    func saveUser(user: User, tempToken: String) {
         do {
-            let userSession = UserSessionModel(user: user, token: token, tempToken: tempToken)
+            let userSession = UserSessionModel(user: user,
+                                               tempToken: tempToken)
             let encoder = JSONEncoder()
             let data = try encoder.encode(userSession)
             _ = KeychainManager.shared.save(key: userSessionKey, data: data)
@@ -49,20 +56,7 @@ class UserSessionManager: ObservableObject {
             return nil
         }
     }
-    
-    func getToken() -> String {
-        do {
-            if let data = KeychainManager.shared.load(key: userSessionKey) {
-                let decoder = JSONDecoder()
-                let user = try decoder.decode(UserSessionModel.self, from: data)
-                return user.token
-            }
-            return ""
-        } catch {
-            return ""
-        }
-    }
-    
+        
     func getTempToken() -> String {
         do {
             if let data = KeychainManager.shared.load(key: userSessionKey) {
@@ -120,3 +114,70 @@ class UserSessionManager: ObservableObject {
     
 }
 
+/// REFRESH TOKEN
+extension UserSessionManager {
+    func saveRefreshToken(value: String) {
+        if let data = value.data(using: .utf8) {
+            _ = KeychainManager.shared.save(key: refreshTokenKey, data: data)
+        }
+    }
+    
+    func getRefreshToken() -> String {
+        let data = KeychainManager.shared.load(key: refreshTokenKey)
+        return String(data: data ?? Data(), encoding: .utf8) ?? ""
+    }
+    
+    func saveRefreshTokenExpirationDate(value: String) {
+        if let data = value.data(using: .utf8) {
+            _ = KeychainManager.shared.save(key: refreshTokenExpirationKey, data: data)
+        }
+    }
+    
+    func getRefreshTokenExpirationDate() -> Date {
+        let data = KeychainManager.shared.load(key: refreshTokenExpirationKey)
+        let stringDate = String(data: data ?? Data(), encoding: .utf8) ?? ""
+        
+        let formatter = DateFormatter()
+        formatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSSZ" // Adjust this as needed
+        return formatter.date(from: stringDate) ?? Date()
+    }
+    
+    var isRefreshTokenExpired: Bool {
+        let date = getRefreshTokenExpirationDate()
+        return date.isExpired
+    }
+}
+
+/// ACCESS TOKEN
+extension UserSessionManager {
+    func saveAccessToken(value: String) {
+        if let data = value.data(using: .utf8) {
+            _ = KeychainManager.shared.save(key: accessTokenKey, data: data)
+        }
+    }
+    
+    func getAccessToken() -> String {
+        let data = KeychainManager.shared.load(key: accessTokenKey)
+        return String(data: data ?? Data(), encoding: .utf8) ?? ""
+    }
+    
+    func saveAccessTokenExpirationDate(value: String) {
+        if let data = value.data(using: .utf8) {
+            _ = KeychainManager.shared.save(key: accessTokenExpirationKey, data: data)
+        }
+    }
+    
+    func getAccessTokenExpirationDate() -> Date {
+        let data = KeychainManager.shared.load(key: accessTokenExpirationKey)
+        let stringDate = String(data: data ?? Data(), encoding: .utf8) ?? ""
+        
+        let formatter = DateFormatter()
+        formatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSSZ" // Adjust this as needed
+        return formatter.date(from: stringDate) ?? Date()
+    }
+    
+    var isAccessTokenExpired: Bool {
+        let date = getAccessTokenExpirationDate()
+        return date.isExpired
+    }
+}

@@ -26,6 +26,10 @@ extension Date {
         min(date1, date2) ... max(date1, date2) ~= self
     }
     
+    var isExpired: Bool {
+        return self < Date()
+    }
+    
     func getDayName() -> String {
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "EEEE"

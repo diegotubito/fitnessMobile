@@ -89,7 +89,14 @@ struct LoginView: View {
         viewmodel.doLogin(completion: { response in
             DispatchQueue.main.async {
                 if let response = response {
-                    userSession.saveUser(user: response.user, token: response.token, tempToken: response.tempToken)
+                    
+                    userSession.saveUser(user: response.user,
+                                         tempToken: response.tempToken)
+                    userSession.saveAccessToken(value: response.accessToken)
+                    userSession.saveRefreshToken(value: response.refreshToken)
+                    userSession.saveAccessTokenExpirationDate(value: response.accessTokenExpirationDateString)
+                    userSession.saveRefreshTokenExpirationDate(value: response.refreshTokenExpirationDateString)
+                    
                     if response.user.twoFactorEnabled {
                         shouldGoToOTP = true
                         return

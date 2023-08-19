@@ -17,6 +17,8 @@ open class ApiNetworkAsync {
     }
     
     public func apiCall<T: Decodable>() async throws -> T {
+        
+
         do {
             let data = try await performRequest()
             // If T is of type Data, return the data directly without decoding
@@ -54,10 +56,9 @@ open class ApiNetworkAsync {
         request.httpMethod = method.rawValue
         request.addValue("application/json", forHTTPHeaderField: "Content-Type")
       
-        let token = UserSessionManager().getToken()
-        let authorization = "\(token)"
+        let accessToken = UserSessionManager().getAccessToken()
+        let authorization = "\(accessToken)"
         request.addValue(authorization, forHTTPHeaderField: "Authorization")
-        
         
         if let deviceToken = UserSessionManager().getDeviceToken() {
             request.setValue(deviceToken, forHTTPHeaderField: "DeviceToken")

@@ -16,6 +16,11 @@ open class ApiNetwork {
     }
     
     public func apiCall<T: Decodable>(completion: @escaping (Result<T, APIError>) -> Void) {
+        let accessTokenExpirationDate = UserSessionManager().getAccessTokenExpirationDate()
+        if accessTokenExpirationDate.isExpired {
+            return completion(.failure(.authentication))
+        }
+
         performRequest { result in
             switch result {
             case .failure(let error):
@@ -54,8 +59,8 @@ open class ApiNetwork {
         request.httpMethod = method.rawValue
         request.addValue("application/json", forHTTPHeaderField: "Content-Type")
       
-        let token = UserSessionManager().getToken()
-        let authorization = "Bearer \(token)"
+        let accessToken = UserSessionManager().getAccessToken()
+        let authorization = "Bearer \(accessToken)"
         request.addValue(authorization, forHTTPHeaderField: "Authorization")
         
         if let deviceToken = UserSessionManager().getDeviceToken() {

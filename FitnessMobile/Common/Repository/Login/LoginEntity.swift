@@ -20,7 +20,17 @@ struct LoginEntity {
     
     struct Response: Decodable {
         let user: User
-        let token: String
+        let accessToken: String
+        let accessTokenExpirationDateString: String
         let tempToken: String
+        let refreshToken: String
+        let refreshTokenExpirationDateString: String
+    }
+    
+    struct Refresh {
+        struct Response: Decodable {
+            let accessToken: String
+            let accessTokenExpirationDateString: String
+        }
     }
 }

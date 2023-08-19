@@ -46,7 +46,7 @@ struct ProfileHeader: View {
                             Spacer()
                         }
                         HStack {
-                            Text(verbatim: String(UserSessionManager().getToken().prefix(10)))
+                            Text(getExpirationAccessToken())
                                 .font(.subheadline)
                                 .foregroundColor(Color.Dark.tone80)
                             
@@ -65,6 +65,11 @@ struct ProfileHeader: View {
             shouldUpdateView = false
             shouldUpdateView = true
         }
+    }
+    
+    func getExpirationAccessToken() -> String {
+        let token = UserSessionManager().getAccessTokenExpirationDate().toString(format: "dd/MM/yy HH:mm:ss")
+        return "exp token: \(token)"
     }
 }
 

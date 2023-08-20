@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import UserNotifications
 
 @main
 struct FitnessMobileApp: App {
@@ -14,7 +15,9 @@ struct FitnessMobileApp: App {
     @StateObject var coordinator = Coordinator()
     @StateObject var userSession = UserSessionManager()
     @Environment(\.scenePhase) var scenePhase
-   
+    
+    @UIApplicationDelegateAdaptor(AppDelegate.self) var appDelegate
+    
     var body: some Scene {
         WindowGroup {
             CoordinatorMainView()
@@ -29,6 +32,17 @@ struct FitnessMobileApp: App {
                         print("Inactive")
                     } else if newPhase == .background {
                         print("Background")
+                    }
+                }
+                .onAppear {
+                    UNUserNotificationCenter.current().requestAuthorization(options: [.alert, .badge, .sound]) { (granted, error) in
+                        if granted {
+                            DispatchQueue.main.async {
+                                UIApplication.shared.registerForRemoteNotifications()
+                            }
+                        } else {
+                            // User denied notifications or an error occurred
+                        }
                     }
                 }
         }

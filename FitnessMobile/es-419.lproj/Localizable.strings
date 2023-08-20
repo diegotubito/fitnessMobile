@@ -73,4 +73,4 @@
 "_SERIALIZE_TITLE" = "Error";
 "_SERIALIZE_MESSAGE" = "No se pudo serializar los datos.";
 "_401_TITLE"="Autenticación";
-"_401_MESSAGE"="Token inválido.";
+"_401_MESSAGE"="Sesión vencida.";

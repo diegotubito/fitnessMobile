@@ -56,9 +56,6 @@ open class ApiNetworkAsync {
                 UserSessionManager().saveAccessTokenExpirationDate(value: response.accessTokenExpirationDateString)
                 return try await doTask(request: createRequest(url: url, method: method))
             } catch {
-                DispatchQueue.main.async {
-                    NotificationCenter.default.post(Notification(name: .MustLogin))
-                }
                 throw APIError.authentication
             }
         }

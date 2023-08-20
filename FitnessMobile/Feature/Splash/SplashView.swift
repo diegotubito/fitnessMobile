@@ -8,47 +8,45 @@
 import SwiftUI
 
 struct SplashView: View {
-    @Binding var shouldShowSplash: Bool
-    @StateObject var viewmodel = SplashViewModel()
-    @EnvironmentObject var coordinator: Coordinator
+    @StateObject var networkMonitor = NetworkMonitor()
+    @StateObject var socketIOManager = SocketIOManager()
+    @StateObject var coordinator = Coordinator()
+    @StateObject var userSession = UserSessionManager()
+    @Environment(\.scenePhase) var scenePhase
+
+    @State var shouldShowSplash = true
     
     var body: some View {
         VStack {
-            
-            switch viewmodel.serverState {
-            case .idle:
-                Text("Server connection: idle")
-            case .loading:
-                Text("Server connection: loading...")
-            case .connected:
-                Text("Server connection: ✔️")
-            case .disconnected:
-                Text("Server connection: X")
-            }
-            
-            if viewmodel.serverState == .loading {
-                ProgressView()
+            if shouldShowSplash {
+                Text("Splash View")
+            } else {
+                CoordinatorMainView()
+                    .environmentObject(socketIOManager)
+                    .environmentObject(coordinator)
+                    .environmentObject(networkMonitor)
+                    .environmentObject(userSession)
+                    .onChange(of: scenePhase) { newPhase in
+                        if newPhase == .active {
+                            print("Active")
+                        } else if newPhase == .inactive {
+                            print("Inactive")
+                        } else if newPhase == .background {
+                            print("Background")
+                        }
+                    }
             }
         }
         .onAppear {
-            viewmodel.checkServerConnection()
-        }
-        .onChange(of: viewmodel.serverState) { state in
-            if state == .disconnected {
-                coordinator.presentPrimaryAlert(title: "Server", message: "The server is not reachable") {
-                    DispatchQueue.main.asyncAfter(deadline: .now() + 5, execute: {
-                        self.viewmodel.checkServerConnection()
-                    })
-                }
-            } else if state == .connected {
+            DispatchQueue.main.asyncAfter(deadline: .now() + 3, execute: {
                 shouldShowSplash = false
-            }
+            })
         }
     }
 }
 
 struct SplashView_Previews: PreviewProvider {
     static var previews: some View {
-        SplashView(shouldShowSplash: .constant(true))
+        SplashView()
     }
 }

@@ -74,4 +74,4 @@
 "_SERIALIZE_TITLE" = "Error";
 "_SERIALIZE_MESSAGE" = "Data could not be serialized.";
 "_401_TITLE"="Authentication";
-"_401_MESSAGE"="Invalid token.";
+"_401_MESSAGE"="Session expired.";

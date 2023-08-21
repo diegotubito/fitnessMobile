@@ -60,8 +60,29 @@ open class ApiNetworkAsync {
             }
         }
         
-        return try await doTask(request: createRequest(url: url, method: method))
+        if let imageData = config.imageData {
+            return try await doTask(request: createMultipartRequest(url: url, method: method))
+        } else {
+            return try await doTask(request: createRequest(url: url, method: method))
+        }
         
+    }
+    
+    private func createMultipartRequest(url: URL, method: ApiRequestConfiguration.Method) -> URLRequest {
+        let multipartRequest = MultipartFormDataRequest(url: url)
+        multipartRequest.addDataField(fieldName: "file", fileName: "testing.png", data: config.imageData!, mimeType: "image/png")
+        
+        var request = multipartRequest.asURLRequest()
+        
+        let accessToken = UserSessionManager().getAccessToken()
+        let authorization = "\(accessToken)"
+        request.addValue(authorization, forHTTPHeaderField: "Authorization")
+        
+        if let deviceToken = UserSessionManager().getDeviceToken() {
+            request.setValue(deviceToken, forHTTPHeaderField: "DeviceToken")
+        }
+        
+        return request
     }
     
     private func createRequest(url: URL, method: ApiRequestConfiguration.Method) -> URLRequest {
@@ -154,5 +175,54 @@ open class ApiNetworkAsync {
             print("response:", json)
         }
         print(error ? "🔴" : "🟢")
+    }
+}
+
+
+struct MultipartFormDataRequest {
+    private let boundary: String = UUID().uuidString
+    var httpBody = NSMutableData()
+    let url: URL
+    
+    init(url: URL) {
+        self.url = url
+    }
+    
+    func addDataField(fieldName: String, fileName: String, data: Data, mimeType: String) {
+        httpBody.append(dataFormField(fieldName: fieldName,fileName:fileName,data: data, mimeType: mimeType))
+    }
+    
+    private func dataFormField(fieldName: String,
+                               fileName: String,
+                               data: Data,
+                               mimeType: String) -> Data {
+        let fieldData = NSMutableData()
+        
+        fieldData.appendString("--\(boundary)\r\n")
+        fieldData.appendString("Content-Disposition: form-data; name=\"\(fieldName)\"; filename=\"\(fileName)\"\r\n")
+        fieldData.appendString("Content-Type: \(mimeType)\r\n")
+        fieldData.appendString("\r\n")
+        fieldData.append(data)
+        fieldData.appendString("\r\n")
+        return fieldData as Data
+    }
+    
+    func asURLRequest() -> URLRequest {
+        var request = URLRequest(url: url)
+        
+        request.httpMethod = "POST"
+        request.setValue("multipart/form-data; boundary=\(boundary)", forHTTPHeaderField: "Content-Type")
+        
+        httpBody.appendString("--\(boundary)--")
+        request.httpBody = httpBody as Data
+        return request
+    }
+}
+
+extension NSMutableData {
+    func appendString(_ string: String) {
+        if let data = string.data(using: .utf8) {
+            self.append(data)
+        }
     }
 }

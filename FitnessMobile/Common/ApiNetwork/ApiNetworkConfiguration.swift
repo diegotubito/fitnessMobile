@@ -16,6 +16,7 @@ public struct ApiRequestConfiguration {
     public var headers: [String: String] = [:]
     public var queryItems: [QueryModel] = []
     public var server: Server = .serverApiV2
+    public var imageData: Data? = nil
  
     public struct QueryModel {
         var key: String

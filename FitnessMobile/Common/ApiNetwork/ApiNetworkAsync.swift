@@ -54,18 +54,23 @@ open class ApiNetworkAsync {
                 let response = try await loginUseCase.doRefresh()
                 UserSessionManager().saveAccessToken(value: response.accessToken)
                 UserSessionManager().saveAccessTokenExpirationDate(value: response.accessTokenExpirationDateString)
-                return try await doTask(request: createRequest(url: url, method: method))
+                
+                return try await doTask(request: createRequest(url: url, method: method) )
+
             } catch {
                 throw APIError.authentication
             }
         }
         
+        return try await doTask(request: createRequest(url: url, method: method) )
+    }
+    
+    private func createRequest(url: URL, method: ApiRequestConfiguration.Method) -> URLRequest {
         if let imageData = config.imageData {
-            return try await doTask(request: createMultipartRequest(url: url, method: method))
+            return createMultipartRequest(url: url, method: method)
         } else {
-            return try await doTask(request: createRequest(url: url, method: method))
+            return createAplicationJsonRequest(url: url, method: method)
         }
-        
     }
     
     private func createMultipartRequest(url: URL, method: ApiRequestConfiguration.Method) -> URLRequest {
@@ -85,7 +90,7 @@ open class ApiNetworkAsync {
         return request
     }
     
-    private func createRequest(url: URL, method: ApiRequestConfiguration.Method) -> URLRequest {
+    private func createAplicationJsonRequest(url: URL, method: ApiRequestConfiguration.Method) -> URLRequest {
         var request = URLRequest(url: url)
         request.httpMethod = method.rawValue
         request.addValue("application/json", forHTTPHeaderField: "Content-Type")

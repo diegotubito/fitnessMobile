@@ -15,6 +15,7 @@ class StorageRepository: ApiNetworkAsync {
     func uploadFile(request: StorageEntity.Upload.Request) async throws -> StorageUploadResult {
         config.path = "/api/v1/storage"
         config.imageData = request.imageData
+        config.mimeType = .png
         config.addQueryItem(key: "filepath", value: request.filepath)
         config.method = .post
         return try await apiCall()

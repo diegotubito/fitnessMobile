@@ -66,35 +66,14 @@ open class ApiNetworkAsync {
     }
     
     private func createRequest(url: URL, method: ApiRequestConfiguration.Method) -> URLRequest {
-        if let imageData = config.imageData {
-            return createMultipartRequest(url: url, method: method)
-        } else {
-            return createAplicationJsonRequest(url: url, method: method)
-        }
-    }
-    
-    private func createMultipartRequest(url: URL, method: ApiRequestConfiguration.Method) -> URLRequest {
-        let multipartRequest = MultipartFormDataRequest(url: url)
-        multipartRequest.addDataField(fieldName: "file", fileName: "testing.png", data: config.imageData!, mimeType: "image/png")
-        
-        var request = multipartRequest.asURLRequest()
-        
-        let accessToken = UserSessionManager().getAccessToken()
-        let authorization = "\(accessToken)"
-        request.addValue(authorization, forHTTPHeaderField: "Authorization")
-        
-        if let deviceToken = UserSessionManager().getDeviceToken() {
-            request.setValue(deviceToken, forHTTPHeaderField: "DeviceToken")
-        }
-        
-        return request
-    }
-    
-    private func createAplicationJsonRequest(url: URL, method: ApiRequestConfiguration.Method) -> URLRequest {
         var request = URLRequest(url: url)
         request.httpMethod = method.rawValue
         request.addValue("application/json", forHTTPHeaderField: "Content-Type")
-      
+
+        if config.imageData != nil {
+            request = createMultipartRequest(url: url, method: method)
+        }
+
         let accessToken = UserSessionManager().getAccessToken()
         let authorization = "\(accessToken)"
         request.addValue(authorization, forHTTPHeaderField: "Authorization")
@@ -102,7 +81,7 @@ open class ApiNetworkAsync {
         if let deviceToken = UserSessionManager().getDeviceToken() {
             request.setValue(deviceToken, forHTTPHeaderField: "DeviceToken")
         }
-         
+
         for header in config.headers {
             request.setValue(header.value, forHTTPHeaderField: header.key)
         }
@@ -111,6 +90,12 @@ open class ApiNetworkAsync {
         }
         
         return request
+    }
+    
+    private func createMultipartRequest(url: URL, method: ApiRequestConfiguration.Method) -> URLRequest {
+        let multipartRequest = MultipartFormDataRequest(url: url)
+        multipartRequest.addDataField(fieldName: "file", fileName: "not_used", data: config.imageData!, mimeType: config.mimeType.rawValue)
+        return multipartRequest.asURLRequest()
     }
     
     private func doTask(request: URLRequest) async throws -> Data {

@@ -87,8 +87,9 @@ struct ProfileHeader: View {
             let usecase = StorageUseCase()
             do {
                 let response = try await usecase.downloadFile(filepath: "profile_pictures/\(UserSessionManager().getUser()?._id ?? "")/profile.png")
-                let uiimage = UIImage(data: response)
-                image = Image(uiImage: uiimage! )
+                if let uiimage = UIImage(data: response) {
+                    image = Image(uiImage: uiimage )
+                }
             } catch {
                 print("image error")
             }
@@ -101,7 +102,7 @@ struct ProfileHeader: View {
             do {
                 let uiimageData = UIImage(systemName: "pencil")
                 let imageData = uiimageData?.pngData()
-                let response = try await usecase.uploadFile(imageData: imageData!, filepath: "test/\(UserSessionManager().getUser()?._id ?? "")/a.png")
+                let response = try await usecase.uploadFile(imageData: imageData!, filepath: "test/\(UserSessionManager().getUser()?._id ?? "")/c.png")
                 print(response)
             } catch {
                 print("image error")

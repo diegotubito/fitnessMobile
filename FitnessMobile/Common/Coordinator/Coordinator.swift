@@ -111,11 +111,12 @@ class Coordinator: ObservableObject {
     
     enum ModalView: Identifiable {
         case noInternet
+        case photoPicker
         case login
       
         var id: UUID {
             switch self {
-            case .noInternet, .login:
+            case .noInternet, .login, .photoPicker:
                 return UUID()
             }
         }
@@ -158,6 +159,8 @@ class Coordinator: ObservableObject {
             OfflineInternetView()
         case .login:
             LoginView(allowSighUp: true)
+        case .photoPicker:
+            PhotoPickerView()
         }
     }
 }

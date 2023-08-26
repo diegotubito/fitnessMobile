@@ -9,7 +9,6 @@ import SwiftUI
 
 struct SettingView: View {
     @EnvironmentObject var coordinator: Coordinator
-    @EnvironmentObject var userSession: UserSession
     
     var body: some View {
         VStack(spacing: 0) {
@@ -55,11 +54,28 @@ struct SettingView: View {
             Spacer()
             HStack {
                 VStack {
-                    Text(ApplicationVersion.getVersionAndBundle())
-                    Text(UserSession.getAccessTokenExpirationDateString())
-                    Text(UserSession.getRefreshTokenExpirationDateString())
-                    Text("Device Token")
+                    HStack {
+                        Text(ApplicationVersion.getVersionAndBundle())
+                        Spacer()
+                    }
+                    HStack {
+                        Text(UserSession.getAccessTokenExpirationDateString())
+                        Spacer()
+                    }
+                    HStack{
+                        Text(UserSession.getRefreshTokenExpirationDateString())
+                        Spacer()
+                    }
+                    /*
+                    HStack {
+                        Text("Device Token \(UserSession.getDeviceToken() ?? "")")
+                        Spacer()
+                    }
+                     */
                 }
+                .padding()
+                .foregroundColor(Color.Neutral.tone90)
+                .font(.subheadline)
                 Spacer()
             }
         }

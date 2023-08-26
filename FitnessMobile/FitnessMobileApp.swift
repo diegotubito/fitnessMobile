@@ -13,7 +13,6 @@ struct FitnessMobileApp: App {
     @StateObject var networkMonitor = NetworkMonitor()
     @StateObject var socketIOManager = SocketIOManager()
     @StateObject var coordinator = Coordinator()
-    @StateObject var userSession = UserSession()
     @Environment(\.scenePhase) var scenePhase
     
     @UIApplicationDelegateAdaptor(AppDelegate.self) var appDelegate
@@ -24,7 +23,6 @@ struct FitnessMobileApp: App {
                 .environmentObject(socketIOManager)
                 .environmentObject(coordinator)
                 .environmentObject(networkMonitor)
-                .environmentObject(userSession)
                 .onChange(of: scenePhase) { newPhase in
                     if newPhase == .active {
                         print("Active")

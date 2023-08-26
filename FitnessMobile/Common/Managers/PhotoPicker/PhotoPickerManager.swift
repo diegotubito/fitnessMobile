@@ -31,6 +31,7 @@ class PhotoPickerManager: BaseViewModel {
         }
     }
     
+    @MainActor
     func loadProfileImageFromApi() {
         guard let user = UserSession.getUser() else { return }
         

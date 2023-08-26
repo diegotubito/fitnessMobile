@@ -19,6 +19,7 @@ struct ProfileHeader: View {
                     if let image = photoPickerManager.image {
                         image
                         .resizable()
+                        .scaledToFill()
                         .frame(width: 85, height: 85)
                         .clipShape(Circle())
                         .overlay(

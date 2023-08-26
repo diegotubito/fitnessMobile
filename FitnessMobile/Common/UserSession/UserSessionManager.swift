@@ -15,6 +15,23 @@ class UserSessionManager: ObservableObject {
     private let accessTokenKey = "AccessTokenKey"
     private let accessTokenExpirationKey = "AccessTokenExpirationKey"
     private let tempTokenKey = "TempTokenKey"
+    
+    func saveImageToDisk(image: UIImage, identifier: String) {
+        // Get the path to the Caches directory
+        let cacheDirectory = FileManager.default.urls(for: .cachesDirectory, in: .userDomainMask).first!
+        let fileURL = cacheDirectory.appendingPathComponent(identifier)
+        
+        // Convert the UIImage to Data
+        if let data = image.jpegData(compressionQuality: 1) {
+            do {
+                // Write the data to the specified location
+                try data.write(to: fileURL)
+                print("Image saved to disk: \(fileURL)")
+            } catch {
+                print("Error saving image: \(error)")
+            }
+        }
+    }
         
     func saveUser(user: User) {
         do {

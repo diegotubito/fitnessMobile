@@ -24,6 +24,11 @@ class StorageUseCase {
         return try await repository.downloadFile(request: request)
     }
     
+    func downloadImageWithUrl(url: String) async throws -> StorageDownloadResult {
+        let request = StorageEntity.DownloadWithURL.Request(url: url)
+        return try await repository.downloadImageWithURL(request: request)
+    }
+    
     func deleteFile(filepath: String) async throws -> StorageDeleteResult {
         let request = StorageEntity.Delete.Request(filepath: filepath)
         return try await repository.deleteFile(request: request)

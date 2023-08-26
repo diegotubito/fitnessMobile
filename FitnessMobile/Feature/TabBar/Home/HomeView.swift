@@ -9,10 +9,17 @@ import SwiftUI
 
 struct HomeView: View {
     @EnvironmentObject var coordinator: Coordinator
+    @EnvironmentObject var socketManager: SocketIOManager
+    
+    @State var receivedMessage = ""
     
     var body: some View {
         VStack {
-            Text("Home")
+            Text(receivedMessage)
+        }
+        .onReceive(socketManager.$messageReceived) { value in
+            print(value)
+            receivedMessage = value.message
         }
     }
 }

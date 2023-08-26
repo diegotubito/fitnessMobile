@@ -9,6 +9,7 @@ import Foundation
 
 typealias StorageUploadResult = StorageEntity.Upload.Response
 typealias StorageDownloadResult = StorageEntity.Download.Response
+typealias StorageDownloadWithURLResult = StorageEntity.DownloadWithURL.Response
 typealias StorageDeleteResult = StorageEntity.Delete.Response
 
 class StorageRepository: ApiNetworkAsync {
@@ -25,6 +26,14 @@ class StorageRepository: ApiNetworkAsync {
         config.path = "/api/v1/storage"
         config.addQueryItem(key: "filepath", value: request.filepath)
         config.method = .get
+        return try await apiCall()
+    }
+    
+    func downloadImageWithURL(request: StorageEntity.DownloadWithURL.Request) async throws -> StorageDownloadWithURLResult {
+        config.path = "/api/v1/storage/imageUrl"
+        config.method = .post
+        config.addRequestBody(request)
+        
         return try await apiCall()
     }
     

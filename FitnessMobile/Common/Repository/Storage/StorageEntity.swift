@@ -28,6 +28,15 @@ struct StorageEntity {
 
     }
     
+    struct DownloadWithURL {
+        struct Request: Encodable {
+            let url: String
+        }
+        
+        typealias Response = Data
+
+    }
+    
     struct Delete {
         struct Request: Encodable {
             let filepath: String

@@ -15,8 +15,8 @@ struct ProfileHeader: View {
         VStack {
             if shouldUpdateView {
                 HStack(spacing: 16) {
-                    if image != nil {
-                        image!
+                    if let image = image {
+                        image
                         .resizable()
                         .frame(width: 85, height: 85)
                         .clipShape(Circle())
@@ -24,6 +24,14 @@ struct ProfileHeader: View {
                             Circle()
                                 .stroke(Color.white, lineWidth: 2)
                         )
+                        .shadow(radius: 5)
+                    } else {
+                        ProgressView()
+                            .frame(width: 85, height: 85)
+                            .overlay {
+                                Circle()
+                                    .stroke(Color.white, lineWidth: 2) // This draws the border
+                            }
                             .shadow(radius: 5)
                     }
                     
@@ -77,18 +85,34 @@ struct ProfileHeader: View {
             shouldUpdateView = true
         }
         .onAppear {
-            loadImage()
-            uploadImage()
+            Task {
+                guard let user = UserSessionManager().getUser() else { return }
+                
+                if let uiimage = await MemoryImageCache.getImage(identifier: user._id) {
+                    print("image loaded from cache")
+                    image = Image(uiImage: uiimage)
+                } else if let uuimage = await DiskImageCache.getImage(identifier: user._id) {
+                    image = Image(uiImage: uuimage)
+                    MemoryImageCache.saveImage(image: uuimage, identifier: user._id)
+                } else {
+                    loadProfileImageFromApi()
+                }
+            }
         }
     }
     
-    func loadImage() {
+    func loadProfileImageFromApi() {
+        guard let user = UserSessionManager().getUser() else { return }
+        
         Task {
             let usecase = StorageUseCase()
             do {
-                let response = try await usecase.downloadFile(filepath: "profile_pictures/\(UserSessionManager().getUser()?._id ?? "")/profile.png")
+                let response = try await usecase.downloadImageWithUrl(url: user.profileImage?.url ?? "")
                 if let uiimage = UIImage(data: response) {
                     image = Image(uiImage: uiimage )
+                    MemoryImageCache.saveImage(image: uiimage, identifier: user._id)
+                    DiskImageCache.saveImage(image: uiimage, identifier: user._id)
+                    print("image loaded from api")
                 }
             } catch {
                 print("image error")
@@ -112,12 +136,12 @@ struct ProfileHeader: View {
     
     func getExpirationAccessToken() -> String {
         let token = UserSessionManager().getAccessTokenExpirationDate().toString(format: "dd/MM/yy HH:mm:ss")
-        return "access token exp: \(token)"
+        return "ATE: \(token)"
     }
     
     func getExpirationRefreshToken() -> String {
         let token = UserSessionManager().getRefreshTokenExpirationDate().toString(format: "dd/MM/yy HH:mm:ss")
-        return "refresh token exp: \(token)"
+        return "RTE: \(token)"
     }
 }
 

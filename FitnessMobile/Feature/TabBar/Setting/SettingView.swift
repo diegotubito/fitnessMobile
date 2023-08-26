@@ -13,7 +13,6 @@ struct SettingView: View {
     
     var body: some View {
         VStack(spacing: 0) {
-            ProfileHeader()
             
             List {
                 Section {
@@ -52,6 +51,16 @@ struct SettingView: View {
                     }
                     .foregroundColor(Color.Red.truly)
                 }
+            }
+            Spacer()
+            HStack {
+                VStack {
+                    Text(ApplicationVersion.getVersionAndBundle())
+                    Text(UserSessionManager.getAccessTokenExpirationDateString())
+                    Text(UserSessionManager.getRefreshTokenExpirationDateString())
+                    Text("Device Token")
+                }
+                Spacer()
             }
         }
     

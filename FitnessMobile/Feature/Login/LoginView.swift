@@ -10,7 +10,6 @@ import SwiftUI
 struct LoginView: View {
     @StateObject var viewmodel = LoginViewModel()
     @State var showAlert = false
-    @EnvironmentObject var userSession: UserSessionManager
     @EnvironmentObject var coordinator: Coordinator
     
     @State var shouldGoToOTP = false
@@ -60,7 +59,7 @@ struct LoginView: View {
             }
         })
         .onAppear(perform: {
-            userSession.removeUserSession()
+            UserSessionManager.removeUserSession()
             Task {
                 await viewmodel.loadUsers()
             }
@@ -90,11 +89,11 @@ struct LoginView: View {
             DispatchQueue.main.async {
                 if let response = response {
                     
-                    userSession.saveUser(user: response.user)
-                    userSession.saveAccessToken(value: response.accessToken)
-                    userSession.saveRefreshToken(value: response.refreshToken)
-                    userSession.saveAccessTokenExpirationDate(value: response.accessTokenExpirationDateString)
-                    userSession.saveRefreshTokenExpirationDate(value: response.refreshTokenExpirationDateString)
+                    UserSessionManager.saveUser(user: response.user)
+                    UserSessionManager.saveAccessToken(value: response.accessToken)
+                    UserSessionManager.saveRefreshToken(value: response.refreshToken)
+                    UserSessionManager.saveAccessTokenExpirationDate(value: response.accessTokenExpirationDateString)
+                    UserSessionManager.saveRefreshTokenExpirationDate(value: response.refreshTokenExpirationDateString)
                     
                     if response.user.twoFactorEnabled {
                         shouldGoToOTP = true

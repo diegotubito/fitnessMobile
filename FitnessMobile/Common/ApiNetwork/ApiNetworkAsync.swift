@@ -48,12 +48,12 @@ open class ApiNetworkAsync {
             throw APIError.invalidMethod(method: config.method?.rawValue)
         }
         
-        if UserSessionManager().isAccessTokenExpired && !config.refresingToken && config.noTokenNeeded {
+        if UserSessionManager.isAccessTokenExpired && !config.refresingToken && config.noTokenNeeded {
             let loginUseCase = LoginUseCase()
             do {
                 let response = try await loginUseCase.doRefresh()
-                UserSessionManager().saveAccessToken(value: response.accessToken)
-                UserSessionManager().saveAccessTokenExpirationDate(value: response.accessTokenExpirationDateString)
+                UserSessionManager.saveAccessToken(value: response.accessToken)
+                UserSessionManager.saveAccessTokenExpirationDate(value: response.accessTokenExpirationDateString)
                 
                 return try await doTask(request: createRequest(url: url, method: method) )
 
@@ -74,11 +74,11 @@ open class ApiNetworkAsync {
             request = createMultipartRequest(url: url, method: method)
         }
 
-        let accessToken = UserSessionManager().getAccessToken()
+        let accessToken = UserSessionManager.getAccessToken()
         let authorization = "\(accessToken)"
         request.addValue(authorization, forHTTPHeaderField: "Authorization")
         
-        if let deviceToken = UserSessionManager().getDeviceToken() {
+        if let deviceToken = UserSessionManager.getDeviceToken() {
             request.setValue(deviceToken, forHTTPHeaderField: "DeviceToken")
         }
 

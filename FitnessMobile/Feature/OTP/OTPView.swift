@@ -229,11 +229,11 @@ struct OTPView: View {
     }
     
     func verify2FA() {
-        viewmodel.verify2FA(tempToken: userSession.getTempToken()) { result in
+        viewmodel.verify2FA(tempToken: UserSessionManager.getTempToken()) { result in
             if let result = result {
-                userSession.saveUser(user: result.user)
-                userSession.saveAccessToken(value: result.accessToken)
-                userSession.saveAccessTokenExpirationDate(value: result.accessTokenExpirationDate)
+                UserSessionManager.saveUser(user: result.user)
+                UserSessionManager.saveAccessToken(value: result.accessToken)
+                UserSessionManager.saveAccessTokenExpirationDate(value: result.accessTokenExpirationDate)
                 optResult = .otpSuccess
                 dismiss()
             } else {

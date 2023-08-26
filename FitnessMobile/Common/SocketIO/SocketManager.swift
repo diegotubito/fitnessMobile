@@ -51,7 +51,7 @@ class SocketIOManager: ObservableObject {
             self?.isConnected = true
             print("Socket: connected")
             
-            if let user = UserSessionManager.getUser() {
+            if let user = UserSession.getUser() {
                 self?.socket.emit("register-user", user._id)
             }
         }

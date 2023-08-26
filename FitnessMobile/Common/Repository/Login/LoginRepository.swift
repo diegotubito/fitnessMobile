@@ -18,7 +18,7 @@ protocol LoginRepositoryProtocol {
 class LoginRepository: ApiNetworkAsync, LoginRepositoryProtocol {
     func refreshAccessToken() async throws -> RefreshResult {
         config.path = "/api/v1/refresh"
-        config.addCustomHeader(key: "Authorization", value: UserSessionManager.getRefreshToken())
+        config.addCustomHeader(key: "Authorization", value: UserSession.getRefreshToken())
         config.method = .post
         config.refresingToken = true
         

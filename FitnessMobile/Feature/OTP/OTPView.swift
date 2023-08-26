@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct OTPView: View {
-    @EnvironmentObject var userSession: UserSessionManager
+    @EnvironmentObject var userSession: UserSession
     @StateObject var viewmodel = OTPViewModel()
     
     @FocusState private var focusedField: FocusedDigit?
@@ -229,11 +229,11 @@ struct OTPView: View {
     }
     
     func verify2FA() {
-        viewmodel.verify2FA(tempToken: UserSessionManager.getTempToken()) { result in
+        viewmodel.verify2FA(tempToken: UserSession.getTempToken()) { result in
             if let result = result {
-                UserSessionManager.saveUser(user: result.user)
-                UserSessionManager.saveAccessToken(value: result.accessToken)
-                UserSessionManager.saveAccessTokenExpirationDate(value: result.accessTokenExpirationDate)
+                UserSession.saveUser(user: result.user)
+                UserSession.saveAccessToken(value: result.accessToken)
+                UserSession.saveAccessTokenExpirationDate(value: result.accessTokenExpirationDate)
                 optResult = .otpSuccess
                 dismiss()
             } else {

@@ -14,7 +14,7 @@ struct TwoFactorSettingView: View {
     @State var toggleIsEnabled: Bool = true
     
     var body: some View {
-        if !UserSessionManager.isTwoFactorEnabled {
+        if !UserSession.isTwoFactorEnabled {
             VStack {
                 HStack {
                     Text("Two factor authentication")
@@ -80,9 +80,9 @@ struct TwoFactorSettingView: View {
     func enable2FA() {
         viewmodel.enable2FA { result in
             if let result = result {
-                let user = UserSessionManager.getUser()
-                UserSessionManager.saveUser(user: user!)
-                UserSessionManager.saveTempToken(value: result.tempToken)
+                let user = UserSession.getUser()
+                UserSession.saveUser(user: user!)
+                UserSession.saveTempToken(value: result.tempToken)
                 let imageData = Data(base64Encoded: result.qrImage)
                 let image = UIImage(data: imageData ?? Data())
                 coordinator.push(.twoFactorEnableInformation(qrImage: image ?? UIImage(), activationCode: result.activationCode))
@@ -105,7 +105,7 @@ struct TwoFactorSettingView: View {
 }
 
 struct TwoFactorSettingView_Previews: PreviewProvider {
-    @State static var userSession = UserSessionManager()
+    @State static var userSession = UserSession()
     static var previews: some View {
         TwoFactorSettingView()
             .environmentObject(userSession)

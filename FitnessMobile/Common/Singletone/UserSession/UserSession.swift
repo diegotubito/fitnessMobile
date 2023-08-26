@@ -7,9 +7,9 @@
 
 import SwiftUI
 
-class UserSessionManager: ObservableObject {
+class UserSession: ObservableObject {
     
-    static let shared = UserSessionManager()
+    static let shared = UserSession()
     
     static private let userSessionKey = "UserSessionKey"
     static private let deviceTokenKey = "DeviceToken"
@@ -39,7 +39,7 @@ class UserSessionManager: ObservableObject {
     static func saveUser(user: User) {
         do {
             let data = try JSONEncoder().encode(user)
-            _ = KeychainManager.shared.save(key: userSessionKey, data: data)
+            _ = KeychainManager.save(key: userSessionKey, data: data)
             NotificationCenter.default.post(Notification(name: .UserSessionDidChanged))
         } catch {
             print("Error encoding person: \(error)")
@@ -49,7 +49,7 @@ class UserSessionManager: ObservableObject {
     
     static func getUser() -> User? {
         do {
-            if let data = KeychainManager.shared.load(key: userSessionKey) {
+            if let data = KeychainManager.load(key: userSessionKey) {
                 let user = try JSONDecoder().decode(User.self, from: data)
                 return user
             }
@@ -60,21 +60,21 @@ class UserSessionManager: ObservableObject {
     }
     
     static func removeUserSession() {
-        _ = KeychainManager.shared.delete(key: userSessionKey)
-//        _ = KeychainManager.shared.delete(key: deviceTokenKey)
-        _ = KeychainManager.shared.delete(key: refreshTokenKey)
-        _ = KeychainManager.shared.delete(key: refreshTokenExpirationKey)
-        _ = KeychainManager.shared.delete(key: accessTokenKey)
-        _ = KeychainManager.shared.delete(key: accessTokenExpirationKey)
-        _ = KeychainManager.shared.delete(key: tempTokenKey)
+        _ = KeychainManager.delete(key: userSessionKey)
+//        _ = KeychainManager.delete(key: deviceTokenKey)
+        _ = KeychainManager.delete(key: refreshTokenKey)
+        _ = KeychainManager.delete(key: refreshTokenExpirationKey)
+        _ = KeychainManager.delete(key: accessTokenKey)
+        _ = KeychainManager.delete(key: accessTokenExpirationKey)
+        _ = KeychainManager.delete(key: tempTokenKey)
     }
     
     static func saveDeviceToken(data: Data) {
-        _ = KeychainManager.shared.save(key: deviceTokenKey, data: data)
+        _ = KeychainManager.save(key: deviceTokenKey, data: data)
     }
     
     static func getDeviceToken() -> String? {
-        guard let deviceTokenData = KeychainManager.shared.load(key: deviceTokenKey) else {
+        guard let deviceTokenData = KeychainManager.load(key: deviceTokenKey) else {
             return nil
         }
         
@@ -110,40 +110,40 @@ class UserSessionManager: ObservableObject {
 }
 
 /// TEMP TOKEN
-extension UserSessionManager {
+extension UserSession {
     static func saveTempToken(value: String) {
         if let data = value.data(using: .utf8) {
-            _ = KeychainManager.shared.save(key: tempTokenKey, data: data)
+            _ = KeychainManager.save(key: tempTokenKey, data: data)
         }
     }
     
     static func getTempToken() -> String {
-        let data = KeychainManager.shared.load(key: tempTokenKey)
+        let data = KeychainManager.load(key: tempTokenKey)
         return String(data: data ?? Data(), encoding: .utf8) ?? ""
     }
 }
 
 /// REFRESH TOKEN
-extension UserSessionManager {
+extension UserSession {
     static func saveRefreshToken(value: String) {
         if let data = value.data(using: .utf8) {
-            _ = KeychainManager.shared.save(key: refreshTokenKey, data: data)
+            _ = KeychainManager.save(key: refreshTokenKey, data: data)
         }
     }
     
     static func getRefreshToken() -> String {
-        let data = KeychainManager.shared.load(key: refreshTokenKey)
+        let data = KeychainManager.load(key: refreshTokenKey)
         return String(data: data ?? Data(), encoding: .utf8) ?? ""
     }
     
     static func saveRefreshTokenExpirationDate(value: String) {
         if let data = value.data(using: .utf8) {
-            _ = KeychainManager.shared.save(key: refreshTokenExpirationKey, data: data)
+            _ = KeychainManager.save(key: refreshTokenExpirationKey, data: data)
         }
     }
     
     static func getRefreshTokenExpirationDate() -> Date {
-        let data = KeychainManager.shared.load(key: refreshTokenExpirationKey)
+        let data = KeychainManager.load(key: refreshTokenExpirationKey)
         let stringDate = String(data: data ?? Data(), encoding: .utf8) ?? ""
         
         let formatter = DateFormatter()
@@ -152,7 +152,7 @@ extension UserSessionManager {
     }
     
     static func getRefreshTokenExpirationDateString() -> String {
-        let data = KeychainManager.shared.load(key: refreshTokenExpirationKey)
+        let data = KeychainManager.load(key: refreshTokenExpirationKey)
         let stringDate = String(data: data ?? Data(), encoding: .utf8) ?? ""
         
         let formatter = DateFormatter()
@@ -169,26 +169,26 @@ extension UserSessionManager {
 }
 
 /// ACCESS TOKEN
-extension UserSessionManager {
+extension UserSession {
     static func saveAccessToken(value: String) {
         if let data = value.data(using: .utf8) {
-            _ = KeychainManager.shared.save(key: accessTokenKey, data: data)
+            _ = KeychainManager.save(key: accessTokenKey, data: data)
         }
     }
     
     static func getAccessToken() -> String {
-        let data = KeychainManager.shared.load(key: accessTokenKey)
+        let data = KeychainManager.load(key: accessTokenKey)
         return String(data: data ?? Data(), encoding: .utf8) ?? ""
     }
     
     static func saveAccessTokenExpirationDate(value: String) {
         if let data = value.data(using: .utf8) {
-            _ = KeychainManager.shared.save(key: accessTokenExpirationKey, data: data)
+            _ = KeychainManager.save(key: accessTokenExpirationKey, data: data)
         }
     }
     
     static func getAccessTokenExpirationDate() -> Date {
-        let data = KeychainManager.shared.load(key: accessTokenExpirationKey)
+        let data = KeychainManager.load(key: accessTokenExpirationKey)
         let stringDate = String(data: data ?? Data(), encoding: .utf8) ?? ""
         
         let formatter = DateFormatter()
@@ -197,7 +197,7 @@ extension UserSessionManager {
     }
     
     static func getAccessTokenExpirationDateString() -> String {
-        let data = KeychainManager.shared.load(key: accessTokenExpirationKey)
+        let data = KeychainManager.load(key: accessTokenExpirationKey)
         let stringDate = String(data: data ?? Data(), encoding: .utf8) ?? ""
         
         let formatter = DateFormatter()

@@ -11,7 +11,7 @@ struct SplashView: View {
     @StateObject var networkMonitor = NetworkMonitor()
     @StateObject var socketIOManager = SocketIOManager()
     @StateObject var coordinator = Coordinator()
-    @StateObject var userSession = UserSessionManager()
+    @StateObject var userSession = UserSession()
     @Environment(\.scenePhase) var scenePhase
 
     @State var shouldShowSplash = true

@@ -59,7 +59,7 @@ struct LoginView: View {
             }
         })
         .onAppear(perform: {
-            UserSessionManager.removeUserSession()
+            UserSession.removeUserSession()
             Task {
                 await viewmodel.loadUsers()
             }
@@ -89,11 +89,11 @@ struct LoginView: View {
             DispatchQueue.main.async {
                 if let response = response {
                     
-                    UserSessionManager.saveUser(user: response.user)
-                    UserSessionManager.saveAccessToken(value: response.accessToken)
-                    UserSessionManager.saveRefreshToken(value: response.refreshToken)
-                    UserSessionManager.saveAccessTokenExpirationDate(value: response.accessTokenExpirationDateString)
-                    UserSessionManager.saveRefreshTokenExpirationDate(value: response.refreshTokenExpirationDateString)
+                    UserSession.saveUser(user: response.user)
+                    UserSession.saveAccessToken(value: response.accessToken)
+                    UserSession.saveRefreshToken(value: response.refreshToken)
+                    UserSession.saveAccessTokenExpirationDate(value: response.accessTokenExpirationDateString)
+                    UserSession.saveRefreshTokenExpirationDate(value: response.refreshTokenExpirationDateString)
                     
                     if response.user.twoFactorEnabled {
                         shouldGoToOTP = true

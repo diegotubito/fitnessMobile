@@ -29,7 +29,7 @@ class UserRepository: ApiNetworkAsync, UserRepositoryProtocol {
     func doUpdate(request: UserEntity.Update.Request) async throws -> UpdateUserResult {
         config.path = "/api/v1/user"
         config.method = .put
-        config.addQueryItem(key: "_id", value: UserSessionManager.getUser()?._id ?? "")
+        config.addQueryItem(key: "_id", value: UserSession.getUser()?._id ?? "")
         config.addRequestBody(request)
         return try await apiCall()
     }
@@ -37,7 +37,7 @@ class UserRepository: ApiNetworkAsync, UserRepositoryProtocol {
     func deleteUser() async throws -> DeleteUserResult {
         config.path = "/api/v1/user"
         config.method = .delete
-        config.addQueryItem(key: "_id", value: UserSessionManager.getUser()?._id ?? "")
+        config.addQueryItem(key: "_id", value: UserSession.getUser()?._id ?? "")
         return try await apiCall()
     }
     

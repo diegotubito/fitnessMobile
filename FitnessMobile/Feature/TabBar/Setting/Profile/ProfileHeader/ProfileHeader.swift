@@ -37,20 +37,20 @@ struct ProfileHeader: View {
                     
                     VStack(spacing: 2) {
                         HStack {
-                            Text(UserSessionManager.getFullName() ?? "")
+                            Text(UserSession.getFullName() ?? "")
                                 .font(.headline)
                                 .foregroundColor(Color.Dark.tone70)
                             Spacer()
                         }
                         HStack {
-                            Text(UserSessionManager.getUserName() ?? "")
+                            Text(UserSession.getUserName() ?? "")
                                 .font(.subheadline)
                                 .foregroundColor(Color.Dark.tone70)
                             Spacer()
                         }
                         .padding(.bottom, 4)
                         HStack {
-                            Text(verbatim: UserSessionManager.getEmail() ?? "")
+                            Text(verbatim: UserSession.getEmail() ?? "")
                                 .font(.subheadline)
                                 .foregroundColor(Color.Dark.tone80)
                             
@@ -86,7 +86,7 @@ struct ProfileHeader: View {
         }
         .onAppear {
             Task {
-                guard let user = UserSessionManager.getUser() else { return }
+                guard let user = UserSession.getUser() else { return }
                 
                 if let uiimage = await MemoryImageCache.getImage(identifier: user._id) {
                     print("image loaded from cache")
@@ -102,7 +102,7 @@ struct ProfileHeader: View {
     }
     
     func loadProfileImageFromApi() {
-        guard let user = UserSessionManager.getUser() else { return }
+        guard let user = UserSession.getUser() else { return }
         
         Task {
             let usecase = StorageUseCase()
@@ -126,7 +126,7 @@ struct ProfileHeader: View {
             do {
                 let uiimageData = UIImage(systemName: "pencil")
                 let imageData = uiimageData?.pngData()
-                let response = try await usecase.uploadFile(imageData: imageData!, filepath: "test/\(UserSessionManager.getUser()?._id ?? "")/c.png")
+                let response = try await usecase.uploadFile(imageData: imageData!, filepath: "test/\(UserSession.getUser()?._id ?? "")/c.png")
                 print(response)
             } catch {
                 print("image error")
@@ -135,12 +135,12 @@ struct ProfileHeader: View {
     }
     
     func getExpirationAccessToken() -> String {
-        let token = UserSessionManager.getAccessTokenExpirationDate().toString(format: "dd/MM/yy HH:mm:ss")
+        let token = UserSession.getAccessTokenExpirationDate().toString(format: "dd/MM/yy HH:mm:ss")
         return "ATE: \(token)"
     }
     
     func getExpirationRefreshToken() -> String {
-        let token = UserSessionManager.getRefreshTokenExpirationDate().toString(format: "dd/MM/yy HH:mm:ss")
+        let token = UserSession.getRefreshTokenExpirationDate().toString(format: "dd/MM/yy HH:mm:ss")
         return "RTE: \(token)"
     }
 }

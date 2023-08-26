@@ -38,7 +38,7 @@ struct WebView: UIViewRepresentable {
 
 struct TwoFactorEnableInformationView: View {
     @StateObject var viewmodel = TwoFactorEnableInformationViewModel()
-    @EnvironmentObject var userSession: UserSessionManager
+    @EnvironmentObject var userSession: UserSession
     @State var otpResult: OTPView.OPTResult = .none
     @EnvironmentObject var coordinator: Coordinator
     @State var shouldGoToOTP = false

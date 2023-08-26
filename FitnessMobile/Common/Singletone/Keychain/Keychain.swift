@@ -13,7 +13,7 @@ class KeychainManager {
 
     private init() {}
 
-    func save(key: String, data: Data) -> OSStatus {
+    static func save(key: String, data: Data) -> OSStatus {
         let query = [
             kSecClass as String: kSecClassGenericPassword as String,
             kSecAttrAccount as String: key,
@@ -25,7 +25,7 @@ class KeychainManager {
         return SecItemAdd(query as CFDictionary, nil)
     }
 
-    func load(key: String) -> Data? {
+    static func load(key: String) -> Data? {
         let query = [
             kSecClass as String: kSecClassGenericPassword,
             kSecAttrAccount as String: key,
@@ -43,7 +43,7 @@ class KeychainManager {
         }
     }
 
-    func delete(key: String) -> OSStatus {
+    static func delete(key: String) -> OSStatus {
         let query = [
             kSecClass as String: kSecClassGenericPassword,
             kSecAttrAccount as String: key

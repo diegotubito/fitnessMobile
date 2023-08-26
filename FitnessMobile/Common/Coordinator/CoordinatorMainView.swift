@@ -15,7 +15,7 @@ extension NSNotification.Name {
 struct CoordinatorMainView: View {
     @EnvironmentObject var coordinator: Coordinator
     @EnvironmentObject var networkMonitor: NetworkMonitor
-    @EnvironmentObject var userSession: UserSessionManager
+    @EnvironmentObject var userSession: UserSession
     
     @State var currentPage: Coordinator.PageView = .tabbar
        

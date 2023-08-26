@@ -10,7 +10,7 @@ import SwiftUI
 struct DeleteAccountView: View {
     @StateObject var viewmodel = DeleteAccountViewModel()
     @EnvironmentObject var coordinator: Coordinator
-    @EnvironmentObject var userSession: UserSessionManager
+    @EnvironmentObject var userSession: UserSession
     
     var body: some View {
         VStack {

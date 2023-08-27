@@ -126,7 +126,7 @@ struct PhotoPickerView: View {
         }
         .overlay(
             Group {
-                CustomAlertView(showError: $photoPickerManager.showError, title: $photoPickerManager.errorTitle, message: $photoPickerManager.errorMessage)
+                CustomAlertView(isPresented: $photoPickerManager.showError, title: $photoPickerManager.errorTitle, message: $photoPickerManager.errorMessage)
                 CustomProgressView(isLoading: $photoPickerManager.isLoading)
             }
         )

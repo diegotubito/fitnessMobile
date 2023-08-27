@@ -8,12 +8,12 @@
 import SwiftUI
 
 struct CustomAlertView: View {
-    @Binding var showError: Bool
+    @Binding var isPresented: Bool
     @Binding var title: LocalizedStringKey
     @Binding var message: LocalizedStringKey
     
     var body: some View {
-        if showError {
+        if isPresented {
             ZStack {
                 Color.clear
                         .ignoresSafeArea()
@@ -33,7 +33,7 @@ struct CustomAlertView: View {
                     Divider()
                     
                     Button {
-                        showError = false
+                        isPresented = false
                     } label: {
                         VStack {
                             Text("OK")
@@ -50,6 +50,6 @@ struct CustomAlertView: View {
 }
 struct CustomAlertView_Previews: PreviewProvider {
     static var previews: some View {
-        CustomAlertView(showError: .constant(true), title: .constant("Title"), message: .constant("Message"))
+        CustomAlertView(isPresented: .constant(true), title: .constant("Title"), message: .constant("Message"))
     }
 }

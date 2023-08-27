@@ -89,7 +89,7 @@ struct SignUpView: View {
         })
         .overlay(
             Group {
-                CustomAlertView(showError: $viewmodel.showError, title: $viewmodel.errorTitle, message: $viewmodel.errorMessage)
+                CustomAlertView(isPresented: $viewmodel.showError, title: $viewmodel.errorTitle, message: $viewmodel.errorMessage)
                 CustomProgressView(isLoading: $viewmodel.isLoading)
             }
         )

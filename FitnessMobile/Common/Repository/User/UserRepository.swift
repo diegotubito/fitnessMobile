@@ -16,6 +16,7 @@ protocol UserRepositoryProtocol {
     func deleteUser() async throws -> DeleteUserResult
     func getUsers() async throws -> GetUserResult
     func doUpdate(request: UserEntity.Update.Request) async throws -> UpdateUserResult
+    func doUpdate(request: UserEntity.UpdateProfileImage.Request) async throws -> UpdateUserResult
 }
 
 class UserRepository: ApiNetworkAsync, UserRepositoryProtocol {
@@ -27,6 +28,14 @@ class UserRepository: ApiNetworkAsync, UserRepositoryProtocol {
     }
     
     func doUpdate(request: UserEntity.Update.Request) async throws -> UpdateUserResult {
+        config.path = "/api/v1/user"
+        config.method = .put
+        config.addQueryItem(key: "_id", value: UserSession.getUser()?._id ?? "")
+        config.addRequestBody(request)
+        return try await apiCall()
+    }
+    
+    func doUpdate(request: UserEntity.UpdateProfileImage.Request) async throws -> UpdateUserResult {
         config.path = "/api/v1/user"
         config.method = .put
         config.addQueryItem(key: "_id", value: UserSession.getUser()?._id ?? "")

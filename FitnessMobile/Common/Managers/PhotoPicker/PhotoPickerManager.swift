@@ -8,23 +8,25 @@
 import SwiftUI
 
 class PhotoPickerManager: BaseViewModel {
-    @Published var image: Image?
+    @Published var imageData: Data?
     @Published var imageUploaded: Bool = false
     @Published var isLoading: Bool = false
     
-    var storageUseCase = StorageUseCase()
+    /// Use Cases
+    let storageUseCase = StorageUseCase()
+    let userUsecase = UserUseCase()
     
     @MainActor
     func fetchProfileImage() {
         Task {
             guard let user = UserSession.getUser() else { return }
             
-            if let uiimage = await MemoryImageCache.getImage(identifier: user._id) {
+            if let dataFromMemory = await DataCache.getData(identifier: user._id) {
                 print("image loaded from cache")
-                image = Image(uiImage: uiimage)
-            } else if let uuimage = await DiskImageCache.getImage(identifier: user._id) {
-                image = Image(uiImage: uuimage)
-                MemoryImageCache.saveImage(image: uuimage, identifier: user._id)
+                imageData = dataFromMemory
+            } else if let dataFromDisk = await DataDisk.getData(identifier: user._id) {
+                imageData = dataFromDisk
+                DataCache.saveData(data: dataFromDisk, identifier: UserSession._id)
             } else {
                 loadProfileImageFromApi()
             }
@@ -33,39 +35,53 @@ class PhotoPickerManager: BaseViewModel {
     
     @MainActor
     func loadProfileImageFromApi() {
-        guard let user = UserSession.getUser() else { return }
         
         Task {
             do {
                 isLoading = true
-                let response = try await storageUseCase.downloadImageWithUrl(url: user.profileImage?.url ?? "")
+                let response = try await storageUseCase.downloadImageWithUrl(url: UserSession.getUser()?.profileImage?.url ?? "")
                 isLoading = false
-                if let uiimage = UIImage(data: response) {
-                    image = Image(uiImage: uiimage )
-                    MemoryImageCache.saveImage(image: uiimage, identifier: user._id)
-                    DiskImageCache.saveImage(image: uiimage, identifier: user._id)
-                    print("image loaded from api")
-                    
-                }
+                imageData = response
+                DataCache.saveData(data: response, identifier: UserSession._id)
+                DataDisk.saveData(data: response, identifier: UserSession._id)
+                print("image loaded from api")
             } catch {
-                image = nil
+                imageData = nil
                 isLoading = false
             }
         }
     }
     
+    @MainActor
     func uploadImage() {
+        guard let imageData = imageData else { return }
         Task {
             do {
                 isLoading = true
-                let uiimageData = UIImage(systemName: "pencil")
-                let imageData = uiimageData?.pngData()
-                let response = try await storageUseCase.uploadFile(imageData: imageData!, filepath: "test/\(UserSession.getUser()?._id ?? "")/c.png")
-                imageUploaded = true
-                isLoading = false
+                let response = try await storageUseCase.uploadFile(imageData: imageData, filepath: "profile_pictures/\(UserSession._id)/profile.png")
+                await updateUser(url: response.url)
             } catch {
                 imageUploaded = false
                 isLoading = false
+            }
+        }
+    }
+    
+    @MainActor
+    func updateUser(url: String) async {
+        Task {
+            do {
+                isLoading = true
+                let response = try await userUsecase.doUpdateProfileImage(url: url)
+                UserSession.saveUser(user: response.user)
+                DataDisk.removeData(identifier: UserSession._id)
+                DataCache.removeData(identifier: UserSession._id)
+                imageUploaded = true
+                self.isLoading = false
+            } catch {
+                imageUploaded = false
+                self.isLoading = false
+                self.handleError(error: error)
             }
         }
     }

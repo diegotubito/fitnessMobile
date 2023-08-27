@@ -18,23 +18,6 @@ class UserSession: ObservableObject {
     static private let accessTokenKey = "AccessTokenKey"
     static private let accessTokenExpirationKey = "AccessTokenExpirationKey"
     static private let tempTokenKey = "TempTokenKey"
-    
-    static func saveImageToDisk(image: UIImage, identifier: String) {
-        // Get the path to the Caches directory
-        let cacheDirectory = FileManager.default.urls(for: .cachesDirectory, in: .userDomainMask).first!
-        let fileURL = cacheDirectory.appendingPathComponent(identifier)
-        
-        // Convert the UIImage to Data
-        if let data = image.jpegData(compressionQuality: 1) {
-            do {
-                // Write the data to the specified location
-                try data.write(to: fileURL)
-                print("Image saved to disk: \(fileURL)")
-            } catch {
-                print("Error saving image: \(error)")
-            }
-        }
-    }
         
     static func saveUser(user: User) {
         do {
@@ -67,6 +50,8 @@ class UserSession: ObservableObject {
         _ = KeychainManager.delete(key: accessTokenKey)
         _ = KeychainManager.delete(key: accessTokenExpirationKey)
         _ = KeychainManager.delete(key: tempTokenKey)
+        DataCache.removeData(identifier: UserSession._id)
+        DataDisk.removeData(identifier: UserSession._id)
     }
     
     static func saveDeviceToken(data: Data) {
@@ -105,6 +90,10 @@ class UserSession: ObservableObject {
         let user = getUser()
         let twoFactorEnabled: Bool = user?.twoFactorEnabled ?? false
         return twoFactorEnabled
+    }
+    
+    static var _id: String {
+        return getUser()?._id ?? ""
     }
     
 }

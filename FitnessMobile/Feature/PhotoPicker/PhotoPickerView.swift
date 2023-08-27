@@ -26,6 +26,13 @@ struct PhotoPickerView: View {
                                 dismiss()
                             }
                         Spacer()
+                        Image(systemName: "square.and.arrow.up")
+                            .resizable()
+                            .frame(width: 25, height: 25)
+                            .onTapGesture {
+                                photoPickerManager.uploadImage()
+                            }
+
                     }
                     .padding()
                     .padding(.horizontal)
@@ -33,7 +40,7 @@ struct PhotoPickerView: View {
                 Spacer()
                 /// BODY
                 Group {
-                    if let image = photoPickerManager.image {
+                    if let image = photoPickerManager.imageData?.asImage {
                         image.resizable()
                             .scaledToFill()
                             .frame(width: geometry.size.width * 0.8, height: geometry.size.width * 0.8)
@@ -42,15 +49,6 @@ struct PhotoPickerView: View {
                                 Circle()
                                     .stroke(Color.white, lineWidth: 2)
                             }
-                    } else {
-                        if photoPickerManager.isLoading {
-                            ProgressView()
-                                .frame(width: geometry.size.width * 0.8, height: geometry.size.width * 0.8)
-                        } else {
-                            Image(systemName: "photo.on.rectangle.angled")
-                                .resizable()
-                                .frame(width: geometry.size.width * 0.8, height: geometry.size.width * 0.8)
-                        }
                     }
                 }
                 Spacer()
@@ -102,15 +100,36 @@ struct PhotoPickerView: View {
         }
         .onChange(of: selectedItem) { _ in
             Task {
-                if let data = try? await selectedItem?.loadTransferable(type: Data.self),
-                   let uiImage = UIImage(data: data) {
-                    let image = Image(uiImage: uiImage)
-                    photoPickerManager.image = image
+                if let data = try? await selectedItem?.loadTransferable(type: Data.self) {
+                    photoPickerManager.imageData = data
                 } else {
-                    photoPickerManager.image = nil
+                    photoPickerManager.imageData = nil
                 }
             }
         }
+        .onReceive(photoPickerManager.$imageUploaded) { value in
+            if value {
+                dismiss()
+            }
+        }
+        .overlay(
+            Group {
+                if photoPickerManager.isLoading {
+                    // A transparent view that captures all touches, making underlying views non-interactive
+                    ZStack {
+                        Color.clear
+                            .contentShape(Rectangle()) // Makes the entire view tappable
+                            .onTapGesture { }
+                            .allowsHitTesting(true) // Captures all touches
+                        ProgressView()
+                    }
+                } else {
+                    Color.clear
+                        .contentShape(Rectangle()) // Makes the entire view tappable
+                        .allowsHitTesting(false) // Captures all touches
+                }
+            }
+        )
     }
 }
 

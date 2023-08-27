@@ -16,7 +16,7 @@ struct ProfileHeader: View {
         VStack {
             if shouldUpdateView {
                 HStack(spacing: 16) {
-                    if let image = photoPickerManager.image {
+                    if let image = photoPickerManager.imageData?.asImage {
                         image
                         .resizable()
                         .scaledToFill()

@@ -40,6 +40,11 @@ class UserUseCase {
         return try await repository.doUpdate(request: request)
     }
     
+    func doUpdateProfileImage(url: String) async throws -> UpdateUserResult {
+        let request = UserEntity.UpdateProfileImage.Request(url: url)
+        return try await repository.doUpdate(request: request)
+    }
+    
     func deleteUser() async throws -> DeleteUserResult {
         return try await repository.deleteUser()
     }

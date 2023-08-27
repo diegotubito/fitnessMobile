@@ -22,22 +22,33 @@ struct ProfileHeader: View {
                         .scaledToFill()
                         .frame(width: 85, height: 85)
                         .clipShape(Circle())
-                        .overlay(
-                            Circle()
-                                .stroke(Color.white, lineWidth: 2)
-                        )
-                        .shadow(radius: 5)
+                        .overlay {
+                            if photoPickerManager.isLoading {
+                                ProgressView()
+                                    .frame(width: 85, height: 85)
+                                    .overlay {
+                                        Circle()
+                                            .stroke(Color.white, lineWidth: 2) // This draws the border
+                                    }
+                                    .shadow(radius: 5)
+                            } else {
+                                Circle()
+                                    .stroke(Color.white, lineWidth: 2)
+                            }
+                        }
+                        .shadow(radius: 10)
                         .onTapGesture {
                             coordinator.presentModal(.photoPicker)
                         }
                     } else {
-                        ProgressView()
-                            .frame(width: 85, height: 85)
-                            .overlay {
-                                Circle()
-                                    .stroke(Color.white, lineWidth: 2) // This draws the border
-                            }
-                            .shadow(radius: 5)
+                        if !photoPickerManager.isLoading {
+                            Image(systemName: "photo.circle")
+                                .resizable()
+                                .frame(width: 85, height: 85)
+                                .onTapGesture {
+                                    coordinator.presentModal(.photoPicker)
+                                }
+                        }
                     }
                     
                     VStack(spacing: 2) {
@@ -81,14 +92,12 @@ struct ProfileHeader: View {
                     Spacer()
                     
                 }
-                
             }
         }
         .padding()
         .background(Color.Neutral.tone90)
         .onReceive(NotificationCenter.default.publisher(for: .UserSessionDidChanged)) { value in
-            shouldUpdateView = false
-            shouldUpdateView = true
+            photoPickerManager.fetchProfileImage()
         }
         .onAppear {
             photoPickerManager.fetchProfileImage()

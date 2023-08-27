@@ -11,7 +11,6 @@ class LoginViewModel: BaseViewModel {
     @Published var username: String = ""
     @Published var password: String = ""
     @Published var users: [User] = []
-    @Published var isLoading: Bool = false
     @Published var loginButtonEnabled = true
     
     @MainActor

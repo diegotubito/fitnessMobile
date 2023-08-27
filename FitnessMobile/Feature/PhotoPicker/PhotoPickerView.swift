@@ -12,6 +12,7 @@ struct PhotoPickerView: View {
     @Environment(\.dismiss) var dismiss
     @StateObject var photoPickerManager = PhotoPickerManager()
     @State private var selectedItem: PhotosPickerItem?
+    @EnvironmentObject var coordinator: Coordinator
     
     var body: some View {
         GeometryReader { geometry in
@@ -32,7 +33,7 @@ struct PhotoPickerView: View {
                             .onTapGesture {
                                 photoPickerManager.uploadImage()
                             }
-
+                        
                     }
                     .padding()
                     .padding(.horizontal)
@@ -42,6 +43,17 @@ struct PhotoPickerView: View {
                 Group {
                     if let image = photoPickerManager.imageData?.asImage {
                         image.resizable()
+                            .scaledToFill()
+                            .frame(width: geometry.size.width * 0.8, height: geometry.size.width * 0.8)
+                            .clipShape(Circle())
+                            .overlay {
+                                Circle()
+                                    .stroke(Color.white, lineWidth: 2)
+                            }
+                    }
+                    else if !photoPickerManager.isLoading {
+                        
+                        Image(systemName: "photo.circle").resizable()
                             .scaledToFill()
                             .frame(width: geometry.size.width * 0.8, height: geometry.size.width * 0.8)
                             .clipShape(Circle())
@@ -94,6 +106,8 @@ struct PhotoPickerView: View {
                 .padding()
             }
         }
+            
+            
         .ignoresSafeArea(.all, edges: .bottom)
         .onAppear {
             photoPickerManager.fetchProfileImage()
@@ -114,20 +128,8 @@ struct PhotoPickerView: View {
         }
         .overlay(
             Group {
-                if photoPickerManager.isLoading {
-                    // A transparent view that captures all touches, making underlying views non-interactive
-                    ZStack {
-                        Color.clear
-                            .contentShape(Rectangle()) // Makes the entire view tappable
-                            .onTapGesture { }
-                            .allowsHitTesting(true) // Captures all touches
-                        ProgressView()
-                    }
-                } else {
-                    Color.clear
-                        .contentShape(Rectangle()) // Makes the entire view tappable
-                        .allowsHitTesting(false) // Captures all touches
-                }
+                CustomAlertView(showError: $photoPickerManager.showError)
+                CustomProgressView(isLoading: $photoPickerManager.isLoading)
             }
         )
     }

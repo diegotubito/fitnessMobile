@@ -55,11 +55,15 @@ struct UserEntity {
     
     struct UpdateProfileImage {
         struct Request: Codable {
-            let url: String
+            let profileImage: ProfileImageRequest
         }
         
         struct Response: Decodable {
             let user: User
         }
+    }
+    
+    struct ProfileImageRequest: Codable {
+        let url: String
     }
 }

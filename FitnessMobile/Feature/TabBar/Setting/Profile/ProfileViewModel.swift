@@ -11,10 +11,7 @@ class ProfileViewModel: BaseViewModel {
     @Published var firstNameTextField = CustomTextFieldManager()
     @Published var lastNameTextField = CustomTextFieldManager()
     @Published var phoneNumberTextField = PhoneNumberTextFieldManager()
-    @Published var updateButtonValueIsEnabled = false
-    
-    @Published var isLoading = false
-    @Published var showAlert = false
+    @Published var updateUserResult: UpdateUserResult?
     
     private func getPhone() -> Phone {
         let user = UserSession.getUser()
@@ -41,10 +38,9 @@ class ProfileViewModel: BaseViewModel {
         }
     }
     
-    func updateUser(completion: @escaping (UpdateUserResult?) -> Void) {
+    func updateUser() {
         let usecase = UserUseCase()
         isLoading = true
-        updateButtonValueIsEnabled = false
         phoneNumberTextField.phone.number = convertToNumber(phone: phoneNumberTextField.text)
         Task {
             do {
@@ -52,17 +48,14 @@ class ProfileViewModel: BaseViewModel {
                                                           lastName: lastNameTextField.text.trimmedAndSingleSpaced(),
                                                           phone: phoneNumberTextField.phone)
                 DispatchQueue.main.async {
-                    self.updateButtonValueIsEnabled = true
                     self.isLoading = false
-                    completion(response)
+                    self.updateUserResult = response
                 }
             } catch {
                 DispatchQueue.main.async {
-                    self.updateButtonValueIsEnabled = true
-                    self.showAlert = true
-                    self.isLoading = false
                     self.handleError(error: error)
-                    completion(nil)
+                    self.showError = true
+                    self.isLoading = false
                 }
             }
         }
@@ -88,9 +81,5 @@ class ProfileViewModel: BaseViewModel {
     // Computed property to check if all fields are valid
     var isValid: Bool {
         return isValidFirstName && isValidLastName
-    }
-    
-    func validate() {
-        updateButtonValueIsEnabled = isValid
     }
 }

@@ -51,12 +51,12 @@ class Coordinator: ObservableObject {
     }
     
     func presentSheet(_ sheet: SheetView) {
-        self.modal = nil
+        //self.modal = nil
         self.sheet = sheet
     }
     
     func presentModal(_ modal: ModalView) {
-        self.sheet = nil
+        //self.sheet = nil
         self.modal = modal
     }
     

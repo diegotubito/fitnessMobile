@@ -20,7 +20,7 @@ struct ProfileView: View {
                 
                 VStack {
                     CustomTextField(customTextFieldManager: viewmodel.firstNameTextField, title: "_FIRST_NAME", placeholder: "", footer: "", textFieldType: .ascii) { newValue in
-                        viewmodel.validate()
+                        
                     } onDidBegin: { didBegin in
                         if didBegin {
                             viewmodel.firstNameTextField.shouldShowError = false
@@ -33,7 +33,7 @@ struct ProfileView: View {
                     .padding(.bottom, 8)
                 
                     CustomTextField(customTextFieldManager: viewmodel.lastNameTextField, title: "_LAST_NAME", placeholder: "", footer: ""){ newValue in
-                        viewmodel.validate()
+                        
                     } onDidBegin: { didBegin in
                         if didBegin {
                             viewmodel.lastNameTextField.shouldShowError = false
@@ -53,28 +53,32 @@ struct ProfileView: View {
 
                 }
             
-                BasicButton(title: "_UPDATE_BUTTON", style: .primary, isEnabled: .constant(viewmodel.updateButtonValueIsEnabled)) {
+                BasicButton(title: "_UPDATE_BUTTON", style: .primary, isEnabled: .constant(viewmodel.isValid)) {
                     updateUser()
                 }
                 .padding()
             }
             .padding()
         }
+        .onReceive(viewmodel.$updateUserResult, perform: { result in
+            if let result = result {
+                UserSession.saveUser(user: result.user)
+                coordinator.path.removeLast()
+            }
+        })
         .onAppear {
             viewmodel.setupInitValues()
         }
+        .overlay(
+            Group {
+                CustomAlertView(showError: $viewmodel.showError)
+                CustomProgressView(isLoading: $viewmodel.isLoading)
+            }
+        )
     }
     
     func updateUser() {
-        viewmodel.updateUser { response in
-            if let response = response {
-                UserSession.saveUser(user: response.user)
-                coordinator.path.removeLast()
-            } else {
-                coordinator.presentPrimaryAlert(title: viewmodel.errorTitle, message: viewmodel.errorMessage) {
-                }
-            }
-        }
+        viewmodel.updateUser()
     }
 }
 

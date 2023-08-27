@@ -8,7 +8,6 @@
 import SwiftUI
 
 class TwoFactorSettingViewModel: BaseViewModel {
-    @Published var isLoading = false
     
     @MainActor
     func enable2FA(completion: @escaping (TwoFactorEntity.Enable.Response?) -> Void) {

@@ -8,7 +8,6 @@
 import SwiftUI
 
 class TwoFactorEnableInformationViewModel: BaseViewModel {
-    @Published var isLoading = false
     
     @MainActor
     func confirm2FA(completion: @escaping (TwoFactorEntity.ConfirmEnable.Response?) -> Void) {

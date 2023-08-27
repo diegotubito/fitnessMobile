@@ -15,7 +15,6 @@ class SignUpViewModel: BaseViewModel {
     @Published var phoneNumberTextField = PhoneNumberTextFieldManager()
     
     @Published var createButtonIsEnabled = true
-    @Published var isLoading: Bool = false
     @Published var showAlert: Bool = false
 
     func createUser(completion: @escaping (CreateUserResult?) -> Void) {

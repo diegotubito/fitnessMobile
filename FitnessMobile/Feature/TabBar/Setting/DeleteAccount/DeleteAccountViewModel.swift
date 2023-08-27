@@ -8,7 +8,6 @@
 import SwiftUI
 
 class DeleteAccountViewModel: BaseViewModel {
-    @Published var isLoading = false
     
     func deleteAccount(completion: @escaping (DeleteUserResult?) -> Void) {
         let usecase = UserUseCase()

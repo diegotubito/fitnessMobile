@@ -41,7 +41,7 @@ class UserUseCase {
     }
     
     func doUpdateProfileImage(url: String) async throws -> UpdateUserResult {
-        let request = UserEntity.UpdateProfileImage.Request(url: url)
+        let request = UserEntity.UpdateProfileImage.Request(profileImage: UserEntity.ProfileImageRequest(url: url))
         return try await repository.doUpdate(request: request)
     }
     

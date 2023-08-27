@@ -33,13 +33,13 @@ struct LoginView: View {
             }
             .padding()
             
-            if !allowSighUp {
+           // if !allowSighUp {
                 Button {
                     coordinator.push(.signUp)
                 } label: {
                     Text("_SIGNUP")
                 }
-            }
+          //  }
             
             List(viewmodel.users, id: \.self) { user in
                 VStack {

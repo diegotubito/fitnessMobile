@@ -10,6 +10,8 @@ import SwiftUI
 class BaseViewModel: ObservableObject {
     var errorTitle: LocalizedStringKey = ""
     var errorMessage: LocalizedStringKey = ""
+    @Published var showError = false
+    @Published var isLoading: Bool = false
     
     func handleError(error: Error) {
         if let apiError = error as? APIError {

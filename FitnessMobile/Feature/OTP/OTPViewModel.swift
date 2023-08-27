@@ -8,7 +8,6 @@
 import Foundation
 
 class OTPViewModel: BaseViewModel {
-    @Published var isLoading = false
     @Published var firstDigit: String = ""
     @Published var secondDigit: String = ""
     @Published var thirdDigit: String = ""

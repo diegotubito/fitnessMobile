@@ -15,31 +15,41 @@ struct CustomAlertView: View {
     var body: some View {
         if showError {
             ZStack {
-                Color.black.opacity(0.4)
-                    .ignoresSafeArea()
+                Color.clear
+                        .ignoresSafeArea()
+                        .background(.ultraThinMaterial)
                 
                 VStack {
                     Text(title)
                         .font(.headline)
                         .foregroundColor(Color.Neutral.grayText)
-                    Divider()
+                 
                     Text(message)
+                        .multilineTextAlignment(.center)
+                        .padding(.bottom, 8)
                         .foregroundColor(Color.Neutral.grayText)
                         .font(.subheadline)
+        
                     Divider()
-                    Button("OK") {
+                    
+                    Button {
                         showError = false
+                    } label: {
+                        VStack {
+                            Text("OK")
+                        }
                     }
                 }
                 .padding()
-                .background(Color.white)
+                .background(Color.Neutral.tone80)
                 .cornerRadius(15)
+                .padding(64)
             }
         }
     }
 }
 struct CustomAlertView_Previews: PreviewProvider {
     static var previews: some View {
-        CustomAlertView(showError: .constant(false), title: .constant(""), message: .constant(""))
+        CustomAlertView(showError: .constant(true), title: .constant("Title"), message: .constant("Message"))
     }
 }

@@ -36,7 +36,7 @@ struct CustomAlertView: View {
                         isPresented = false
                     } label: {
                         VStack {
-                            Text("OK")
+                            Text("_ALERT_ACCEPT")
                         }
                     }
                 }

@@ -15,4 +15,8 @@ extension UIImage {
             throw APIError.imageFailed
         }
     }
+    
+    func compress(value: Double) -> UIImage {
+        return self
+    }
 }

@@ -14,6 +14,9 @@ struct PhotoPickerView: View {
     @State private var selectedItem: PhotosPickerItem?
     @EnvironmentObject var coordinator: Coordinator
     
+    @State private var isCameraPresented = false
+       @State private var selectedImage: UIImage?
+    
     var body: some View {
         GeometryReader { geometry in
             VStack {
@@ -100,6 +103,8 @@ struct PhotoPickerView: View {
                         .cornerRadius(10)
                         .onTapGesture {
                             
+                            isCameraPresented = true
+                            
                         }
                     }
                 }
@@ -112,13 +117,24 @@ struct PhotoPickerView: View {
         }
         .onChange(of: selectedItem) { _ in
             Task {
-                if let data = try? await selectedItem?.loadTransferable(type: Data.self) {
-                    photoPickerManager.imageData = data
+                if let data = try? await selectedItem?.loadTransferable(type: Data.self),
+                   let image = UIImage(data: data),
+                   let compressedData = image.jpegData(compressionQuality: 0.1) {
+                    print("Original Image Sized: \(data.count)")
+                    print("Compressed Image Sized: \(compressedData.count)")
+                    photoPickerManager.imageData = compressedData
                 } else {
                     photoPickerManager.imageData = nil
                 }
             }
         }
+        .onChange(of: selectedImage, perform: { value in
+            if let image = selectedImage,
+               let compressedData = image.jpegData(compressionQuality: 0.1) {
+                print("Compressed Image Sized: \(compressedData.count)")
+                photoPickerManager.imageData = compressedData
+            }
+        })
         .onReceive(photoPickerManager.$imageUploaded) { value in
             if value {
                 dismiss()
@@ -130,6 +146,9 @@ struct PhotoPickerView: View {
                 CustomProgressView(isLoading: $photoPickerManager.isLoading)
             }
         )
+        .sheet(isPresented: $isCameraPresented, content: {
+            ImagePicker(sourceType: .camera, selectedImage: $selectedImage)
+        })
     }
 }
 

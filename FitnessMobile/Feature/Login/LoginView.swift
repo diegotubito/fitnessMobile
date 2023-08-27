@@ -28,18 +28,18 @@ struct LoginView: View {
                 .background(Color.gray.opacity(0.2))
                 .cornerRadius(5)
             
-            BasicButton(title: "Login", style: .primary, isEnabled: .constant(viewmodel.loginButtonEnabled)) {
+            BasicButton(title: "Login", style: .primary, isEnabled: .constant(true)) {
                 perfomrLogin()
             }
             .padding()
             
-           // if !allowSighUp {
+            if allowSighUp {
                 Button {
                     coordinator.push(.signUp)
                 } label: {
                     Text("_SIGNUP")
                 }
-          //  }
+            }
             
             List(viewmodel.users, id: \.self) { user in
                 VStack {
@@ -53,11 +53,7 @@ struct LoginView: View {
             
         }
         .padding()
-        .overlay(content: {
-            if viewmodel.isLoading {
-                ProgressView()
-            }
-        })
+        
         .onAppear(perform: {
             UserSession.removeUserSession()
             Task {
@@ -81,31 +77,31 @@ struct LoginView: View {
             OTPView(optResult: $otpResult)
 
         })
-        
+        .onReceive(viewmodel.$loginResponse) { response in
+            if let response = response {
+                UserSession.saveUser(user: response.user)
+                UserSession.saveAccessToken(value: response.accessToken)
+                UserSession.saveRefreshToken(value: response.refreshToken)
+                UserSession.saveAccessTokenExpirationDate(value: response.accessTokenExpirationDateString)
+                UserSession.saveRefreshTokenExpirationDate(value: response.refreshTokenExpirationDateString)
+                
+                if response.user.twoFactorEnabled {
+                    shouldGoToOTP = true
+                    return
+                }
+                closeLoginView()
+            }
+        }
+        .overlay(
+            Group {
+                CustomAlertView(showError: $viewmodel.showError, title: $viewmodel.errorTitle, message: $viewmodel.errorMessage)
+                CustomProgressView(isLoading: $viewmodel.isLoading)
+            }
+        )
     }
     
     func perfomrLogin() {
-        viewmodel.doLogin(completion: { response in
-            DispatchQueue.main.async {
-                if let response = response {
-                    
-                    UserSession.saveUser(user: response.user)
-                    UserSession.saveAccessToken(value: response.accessToken)
-                    UserSession.saveRefreshToken(value: response.refreshToken)
-                    UserSession.saveAccessTokenExpirationDate(value: response.accessTokenExpirationDateString)
-                    UserSession.saveRefreshTokenExpirationDate(value: response.refreshTokenExpirationDateString)
-                    
-                    if response.user.twoFactorEnabled {
-                        shouldGoToOTP = true
-                        return
-                    }
-                    closeLoginView()
-                } else {
-                    coordinator.presentPrimaryAlert(title: viewmodel.errorTitle, message: viewmodel.errorMessage) {
-                    }
-                }
-            }
-        })
+        viewmodel.doLogin()
     }
     
     func closeLoginView() {

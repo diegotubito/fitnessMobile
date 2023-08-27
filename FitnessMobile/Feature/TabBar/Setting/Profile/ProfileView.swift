@@ -71,7 +71,7 @@ struct ProfileView: View {
         }
         .overlay(
             Group {
-                CustomAlertView(showError: $viewmodel.showError)
+                CustomAlertView(showError: $viewmodel.showError, title: $viewmodel.errorTitle, message: $viewmodel.errorMessage)
                 CustomProgressView(isLoading: $viewmodel.isLoading)
             }
         )

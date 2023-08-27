@@ -13,33 +13,27 @@ class SignUpViewModel: BaseViewModel {
     @Published var passwordTextFieldManager = CustomTextFieldManager()
     @Published var repeatPasswordTextFieldManager = CustomTextFieldManager()
     @Published var phoneNumberTextField = PhoneNumberTextFieldManager()
-    
-    @Published var createButtonIsEnabled = true
-    @Published var showAlert: Bool = false
 
-    func createUser(completion: @escaping (CreateUserResult?) -> Void) {
+    @Published var response: CreateUserResult?
+    
+    func createUser() {
         let usecase = UserUseCase()
         isLoading = true
-        createButtonIsEnabled = false
         Task {
             do {
-
                 let response = try await usecase.doCreate(username: usernameTextFieldManager.text.trimmedAndSingleSpaced(),
                                                           email: emailTextFieldManager.text.trimmedAndSingleSpaced(),
                                                           password: passwordTextFieldManager.text,
                                                           phone: phoneNumberTextField.phone)
                 DispatchQueue.main.async {
-                    self.createButtonIsEnabled = true
                     self.isLoading = false
-                    completion(response)
+                    self.response = response
                 }
             } catch {
                 DispatchQueue.main.async {
-                    self.createButtonIsEnabled = true
-                    self.showAlert = true
                     self.isLoading = false
                     self.handleError(error: error)
-                    completion(nil)
+                    self.showError = true
                 }
             }
         }

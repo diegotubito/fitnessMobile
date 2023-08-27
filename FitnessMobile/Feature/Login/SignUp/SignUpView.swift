@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct SignUpView: View {
-    @StateObject var viewModel = SignUpViewModel()
+    @StateObject var viewmodel = SignUpViewModel()
     @EnvironmentObject var coordinator: Coordinator
     @FocusState var currentFocus: Focus?
     
@@ -23,7 +23,7 @@ struct SignUpView: View {
         ScrollView {
             VStack {
                 
-                CustomTextField(customTextFieldManager: viewModel.usernameTextFieldManager, title: "_USERNAME", placeholder: "", footer: "") { newValue in
+                CustomTextField(customTextFieldManager: viewmodel.usernameTextFieldManager, title: "_USERNAME", placeholder: "", footer: "") { newValue in
                     
                 } onDidBegin: { didBegin in
                     
@@ -34,7 +34,7 @@ struct SignUpView: View {
                 .focused($currentFocus, equals: .username)
                 
                 
-                CustomTextField(customTextFieldManager: viewModel.emailTextFieldManager, title: "_EMAIL", placeholder: "", footer: ""){ newValue in
+                CustomTextField(customTextFieldManager: viewmodel.emailTextFieldManager, title: "_EMAIL", placeholder: "", footer: ""){ newValue in
                     
                 } onDidBegin: { didBegin in
                     
@@ -44,7 +44,7 @@ struct SignUpView: View {
                     .autocapitalization(.none)
                     .focused($currentFocus, equals: .email)
                 
-                CustomTextField(customTextFieldManager: viewModel.passwordTextFieldManager, title: "_PASSWORD", placeholder: "", footer: ""){ newValue in
+                CustomTextField(customTextFieldManager: viewmodel.passwordTextFieldManager, title: "_PASSWORD", placeholder: "", footer: ""){ newValue in
                     
                 } onDidBegin: { didBegin in
                     
@@ -54,7 +54,7 @@ struct SignUpView: View {
                     .autocapitalization(.none)
                     .focused($currentFocus, equals: .password)
                 
-                CustomTextField(customTextFieldManager: viewModel.repeatPasswordTextFieldManager, title: "_PASSWORD_REPEAT", placeholder: "", footer: ""){ newValue in
+                CustomTextField(customTextFieldManager: viewmodel.repeatPasswordTextFieldManager, title: "_PASSWORD_REPEAT", placeholder: "", footer: ""){ newValue in
                     
                 } onDidBegin: { didBegin in
                     
@@ -64,7 +64,7 @@ struct SignUpView: View {
                     .autocapitalization(.none)
                     .focused($currentFocus, equals: .repeatPassword)
                 
-                PhoneTextField(textFieldManager: $viewModel.phoneNumberTextField) { newValue in
+                PhoneTextField(textFieldManager: $viewmodel.phoneNumberTextField) { newValue in
                     
                 } onDidBegin: { didBegin in
                     
@@ -74,22 +74,25 @@ struct SignUpView: View {
                         print("si tapped")
                     }
                 
-                BasicButton(title: "_CREATE", style: .primary, isEnabled: .constant(viewModel.createButtonIsEnabled)) {
-                    viewModel.createUser { result in
-                        if result != nil {
-                            coordinator.path.removeLast()
-                        } else {
-                            coordinator.presentPrimaryAlert(title: viewModel.errorTitle, message: viewModel.errorMessage) {
-                                
-                            }
-                        }
-                    }
+                BasicButton(title: "_CREATE", style: .primary, isEnabled: .constant(true)) {
+                    viewmodel.createUser()
                 }
             }
             .padding()
         }
         .navigationTitle("_SIGNUP")
         .navigationBarTitleDisplayMode(.inline)
+        .onReceive(viewmodel.$response, perform: { response in
+            if response != nil {
+                coordinator.path.removeLast()
+            }
+        })
+        .overlay(
+            Group {
+                CustomAlertView(showError: $viewmodel.showError, title: $viewmodel.errorTitle, message: $viewmodel.errorMessage)
+                CustomProgressView(isLoading: $viewmodel.isLoading)
+            }
+        )
     }
 }
 

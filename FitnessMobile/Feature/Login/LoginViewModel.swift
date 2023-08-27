@@ -11,29 +11,26 @@ class LoginViewModel: BaseViewModel {
     @Published var username: String = ""
     @Published var password: String = ""
     @Published var users: [User] = []
-    @Published var loginButtonEnabled = true
+    @Published var loginResponse: LoginEntity.Response?
     
     @MainActor
-    func doLogin(completion: @escaping (LoginEntity.Response?) -> Void) {
+    func doLogin() {
         let loginUseCase = LoginUseCase()
         let input = LoginEntity.Input(email: username, password: password)
         isLoading = true
-        loginButtonEnabled = false
         Task {
             do {
                 let response = try await loginUseCase.doLogin(input: input)
 
                 DispatchQueue.main.async {
-                    self.loginButtonEnabled = true
                     self.isLoading = false
-                    completion(response)
+                    self.loginResponse = response
                 }
             } catch {
                 DispatchQueue.main.async {
-                    self.loginButtonEnabled = true
                     self.isLoading = false
                     self.handleError(error: error)
-                    completion(nil)
+                    self.showError = true
                 }
             }
         }
@@ -47,6 +44,7 @@ class LoginViewModel: BaseViewModel {
             self.users = response.users
         } catch {
             self.handleError(error: error)
+            self.showError = true
         }
     }
 }

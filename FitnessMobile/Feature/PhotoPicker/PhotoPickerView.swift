@@ -72,11 +72,11 @@ struct PhotoPickerView: View {
                             selection: $selectedItem,
                             matching: .images,
                             photoLibrary: .shared()) {
-                                VStack{
+                                HStack{
                                     Image(systemName: "photo")
                                         .resizable()
-                                        .frame(width: 30, height: 30)
-                                    Text("Take New Photo")
+                                        .frame(width: 20, height: 20)
+                                    Text("From Gallery")
                                         .font(.subheadline)
                                     
                                 }
@@ -87,28 +87,26 @@ struct PhotoPickerView: View {
                                 
                             }
                         
-                        VStack{
+                        HStack{
                             Image(systemName: "camera")
                                 .resizable()
-                                .frame(width: 30, height: 30)
-                            Text("Take New Photo")
+                                .frame(width: 20, height: 20)
+                            Text("New Photo")
                                 .font(.subheadline)
                         }
                         .padding()
                         .background(Color.Dark.tone90)
+                        .foregroundColor(Color.white)
                         .cornerRadius(10)
                         .onTapGesture {
                             
                         }
-                        
                     }
                 }
                 .padding()
+                .frame(height: 30)
             }
         }
-            
-            
-        .ignoresSafeArea(.all, edges: .bottom)
         .onAppear {
             photoPickerManager.fetchProfileImage()
         }
@@ -128,7 +126,7 @@ struct PhotoPickerView: View {
         }
         .overlay(
             Group {
-                CustomAlertView(showError: $photoPickerManager.showError)
+                CustomAlertView(showError: $photoPickerManager.showError, title: $photoPickerManager.errorTitle, message: $photoPickerManager.errorMessage)
                 CustomProgressView(isLoading: $photoPickerManager.isLoading)
             }
         )

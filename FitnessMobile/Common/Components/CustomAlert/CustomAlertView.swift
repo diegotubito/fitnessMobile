@@ -9,6 +9,8 @@ import SwiftUI
 
 struct CustomAlertView: View {
     @Binding var showError: Bool
+    @Binding var title: LocalizedStringKey
+    @Binding var message: LocalizedStringKey
     
     var body: some View {
         if showError {
@@ -17,11 +19,11 @@ struct CustomAlertView: View {
                     .ignoresSafeArea()
                 
                 VStack {
-                    Text("Alert Title")
+                    Text(title)
                         .font(.headline)
                         .foregroundColor(Color.Neutral.grayText)
                     Divider()
-                    Text("Alert Message")
+                    Text(message)
                         .foregroundColor(Color.Neutral.grayText)
                         .font(.subheadline)
                     Divider()
@@ -38,6 +40,6 @@ struct CustomAlertView: View {
 }
 struct CustomAlertView_Previews: PreviewProvider {
     static var previews: some View {
-        CustomAlertView(showError: .constant(false))
+        CustomAlertView(showError: .constant(false), title: .constant(""), message: .constant(""))
     }
 }

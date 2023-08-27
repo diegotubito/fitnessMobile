@@ -8,22 +8,24 @@
 import SwiftUI
 
 class TwoFactorEnableInformationViewModel: BaseViewModel {
+    @Published var twoFactorConfirmed: TwoFactorEntity.ConfirmEnable.Response?
     
     @MainActor
-    func confirm2FA(completion: @escaping (TwoFactorEntity.ConfirmEnable.Response?) -> Void) {
+    func confirm2FA() {
         Task {
             let usecase = TwoFactorUseCase()
             do {
                 let response = try await usecase.confirm2FA()
                 DispatchQueue.main.async {
                     self.isLoading = false
-                    completion(response)
+                    self.twoFactorConfirmed = response
                 }
             } catch {
                 DispatchQueue.main.async {
                     self.isLoading = false
                     self.handleError(error: error)
-                    completion(nil)
+                    self.twoFactorConfirmed = nil
+                    self.showError = true
                 }
             }
         }

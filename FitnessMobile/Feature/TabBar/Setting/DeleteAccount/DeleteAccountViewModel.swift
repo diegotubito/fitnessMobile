@@ -8,22 +8,23 @@
 import SwiftUI
 
 class DeleteAccountViewModel: BaseViewModel {
+    @Published var deleteResult: DeleteUserResult?
     
-    func deleteAccount(completion: @escaping (DeleteUserResult?) -> Void) {
+    func deleteAccount() {
         let usecase = UserUseCase()
         isLoading = true
         Task {
             do {
                 let response = try await usecase.deleteUser()
                 DispatchQueue.main.async {
-                    completion(response)
                     self.isLoading = false
+                    self.deleteResult = response
                 }
             } catch {
                 DispatchQueue.main.async {                    
                     self.isLoading = false
                     self.handleError(error: error)
-                    completion(nil)
+                    self.showError = true
                 }
             }
         }

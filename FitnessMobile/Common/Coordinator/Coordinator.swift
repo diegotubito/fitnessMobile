@@ -21,12 +21,6 @@ class Coordinator: ObservableObject {
     var completion: (() -> Void)?
     var primaryTapped: (() -> Void)?
     var secondaryTapped: (() -> Void)?
-
-    func presentPrimaryAlert(title: LocalizedStringKey, message: LocalizedStringKey, buttonTitle: LocalizedStringKey? = nil, completion: (() -> Void)?) {
-        alertDetail = AlertDetail(title: title, message: message, alertStyle: .primary, primaryButtonTitle: buttonTitle, secondaryButtonTitle: nil)
-        self.completion = completion
-        showAlert = true
-    }
     
     func presentSecondaryAlert(title: LocalizedStringKey, message: LocalizedStringKey, primaryButtonTitle: LocalizedStringKey? = nil, secondaryButtonTitle: LocalizedStringKey? = nil, primaryTapped: @escaping (() -> Void), secondaryTapped: @escaping (() -> Void)) {
         alertDetail = AlertDetail(title: title, message: message, alertStyle: .secondary, primaryButtonTitle: primaryButtonTitle, secondaryButtonTitle: secondaryButtonTitle)
@@ -75,13 +69,12 @@ class Coordinator: ObservableObject {
     }
     
     enum AlertStyle: Identifiable {
-        case primary
         case secondary
         case destructive
         
         var id: UUID {
             switch self {
-            case .primary, .secondary, .destructive:
+            case .secondary, .destructive:
                 return UUID()
             }
         }

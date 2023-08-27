@@ -33,13 +33,7 @@ struct CoordinatorMainView: View {
                     coordinator.getModal(modal)
                 }
                 .alert(isPresented: $coordinator.showAlert) {
-                    switch coordinator.alertDetail?.alertStyle ?? .primary {
-                    case .primary:
-                        return Alert(
-                            title: Text(coordinator.alertDetail?.title ?? ""),
-                            message: Text(coordinator.alertDetail?.message ?? ""),
-                            dismissButton: .cancel(Text(coordinator.alertDetail?.primaryButtonTitle ?? "OK"), action: coordinator.completion)
-                        )
+                    switch coordinator.alertDetail?.alertStyle ?? .secondary {
                     case .secondary:
                         return Alert(
                             title: Text(coordinator.alertDetail?.title ?? ""),

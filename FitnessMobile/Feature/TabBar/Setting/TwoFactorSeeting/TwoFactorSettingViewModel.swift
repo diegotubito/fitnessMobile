@@ -9,8 +9,11 @@ import SwiftUI
 
 class TwoFactorSettingViewModel: BaseViewModel {
     
+    @Published var twoFactorEnabled: TwoFactorEntity.Enable.Response?
+    @Published var twoFactorDisabled: TwoFactorEntity.Disable.Response?
+    
     @MainActor
-    func enable2FA(completion: @escaping (TwoFactorEntity.Enable.Response?) -> Void) {
+    func enable2FA() {
         Task {
             let usecase = TwoFactorUseCase()
             isLoading = true
@@ -18,20 +21,20 @@ class TwoFactorSettingViewModel: BaseViewModel {
                 let response = try await usecase.enable2FA()
                 DispatchQueue.main.async {
                     self.isLoading = false
-                    completion(response)
+                    self.twoFactorEnabled = response
                 }
             } catch {
                 DispatchQueue.main.async {
                     self.isLoading = false
                     self.handleError(error: error)
-                    completion(nil)
+                    self.showError = true
                 }
             }
         }
     }
 
     @MainActor
-    func disable2FA(completion: @escaping (TwoFactorEntity.Disable.Response?) -> Void) {
+    func disable2FA() {
         Task {
             let usecase = TwoFactorUseCase()
             isLoading = true
@@ -39,13 +42,14 @@ class TwoFactorSettingViewModel: BaseViewModel {
                 let response = try await usecase.disable2FA()
                 DispatchQueue.main.async {
                     self.isLoading = false
-                    completion(response)
+                    self.twoFactorDisabled = response
                 }
             } catch {
                 DispatchQueue.main.async {
                     self.isLoading = false
                     self.handleError(error: error)
-                    completion(nil)
+                    self.showError = true
+                    self.twoFactorDisabled = nil
                 }
             }
         }

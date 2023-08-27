@@ -34,6 +34,12 @@ struct DeleteAccountView: View {
             }
         }
         .padding()
+        .onReceive(viewmodel.$deleteResult, perform: { response in
+            if response != nil {
+                coordinator.path = NavigationPath()
+                NotificationCenter.default.post(Notification(name: .MustLogin))
+            }
+        })
         .overlay {
             if viewmodel.isLoading {
                 ProgressView()
@@ -42,14 +48,7 @@ struct DeleteAccountView: View {
     }
     
     func deleteAccount() {
-        viewmodel.deleteAccount { response in
-            if response == nil {
-                coordinator.presentPrimaryAlert(title: viewmodel.errorTitle, message: viewmodel.errorMessage) {}
-            } else {
-                coordinator.path = NavigationPath()
-                NotificationCenter.default.post(Notification(name: .MustLogin))
-            }
-        }
+        viewmodel.deleteAccount()
     }
 }
 

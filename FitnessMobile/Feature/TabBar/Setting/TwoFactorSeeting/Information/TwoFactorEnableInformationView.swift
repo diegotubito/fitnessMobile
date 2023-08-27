@@ -130,35 +130,22 @@ struct TwoFactorEnableInformationView: View {
         .padding(.horizontal, 4)
         .background( LinearGradient(gradient: Gradient(colors: [Color.Yellow.trueYellow, Color.Dark.tone90]), startPoint: .top, endPoint: .bottom))
         .navigationTitle("Assignment List")
+        .onReceive(viewmodel.$twoFactorConfirmed, perform: { response in
+            if response != nil {
+                otpResult = .enableConfirmed
+                coordinator.path.removeLast()
+            }
+        })
         .overlay(
             Group {
-                if viewmodel.isLoading {
-                    // A transparent view that captures all touches, making underlying views non-interactive
-                    ZStack {
-                        Color.clear
-                            .contentShape(Rectangle()) // Makes the entire view tappable
-                            .onTapGesture { }
-                            .allowsHitTesting(true) // Captures all touches
-                        ProgressView()
-                    }
-                } else {
-                    Color.clear
-                        .contentShape(Rectangle()) // Makes the entire view tappable
-                        .allowsHitTesting(false) // Captures all touches
-                }
+                CustomAlertView(showError: $viewmodel.showError, title: $viewmodel.errorTitle, message: $viewmodel.errorMessage)
+                CustomProgressView(isLoading: $viewmodel.isLoading)
             }
         )
     }
     
     func confirm2FA() {
-        viewmodel.confirm2FA() { result in
-            if result != nil {
-                otpResult = .enableConfirmed
-                coordinator.path.removeLast()
-            } else {
-                coordinator.presentPrimaryAlert(title: viewmodel.errorTitle, message: viewmodel.errorMessage, completion: nil)
-            }
-        }
+        viewmodel.confirm2FA()
     }
     
     @ViewBuilder

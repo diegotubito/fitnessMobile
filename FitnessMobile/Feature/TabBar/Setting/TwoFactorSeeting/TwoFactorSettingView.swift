@@ -56,6 +56,22 @@ struct TwoFactorSettingView: View {
                     }
                 }
             )
+            .onReceive(viewmodel.$twoFactorEnabled) { response in
+                if let response = response {
+                    let user = UserSession.getUser()
+                    UserSession.saveUser(user: user!)
+                    UserSession.saveTempToken(value: response.tempToken)
+                    let imageData = Data(base64Encoded: response.qrImage)
+                    let image = UIImage(data: imageData ?? Data())
+                    coordinator.push(.twoFactorEnableInformation(qrImage: image ?? UIImage(), activationCode: response.activationCode))
+                }
+            }
+            .overlay(
+                Group {
+                    CustomAlertView(showError: $viewmodel.showError, title: $viewmodel.errorTitle, message: $viewmodel.errorMessage)
+                    CustomProgressView(isLoading: $viewmodel.isLoading)
+                }
+            )
         } else {
             VStack {
                 Toggle("Two Factor Authentication", isOn: $toggleIsEnabled)
@@ -72,35 +88,30 @@ struct TwoFactorSettingView: View {
                     
                 Spacer()
             }
+            .onReceive(viewmodel.$twoFactorDisabled) { response in
+                if response != nil {
+                    coordinator.path.removeLast()
+                } else {
+                    toggleIsEnabled = true
+                }
+            }
+            .overlay(
+                Group {
+                    CustomAlertView(showError: $viewmodel.showError, title: $viewmodel.errorTitle, message: $viewmodel.errorMessage)
+                    CustomProgressView(isLoading: $viewmodel.isLoading)
+                }
+            )
             
         }
         
     }
     
     func enable2FA() {
-        viewmodel.enable2FA { result in
-            if let result = result {
-                let user = UserSession.getUser()
-                UserSession.saveUser(user: user!)
-                UserSession.saveTempToken(value: result.tempToken)
-                let imageData = Data(base64Encoded: result.qrImage)
-                let image = UIImage(data: imageData ?? Data())
-                coordinator.push(.twoFactorEnableInformation(qrImage: image ?? UIImage(), activationCode: result.activationCode))
-            } else {
-                coordinator.presentPrimaryAlert(title: viewmodel.errorTitle, message: viewmodel.errorMessage) {}
-            }
-        }
+        viewmodel.enable2FA()
     }
     
     func disable2FA() {
-        viewmodel.disable2FA { result in
-            if result != nil {
-                coordinator.path.removeLast()
-            } else {
-                coordinator.presentPrimaryAlert(title: viewmodel.errorTitle, message: viewmodel.errorMessage) {}
-                toggleIsEnabled = true
-            }
-        }
+        viewmodel.disable2FA()
     }
 }
 

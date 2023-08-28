@@ -45,10 +45,7 @@ class PhotoPickerManager: BaseViewModel {
                 DataDisk.saveData(data: response, identifier: UserSession._id)
                 print("image loaded from api")
             } catch {
-                handleError(error: error)
                 isLoading = false
-                imageData = nil
-                showError = true
             }
         }
     }

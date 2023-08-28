@@ -15,7 +15,7 @@ struct PhotoPickerView: View {
     @EnvironmentObject var coordinator: Coordinator
     
     @State private var isCameraPresented = false
-       @State private var selectedImage: UIImage?
+    @State private var imageFromCamera: UIImage?
     
     var body: some View {
         GeometryReader { geometry in
@@ -102,9 +102,7 @@ struct PhotoPickerView: View {
                         .foregroundColor(Color.white)
                         .cornerRadius(10)
                         .onTapGesture {
-                            
                             isCameraPresented = true
-                            
                         }
                     }
                 }
@@ -128,8 +126,8 @@ struct PhotoPickerView: View {
                 }
             }
         }
-        .onChange(of: selectedImage, perform: { value in
-            if let image = selectedImage,
+        .onChange(of: imageFromCamera, perform: { value in
+            if let image = imageFromCamera,
                let compressedData = image.jpegData(compressionQuality: 0.1) {
                 print("Compressed Image Sized: \(compressedData.count)")
                 photoPickerManager.imageData = compressedData
@@ -147,7 +145,9 @@ struct PhotoPickerView: View {
             }
         )
         .sheet(isPresented: $isCameraPresented, content: {
-            ImagePicker(sourceType: .camera, selectedImage: $selectedImage)
+            if isCameraPresented {
+                ImagePicker(sourceType: .camera, selectedImage: $imageFromCamera)
+            }
         })
     }
 }

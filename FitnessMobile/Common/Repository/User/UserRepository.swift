@@ -23,6 +23,7 @@ class UserRepository: ApiNetworkAsync, UserRepositoryProtocol {
     func doCreate(request: UserEntity.Create.Request) async throws -> CreateUserResult {
         config.path = "/api/v1/user"
         config.method = .post
+        config.noTokenNeeded = true
         config.addRequestBody(request)
         return try await apiCall()
     }
@@ -53,7 +54,7 @@ class UserRepository: ApiNetworkAsync, UserRepositoryProtocol {
     func getUsers() async throws -> GetUserResult {
         config.path = "/api/v1/user"
         config.method = .get
-        config.noTokenNeeded = false
+        config.noTokenNeeded = true
         return try await apiCall()
     }
 }

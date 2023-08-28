@@ -9,8 +9,8 @@ import SwiftUI
 
 struct SignUpView: View {
     @StateObject var viewmodel = SignUpViewModel()
-    @EnvironmentObject var coordinator: Coordinator
     @FocusState var currentFocus: Focus?
+    @Environment(\.dismiss) var dismiss
     
     enum Focus {
         case username
@@ -84,7 +84,7 @@ struct SignUpView: View {
         .navigationBarTitleDisplayMode(.inline)
         .onReceive(viewmodel.$response, perform: { response in
             if response != nil {
-                coordinator.path.removeLast()
+                dismiss()
             }
         })
         .overlay(

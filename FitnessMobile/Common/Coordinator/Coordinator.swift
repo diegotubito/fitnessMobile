@@ -84,7 +84,6 @@ class Coordinator: ObservableObject {
         case tabbar
         case home
         case deleteAccount
-        case login
         case signUp
         case profile
         case settingTwoFactor
@@ -124,8 +123,6 @@ class Coordinator: ObservableObject {
             HomeView()
         case .deleteAccount:
             DeleteAccountView()
-        case .login:
-            LoginView(allowSighUp: false)
         case .signUp:
             SignUpView()
         case .profile:

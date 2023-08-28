@@ -26,7 +26,7 @@ class LoginRepository: ApiNetworkAsync, LoginRepositoryProtocol {
     }
     
     func doLogin(request: LoginEntity.Request) async throws -> LoginResult {
-        config.noTokenNeeded = false
+        config.noTokenNeeded = true
         config.path = "/api/v1/login"
         config.method = .post
         config.addRequestBody(request)

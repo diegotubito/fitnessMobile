@@ -48,7 +48,7 @@ open class ApiNetworkAsync {
             throw APIError.invalidMethod(method: config.method?.rawValue)
         }
         
-        if UserSession.isAccessTokenExpired && !config.refresingToken && config.noTokenNeeded {
+        if UserSession.isAccessTokenExpired && !config.refresingToken && !config.noTokenNeeded {
             let loginUseCase = LoginUseCase()
             do {
                 let response = try await loginUseCase.doRefresh()

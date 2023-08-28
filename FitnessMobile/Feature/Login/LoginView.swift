@@ -16,41 +16,48 @@ struct LoginView: View {
     @State var otpResult: OTPView.OPTResult = .none
     
     var allowSighUp: Bool
+    @State var shouldPresentSignUp = false
     
     var body: some View {
-        VStack {
-            TextField("_USERNAME", text: $viewmodel.username)
-                .padding()
-                .background(Color.gray.opacity(0.2))
-                .cornerRadius(5)
-            SecureField("_PASSWORD", text: $viewmodel.password)
-                .padding()
-                .background(Color.gray.opacity(0.2))
-                .cornerRadius(5)
-            
-            BasicButton(title: "Login", style: .primary, isEnabled: .constant(true)) {
-                perfomrLogin()
-            }
-            .padding()
-            
-//            if allowSighUp {
-//                Button {
-//                    coordinator.push(.signUp)
-//                } label: {
-//                    Text("_SIGNUP")
-//                }
-//            }
-            
-            List(viewmodel.users, id: \.self) { user in
-                VStack {
-                    Text(user.email)
+    
+        NavigationStack {
+            VStack {
+                TextField("_USERNAME", text: $viewmodel.username)
+                    .padding()
+                    .background(Color.gray.opacity(0.2))
+                    .cornerRadius(5)
+                SecureField("_PASSWORD", text: $viewmodel.password)
+                    .padding()
+                    .background(Color.gray.opacity(0.2))
+                    .cornerRadius(5)
+                
+                BasicButton(title: "Login", style: .primary, isEnabled: .constant(true)) {
+                    perfomrLogin()
                 }
-                .onTapGesture {
-                    self.viewmodel.username = user.email
-                    self.viewmodel.password = "admin1234"
+                .padding()
+                
+                if allowSighUp {
+                    Button {
+                        shouldPresentSignUp = true
+                    } label: {
+                        Text("_SIGNUP")
+                    }
                 }
+                
+                List(viewmodel.users, id: \.self) { user in
+                    VStack {
+                        Text(user.email)
+                    }
+                    .onTapGesture {
+                        self.viewmodel.username = user.email
+                        self.viewmodel.password = "admin1234"
+                    }
+                }
+                
             }
-            
+            .navigationDestination(isPresented: $shouldPresentSignUp) {
+                SignUpView()
+            }
         }
         .padding()
         
@@ -98,6 +105,7 @@ struct LoginView: View {
                 CustomProgressView(isLoading: $viewmodel.isLoading)
             }
         )
+        
     }
     
     func perfomrLogin() {

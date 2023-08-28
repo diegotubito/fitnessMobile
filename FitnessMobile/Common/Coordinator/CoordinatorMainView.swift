@@ -58,6 +58,14 @@ struct CoordinatorMainView: View {
                 .onReceive(NotificationCenter.default.publisher(for: .MustLogin)) { value in
                     coordinator.presentModal(.login)
                 }
+                .onAppear {
+                    if UserSession._id.isEmpty {
+                        // just to avoid a bug, it shows login view twice.
+                        DispatchQueue.main.asyncAfter(deadline: .now() + 0.1, execute: {
+                            coordinator.presentModal(.login)
+                        })
+                    }
+                }
         }
     }
 }

@@ -50,10 +50,9 @@ struct ProfileView: View {
                     } onDidBegin: { didBegin in
                         
                     }
-
                 }
             
-                BasicButton(title: "_UPDATE_BUTTON", style: .primary, isEnabled: .constant(viewmodel.isValid)) {
+                BasicButton(title: "_UPDATE_BUTTON", style: .primary, isEnabled: .constant(true)) {
                     updateUser()
                 }
                 .padding()

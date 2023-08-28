@@ -20,12 +20,15 @@ struct DeleteAccountView: View {
             VStack {
                 HStack {
                     Text("_DELETE_ACCOUNT_TITLE")
-                        .font(.title)
+                        .font(.largeTitle)
+                        .foregroundColor(Color.Dark.tone80)
                     Spacer()
                 }
                 .padding(.bottom)
                 HStack {
                     Text("_DELETE_ACCOUNT_SUBTITLE")
+                        .font(.subheadline)
+                        .foregroundColor(Color.Dark.tone90)
                     Spacer()
                 }
                 Spacer()
@@ -50,6 +53,16 @@ struct DeleteAccountView: View {
                 ProgressView()
             }
         }
+        .navigationBarBackButtonHidden(true)
+        .toolbar(content: {
+            
+            ToolbarItem(placement: .navigationBarLeading) {
+                Button("_ALERT_CANCEL") {
+                    coordinator.path.removeLast()
+                }.disabled(false)
+                    .foregroundColor(Color.Red.tone100)
+            }
+        })
     }
     
     func deleteAccount() {

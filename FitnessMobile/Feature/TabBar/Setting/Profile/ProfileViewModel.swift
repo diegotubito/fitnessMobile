@@ -12,8 +12,9 @@ class ProfileViewModel: BaseViewModel {
     @Published var lastNameTextField = CustomTextFieldManager()
     @Published var phoneNumberTextField = PhoneNumberTextFieldManager()
     @Published var updateUserResult: UpdateUserResult?
-    @Published var disableButtons: Bool = false
-    
+    @Published var disableSaveButton: Bool = true
+    @Published var disableCancelButton: Bool = false
+
     private func getPhone() -> Phone {
         let user = UserSession.getUser()
         let phone = Phone(countryName: user?.phone?.countryName ?? "",
@@ -40,8 +41,11 @@ class ProfileViewModel: BaseViewModel {
     }
     
     func updateUser() {
+        if !isValid { return }
         let usecase = UserUseCase()
         isLoading = true
+        disableSaveButton = true
+        disableCancelButton = true
         phoneNumberTextField.phone.number = convertToNumber(phone: phoneNumberTextField.text)
         Task {
             do {
@@ -57,6 +61,8 @@ class ProfileViewModel: BaseViewModel {
                     self.handleError(error: error)
                     self.showError = true
                     self.isLoading = false
+                    self.disableSaveButton = false
+                    self.disableCancelButton = false
                 }
             }
         }
@@ -82,5 +88,9 @@ class ProfileViewModel: BaseViewModel {
     // Computed property to check if all fields are valid
     var isValid: Bool {
         return isValidFirstName && isValidLastName
+    }
+    
+    func validate() {
+        disableSaveButton = !isValid
     }
 }

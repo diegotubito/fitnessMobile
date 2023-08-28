@@ -15,6 +15,8 @@ struct SettingView: View {
             LinearGradient(gradient: Gradient(colors: [Color.black, Color.Blue.midnight]), startPoint: .top, endPoint: .bottom)
                 .ignoresSafeArea()
             VStack(spacing: 0) {
+                ProfileHeader()
+                    .cornerRadius(10)
                 
                 List {
                     Section {

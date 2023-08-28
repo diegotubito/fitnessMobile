@@ -91,7 +91,7 @@ class PhotoPickerManager: BaseViewModel {
     }
     
     func getImageView() -> Image {
-        let defaultImage = Image(systemName: "photo.circle")
+        let defaultImage = Image(systemName: "person.crop.circle.fill")
         return imageData?.asImage ?? defaultImage
     }
 }

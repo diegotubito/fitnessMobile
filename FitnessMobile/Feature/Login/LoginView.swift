@@ -22,14 +22,27 @@ struct LoginView: View {
     
         NavigationStack {
             ZStack {
-                LinearGradient(gradient: Gradient(colors: [Color.black, Color.Red.midnight]), startPoint: .top, endPoint: .bottom)
+                LinearGradient(gradient: Gradient(colors: [Color.black, Color.Blue.midnight, Color.Green.midnight]), startPoint: .top, endPoint: .bottom)
                     .ignoresSafeArea()
                 VStack {
-                    VStack {
-                        Text("Authentication")
+                    
+                    HStack {
+                        Text("_LOGIN_TITLE")
                             .font(.title)
+                            .foregroundColor(Color.Neutral.tone80)
+                        Spacer()
                     }
-                    VStack(spacing: 32) {
+                    .padding(.bottom)
+                    
+                    VStack(spacing: 16) {
+                        HStack {
+                            Text("_ALREADY_HAVE_ACCOUNT_MESSAGE")
+                                .font(.subheadline)
+                                .lineLimit(2, reservesSpace: true)
+                                .foregroundColor(Color.Neutral.tone80)
+                                .lineLimit(0)
+                            Spacer()
+                        }
                         VStack(spacing: 16) {
                             TextField("_USERNAME", text: $viewmodel.username)
                                 .padding()
@@ -46,23 +59,38 @@ struct LoginView: View {
                         }
                         
                         VStack(spacing: 16) {
-                            BasicButton(title: "Login", style: .destructive, isEnabled: .constant(true)) {
+                            BasicButton(title: "_LOGIN_BUTTON_TITLE", style: .primary, isEnabled: .constant(true)) {
                                 perfomrLogin()
                             }
-                            if allowSighUp {
+                           
+                        }
+                    }
+                    
+                    if allowSighUp {
+                        VStack {
+                            Divider()
+                            
+                            HStack {
+                                Text("_CREATE_ACCOUNT_MESSAGE")
+                                    .font(.subheadline)
+                                    .lineLimit(2, reservesSpace: true)
+                                    .foregroundColor(Color.Neutral.tone80)
+                                Spacer()
+                            }
+                            .padding(.bottom, 4)
+                            HStack {
                                 Button {
                                     shouldPresentSignUp = true
                                 } label: {
                                     Text("_SIGNUP")
-                                        .foregroundColor(Color.Yellow.midnight)
+                                        .foregroundColor(.accentColor)
                                 }
-                            
+                                Spacer()
                             }
+                            
+                            Divider()
                         }
                     }
-                    .padding(32)
-                    
-                   
                     
                     List(viewmodel.users, id: \.self) { user in
                         VStack {
@@ -76,6 +104,7 @@ struct LoginView: View {
                     .scrollContentBackground(.hidden)
                     
                 }
+                .padding()
             }
             .navigationDestination(isPresented: $shouldPresentSignUp) {
                 SignUpView()
@@ -88,7 +117,6 @@ struct LoginView: View {
                 await viewmodel.loadUsers()
             }
         })
-        .navigationTitle("_LOGIN_TITLE")
         .onChange(of: shouldGoToOTP, perform: { newValue in
             switch otpResult {
             case .none, .enableConfirmed:

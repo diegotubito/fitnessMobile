@@ -34,13 +34,16 @@
 "_ALERT_REMOVE" = "Borrar";
 
 // Mark: LOGIN VIEW
+"_CREATE_ACCOUNT_MESSAGE" = "Si aún no tienes una cuenta, puedes crear una fácilmente y sin costo.";
+"_ALREADY_HAVE_ACCOUNT_MESSAGE" = "Si ya tienes una cuenta, por favor ingresa tu nombre de usuario y contraseña.";
 "_USERNAME" = "Usuario";
 "_EMAIL" = "Correo";
 "_PASSWORD" = "Clave";
 "_PASSWORD_REPEAT" = "Repetir clave";
-"_SIGNUP" = "Registrarse";
+"_SIGNUP" = "Crear Cuenta";
 "_LOGIN_TITLE" = "Autenticación";
-"_CREATE" = "Crear";
+"_CREATE" = "Crear Cuenta";
+"_LOGIN_BUTTON_TITLE" = "Iniciar Sesión";
 
 // Mark: Seeting View
 "_SETTING_2FA" = "Autenticación Doble Factor";

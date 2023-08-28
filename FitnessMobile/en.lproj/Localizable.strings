@@ -34,13 +34,16 @@
 "_ALERT_REMOVE" = "Delete";
 
 // Mark: LOGIN VIEW
+"_CREATE_ACCOUNT_MESSAGE" = "If you don't have an account, you can easily create one for free.";
+"_ALREADY_HAVE_ACCOUNT_MESSAGE" = "If you already have an account, please enter your username and password.";
 "_USERNAME" = "Username";
 "_EMAIL" = "Email";
 "_PASSWORD" = "Password";
 "_PASSWORD_REPEAT" = "Repeat password";
 "_SIGNUP" = "Sign Up";
 "_LOGIN_TITLE" = "Authentication";
-"_CREATE" = "Create";
+"_CREATE" = "Create Account";
+"_LOGIN_BUTTON_TITLE" = "Log in";
 
 // Mark: Seeting View
 "_SETTING_2FA" = "Two Factor Authentication";

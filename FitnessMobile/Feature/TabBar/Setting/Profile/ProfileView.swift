@@ -11,6 +11,13 @@ struct ProfileView: View {
     @StateObject var viewmodel = ProfileViewModel()
     @EnvironmentObject var coordinator: Coordinator
     @Environment(\.dismiss) var dismiss
+    @FocusState var focus: Focus?
+    
+    enum Focus: Hashable {
+        case name
+        case surname
+        case phone
+    }
    
     var body: some View {
         
@@ -19,43 +26,45 @@ struct ProfileView: View {
             .ignoresSafeArea()
             
             VStack {
-                Divider()
-                ProfileHeader()
-                    .cornerRadius(10)
-                    .padding(.bottom)
 
                 ScrollView {
                     
                     VStack {
                         CustomTextField(customTextFieldManager: viewmodel.firstNameTextField, title: "_FIRST_NAME", placeholder: "", footer: "", textFieldType: .ascii) { newValue in
-                            
+                            viewmodel.validate()
                         } onDidBegin: { didBegin in
                             if didBegin {
                                 viewmodel.firstNameTextField.shouldShowError = false
                             } else {
+                                focus = .surname
                                 if !viewmodel.isValidFirstName {
                                     viewmodel.firstNameTextField.showError(message: "_FIRST_NAME_INCORRECT")
                                 }
                             }
                         }
+                        .focused($focus, equals: .name)
                     
                         CustomTextField(customTextFieldManager: viewmodel.lastNameTextField, title: "_LAST_NAME", placeholder: "", footer: ""){ newValue in
-                            
+                            viewmodel.validate()
                         } onDidBegin: { didBegin in
                             if didBegin {
                                 viewmodel.lastNameTextField.shouldShowError = false
                             } else {
+                                focus = .phone
                                 if !viewmodel.isValidLastName {
                                     viewmodel.lastNameTextField.showError(message: "_LAST_NAME_INCORRECT")
                                 }
                             }
                         }
-                     
+                        .focused($focus, equals: .surname)
+
                         PhoneTextField(textFieldManager: $viewmodel.phoneNumberTextField) { newValue in
-                            
+                            viewmodel.validate()
                         } onDidBegin: { didBegin in
                             
                         }
+                        .focused($focus, equals: .phone)
+
                     }
                 }
             }
@@ -68,13 +77,13 @@ struct ProfileView: View {
             ToolbarItem(placement: .navigationBarLeading) {
                 Button("_ALERT_CANCEL") {
                     dismiss()
-                }.disabled(viewmodel.disableButtons)
+                }.disabled(viewmodel.disableCancelButton)
             }
 
             ToolbarItem(placement: .navigationBarTrailing) {
                 Button("_UPDATE_BUTTON") {
                     updateUser()
-                }.disabled(viewmodel.disableButtons)
+                }.disabled(viewmodel.disableSaveButton)
             }
             
         })
@@ -85,6 +94,7 @@ struct ProfileView: View {
             }
         })
         .onAppear {
+            focus = .name
             viewmodel.setupInitValues()
         }
         .overlay(
@@ -96,7 +106,6 @@ struct ProfileView: View {
     }
     
     func updateUser() {
-        viewmodel.disableButtons = true
         viewmodel.updateUser()
     }
 }

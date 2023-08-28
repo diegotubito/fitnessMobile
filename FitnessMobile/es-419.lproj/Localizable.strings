@@ -6,6 +6,10 @@
   
 */
 
+// Mark: BUTTONS
+"_EDIT_BUTTON" = "Editar";
+"_BACK_BUTTON" = "Atrás";
+
 // Mark: PHONE TEXTVIEW
 "_COUNTRY_TEXTFIELD_TITLE" = "País";
 "_PHONE_NUMBER_TEXTFIELD_TITLE" = "Teléfono";

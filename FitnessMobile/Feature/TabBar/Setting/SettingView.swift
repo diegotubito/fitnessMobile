@@ -11,72 +11,77 @@ struct SettingView: View {
     @EnvironmentObject var coordinator: Coordinator
     
     var body: some View {
-        VStack(spacing: 0) {
-            
-            List {
-                Section {
-                    HStack {
-                        Button("_SETTING_PROFILE", action: {
-                            coordinator.push(.profile)
-                        })
-                        Spacer()
-                        Image(systemName: "chevron.right")
-                    }
-                    .foregroundColor(Color.Dark.tone90)
-                    
-                    HStack {
-                        Button("_SETTING_2FA", action: {
-                            coordinator.push(.settingTwoFactor)
-                        })
-                        Spacer()
-                        Image(systemName: "chevron.right")
-                    }
-                    .foregroundColor(Color.Dark.tone90)
-                   
-                }
+        ZStack {
+            LinearGradient(gradient: Gradient(colors: [Color.black, Color.Blue.midnight]), startPoint: .top, endPoint: .bottom)
+                .ignoresSafeArea()
+            VStack(spacing: 0) {
                 
-                Section {
-                    Button("_LOGOUT", action: {
-                        coordinator.presentSecondaryAlert(title: "_LOGOUT_ALERT_WARNING_TITLE", message: "_LOGOUT_ALERT_WARNING_MESSAGE") { } secondaryTapped: { closeSession() }
-                    })
-                    .foregroundColor(Color.Dark.tone90)
+                List {
+                    Section {
+                        HStack {
+                            Button("_SETTING_PROFILE", action: {
+                                coordinator.push(.profile)
+                            })
+                            Spacer()
+                            Image(systemName: "chevron.right")
+                        }
+                        .foregroundColor(Color.Dark.tone90)
+                        
+                        HStack {
+                            Button("_SETTING_2FA", action: {
+                                coordinator.push(.settingTwoFactor)
+                            })
+                            Spacer()
+                            Image(systemName: "chevron.right")
+                        }
+                        .foregroundColor(Color.Dark.tone90)
+                       
+                    }
                     
-                    HStack {
-                        Button("_DELETE_ACCOUNT", action: {
-                            coordinator.push(.deleteAccount)
+                    Section {
+                        Button("_LOGOUT", action: {
+                            coordinator.presentSecondaryAlert(title: "_LOGOUT_ALERT_WARNING_TITLE", message: "_LOGOUT_ALERT_WARNING_MESSAGE") { } secondaryTapped: { closeSession() }
                         })
-                        Spacer()
-                        Image(systemName: "chevron.right")
+                        .foregroundColor(Color.Dark.tone90)
+                        
+                        HStack {
+                            Button("_DELETE_ACCOUNT", action: {
+                                coordinator.push(.deleteAccount)
+                            })
+                            Spacer()
+                            Image(systemName: "chevron.right")
+                        }
+                        .foregroundColor(Color.Red.truly)
                     }
-                    .foregroundColor(Color.Red.truly)
                 }
-            }
-            Spacer()
-            HStack {
-                VStack {
-                    HStack {
-                        Text(ApplicationVersion.getVersionAndBundle())
-                        Spacer()
-                    }
-                    HStack {
-                        Text(UserSession.getAccessTokenExpirationDateString())
-                        Spacer()
-                    }
-                    HStack{
-                        Text(UserSession.getRefreshTokenExpirationDateString())
-                        Spacer()
-                    }
-                    /*
-                    HStack {
-                        Text("Device Token \(UserSession.getDeviceToken() ?? "")")
-                        Spacer()
-                    }
-                     */
-                }
-                .padding()
-                .foregroundColor(Color.Neutral.tone90)
-                .font(.subheadline)
+                .scrollContentBackground(.hidden)
                 Spacer()
+                HStack {
+                    VStack {
+                        HStack {
+                            Text(ApplicationVersion.getVersionAndBundle())
+                            Spacer()
+                        }
+                        HStack {
+                            Text(UserSession.getAccessTokenExpirationDateString())
+                            Spacer()
+                        }
+                        HStack{
+                            Text(UserSession.getRefreshTokenExpirationDateString())
+                            Spacer()
+                        }
+                        /*
+                        HStack {
+                            Text("Device Token \(UserSession.getDeviceToken() ?? "")")
+                            Spacer()
+                        }
+                         */
+                    }
+                    .padding()
+                    .foregroundColor(Color.Neutral.tone90)
+                    .font(.subheadline)
+                    Spacer()
+                }
             }
         }
     

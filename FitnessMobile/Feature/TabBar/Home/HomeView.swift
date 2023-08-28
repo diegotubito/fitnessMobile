@@ -14,8 +14,12 @@ struct HomeView: View {
     @State var receivedMessage = ""
     
     var body: some View {
-        VStack {
-            Text(receivedMessage)
+        ZStack {
+            LinearGradient(gradient: Gradient(colors: [Color.black, Color.Blue.midnight]), startPoint: .top, endPoint: .bottom)
+                .ignoresSafeArea()
+            VStack {
+                Text(receivedMessage)
+            }
         }
         .onReceive(socketManager.$messageReceived) { value in
             print(value)
@@ -25,11 +29,7 @@ struct HomeView: View {
 }
 
 struct HomeView_Previews: PreviewProvider {
-    @State static var coordinator = Coordinator()
     static var previews: some View {
-        NavigationStack {
-            HomeView()
-        }
-        .environmentObject(coordinator)
+        HomeView()
     }
 }

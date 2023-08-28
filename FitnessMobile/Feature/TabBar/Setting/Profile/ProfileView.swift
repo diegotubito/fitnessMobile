@@ -10,55 +10,74 @@ import SwiftUI
 struct ProfileView: View {
     @StateObject var viewmodel = ProfileViewModel()
     @EnvironmentObject var coordinator: Coordinator
+    @Environment(\.dismiss) var dismiss
    
     var body: some View {
         
-        VStack {
-            ProfileHeader()
-
-            ScrollView {
-                
-                VStack {
-                    CustomTextField(customTextFieldManager: viewmodel.firstNameTextField, title: "_FIRST_NAME", placeholder: "", footer: "", textFieldType: .ascii) { newValue in
-                        
-                    } onDidBegin: { didBegin in
-                        if didBegin {
-                            viewmodel.firstNameTextField.shouldShowError = false
-                        } else {
-                            if !viewmodel.isValidFirstName {
-                                viewmodel.firstNameTextField.showError(message: "_FIRST_NAME_INCORRECT")
-                            }
-                        }
-                    }
-                    .padding(.bottom, 8)
-                
-                    CustomTextField(customTextFieldManager: viewmodel.lastNameTextField, title: "_LAST_NAME", placeholder: "", footer: ""){ newValue in
-                        
-                    } onDidBegin: { didBegin in
-                        if didBegin {
-                            viewmodel.lastNameTextField.shouldShowError = false
-                        } else {
-                            if !viewmodel.isValidLastName {
-                                viewmodel.lastNameTextField.showError(message: "_LAST_NAME_INCORRECT")
-                            }
-                        }
-                    }
-                    .padding(.bottom, 8)
-                 
-                    PhoneTextField(textFieldManager: $viewmodel.phoneNumberTextField) { newValue in
-                        
-                    } onDidBegin: { didBegin in
-                        
-                    }
-                }
+        ZStack {
+            LinearGradient(gradient: Gradient(colors: [Color.black, Color.Blue.midnight]), startPoint: .top, endPoint: .bottom)
+            .ignoresSafeArea()
             
-                BasicButton(title: "_UPDATE_BUTTON", style: .primary, isEnabled: .constant(true)) {
-                    updateUser()
+            VStack {
+                Divider()
+                ProfileHeader()
+                    .cornerRadius(10)
+                    .padding(.bottom)
+
+                ScrollView {
+                    
+                    VStack {
+                        CustomTextField(customTextFieldManager: viewmodel.firstNameTextField, title: "_FIRST_NAME", placeholder: "", footer: "", textFieldType: .ascii) { newValue in
+                            
+                        } onDidBegin: { didBegin in
+                            if didBegin {
+                                viewmodel.firstNameTextField.shouldShowError = false
+                            } else {
+                                if !viewmodel.isValidFirstName {
+                                    viewmodel.firstNameTextField.showError(message: "_FIRST_NAME_INCORRECT")
+                                }
+                            }
+                        }
+                    
+                        CustomTextField(customTextFieldManager: viewmodel.lastNameTextField, title: "_LAST_NAME", placeholder: "", footer: ""){ newValue in
+                            
+                        } onDidBegin: { didBegin in
+                            if didBegin {
+                                viewmodel.lastNameTextField.shouldShowError = false
+                            } else {
+                                if !viewmodel.isValidLastName {
+                                    viewmodel.lastNameTextField.showError(message: "_LAST_NAME_INCORRECT")
+                                }
+                            }
+                        }
+                     
+                        PhoneTextField(textFieldManager: $viewmodel.phoneNumberTextField) { newValue in
+                            
+                        } onDidBegin: { didBegin in
+                            
+                        }
+                    }
                 }
-                .padding()
             }
-            .padding()
+            .padding(.horizontal)
         }
+        .navigationTitle("_SETTING_PROFILE")
+        .navigationBarBackButtonHidden(true)
+        .toolbar(content: {
+            
+            ToolbarItem(placement: .navigationBarLeading) {
+                Button("_ALERT_CANCEL") {
+                    dismiss()
+                }.disabled(viewmodel.disableButtons)
+            }
+
+            ToolbarItem(placement: .navigationBarTrailing) {
+                Button("_UPDATE_BUTTON") {
+                    updateUser()
+                }.disabled(viewmodel.disableButtons)
+            }
+            
+        })
         .onReceive(viewmodel.$updateUserResult, perform: { result in
             if let result = result {
                 UserSession.saveUser(user: result.user)
@@ -77,6 +96,7 @@ struct ProfileView: View {
     }
     
     func updateUser() {
+        viewmodel.disableButtons = true
         viewmodel.updateUser()
     }
 }

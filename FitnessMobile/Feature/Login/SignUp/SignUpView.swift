@@ -20,65 +20,70 @@ struct SignUpView: View {
     }
     
     var body: some View {
-        ScrollView {
-            VStack {
-                
-                CustomTextField(customTextFieldManager: viewmodel.usernameTextFieldManager, title: "_USERNAME", placeholder: "", footer: "") { newValue in
+        ZStack {
+            LinearGradient(gradient: Gradient(colors: [Color.black, Color.Red.midnight]), startPoint: .top, endPoint: .bottom)
+                .ignoresSafeArea()
+            
+            ScrollView {
+                VStack {
                     
-                } onDidBegin: { didBegin in
+                    CustomTextField(customTextFieldManager: viewmodel.usernameTextFieldManager, title: "_USERNAME", placeholder: "", footer: "") { newValue in
+                        
+                    } onDidBegin: { didBegin in
+                        
+                    }
+                    .padding(.bottom)
+                    .autocorrectionDisabled()
+                    .autocapitalization(.none)
+                    .focused($currentFocus, equals: .username)
                     
-                }
-                .padding(.bottom)
-                .autocorrectionDisabled()
-                .autocapitalization(.none)
-                .focused($currentFocus, equals: .username)
-                
-                
-                CustomTextField(customTextFieldManager: viewmodel.emailTextFieldManager, title: "_EMAIL", placeholder: "", footer: ""){ newValue in
                     
-                } onDidBegin: { didBegin in
-                    
-                }
+                    CustomTextField(customTextFieldManager: viewmodel.emailTextFieldManager, title: "_EMAIL", placeholder: "", footer: ""){ newValue in
+                        
+                    } onDidBegin: { didBegin in
+                        
+                    }
                     .padding(.bottom)
                     .autocorrectionDisabled()
                     .autocapitalization(.none)
                     .focused($currentFocus, equals: .email)
-                
-                CustomTextField(customTextFieldManager: viewmodel.passwordTextFieldManager, title: "_PASSWORD", placeholder: "", footer: ""){ newValue in
                     
-                } onDidBegin: { didBegin in
-                    
-                }
+                    CustomTextField(customTextFieldManager: viewmodel.passwordTextFieldManager, title: "_PASSWORD", placeholder: "", footer: ""){ newValue in
+                        
+                    } onDidBegin: { didBegin in
+                        
+                    }
                     .padding(.bottom)
                     .autocorrectionDisabled()
                     .autocapitalization(.none)
                     .focused($currentFocus, equals: .password)
-                
-                CustomTextField(customTextFieldManager: viewmodel.repeatPasswordTextFieldManager, title: "_PASSWORD_REPEAT", placeholder: "", footer: ""){ newValue in
                     
-                } onDidBegin: { didBegin in
-                    
-                }
+                    CustomTextField(customTextFieldManager: viewmodel.repeatPasswordTextFieldManager, title: "_PASSWORD_REPEAT", placeholder: "", footer: ""){ newValue in
+                        
+                    } onDidBegin: { didBegin in
+                        
+                    }
                     .padding(.bottom, 32)
                     .autocorrectionDisabled()
                     .autocapitalization(.none)
                     .focused($currentFocus, equals: .repeatPassword)
-                
-                PhoneTextField(textFieldManager: $viewmodel.phoneNumberTextField) { newValue in
                     
-                } onDidBegin: { didBegin in
-                    
-                }
+                    PhoneTextField(textFieldManager: $viewmodel.phoneNumberTextField) { newValue in
+                        
+                    } onDidBegin: { didBegin in
+                        
+                    }
                     .padding(.bottom, 32)
                     .onTapGesture {
                         print("si tapped")
                     }
-                
-                BasicButton(title: "_CREATE", style: .primary, isEnabled: .constant(true)) {
-                    viewmodel.createUser()
+                    
+                    BasicButton(title: "_CREATE", style: .secondary, isEnabled: .constant(true)) {
+                        viewmodel.createUser()
+                    }
                 }
+                .padding()
             }
-            .padding()
         }
         .navigationTitle("_SIGNUP")
         .navigationBarTitleDisplayMode(.inline)

@@ -12,6 +12,7 @@ class ProfileViewModel: BaseViewModel {
     @Published var lastNameTextField = CustomTextFieldManager()
     @Published var phoneNumberTextField = PhoneNumberTextFieldManager()
     @Published var updateUserResult: UpdateUserResult?
+    @Published var disableButtons: Bool = false
     
     private func getPhone() -> Phone {
         let user = UserSession.getUser()

@@ -39,10 +39,10 @@ class PhotoPickerManager: BaseViewModel {
                 isLoading = true
                 let storageUseCase = StorageUseCase()
                 let response = try await storageUseCase.downloadImageWithUrl(url: UserSession.getUser()?.profileImage?.url ?? "")
-                isLoading = false
                 imageData = response
                 DataCache.saveData(data: response, identifier: UserSession._id)
                 DataDisk.saveData(data: response, identifier: UserSession._id)
+                isLoading = false
                 print("image loaded from api")
             } catch {
                 isLoading = false
@@ -90,4 +90,8 @@ class PhotoPickerManager: BaseViewModel {
         }
     }
     
+    func getImageView() -> Image {
+        let defaultImage = Image(systemName: "photo.circle")
+        return imageData?.asImage ?? defaultImage
+    }
 }

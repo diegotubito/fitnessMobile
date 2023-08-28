@@ -21,46 +21,67 @@ struct LoginView: View {
     var body: some View {
     
         NavigationStack {
-            VStack {
-                TextField("_USERNAME", text: $viewmodel.username)
-                    .padding()
-                    .background(Color.gray.opacity(0.2))
-                    .cornerRadius(5)
-                SecureField("_PASSWORD", text: $viewmodel.password)
-                    .padding()
-                    .background(Color.gray.opacity(0.2))
-                    .cornerRadius(5)
-                
-                BasicButton(title: "Login", style: .primary, isEnabled: .constant(true)) {
-                    perfomrLogin()
-                }
-                .padding()
-                
-                if allowSighUp {
-                    Button {
-                        shouldPresentSignUp = true
-                    } label: {
-                        Text("_SIGNUP")
-                    }
-                }
-                
-                List(viewmodel.users, id: \.self) { user in
+            ZStack {
+                LinearGradient(gradient: Gradient(colors: [Color.black, Color.Red.midnight]), startPoint: .top, endPoint: .bottom)
+                    .ignoresSafeArea()
+                VStack {
                     VStack {
-                        Text(user.email)
+                        Text("Authentication")
+                            .font(.title)
                     }
-                    .onTapGesture {
-                        self.viewmodel.username = user.email
-                        self.viewmodel.password = "admin1234"
+                    VStack(spacing: 32) {
+                        VStack(spacing: 16) {
+                            TextField("_USERNAME", text: $viewmodel.username)
+                                .padding()
+                                .background(Color.gray.opacity(0.2))
+                                .cornerRadius(5)
+                                .autocapitalization(.none)
+                                .autocorrectionDisabled()
+                            SecureField("_PASSWORD", text: $viewmodel.password)
+                                .padding()
+                                .background(Color.gray.opacity(0.2))
+                                .cornerRadius(5)
+                                .autocapitalization(.none)
+                                .autocorrectionDisabled()
+                        }
+                        
+                        VStack(spacing: 16) {
+                            BasicButton(title: "Login", style: .destructive, isEnabled: .constant(true)) {
+                                perfomrLogin()
+                            }
+                            if allowSighUp {
+                                Button {
+                                    shouldPresentSignUp = true
+                                } label: {
+                                    Text("_SIGNUP")
+                                        .foregroundColor(Color.Yellow.midnight)
+                                }
+                            
+                            }
+                        }
                     }
+                    .padding(32)
+                    
+                   
+                    
+                    List(viewmodel.users, id: \.self) { user in
+                        VStack {
+                            Text(user.email)
+                        }
+                        .onTapGesture {
+                            self.viewmodel.username = user.email
+                            self.viewmodel.password = "admin1234"
+                        }
+                    }
+                    .scrollContentBackground(.hidden)
+                    
                 }
-                
             }
             .navigationDestination(isPresented: $shouldPresentSignUp) {
                 SignUpView()
             }
+            
         }
-        .padding()
-        
         .onAppear(perform: {
             UserSession.removeUserSession()
             Task {

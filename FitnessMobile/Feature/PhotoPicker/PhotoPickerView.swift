@@ -19,97 +19,22 @@ struct PhotoPickerView: View {
     
     var body: some View {
         GeometryReader { geometry in
-            VStack {
-                /// HEADER
-                Group {
-                    HStack {
-                        Image(systemName: "xmark")
-                            .resizable()
-                            .frame(width: 20, height: 20)
-                            .onTapGesture {
-                                dismiss()
-                            }
-                        Spacer()
-                        Image(systemName: "square.and.arrow.up")
-                            .resizable()
-                            .frame(width: 25, height: 25)
-                            .onTapGesture {
-                                photoPickerManager.uploadImage()
-                            }
-                        
-                    }
-                    .padding()
-                    .padding(.horizontal)
-                }
-                Spacer()
-                /// BODY
-                Group {
-                    if let image = photoPickerManager.imageData?.asImage {
-                        image.resizable()
-                            .scaledToFill()
-                            .frame(width: geometry.size.width * 0.8, height: geometry.size.width * 0.8)
-                            .clipShape(Circle())
-                            .overlay {
-                                Circle()
-                                    .stroke(Color.white, lineWidth: 2)
-                            }
-                    }
-                    else if !photoPickerManager.isLoading {
-                        
-                        Image(systemName: "photo.circle").resizable()
-                            .scaledToFill()
-                            .frame(width: geometry.size.width * 0.8, height: geometry.size.width * 0.8)
-                            .clipShape(Circle())
-                            .overlay {
-                                Circle()
-                                    .stroke(Color.white, lineWidth: 2)
-                            }
-                    }
-                }
-                Spacer()
+            
+            ZStack {
+                RadialGradient(gradient: Gradient(colors: [Color.black, Color.Blue.midnight]), center: .center, startRadius: 0, endRadius: geometry.size.width)
+                    .ignoresSafeArea()
                 
-                /// FOOTER
-                Group {
-                    HStack {
-                        PhotosPicker(
-                            selection: $selectedItem,
-                            matching: .images,
-                            photoLibrary: .shared()) {
-                                HStack{
-                                    Image(systemName: "photo")
-                                        .resizable()
-                                        .frame(width: 20, height: 20)
-                                    Text("From Gallery")
-                                        .font(.subheadline)
-                                    
-                                }
-                                .padding()
-                                .background(Color.Dark.tone90)
-                                .foregroundColor(Color.white)
-                                .cornerRadius(10)
-                                
-                            }
-                        
-                        HStack{
-                            Image(systemName: "camera")
-                                .resizable()
-                                .frame(width: 20, height: 20)
-                            Text("New Photo")
-                                .font(.subheadline)
-                        }
-                        .padding()
-                        .background(Color.Dark.tone90)
-                        .foregroundColor(Color.white)
-                        .cornerRadius(10)
-                        .onTapGesture {
-                            isCameraPresented = true
-                        }
-                    }
+                VStack {
+                    HeaderView()
+                    Spacer()
+                    PhotoView(geometry: geometry)
+                        .padding(.bottom)
+                    Buttons()
+                    Spacer()
                 }
-                .padding()
-                .frame(height: 30)
             }
         }
+        
         .onAppear {
             photoPickerManager.fetchProfileImage()
         }
@@ -149,6 +74,83 @@ struct PhotoPickerView: View {
                 ImagePicker(sourceType: .camera, selectedImage: $imageFromCamera)
             }
         })
+    }
+    
+    func HeaderView() -> some View {
+        return VStack {
+            HStack {
+                Image(systemName: "xmark")
+                    .resizable()
+                    .frame(width: 20, height: 20)
+                    .foregroundColor(Color.Dark.tone80)
+                    .onTapGesture {
+                        dismiss()
+                    }
+                Spacer()
+                Image(systemName: "square.and.arrow.up")
+                    .resizable()
+                    .frame(width: 25, height: 25)
+                    .foregroundColor(Color.Dark.tone80)
+                    .onTapGesture {
+                        photoPickerManager.uploadImage()
+                    }
+                
+            }
+            .padding()
+            .padding(.horizontal)
+        }
+    }
+    
+    func PhotoView(geometry: GeometryProxy) -> some View {
+        return VStack {
+            photoPickerManager.getImageView()
+                .resizable()
+                .scaledToFill()
+                .frame(width: geometry.size.width * 0.8, height: geometry.size.width * 0.8)
+                .clipShape(Circle())
+                .overlay {
+                    Circle()
+                        .stroke(Color.white, lineWidth: 2)
+                }
+        }
+    }
+    
+    func Buttons() -> some View {
+        return HStack(spacing: 16) {
+            PhotosPicker(
+                selection: $selectedItem,
+                matching: .images,
+                photoLibrary: .shared()) {
+                    HStack{
+                        Image(systemName: "photo")
+                            .resizable()
+                            .frame(width: 20, height: 20)
+                        Text("From Gallery")
+                            .font(.subheadline)
+                        
+                    }
+                    .padding()
+                    .background(Color.Dark.tone90)
+                    .foregroundColor(Color.white)
+                    .cornerRadius(10)
+                    
+                }
+            
+            HStack{
+                Image(systemName: "camera")
+                    .resizable()
+                    .frame(width: 20, height: 20)
+                Text("New Photo")
+                    .font(.subheadline)
+            }
+            .padding()
+            .background(Color.Dark.tone90)
+            .foregroundColor(Color.white)
+            .cornerRadius(10)
+            .onTapGesture {
+                isCameraPresented = true
+            }
+        }
     }
 }
 

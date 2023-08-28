@@ -13,27 +13,32 @@ struct DeleteAccountView: View {
     @EnvironmentObject var userSession: UserSession
     
     var body: some View {
-        VStack {
-            HStack {
-                Text("_DELETE_ACCOUNT_TITLE")
-                    .font(.title)
+        ZStack {
+            LinearGradient(gradient: Gradient(colors: [Color.Red.midnight, Color.black]), startPoint: .top, endPoint: .bottom)
+            .ignoresSafeArea()
+            
+            VStack {
+                HStack {
+                    Text("_DELETE_ACCOUNT_TITLE")
+                        .font(.title)
+                    Spacer()
+                }
+                .padding(.bottom)
+                HStack {
+                    Text("_DELETE_ACCOUNT_SUBTITLE")
+                    Spacer()
+                }
                 Spacer()
-            }
-            .padding(.bottom)
-            HStack {
-                Text("_DELETE_ACCOUNT_SUBTITLE")
-                Spacer()
-            }
-            Spacer()
-            HStack {
-                BasicButton(title: "_DELETE_ACCOUNT", style: .destructive, isEnabled: .constant(true)) {
-                    coordinator.presentDesctructiveAlert(title: "_DELETE_ACCOUNT_BUTTON_TITLE", message: "_DELETE_ACCOUNT_BUTTON_MESSAGE") {
-                        deleteAccount()
-                    } secondaryTapped: { }
+                HStack {
+                    BasicButton(title: "_DELETE_ACCOUNT", style: .destructive, isEnabled: .constant(true)) {
+                        coordinator.presentDesctructiveAlert(title: "_DELETE_ACCOUNT_BUTTON_TITLE", message: "_DELETE_ACCOUNT_BUTTON_MESSAGE") {
+                            deleteAccount()
+                        } secondaryTapped: { }
+                    }
                 }
             }
+            .padding()
         }
-        .padding()
         .onReceive(viewmodel.$deleteResult, perform: { response in
             if response != nil {
                 coordinator.path = NavigationPath()

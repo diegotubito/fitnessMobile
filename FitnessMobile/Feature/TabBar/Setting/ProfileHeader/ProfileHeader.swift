@@ -50,9 +50,6 @@ struct ProfileHeader: View {
                         coordinator.presentModal(.photoPicker)
                     }
                
-                
-            
-            
             VStack(spacing: 2) {
                 HStack {
                     Text(UserSession.getFullName() ?? "")

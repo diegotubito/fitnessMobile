@@ -31,8 +31,8 @@ class StorageRepository: ApiNetworkAsync {
     
     func downloadImageWithURL(request: StorageEntity.DownloadWithURL.Request) async throws -> StorageDownloadWithURLResult {
         config.path = "/api/v1/storage/imageUrl"
-        config.method = .post
-        config.addRequestBody(request)
+        config.method = .get
+        config.addQueryItem(key: "url", value: request.url)
         
         return try await apiCall()
     }

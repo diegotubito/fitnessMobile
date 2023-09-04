@@ -30,7 +30,7 @@ struct InvitationView: View {
             LinearGradient(gradient: Gradient(colors: [Color.black, Color.Blue.midnight]), startPoint: .top, endPoint: .bottom)
                 .ignoresSafeArea()
             
-            if viewmodel.invitations.isEmpty {
+            if viewmodel.invitations.isEmpty && !viewmodel.isLoading {
                 invitationEmptyView()
             } else {
                 invitationNonEmptyView()

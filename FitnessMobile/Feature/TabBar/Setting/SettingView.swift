@@ -21,6 +21,7 @@ struct SettingView: View {
                 List {
                     Section {
                         HStack {
+                            Image("laptop-computer")
                             Button("_SETTING_WORKSPACES") {
                                 coordinator.push(.workspaceSetting)
                             }
@@ -29,6 +30,7 @@ struct SettingView: View {
                         }
                         .foregroundColor(Color.Dark.tone90)
                         HStack {
+                            Image("users")
                             Button("_SETTING_INVITATIONS") {
                                 coordinator.push(.invitationSetting)
                             }
@@ -39,6 +41,7 @@ struct SettingView: View {
                     }
                     Section {
                         HStack {
+                            Image("profile")
                             Button("_SETTING_PROFILE", action: {
                                 coordinator.push(.profile)
                             })
@@ -48,6 +51,7 @@ struct SettingView: View {
                         .foregroundColor(Color.Dark.tone90)
                         
                         HStack {
+                            Image("key")
                             Button("_SETTING_2FA", action: {
                                 coordinator.push(.settingTwoFactor)
                             })
@@ -59,14 +63,18 @@ struct SettingView: View {
                     }
                     
                     Section {
-                        Button("_LOGOUT", action: {
-                            coordinator.presentSecondaryAlert(title: "_LOGOUT_ALERT_WARNING_TITLE", message: "_LOGOUT_ALERT_WARNING_MESSAGE") { } secondaryTapped: {
-                                closeSession()
-                            }
-                        })
+                        HStack {
+                            Image("log-out")
+                            Button("_LOGOUT", action: {
+                                coordinator.presentSecondaryAlert(title: "_LOGOUT_ALERT_WARNING_TITLE", message: "_LOGOUT_ALERT_WARNING_MESSAGE") { } secondaryTapped: {
+                                    closeSession()
+                                }
+                            })
+                        }
                         .foregroundColor(Color.Dark.tone90)
                         
                         HStack {
+                            Image("delete")
                             Button("_DELETE_ACCOUNT", action: {
                                 coordinator.push(.deleteAccount)
                             })

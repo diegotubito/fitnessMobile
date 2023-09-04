@@ -1,0 +1,44 @@
+{
+    "workspaces": [
+           {
+               "_id": "64f3c9cf2945adf7b3d0aac0",
+               "title": "POLIDEPORTIVO ADILAS mock",
+               "subtitle": "",
+               "isEnabled": true,
+               "owner": "64e96af64a2b599be61a4d96",
+               "location": {
+                   "type": "Point",
+                   "coordinates": [
+                       -34.72095934375024,
+                       -58.39028476281314
+                   ],
+                   "street": "Gral Ferré",
+                   "streetNumber": 2901,
+                "cp": "1824",
+                "locality": "Lanús",
+                "state": "Buenos Aires",
+                "country": "ARG",
+                "_id": "64f3c9cf2945adf7b3d0aac1"
+            },
+            "logo": "https://placeimg.com/640/480/any",
+            "images": [
+                {
+                    "url": "https://placeimg.com/640/480/any",
+                    "thumbnail": ""
+                },
+                {
+                    "url": "https://placeimg.com/640/480/any",
+                    "thumbnail": ""
+                },
+                {
+                    "url": "https://placeimg.com/640/480/any",
+                    "thumbnail": ""
+                }
+            ],
+            "members": [],
+            "createdAt": "2023-09-02T23:48:31.029Z",
+            "updatedAt": "2023-09-02T23:48:31.029Z",
+            "__v": 0
+        }
+    ]
+}

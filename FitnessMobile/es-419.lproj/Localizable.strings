@@ -9,6 +9,8 @@
 // Mark: BUTTONS
 "_EDIT_BUTTON" = "Editar";
 "_BACK_BUTTON" = "Atrás";
+"_SAVE_BUTTON" = "Guardar";
+"_CANCEL_BUTTON" = "Cancelar";
 
 // Mark: PHONE TEXTVIEW
 "_COUNTRY_TEXTFIELD_TITLE" = "País";
@@ -46,6 +48,8 @@
 "_LOGIN_BUTTON_TITLE" = "Iniciar Sesión";
 
 // Mark: Seeting View
+"_SETTING_INVITATIONS"="Invitaciones";
+"_SETTING_WORKSPACES"="Espacios de trabajo";
 "_SETTING_2FA" = "Autenticación Doble Factor";
 "_SETTING_PROFILE" = "Perfil";
 "_LOGOUT" = "Cerrar Sesión";
@@ -81,3 +85,7 @@
 "_SERIALIZE_MESSAGE" = "No se pudo serializar los datos.";
 "_401_TITLE"="Autenticación";
 "_401_MESSAGE"="Sesión vencida.";
+"_IMAGE_FAILED_TITLE"="Error en la imágen";
+"_IMAGE_FAILED_MESSAGE"="Hubo un error al cargar la imágen.";
+"_JSON_NOT_FOUND_TITLE"="Error en JSON";
+"_JSON_NOT_FOUND_MESSAGE"="No se encontró el archivo %@";

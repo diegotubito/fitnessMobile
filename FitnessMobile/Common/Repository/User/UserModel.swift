@@ -16,7 +16,6 @@ struct User: Identifiable, Codable, Hashable {
     let firstName: String
     let lastName: String
     let isEnabled: Bool
-    let role: String
     let phone: Phone?
     let emailVerified: Bool
     let createdAt: String

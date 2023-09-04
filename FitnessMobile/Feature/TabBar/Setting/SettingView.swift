@@ -21,6 +21,24 @@ struct SettingView: View {
                 List {
                     Section {
                         HStack {
+                            Button("_SETTING_WORKSPACES") {
+                                coordinator.push(.workspaceSetting)
+                            }
+                            Spacer()
+                            Image(systemName: "chevron.right")
+                        }
+                        .foregroundColor(Color.Dark.tone90)
+                        HStack {
+                            Button("_SETTING_INVITATIONS") {
+                                coordinator.push(.invitationSetting)
+                            }
+                            Spacer()
+                            Image(systemName: "chevron.right")
+                        }
+                        .foregroundColor(Color.Dark.tone90)
+                    }
+                    Section {
+                        HStack {
                             Button("_SETTING_PROFILE", action: {
                                 coordinator.push(.profile)
                             })
@@ -42,7 +60,9 @@ struct SettingView: View {
                     
                     Section {
                         Button("_LOGOUT", action: {
-                            coordinator.presentSecondaryAlert(title: "_LOGOUT_ALERT_WARNING_TITLE", message: "_LOGOUT_ALERT_WARNING_MESSAGE") { } secondaryTapped: { closeSession() }
+                            coordinator.presentSecondaryAlert(title: "_LOGOUT_ALERT_WARNING_TITLE", message: "_LOGOUT_ALERT_WARNING_MESSAGE") { } secondaryTapped: {
+                                closeSession()
+                            }
                         })
                         .foregroundColor(Color.Dark.tone90)
                         

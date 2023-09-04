@@ -79,21 +79,15 @@ struct PhotoPickerView: View {
     func HeaderView() -> some View {
         return VStack {
             HStack {
-                Image(systemName: "xmark")
-                    .resizable()
-                    .frame(width: 20, height: 20)
-                    .foregroundColor(Color.Dark.tone80)
-                    .onTapGesture {
-                        dismiss()
-                    }
+                Button("_CANCEL_BUTTON") {
+                    dismiss()
+                }
+                .foregroundColor(.accentColor)
                 Spacer()
-                Image(systemName: "square.and.arrow.up")
-                    .resizable()
-                    .frame(width: 25, height: 25)
-                    .foregroundColor(Color.Dark.tone80)
-                    .onTapGesture {
-                        photoPickerManager.uploadImage()
-                    }
+                Button("_SAVE_BUTTON") {
+                    photoPickerManager.uploadImage()
+                }
+                .foregroundColor(.accentColor)
                 
             }
             .padding()

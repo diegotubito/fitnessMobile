@@ -52,10 +52,16 @@ class BaseViewModel: ObservableObject {
                 errorMessage = LocalizedStringKey("_SERIALIZE_MESSAGE")
                 break
             case .jsonFileNotFound(let filename):
+                let message = NSLocalizedString("_JSON_NOT_FOUND_MESSAGE", comment: "")
+                
+                errorTitle = LocalizedStringKey("_JSON_NOT_FOUND_TITLE")
+                errorMessage = LocalizedStringKey(String(format: message, filename ?? ""))
                 break
             case .mockFailed:
                 break
             case .imageFailed:
+                errorTitle = LocalizedStringKey("_IMAGE_FAILED_TITLE")
+                errorMessage = LocalizedStringKey("_IMAGE_FAILED_MESSAGE")
                 break
             case .notAuthorize:
                 errorTitle = LocalizedStringKey("_LOGIN_ERROR")

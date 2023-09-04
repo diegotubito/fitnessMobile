@@ -9,6 +9,8 @@
 // Mark: BUTTONS
 "_EDIT_BUTTON" = "Edit";
 "_BACK_BUTTON" = "Back";
+"_SAVE_BUTTON" = "Save";
+"_CANCEL_BUTTON" = "Cancel";
 
 // Mark: PHONE TEXTVIEW
 "_COUNTRY_TEXTFIELD_TITLE" = "Country";
@@ -46,6 +48,8 @@
 "_LOGIN_BUTTON_TITLE" = "Log in";
 
 // Mark: Seeting View
+"_SETTING_INVITATIONS"="Invitations";
+"_SETTING_WORKSPACES"="Workspaces";
 "_SETTING_2FA" = "Two Factor Authentication";
 "_SETTING_PROFILE" = "Profile";
 "_LOGOUT" = "Log Out";
@@ -74,11 +78,13 @@
 "_SERVER_ERROR_MESSAGE" = "The server doesn't respond.";
 "_NOT_KNOWN_TITLE" = "Server Error";
 "_NOT_KNOWN_MESSAGE" = "The server doesn't respond.";
-
 "_ERROR_NOT_HANDLED_TITLE" = "Error not handled";
 "_ERROR_NOT_HANDLED_MESSAGE" = "The error is known but not handled properly.";
-
 "_SERIALIZE_TITLE" = "Error";
 "_SERIALIZE_MESSAGE" = "Data could not be serialized.";
 "_401_TITLE"="Authentication";
 "_401_MESSAGE"="Session expired.";
+"_IMAGE_FAILED_TITLE"="Image Error";
+"_IMAGE_FAILED_MESSAGE"="There was an error downloading image";
+"_JSON_NOT_FOUND_TITLE"="JSON Error";
+"_JSON_NOT_FOUND_MESSAGE"="File %@ not found.";

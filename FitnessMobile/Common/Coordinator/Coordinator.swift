@@ -88,6 +88,8 @@ class Coordinator: ObservableObject {
         case profile
         case settingTwoFactor
         case twoFactorEnableInformation(qrImage: UIImage, activationCode: String)
+        case workspaceSetting
+        case invitationSetting
     }
     
     enum SheetView: Identifiable {
@@ -131,6 +133,10 @@ class Coordinator: ObservableObject {
             TwoFactorSettingView()
         case .twoFactorEnableInformation(qrImage: let qrImage, activationCode: let activationCode):
             TwoFactorEnableInformationView(qrImage: qrImage, activationCode: activationCode)
+        case .workspaceSetting:
+            WorkspaceSettingView()
+        case .invitationSetting:
+            InvitationView()
         }
     }
     

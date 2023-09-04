@@ -1,16 +1,35 @@
 {
     "user": {
-        "_id": "642f675e3334343ff52068dc",
+        "_id": "64e96af64a2b599be61a4d96",
         "username": "diego",
         "email": "diegodavid@icloud.com",
         "firstName": "David Diego",
-        "lastName": "Gomez",
+        "lastName": "Gomez Ricardon",
+        "profileImage": {
+            "url": "https://storage.googleapis.com/fitnessapp-3b183.appspot.com/profile_pictures/64e96af64a2b599be61a4d96/profile.png?GoogleAccessId=firebase-adminsdk-703jw%40fitnessapp-3b183.iam.gserviceaccount.com&Expires=3408145200&Signature=WP1kXvg%2FJYJUmiREEphZRVZDp9VVljW%2B2pn27GSdgNgmgkyIkiOvrRYLbcYfS9yXuTjCp8DyIULEO89SVRZ7QXJnPy3efbjYbfwZ7nfNaUu%2BSHFKVPP39W0RL1iOrsNecX57%2BECHX1lpLW2EBX9V%2FVfoUQmuph3b5lbsLbVPvIc9pEmnKpgCeixYElJHoCRwHXUjCk%2FnIDrDrZT9mOL967X6UZ2wWIGkTYhclwp7z1uNJp6%2BcSTMniG4fjl7kPW7XIkdXQXQiedfpG7bqBhGzBja94MRK2iAoQBK4EPj0X4OTm7I%2ByX0Xldbr3m0RTm4fvgxkM3BrtMoS75qGRDiVg%3D%3D",
+            "_id": "64f372d08a171717321bdb0d",
+            "createdAt": "2023-09-02T17:37:20.945Z",
+            "updatedAt": "2023-09-02T17:37:20.945Z"
+        },
         "isEnabled": true,
         "role": "SUPER_ROLE",
-        "phoneNumber": "1135937260",
-        "emailVerified": false,
-        "createdAt": "2023-04-07T00:44:14.554Z",
-        "spot": "642f676f3334343ff52068e2"
+        "phone": {
+            "countryName": "Bélgica",
+            "number": "1135937260",
+            "phoneCode": "32",
+            "countryCode": "BE",
+            "_id": "64f012b3f84052ba6a4d01e7"
+        },
+        "emailVerified": true,
+        "twoFactorEnabled": false,
+        "twoFactorSecret": "IVAGYUCQJ5MEO3KHGRLXS2B4KNLEG5B6KQQWO5ZJGJ5FW4ROF47A",
+        "deviceTokens": [],
+        "createdAt": "2023-08-26T03:01:10.856Z",
+        "updatedAt": "2023-09-02T17:37:20.945Z"
     },
-    "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NDJmNjc1ZTMzMzQzNDNmZjUyMDY4ZGMiLCJpYXQiOjE2ODI3ODQ5MzIsImV4cCI6MTY4Mjc4ODUzMn0.0sH-ArJQUWTtgfGdpAqiktJyYiB2xHArt7NnGYqY-IE"
+    "accessToken": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NGU5NmFmNjRhMmI1OTliZTYxYTRkOTYiLCJuYW1lIjoiRGF2aWQgRGllZ28iLCJpYXQiOjE2OTM3NTc2MTAsImV4cCI6MTY5Mzc1ODUxMH0.r521VIlJDT57diffb-HskBbBkmqLv7eEqtIC-BHUwec",
+    "accessTokenExpirationDateString": "2023-09-03T16:28:30.425Z",
+    "tempToken": "",
+    "refreshToken": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NGU5NmFmNjRhMmI1OTliZTYxYTRkOTYiLCJpYXQiOjE2OTM3NTc2MTAsImV4cCI6MTcyNTI5MzYxMH0.3d9H2Z96MwVgZmCjBWEPUf7M8eVAq5rwHPNfgrvX0nY",
+    "refreshTokenExpirationDateString": "2024-09-02T16:13:30.425Z"
 }

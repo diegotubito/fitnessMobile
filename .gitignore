@@ -17,3 +17,5 @@ Package.resolved
 *.pyc
 .docc-build
 .vscode
+*.xcuserstate
+/FitnessMobile.xcodeproj/project.xcworkspace/xcuserdata

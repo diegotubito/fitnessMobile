@@ -10,6 +10,7 @@ import SwiftUI
 class WorkspaceViewModel: BaseViewModel {
     @Published var titleTextFieldManager = CustomTextFieldManager()
     @Published var subtitleTextFieldManager = CustomTextFieldManager()
+    @Published var disabledButton: Bool = false
     
     var workspace: WorkspaceModel?
     
@@ -41,5 +42,21 @@ class WorkspaceViewModel: BaseViewModel {
     
     var isEditing: Bool {
         workspace != nil
+    }
+    
+    var isTitleValid: Bool {
+        return !titleTextFieldManager.text.isEmpty && titleTextFieldManager.text.count < 30
+    }
+    
+    var isSubtitleValid: Bool {
+        return !subtitleTextFieldManager.text.isEmpty && subtitleTextFieldManager.text.count < 30
+    }
+
+    var isValid: Bool {
+        return isSubtitleValid && isTitleValid
+    }
+    
+    func validate() {
+        disabledButton = !isValid
     }
 }

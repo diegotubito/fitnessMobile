@@ -11,6 +11,13 @@ struct WorkspaceView: View {
     @StateObject var viewmodel: WorkspaceViewModel
     @EnvironmentObject var coordinator: Coordinator
     
+    @FocusState var focus: Focus?
+    
+    enum Focus {
+        case title
+        case subtitle
+    }
+    
     var body: some View {
         ZStack {
             LinearGradient(colors: [Color.Blue.midnight, Color.Dark.tone120, .black], startPoint: .leading, endPoint: .bottom)
@@ -20,35 +27,43 @@ struct WorkspaceView: View {
                 ScrollView {
                     VStack {
                         CustomTextField(customTextFieldManager: viewmodel.titleTextFieldManager, title: "Title", placeholder: "", footer: "") { newString in
-                            
+                            viewmodel.validate()
                         } onDidBegin: { didBegin in
                             if didBegin {
-                                
+                                viewmodel.titleTextFieldManager.shouldShowError = false
                             } else {
-                                
+                                focus = .subtitle
+                                if !viewmodel.isTitleValid {
+                                    viewmodel.titleTextFieldManager.showError(message: "Title is badly format or empty field")
+                                }
                             }
                         }
+                        .focused($focus, equals: .title)
                         
                         CustomTextField(customTextFieldManager: viewmodel.subtitleTextFieldManager, title: "Subtitle", placeholder: "", footer: "") { newString in
-                            
+                            viewmodel.validate()
                         } onDidBegin: { didBegin in
                             if didBegin {
-
+                                viewmodel.subtitleTextFieldManager.shouldShowError = false
                             } else {
-                                
+                                if !viewmodel.isSubtitleValid {
+                                    viewmodel.subtitleTextFieldManager.showError(message: "Subtitle is badly format or empty field")
+                                }
                             }
                         }
+                        .focused($focus, equals: .subtitle)
+
                     }
                 }
                 
                 Spacer()
                 
                 if !viewmodel.isEditing {
-                    BasicButton(title: "Create", style: .primary, isEnabled: .constant(true)) {
+                    BasicButton(title: "Create", style: .primary, isEnabled: .constant(!viewmodel.disabledButton)) {
                         viewmodel.createWorkspace()
                     }
                 } else {
-                    BasicButton(title: "Update", style: .primary, isEnabled: .constant(true)) {
+                    BasicButton(title: "Update", style: .primary, isEnabled: .constant(!viewmodel.disabledButton)) {
                         viewmodel.updateWorkspace()
                     }
                 }
@@ -73,6 +88,8 @@ struct WorkspaceView: View {
         )
         .onAppear {
             viewmodel.setupInitValues()
+            focus = .title
+            viewmodel.validate()
         }
     }
 }

@@ -8,7 +8,8 @@
 import SwiftUI
 
 struct WorkspaceSettingView: View {
-    @StateObject var viewmodel = WorkspaceViewModel()
+    @StateObject var viewmodel = WorkspaceSettingViewModel()
+    @EnvironmentObject var coordinator: Coordinator
     
     func ownerWorkspaceView() -> some View {
         return VStack {
@@ -16,8 +17,11 @@ struct WorkspaceSettingView: View {
             if !viewmodel.ownWorkspaces.isEmpty {
                 
                 Text("Tus propios Espacios")
-                ForEach(viewmodel.ownWorkspaces, id: \.self) { own in
+                List(viewmodel.ownWorkspaces, id: \.self) { own in
                     Text(own.title)
+                        .onTapGesture {
+                            coordinator.push(.workspace(workspace: own))
+                        }
                 }
             }
             
@@ -30,7 +34,7 @@ struct WorkspaceSettingView: View {
             if !viewmodel.invitedWorkspaces.isEmpty {
                 
                 Text("Espacios como invitado")
-                ForEach(viewmodel.invitedWorkspaces, id: \.self) { invited in
+                List(viewmodel.invitedWorkspaces, id: \.self) { invited in
                     Text(invited.title)
                 }
             }
@@ -45,8 +49,11 @@ struct WorkspaceSettingView: View {
             
             VStack {
                 ownerWorkspaceView()
-                
                 invitedWorkspaceView()
+                Spacer()
+                Button("Create a new Workspace") {
+                    coordinator.push(.workspace(workspace: nil))
+                }
             }
             
         }

@@ -45,6 +45,7 @@ struct CustomAlertView: View {
                 .cornerRadius(15)
                 .padding(64)
             }
+            .navigationBarBackButtonHidden(isPresented)
         }
     }
 }

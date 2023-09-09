@@ -7,7 +7,7 @@
 
 import Foundation
 
-class WorkspaceViewModel: BaseViewModel {
+class WorkspaceSettingViewModel: BaseViewModel {
     var workspaces: [WorkspaceModel] = []
     @Published var ownWorkspaces: [WorkspaceModel] = []
     @Published var invitedWorkspaces: [WorkspaceModel] = []

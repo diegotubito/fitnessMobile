@@ -28,18 +28,18 @@ struct ProfileHeader: View {
                                 .frame(width: Constants.size, height: Constants.size)
                                 .overlay {
                                     Circle()
-                                        .stroke(Color.Dark.tone70, lineWidth: 2)
+                                        .stroke(Color.Dark.tone20, lineWidth: 2)
                                 }
                                 .shadow(radius: 5)
                         } else {
                             Circle()
-                                .stroke(Color.Dark.tone70, lineWidth: 2)
+                                .stroke(Color.Dark.tone20, lineWidth: 2)
                             Text("_EDIT_BUTTON")
                                 .padding(3)
                                 .padding(.horizontal, 2)
                                 .font(.caption)
                                 .foregroundColor(Color.Blue.truly)
-                                .background(Color.Dark.tone70)
+                                .background(Color.Dark.tone20)
                                 .cornerRadius(5)
                                 .offset(CGSize(width: 0, height: Constants.size / 2))
                                 .shadow(radius: 5)
@@ -54,20 +54,20 @@ struct ProfileHeader: View {
                 HStack {
                     Text(UserSession.getFullName() ?? "")
                         .font(.title2)
-                        .foregroundColor(Color.Dark.tone70)
+                        .foregroundColor(Color.Dark.tone20)
                     Spacer()
                 }
                 HStack {
                     Text(getDisplayUserName())
                         .font(.subheadline)
-                        .foregroundColor(Color.Dark.tone80)
+                        .foregroundColor(Color.Dark.tone30)
                     Spacer()
                 }
                 .padding(.bottom, 4)
                 HStack {
                     Text(getDisplayEmail())
                         .font(.subheadline)
-                        .foregroundColor(Color.Dark.tone80)
+                        .foregroundColor(Color.Dark.tone30)
                     Spacer()
 
                 }

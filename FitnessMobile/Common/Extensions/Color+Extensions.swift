@@ -96,10 +96,13 @@ extension Color {
     }
     
     enum Dark {
+        static var tone120: Color { return Color("Dark-120", bundle: nil) }
+        static var tone110: Color { return Color("Dark-110", bundle: nil) }
         static var tone100: Color { return Color("Dark-100", bundle: nil) }
         static var tone90: Color { return Color("Dark-90", bundle: nil) }
-        static var tone80: Color { return Color("Dark-80", bundle: nil) }
-        static var tone70: Color { return Color("Dark-70", bundle: nil) }
+        static var tone40: Color { return Color("Dark-40", bundle: nil) }
+        static var tone30: Color { return Color("Dark-30", bundle: nil) }
+        static var tone20: Color { return Color("Dark-20", bundle: nil) }
     }
     
     enum Neutral {

@@ -9,10 +9,14 @@ import Foundation
 
 struct WorkspaceResults {
     typealias FindById = WorkspaceEntity.FindByUserId.response
+    typealias Create = WorkspaceEntity.Create.Response
+    typealias Update = WorkspaceEntity.Update.Response
 }
 
 protocol WorkspaceRepositoryProtocol {
     func getWorkspacesByUserId(request: WorkspaceEntity.FindByUserId.Request) async throws -> WorkspaceResults.FindById
+    func createWorkspace(request: WorkspaceEntity.Create.Request) async throws -> WorkspaceResults.Create
+    func updateWorkspace(request: WorkspaceEntity.Update.Request) async throws -> WorkspaceResults.Update
 }
 
 class WorkspaceRepository: ApiNetworkAsync, WorkspaceRepositoryProtocol {
@@ -23,11 +27,38 @@ class WorkspaceRepository: ApiNetworkAsync, WorkspaceRepositoryProtocol {
         
         return try await apiCall()
     }
+    
+    func createWorkspace(request: WorkspaceEntity.Create.Request) async throws -> WorkspaceResults.Create {
+        config.path = "/api/v1/workspace"
+        config.method = .post
+        config.addRequestBody(request)
+        
+        return try await apiCall()
+    }
+    
+    func updateWorkspace(request: WorkspaceEntity.Update.Request) async throws -> WorkspaceResults.Update {
+        config.path = "/api/v1/workspace"
+        config.addQueryItem(key: "_id", value: request._id)
+        config.method = .put
+        config.addRequestBody(request)
+        
+        return try await apiCall()
+    }
 }
 
 class WorkspaceRepositoryMock: ApiNetworkMockAsync, WorkspaceRepositoryProtocol {
     func getWorkspacesByUserId(request: WorkspaceEntity.FindByUserId.Request) async throws -> WorkspaceResults.FindById {
         mockFileName = "load_workspace_by_id_response"
+        return try await apiCallMocked(bundle: Bundle.main)
+    }
+    
+    func createWorkspace(request: WorkspaceEntity.Create.Request) async throws -> WorkspaceResults.Create {
+        mockFileName = ""
+        return try await apiCallMocked(bundle: Bundle.main)
+    }
+
+    func updateWorkspace(request: WorkspaceEntity.Update.Request) async throws -> WorkspaceResults.Update {
+        mockFileName = ""
         return try await apiCallMocked(bundle: Bundle.main)
     }
 }

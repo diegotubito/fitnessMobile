@@ -17,4 +17,28 @@ struct WorkspaceEntity {
             let workspaces: [WorkspaceModel]
         }
     }
+    
+    struct Create {
+        struct Request: Encodable {
+            let owner: String
+            let title: String
+            let subtitle: String
+        }
+        
+        struct Response: Decodable {
+            let workspace: WorkspaceModel
+        }
+    }
+    
+    struct Update {
+        struct Request: Encodable {
+            let _id: String
+            let title: String
+            let subtitle: String
+        }
+        
+        struct Response: Decodable {
+            let workspace: WorkspaceModel
+        }
+    }
 }

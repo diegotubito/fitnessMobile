@@ -21,7 +21,7 @@ struct DeleteAccountView: View {
                 HStack {
                     Text("_DELETE_ACCOUNT_TITLE")
                         .font(.largeTitle)
-                        .foregroundColor(Color.Dark.tone80)
+                        .foregroundColor(Color.Dark.tone30)
                     Spacer()
                 }
                 .padding(.bottom)

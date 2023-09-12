@@ -20,7 +20,7 @@ struct WorkspaceSettingView: View {
                 List(viewmodel.ownWorkspaces, id: \.self) { own in
                     Text(own.title)
                         .onTapGesture {
-                            coordinator.push(.workspace(workspace: own))
+                            coordinator.push(.workspaceDetail(workspace: own))
                         }
                 }
             }
@@ -52,7 +52,7 @@ struct WorkspaceSettingView: View {
                 invitedWorkspaceView()
                 Spacer()
                 Button("Create a new Workspace") {
-                    coordinator.push(.workspace(workspace: nil))
+                    coordinator.push(.workspaceTitleAndSubtitle(workspace: nil))
                 }
             }
             

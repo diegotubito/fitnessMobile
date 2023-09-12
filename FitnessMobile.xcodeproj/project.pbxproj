@@ -7,8 +7,13 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		F11143982AA82EC5008EC3DC /* WorkspaceView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F11143972AA82EC5008EC3DC /* WorkspaceView.swift */; };
-		F111439A2AA82ED4008EC3DC /* WorkspaceViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F11143992AA82ED4008EC3DC /* WorkspaceViewModel.swift */; };
+		F1028D1F2AACC640005C8F5B /* WorkspaceAddressView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1028D1E2AACC640005C8F5B /* WorkspaceAddressView.swift */; };
+		F1028D252AAD710D005C8F5B /* WorkspaceAddressViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1028D242AAD710D005C8F5B /* WorkspaceAddressViewModel.swift */; };
+		F1028D282AAE13C6005C8F5B /* WorkspaceDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1028D272AAE13C6005C8F5B /* WorkspaceDetailView.swift */; };
+		F1028D2A2AAE14AB005C8F5B /* WorkspaceDetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1028D292AAE14AB005C8F5B /* WorkspaceDetailViewModel.swift */; };
+		F1028D2D2AAFF6B8005C8F5B /* WarningBoxView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1028D2C2AAFF6B8005C8F5B /* WarningBoxView.swift */; };
+		F11143982AA82EC5008EC3DC /* TitleAndSubtitleWorkspaceView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F11143972AA82EC5008EC3DC /* TitleAndSubtitleWorkspaceView.swift */; };
+		F111439A2AA82ED4008EC3DC /* WorkspaceTitleAndSubtitleViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F11143992AA82ED4008EC3DC /* WorkspaceTitleAndSubtitleViewModel.swift */; };
 		F136CE692A81EB4100326730 /* ProfileHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = F136CE682A81EB4100326730 /* ProfileHeader.swift */; };
 		F136CE6B2A84326100326730 /* CountryPickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F136CE6A2A84326100326730 /* CountryPickerView.swift */; };
 		F136CE6E2A8432F200326730 /* CountryPickerViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F136CE6D2A8432F200326730 /* CountryPickerViewModel.swift */; };
@@ -131,8 +136,13 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		F11143972AA82EC5008EC3DC /* WorkspaceView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkspaceView.swift; sourceTree = "<group>"; };
-		F11143992AA82ED4008EC3DC /* WorkspaceViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkspaceViewModel.swift; sourceTree = "<group>"; };
+		F1028D1E2AACC640005C8F5B /* WorkspaceAddressView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkspaceAddressView.swift; sourceTree = "<group>"; };
+		F1028D242AAD710D005C8F5B /* WorkspaceAddressViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkspaceAddressViewModel.swift; sourceTree = "<group>"; };
+		F1028D272AAE13C6005C8F5B /* WorkspaceDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkspaceDetailView.swift; sourceTree = "<group>"; };
+		F1028D292AAE14AB005C8F5B /* WorkspaceDetailViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkspaceDetailViewModel.swift; sourceTree = "<group>"; };
+		F1028D2C2AAFF6B8005C8F5B /* WarningBoxView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WarningBoxView.swift; sourceTree = "<group>"; };
+		F11143972AA82EC5008EC3DC /* TitleAndSubtitleWorkspaceView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TitleAndSubtitleWorkspaceView.swift; sourceTree = "<group>"; };
+		F11143992AA82ED4008EC3DC /* WorkspaceTitleAndSubtitleViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkspaceTitleAndSubtitleViewModel.swift; sourceTree = "<group>"; };
 		F136CE682A81EB4100326730 /* ProfileHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileHeader.swift; sourceTree = "<group>"; };
 		F136CE6A2A84326100326730 /* CountryPickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CountryPickerView.swift; sourceTree = "<group>"; };
 		F136CE6D2A8432F200326730 /* CountryPickerViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CountryPickerViewModel.swift; sourceTree = "<group>"; };
@@ -268,13 +278,49 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		F11143962AA82EAC008EC3DC /* CreateWorkspace */ = {
+		F1028D202AACD2F0005C8F5B /* AddressView */ = {
 			isa = PBXGroup;
 			children = (
-				F11143972AA82EC5008EC3DC /* WorkspaceView.swift */,
-				F11143992AA82ED4008EC3DC /* WorkspaceViewModel.swift */,
+				F1028D1E2AACC640005C8F5B /* WorkspaceAddressView.swift */,
+				F1028D242AAD710D005C8F5B /* WorkspaceAddressViewModel.swift */,
 			);
-			path = CreateWorkspace;
+			path = AddressView;
+			sourceTree = "<group>";
+		};
+		F1028D232AACF145005C8F5B /* WorkplaceFlow */ = {
+			isa = PBXGroup;
+			children = (
+				F1028D262AAE13BB005C8F5B /* Detail */,
+				F11143962AA82EAC008EC3DC /* TitleAndSubtitle */,
+				F1028D202AACD2F0005C8F5B /* AddressView */,
+			);
+			path = WorkplaceFlow;
+			sourceTree = "<group>";
+		};
+		F1028D262AAE13BB005C8F5B /* Detail */ = {
+			isa = PBXGroup;
+			children = (
+				F1028D272AAE13C6005C8F5B /* WorkspaceDetailView.swift */,
+				F1028D292AAE14AB005C8F5B /* WorkspaceDetailViewModel.swift */,
+			);
+			path = Detail;
+			sourceTree = "<group>";
+		};
+		F1028D2B2AAFF6AA005C8F5B /* WarningBox */ = {
+			isa = PBXGroup;
+			children = (
+				F1028D2C2AAFF6B8005C8F5B /* WarningBoxView.swift */,
+			);
+			path = WarningBox;
+			sourceTree = "<group>";
+		};
+		F11143962AA82EAC008EC3DC /* TitleAndSubtitle */ = {
+			isa = PBXGroup;
+			children = (
+				F11143972AA82EC5008EC3DC /* TitleAndSubtitleWorkspaceView.swift */,
+				F11143992AA82ED4008EC3DC /* WorkspaceTitleAndSubtitleViewModel.swift */,
+			);
+			path = TitleAndSubtitle;
 			sourceTree = "<group>";
 		};
 		F136CE672A81EB3600326730 /* ProfileHeader */ = {
@@ -693,6 +739,7 @@
 		F1AD87D42A7A1EE100A39752 /* Components */ = {
 			isa = PBXGroup;
 			children = (
+				F1028D2B2AAFF6AA005C8F5B /* WarningBox */,
 				F159C3E92A9B98DF00CDAF20 /* ProgressView */,
 				F159C3E62A9B8B6100CDAF20 /* CustomAlert */,
 				F1AD87D52A7A1EE100A39752 /* Buttons */,
@@ -766,7 +813,7 @@
 		F1D372DF2AA4033F00846DC6 /* Workspace */ = {
 			isa = PBXGroup;
 			children = (
-				F11143962AA82EAC008EC3DC /* CreateWorkspace */,
+				F1028D232AACF145005C8F5B /* WorkplaceFlow */,
 				F1D372E02AA4035000846DC6 /* WorkspaceSettingView.swift */,
 				F1D372E22AA4E17E00846DC6 /* WorkspaceSettingViewModel.swift */,
 			);
@@ -993,12 +1040,14 @@
 				F159C3E82A9B8B7200CDAF20 /* CustomAlertView.swift in Sources */,
 				F1AD87CC2A788FE000A39752 /* LoginRepository.swift in Sources */,
 				F1AD87B52A788E2100A39752 /* Keychain.swift in Sources */,
+				F1028D252AAD710D005C8F5B /* WorkspaceAddressViewModel.swift in Sources */,
 				F17F4A462A7F00E90086DDCB /* Coordinator.swift in Sources */,
 				F17F4A7E2A8145C10086DDCB /* ProfileView.swift in Sources */,
 				F17F4A592A7F59200086DDCB /* SplashViewModel.swift in Sources */,
 				F1AD87C12A788FD900A39752 /* UserModel.swift in Sources */,
 				F1D372F12AA54A4B00846DC6 /* invitationViewModel.swift in Sources */,
 				F1AD87CB2A788FE000A39752 /* LoginEntity.swift in Sources */,
+				F1028D2A2AAE14AB005C8F5B /* WorkspaceDetailViewModel.swift in Sources */,
 				F159C3D62A99AE8700CDAF20 /* DataDisk.swift in Sources */,
 				F1D372F62AA5604C00846DC6 /* InvitationModel.swift in Sources */,
 				F1AD87B72A788E2D00A39752 /* UserSession.swift in Sources */,
@@ -1026,6 +1075,7 @@
 				F17F4A722A8040830086DDCB /* UserUsaCase.swift in Sources */,
 				F1AD87E32A7A1EE200A39752 /* BasicButtonView.swift in Sources */,
 				F17F4A6A2A80227D0086DDCB /* DeleteAccountViewModel.swift in Sources */,
+				F1028D282AAE13C6005C8F5B /* WorkspaceDetailView.swift in Sources */,
 				F1E01EE12A93D01700991010 /* StorageUseCase.swift in Sources */,
 				F1E01EE52A93D02900991010 /* StorageEntity.swift in Sources */,
 				F1D372E82AA4E88700846DC6 /* WorkspaceModel.swift in Sources */,
@@ -1039,7 +1089,7 @@
 				F17F4A652A8021070086DDCB /* SettingView.swift in Sources */,
 				F1AD87E82A7A1EE200A39752 /* CustomTextField.swift in Sources */,
 				F1AD879B2A788D2D00A39752 /* ApiNetworkErrorModel.swift in Sources */,
-				F111439A2AA82ED4008EC3DC /* WorkspaceViewModel.swift in Sources */,
+				F111439A2AA82ED4008EC3DC /* WorkspaceTitleAndSubtitleViewModel.swift in Sources */,
 				F17F49C42A7AB6990086DDCB /* SplashView.swift in Sources */,
 				F1AD87B32A788DFF00A39752 /* ColorAsset.swift in Sources */,
 				F1AD87A72A788D5B00A39752 /* UIImage+Extension.swift in Sources */,
@@ -1056,9 +1106,11 @@
 				F159C3EB2A9B990100CDAF20 /* CustomProgressView.swift in Sources */,
 				F1F637BC2A88798F00FC3A31 /* TwoFactorEnableInformationView.swift in Sources */,
 				F1AD87E42A7A1EE200A39752 /* SingleSelector.swift in Sources */,
+				F1028D1F2AACC640005C8F5B /* WorkspaceAddressView.swift in Sources */,
 				F159C3E02A9A6D8E00CDAF20 /* PhotoPickerManager.swift in Sources */,
 				F17F49C12A7AB6750086DDCB /* HomeView.swift in Sources */,
 				F1D372FC2AA5647E00846DC6 /* InvitationRepository.swift in Sources */,
+				F1028D2D2AAFF6B8005C8F5B /* WarningBoxView.swift in Sources */,
 				F136CE752A85B63600326730 /* OTPViewModel.swift in Sources */,
 				F1F637B92A886C9C00FC3A31 /* TwoFactorSettingViewModel.swift in Sources */,
 				F1AD87BE2A788F6000A39752 /* LoginViewModel.swift in Sources */,
@@ -1074,7 +1126,7 @@
 				F1AD87A62A788D5B00A39752 /* Date+Extension.swift in Sources */,
 				F17F4A6E2A8040750086DDCB /* UserRepository.swift in Sources */,
 				F17F49CB2A7ABC120086DDCB /* ServerConnectionUseCase.swift in Sources */,
-				F11143982AA82EC5008EC3DC /* WorkspaceView.swift in Sources */,
+				F11143982AA82EC5008EC3DC /* TitleAndSubtitleWorkspaceView.swift in Sources */,
 				F159C3DD2A9A61CA00CDAF20 /* PhotoPickerView.swift in Sources */,
 				F1F637C12A89229B00FC3A31 /* TwoFactorUseCase.swift in Sources */,
 				F1D372E62AA4E87D00846DC6 /* WorkspaceEntity.swift in Sources */,

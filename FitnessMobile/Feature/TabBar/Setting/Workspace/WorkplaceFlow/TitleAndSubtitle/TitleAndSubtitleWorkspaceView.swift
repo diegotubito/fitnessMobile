@@ -7,17 +7,16 @@
 
 import SwiftUI
 
-struct WorkspaceView: View {
-    @StateObject var viewmodel: WorkspaceViewModel
+struct TitleAndSubtitleWorkspaceView: View {
+    @StateObject var viewmodel: WorkspaceTitleAndSubtitleViewModel
     @EnvironmentObject var coordinator: Coordinator
-    
     @FocusState var focus: Focus?
     
     enum Focus {
         case title
         case subtitle
     }
-    
+        
     var body: some View {
         ZStack {
             LinearGradient(colors: [Color.Blue.midnight, Color.Dark.tone120, .black], startPoint: .leading, endPoint: .bottom)
@@ -60,7 +59,7 @@ struct WorkspaceView: View {
                 
                 if !viewmodel.isEditing {
                     BasicButton(title: "Create", style: .primary, isEnabled: .constant(!viewmodel.disabledButton)) {
-                        viewmodel.createWorkspace()
+                        coordinator.push(.addressWorkspace)
                     }
                 } else {
                     BasicButton(title: "Update", style: .primary, isEnabled: .constant(!viewmodel.disabledButton)) {
@@ -79,6 +78,7 @@ struct WorkspaceView: View {
                 }
             })
             .padding()
+            
         }
         .overlay(
             Group {
@@ -94,8 +94,8 @@ struct WorkspaceView: View {
     }
 }
 
-struct CreateWorkspaceView_Previews: PreviewProvider {
+struct TitleAndSubtitleWorkspaceView_Previews: PreviewProvider {
     static var previews: some View {
-        WorkspaceView(viewmodel: WorkspaceViewModel(workspace: nil))
+        TitleAndSubtitleWorkspaceView(viewmodel: WorkspaceTitleAndSubtitleViewModel(workspace: nil))
     }
 }

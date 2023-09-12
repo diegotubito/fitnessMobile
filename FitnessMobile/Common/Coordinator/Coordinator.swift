@@ -90,7 +90,9 @@ class Coordinator: ObservableObject {
         case twoFactorEnableInformation(qrImage: UIImage, activationCode: String)
         case workspaceSetting
         case invitationSetting
-        case workspace(workspace: WorkspaceModel?)
+        case workspaceTitleAndSubtitle(workspace: WorkspaceModel?)
+        case workspaceDetail(workspace: WorkspaceModel)
+        case addressWorkspace
     }
     
     enum SheetView: Identifiable {
@@ -138,8 +140,12 @@ class Coordinator: ObservableObject {
             WorkspaceSettingView()
         case .invitationSetting:
             InvitationView()
-        case .workspace(workspace: let workspace):
-            WorkspaceView(viewmodel: WorkspaceViewModel(workspace: workspace))
+        case .workspaceDetail(workspace: let workspace):
+            WorkspaceDetailView(viewmodel: WorkspaceDetailViewModel(workspace: workspace))
+        case .workspaceTitleAndSubtitle(workspace: let workspace):
+            TitleAndSubtitleWorkspaceView(viewmodel: WorkspaceTitleAndSubtitleViewModel(workspace: workspace))
+        case .addressWorkspace:
+            WorkspaceAddressView()
         }
     }
     

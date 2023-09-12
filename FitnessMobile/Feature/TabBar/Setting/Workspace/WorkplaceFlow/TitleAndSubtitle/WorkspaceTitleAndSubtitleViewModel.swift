@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-class WorkspaceViewModel: BaseViewModel {
+class WorkspaceTitleAndSubtitleViewModel: BaseViewModel {    
     @Published var titleTextFieldManager = CustomTextFieldManager()
     @Published var subtitleTextFieldManager = CustomTextFieldManager()
     @Published var disabledButton: Bool = false

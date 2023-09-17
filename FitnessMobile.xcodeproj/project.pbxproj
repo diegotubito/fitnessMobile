@@ -28,6 +28,8 @@
 		F159C3E82A9B8B7200CDAF20 /* CustomAlertView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F159C3E72A9B8B7200CDAF20 /* CustomAlertView.swift */; };
 		F159C3EB2A9B990100CDAF20 /* CustomProgressView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F159C3EA2A9B990100CDAF20 /* CustomProgressView.swift */; };
 		F15CDE7C2A9269BC003DCB14 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F15CDE7B2A9269BC003DCB14 /* AppDelegate.swift */; };
+		F16CCD442AB36D2D0037DCC6 /* GoogleGeocodeModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F16CCD432AB36D2D0037DCC6 /* GoogleGeocodeModel.swift */; };
+		F16CCD462AB5DCBD0037DCC6 /* GoogleGeocodeManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F16CCD452AB5DCBD0037DCC6 /* GoogleGeocodeManager.swift */; };
 		F17F49C12A7AB6750086DDCB /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F17F49C02A7AB6750086DDCB /* HomeView.swift */; };
 		F17F49C42A7AB6990086DDCB /* SplashView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F17F49C32A7AB6990086DDCB /* SplashView.swift */; };
 		F17F49C92A7ABC080086DDCB /* ServerConnectionRepostory.swift in Sources */ = {isa = PBXBuildFile; fileRef = F17F49C82A7ABC080086DDCB /* ServerConnectionRepostory.swift */; };
@@ -158,6 +160,8 @@
 		F159C3EA2A9B990100CDAF20 /* CustomProgressView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomProgressView.swift; sourceTree = "<group>"; };
 		F15CDE7B2A9269BC003DCB14 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		F15CDE7F2A926BCE003DCB14 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
+		F16CCD432AB36D2D0037DCC6 /* GoogleGeocodeModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoogleGeocodeModel.swift; sourceTree = "<group>"; };
+		F16CCD452AB5DCBD0037DCC6 /* GoogleGeocodeManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoogleGeocodeManager.swift; sourceTree = "<group>"; };
 		F17F49C02A7AB6750086DDCB /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
 		F17F49C32A7AB6990086DDCB /* SplashView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashView.swift; sourceTree = "<group>"; };
 		F17F49C82A7ABC080086DDCB /* ServerConnectionRepostory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServerConnectionRepostory.swift; sourceTree = "<group>"; };
@@ -419,6 +423,15 @@
 			path = ProgressView;
 			sourceTree = "<group>";
 		};
+		F16CCD422AB36D1F0037DCC6 /* GoogleGeocode */ = {
+			isa = PBXGroup;
+			children = (
+				F16CCD432AB36D2D0037DCC6 /* GoogleGeocodeModel.swift */,
+				F16CCD452AB5DCBD0037DCC6 /* GoogleGeocodeManager.swift */,
+			);
+			path = GoogleGeocode;
+			sourceTree = "<group>";
+		};
 		F17F49BF2A7AB6530086DDCB /* Home */ = {
 			isa = PBXGroup;
 			children = (
@@ -622,6 +635,7 @@
 		F1AD87872A788BCA00A39752 /* Repository */ = {
 			isa = PBXGroup;
 			children = (
+				F16CCD422AB36D1F0037DCC6 /* GoogleGeocode */,
 				F1D372F42AA5603B00846DC6 /* Invitation */,
 				F1D372E42AA4E81000846DC6 /* Workspace */,
 				F1E01EDF2A93D00100991010 /* Storage */,
@@ -1056,8 +1070,10 @@
 				F15CDE7C2A9269BC003DCB14 /* AppDelegate.swift in Sources */,
 				F1F637BF2A89228E00FC3A31 /* TwoFactorRepository.swift in Sources */,
 				F17F4A802A8158020086DDCB /* ProfileViewModel.swift in Sources */,
+				F16CCD462AB5DCBD0037DCC6 /* GoogleGeocodeManager.swift in Sources */,
 				F1AD879C2A788D2D00A39752 /* ApiNetworkAsync.swift in Sources */,
 				F1A1FA4B2A9BD92B00C816AC /* OpenCameraWrapper.swift in Sources */,
+				F16CCD442AB36D2D0037DCC6 /* GoogleGeocodeModel.swift in Sources */,
 				F136CE692A81EB4100326730 /* ProfileHeader.swift in Sources */,
 				F17F4A7B2A8080300086DDCB /* UserList.swift in Sources */,
 				F1D372F82AA5605600846DC6 /* InvitationEntity.swift in Sources */,

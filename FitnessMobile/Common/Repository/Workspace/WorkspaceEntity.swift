@@ -41,4 +41,15 @@ struct WorkspaceEntity {
             let workspace: WorkspaceModel
         }
     }
+    
+    struct UpdateAddress {
+        struct Request: Encodable {
+            let _id: String
+            let location: WorkspaceModel.Location
+        }
+        
+        struct Response: Decodable {
+            let workspace: WorkspaceModel
+        }
+    }
 }

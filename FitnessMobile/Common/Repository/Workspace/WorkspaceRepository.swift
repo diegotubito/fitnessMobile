@@ -11,12 +11,14 @@ struct WorkspaceResults {
     typealias FindById = WorkspaceEntity.FindByUserId.response
     typealias Create = WorkspaceEntity.Create.Response
     typealias Update = WorkspaceEntity.Update.Response
+    typealias UpdateAddress = WorkspaceEntity.UpdateAddress.Response
 }
 
 protocol WorkspaceRepositoryProtocol {
     func getWorkspacesByUserId(request: WorkspaceEntity.FindByUserId.Request) async throws -> WorkspaceResults.FindById
     func createWorkspace(request: WorkspaceEntity.Create.Request) async throws -> WorkspaceResults.Create
     func updateWorkspace(request: WorkspaceEntity.Update.Request) async throws -> WorkspaceResults.Update
+    func updateWorkspaceAddress(request: WorkspaceEntity.UpdateAddress.Request) async throws -> WorkspaceResults.UpdateAddress
 }
 
 class WorkspaceRepository: ApiNetworkAsync, WorkspaceRepositoryProtocol {
@@ -44,6 +46,15 @@ class WorkspaceRepository: ApiNetworkAsync, WorkspaceRepositoryProtocol {
         
         return try await apiCall()
     }
+    
+    func updateWorkspaceAddress(request: WorkspaceEntity.UpdateAddress.Request) async throws -> WorkspaceResults.UpdateAddress {
+        config.path = "/api/v1/workspace/update-address"
+        config.addQueryItem(key: "_id", value: request._id)
+        config.method = .put
+        config.addRequestBody(request)
+        
+        return try await apiCall()
+    }
 }
 
 class WorkspaceRepositoryMock: ApiNetworkMockAsync, WorkspaceRepositoryProtocol {
@@ -58,6 +69,11 @@ class WorkspaceRepositoryMock: ApiNetworkMockAsync, WorkspaceRepositoryProtocol 
     }
 
     func updateWorkspace(request: WorkspaceEntity.Update.Request) async throws -> WorkspaceResults.Update {
+        mockFileName = ""
+        return try await apiCallMocked(bundle: Bundle.main)
+    }
+    
+    func updateWorkspaceAddress(request: WorkspaceEntity.UpdateAddress.Request) async throws -> WorkspaceResults.UpdateAddress {
         mockFileName = ""
         return try await apiCallMocked(bundle: Bundle.main)
     }

@@ -12,6 +12,7 @@ protocol WorkspaceUseCaseProtocol {
     func getWorkspacesBuUserId() async throws -> WorkspaceResults.FindById
     func createWorkspace(ownerId: String, title: String, subtitle: String) async throws -> WorkspaceResults.Create
     func updateWorkspace(workspaceId: String, title: String, subtitle: String) async throws -> WorkspaceResults.Update
+    func updateWorkspaceAddress(workspaceId: String, location: WorkspaceModel.Location) async throws -> WorkspaceResults.UpdateAddress
 }
 
 class WorkspaceUseCase: WorkspaceUseCaseProtocol {
@@ -33,6 +34,11 @@ class WorkspaceUseCase: WorkspaceUseCaseProtocol {
     func updateWorkspace(workspaceId: String, title: String, subtitle: String) async throws -> WorkspaceResults.Update {
         let request = WorkspaceEntity.Update.Request(_id: workspaceId, title: title, subtitle: subtitle)
         return try await repository.updateWorkspace(request: request)
+    }
+    
+    func updateWorkspaceAddress(workspaceId: String, location: WorkspaceModel.Location) async throws -> WorkspaceResults.UpdateAddress {
+        let request = WorkspaceEntity.UpdateAddress.Request(_id: workspaceId, location: location)
+        return try await repository.updateWorkspaceAddress(request: request)
     }
 }
 

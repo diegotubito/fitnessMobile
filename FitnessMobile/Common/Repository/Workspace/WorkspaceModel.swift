@@ -19,12 +19,26 @@ struct WorkspaceModel: Identifiable, Codable, Hashable {
     let createdAt: String
     let updatedAt: String
     let members: [WorkspaceMember]
+    let location: Location?
+    let locationVerificationStatus: Status?
     
     struct WorkspaceMember: Identifiable, Codable, Hashable {
         var id: UUID? = UUID()
         
         let user: String
         let role: String
+    }
+    
+    struct Location: Codable, Hashable {
+        let coordinates: [Double]
+        let googleGeocode: GoogleGeocodeModel.Result?
+    }
+    
+    enum Status: String, Codable, CaseIterable {
+        case notVerified = "NOT_VERIFIED"
+        case pending = "PENDING"
+        case verified = "VERIFIED"
+        case rejected = "REJECTED"
     }
 }
 

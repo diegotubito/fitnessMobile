@@ -59,7 +59,9 @@ struct TitleAndSubtitleWorkspaceView: View {
                 
                 if !viewmodel.isEditing {
                     BasicButton(title: "Create", style: .primary, isEnabled: .constant(!viewmodel.disabledButton)) {
-                        coordinator.push(.addressWorkspace)
+                        if let workspace = viewmodel.workspace {
+                            coordinator.push(.addressWorkspace(workspace: workspace))
+                        }
                     }
                 } else {
                     BasicButton(title: "Update", style: .primary, isEnabled: .constant(!viewmodel.disabledButton)) {

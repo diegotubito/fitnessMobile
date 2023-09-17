@@ -92,7 +92,7 @@ class Coordinator: ObservableObject {
         case invitationSetting
         case workspaceTitleAndSubtitle(workspace: WorkspaceModel?)
         case workspaceDetail(workspace: WorkspaceModel)
-        case addressWorkspace
+        case addressWorkspace(workspace: WorkspaceModel)
     }
     
     enum SheetView: Identifiable {
@@ -144,8 +144,8 @@ class Coordinator: ObservableObject {
             WorkspaceDetailView(viewmodel: WorkspaceDetailViewModel(workspace: workspace))
         case .workspaceTitleAndSubtitle(workspace: let workspace):
             TitleAndSubtitleWorkspaceView(viewmodel: WorkspaceTitleAndSubtitleViewModel(workspace: workspace))
-        case .addressWorkspace:
-            WorkspaceAddressView()
+        case .addressWorkspace(workspace: let workspace):
+            WorkspaceAddressView(viewmodel: WorkspaceAddressViewModel(workspace: workspace))
         }
     }
     

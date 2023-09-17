@@ -10,18 +10,30 @@ import CoreLocation
 
 class WorkspaceAddressViewModel: BaseViewModel {
     @Published var addressTextField = CustomTextFieldManager()
-    @Published var onValidAddress = false
-
-    func verifyAddress() {
-        let geocoder = CLGeocoder()
-        geocoder.geocodeAddressString(addressTextField.text) { (placemarks, error) in
-            DispatchQueue.main.async {
-                if error == nil, let placemarks = placemarks, !placemarks.isEmpty {
-                    self.onValidAddress = true
-                } else {
+    @Published var onWorkspaceUpdated: WorkspaceModel?
+    
+    var workspace: WorkspaceModel
+    
+    init(workspace: WorkspaceModel) {
+        self.workspace = workspace
+    }
+   
+    @MainActor
+    func updateWorkspaceAddress(result: GoogleGeocodeModel.Result) {
+        Task {
+            do {
+                let usecase = WorkspaceUseCase()
+                let location = WorkspaceModel.Location(coordinates: [result.geometry.location.lng, result.geometry.location.lat],
+                                                       googleGeocode: result)
+                let response = try await usecase.updateWorkspaceAddress(workspaceId: workspace._id,
+                                                                        location: location)
+                DispatchQueue.main.async {
+                    self.onWorkspaceUpdated = response.workspace
+                }
+            } catch {
+                DispatchQueue.main.async {
                     self.showError = true
-                    self.errorTitle = "Invalid Address"
-                    self.errorMessage = "Insert a valid address."
+                    self.handleError(error: error)
                 }
             }
         }

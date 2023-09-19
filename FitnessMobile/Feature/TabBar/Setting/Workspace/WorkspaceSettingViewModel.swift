@@ -42,7 +42,7 @@ class WorkspaceSettingViewModel: BaseViewModel {
     
     func filterInvitedWorkspaces() {
         invitedWorkspaces = workspaces.filter { workspace in
-            workspace.members.contains(where: {$0.user == UserSession._id})
+            workspace.members.contains(where: {$0.user._id == UserSession._id})
         }
     }
 }

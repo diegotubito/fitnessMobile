@@ -18,6 +18,8 @@ struct WorkspaceDetailView: View {
                 Image("logo")
                     .resizable()
                     .scaledToFit()
+                    .frame(width: 100)
+                
                 titleAndSubtitleView()
             }
         }
@@ -34,7 +36,7 @@ struct WorkspaceDetailView: View {
                 }
                 .foregroundColor(.accentColor)
                 .onTapGesture {
-                    print("edit title and subtitle")
+                    coordinator.push(.workspaceTitleAndSubtitle(workspace: viewmodel.workspace))
                 }
                 
                 HStack {
@@ -52,18 +54,21 @@ struct WorkspaceDetailView: View {
     }
     
     func notVerifiedView() -> some View {
-        return HStack {
+        return HStack(alignment: .bottom) {
             Image(systemName: "checkmark.shield.fill")
                 .resizable()
                 .frame(width: 20, height: 20)
-            //.foregroundColor(.red)
-            Text("Not Verified")
-            Button("Upload document to verify") {
+                .foregroundColor(Color.Neutral.tone80)
+            Text("Address not verified.")
+                .foregroundColor(Color.Neutral.tone80)
+            Button("Share a document") {
                 
             }
+            .font(.callout)
+            .foregroundColor(.accentColor)
             Spacer()
         }
-        .foregroundColor(Color.Neutral.tone80)
+        
     }
     
     func pendingStatusView() -> some View {
@@ -110,12 +115,13 @@ struct WorkspaceDetailView: View {
                         .font(.headline)
                     Spacer()
                     Image(systemName: "pencil")
+                        .foregroundColor(.accentColor)
+                        .onTapGesture {
+                            coordinator.push(.addressWorkspace(workspace: viewmodel.workspace))
+                        }
                 }
                 .padding(.bottom, 4)
-                .foregroundColor(Color.Apricot.trueApricot)
-                .onTapGesture {
-                    coordinator.push(.addressWorkspace(workspace: viewmodel.workspace))
-                }
+                
                 
                 VStack {
                     if let formattedAddress = viewmodel.getFormattedAddress() {
@@ -134,23 +140,19 @@ struct WorkspaceDetailView: View {
                         
                     case .notVerified:
                         notVerifiedView()
+                        WarningBoxView(title: "Verification Note:", message: "Remeber that verifying your address is mandatory to be visible in user's area. Otherwise, you potential clients would never know you are running a business")
                     case .pending:
                         pendingStatusView()
                     case .verified:
                         verifiedStatusView()
                     case .rejected:
                         rejectedStatusView()
+                        WarningBoxView(title: "Verification Note:", message: "Your address has been rejected. Please, change your address and upload new documents")
                     case .none:
                         EmptyView()
                     }
                 }
-                .padding(.leading)
-                
             }
-            
-            WarningBoxView(title: "Verification Note:", message: "Remeber that verifying your address is mandatory to be visible in user's area. Otherwise, you potential clients would never know you are running a business")
-            
-            
         }
         .padding()
         .background(Color.Neutral.tone100.opacity(0.5))
@@ -164,20 +166,60 @@ struct WorkspaceDetailView: View {
                     .font(.headline)
                 Spacer()
                 Image(systemName: "pencil")
-            }
-            .foregroundColor(Color.Apricot.trueApricot)
-            .onTapGesture {
-                coordinator.push(.addressWorkspace(workspace: viewmodel.workspace))
+                    .foregroundColor(.accentColor)
+                    .onTapGesture {
+                        coordinator.push(.addressWorkspace(workspace: viewmodel.workspace))
+                    }
             }
             
             HStack {
                 Text("No address found.")
                 Spacer()
             }
-            .padding([.leading, .bottom])
+            .padding(.bottom)
             .foregroundColor(Color.Neutral.tone80)
             
             WarningBoxView(title: "Important Note:", message: "Set up your address so that your customers can find you.")
+        }
+        .padding()
+        .background(Color.Neutral.tone100.opacity(0.5))
+        .cornerRadius(10)
+    }
+    
+    func colaborators() -> some View {
+        return VStack {
+            HStack {
+                Text("Colaboradores")
+                    .font(.headline)
+                Spacer()
+                Image(systemName: "plus")
+                    .foregroundColor(.accentColor)
+                    .onTapGesture {
+                        coordinator.push(.addressWorkspace(workspace: viewmodel.workspace))
+                    }
+            }
+            .padding(.bottom, 4)
+            MemberListView(viewmodel: MemberViewModel(members: viewmodel.workspace.members))
+        }
+        .padding()
+        .background(Color.Neutral.tone100.opacity(0.5))
+        .cornerRadius(10)
+    }
+    
+    func invitations() -> some View {
+        return VStack {
+            HStack {
+                Text("Invitations")
+                    .font(.headline)
+                Spacer()
+                Image(systemName: "plus")
+                    .foregroundColor(.accentColor)
+                    .onTapGesture {
+                        coordinator.push(.addressWorkspace(workspace: viewmodel.workspace))
+                    }
+            }
+            .padding(.bottom, 4)
+            InvitationListView(viewmodel: InvitationListViewModel(workspace: viewmodel.workspace))
         }
         .padding()
         .background(Color.Neutral.tone100.opacity(0.5))
@@ -197,12 +239,31 @@ struct WorkspaceDetailView: View {
                         noAddressView()
                     }
                     
+                    colaborators()
+                    invitations()
+                    
+                    HStack {
+                        BasicButton(title: "Delete Workspace", style: .destructive, isEnabled: .constant(true)) {
+                            coordinator.presentDesctructiveAlert(title: "Delete Workspace", message: "Are you sure you want to delete this workspace?") {
+                                viewmodel.removeWorkspace()
+                            } secondaryTapped: { }
+                        }
+                        .onReceive(viewmodel.$onDeleteSuccess) { isDeleted in
+                            if isDeleted {
+                                coordinator.path.removeLast()
+                            }
+                        }
+                    }
+                    
                 }
             }
             .scrollIndicators(.hidden)
-            .padding()
-            .overlay {
-            }
+            .overlay(
+                Group {
+                    CustomAlertView(isPresented: $viewmodel.showError, title: $viewmodel.errorTitle, message: $viewmodel.errorMessage)
+                    CustomProgressView(isLoading: $viewmodel.isLoading)
+                }
+            )
         }
     }
 }

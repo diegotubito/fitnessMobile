@@ -17,4 +17,14 @@ struct InvitationEntity {
             let invitations: [InvitationModel]
         }
     }
+    
+    struct ByWorkspace {
+        struct Request: Encodable {
+            let workspaceId: String
+        }
+        
+        struct Response: Decodable {
+            let invitations: [InvitationModel]
+        }
+    }
 }

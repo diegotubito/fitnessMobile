@@ -23,6 +23,7 @@ struct WorkspaceSettingView: View {
                             coordinator.push(.workspaceDetail(workspace: own))
                         }
                 }
+                .scrollContentBackground(.hidden)
             }
             
         }
@@ -37,6 +38,7 @@ struct WorkspaceSettingView: View {
                 List(viewmodel.invitedWorkspaces, id: \.self) { invited in
                     Text(invited.title)
                 }
+                .scrollContentBackground(.hidden)
             }
             
         }

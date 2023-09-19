@@ -59,9 +59,7 @@ struct TitleAndSubtitleWorkspaceView: View {
                 
                 if !viewmodel.isEditing {
                     BasicButton(title: "Create", style: .primary, isEnabled: .constant(!viewmodel.disabledButton)) {
-                        if let workspace = viewmodel.workspace {
-                            coordinator.push(.addressWorkspace(workspace: workspace))
-                        }
+                        viewmodel.createWorkspace()
                     }
                 } else {
                     BasicButton(title: "Update", style: .primary, isEnabled: .constant(!viewmodel.disabledButton)) {
@@ -71,12 +69,12 @@ struct TitleAndSubtitleWorkspaceView: View {
             }
             .onReceive(viewmodel.$onUpdateSuccess, perform: { updated in
                 if updated {
-                    coordinator.path.removeLast()
+                    coordinator.path.removeLast(2)
                 }
             })
             .onReceive(viewmodel.$onCreateSuccess, perform: { created in
                 if created {
-                    coordinator.path.removeLast()
+                    coordinator.path.removeLast(1)
                 }
             })
             .padding()

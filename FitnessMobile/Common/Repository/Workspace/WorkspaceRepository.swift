@@ -12,6 +12,7 @@ struct WorkspaceResults {
     typealias Create = WorkspaceEntity.Create.Response
     typealias Update = WorkspaceEntity.Update.Response
     typealias UpdateAddress = WorkspaceEntity.UpdateAddress.Response
+    typealias Delete = WorkspaceEntity.Delete.Response
 }
 
 protocol WorkspaceRepositoryProtocol {
@@ -19,6 +20,7 @@ protocol WorkspaceRepositoryProtocol {
     func createWorkspace(request: WorkspaceEntity.Create.Request) async throws -> WorkspaceResults.Create
     func updateWorkspace(request: WorkspaceEntity.Update.Request) async throws -> WorkspaceResults.Update
     func updateWorkspaceAddress(request: WorkspaceEntity.UpdateAddress.Request) async throws -> WorkspaceResults.UpdateAddress
+    func deleteWorkspace(request: WorkspaceEntity.Delete.Request) async throws -> WorkspaceResults.Delete
 }
 
 class WorkspaceRepository: ApiNetworkAsync, WorkspaceRepositoryProtocol {
@@ -55,6 +57,14 @@ class WorkspaceRepository: ApiNetworkAsync, WorkspaceRepositoryProtocol {
         
         return try await apiCall()
     }
+    
+    func deleteWorkspace(request: WorkspaceEntity.Delete.Request) async throws -> WorkspaceResults.Delete {
+        config.path = "/api/v1/workspace"
+        config.method = .delete
+        config.addQueryItem(key: "_id", value: request._id)
+        
+        return try await apiCall()
+    }
 }
 
 class WorkspaceRepositoryMock: ApiNetworkMockAsync, WorkspaceRepositoryProtocol {
@@ -74,6 +84,11 @@ class WorkspaceRepositoryMock: ApiNetworkMockAsync, WorkspaceRepositoryProtocol 
     }
     
     func updateWorkspaceAddress(request: WorkspaceEntity.UpdateAddress.Request) async throws -> WorkspaceResults.UpdateAddress {
+        mockFileName = ""
+        return try await apiCallMocked(bundle: Bundle.main)
+    }
+    
+    func deleteWorkspace(request: WorkspaceEntity.Delete.Request) async throws -> WorkspaceResults.Delete {
         mockFileName = ""
         return try await apiCallMocked(bundle: Bundle.main)
     }

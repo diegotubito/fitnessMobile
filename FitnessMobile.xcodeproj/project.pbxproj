@@ -30,6 +30,10 @@
 		F15CDE7C2A9269BC003DCB14 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F15CDE7B2A9269BC003DCB14 /* AppDelegate.swift */; };
 		F16CCD442AB36D2D0037DCC6 /* GoogleGeocodeModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F16CCD432AB36D2D0037DCC6 /* GoogleGeocodeModel.swift */; };
 		F16CCD462AB5DCBD0037DCC6 /* GoogleGeocodeManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F16CCD452AB5DCBD0037DCC6 /* GoogleGeocodeManager.swift */; };
+		F16CCD482AB7DB020037DCC6 /* MemberListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F16CCD472AB7DB020037DCC6 /* MemberListView.swift */; };
+		F16CCD4B2AB7DCAE0037DCC6 /* MemberViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F16CCD4A2AB7DCAE0037DCC6 /* MemberViewModel.swift */; };
+		F16CCD4E2AB928340037DCC6 /* InvitationListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F16CCD4D2AB928340037DCC6 /* InvitationListView.swift */; };
+		F16CCD502AB9283F0037DCC6 /* InvitationListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F16CCD4F2AB9283F0037DCC6 /* InvitationListViewModel.swift */; };
 		F17F49C12A7AB6750086DDCB /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F17F49C02A7AB6750086DDCB /* HomeView.swift */; };
 		F17F49C42A7AB6990086DDCB /* SplashView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F17F49C32A7AB6990086DDCB /* SplashView.swift */; };
 		F17F49C92A7ABC080086DDCB /* ServerConnectionRepostory.swift in Sources */ = {isa = PBXBuildFile; fileRef = F17F49C82A7ABC080086DDCB /* ServerConnectionRepostory.swift */; };
@@ -162,6 +166,10 @@
 		F15CDE7F2A926BCE003DCB14 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		F16CCD432AB36D2D0037DCC6 /* GoogleGeocodeModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoogleGeocodeModel.swift; sourceTree = "<group>"; };
 		F16CCD452AB5DCBD0037DCC6 /* GoogleGeocodeManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoogleGeocodeManager.swift; sourceTree = "<group>"; };
+		F16CCD472AB7DB020037DCC6 /* MemberListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemberListView.swift; sourceTree = "<group>"; };
+		F16CCD4A2AB7DCAE0037DCC6 /* MemberViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemberViewModel.swift; sourceTree = "<group>"; };
+		F16CCD4D2AB928340037DCC6 /* InvitationListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InvitationListView.swift; sourceTree = "<group>"; };
+		F16CCD4F2AB9283F0037DCC6 /* InvitationListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InvitationListViewModel.swift; sourceTree = "<group>"; };
 		F17F49C02A7AB6750086DDCB /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
 		F17F49C32A7AB6990086DDCB /* SplashView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashView.swift; sourceTree = "<group>"; };
 		F17F49C82A7ABC080086DDCB /* ServerConnectionRepostory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServerConnectionRepostory.swift; sourceTree = "<group>"; };
@@ -294,6 +302,8 @@
 		F1028D232AACF145005C8F5B /* WorkplaceFlow */ = {
 			isa = PBXGroup;
 			children = (
+				F16CCD492AB7DC6B0037DCC6 /* MemberView */,
+				F16CCD4C2AB928230037DCC6 /* InvitationList */,
 				F1028D262AAE13BB005C8F5B /* Detail */,
 				F11143962AA82EAC008EC3DC /* TitleAndSubtitle */,
 				F1028D202AACD2F0005C8F5B /* AddressView */,
@@ -430,6 +440,24 @@
 				F16CCD452AB5DCBD0037DCC6 /* GoogleGeocodeManager.swift */,
 			);
 			path = GoogleGeocode;
+			sourceTree = "<group>";
+		};
+		F16CCD492AB7DC6B0037DCC6 /* MemberView */ = {
+			isa = PBXGroup;
+			children = (
+				F16CCD472AB7DB020037DCC6 /* MemberListView.swift */,
+				F16CCD4A2AB7DCAE0037DCC6 /* MemberViewModel.swift */,
+			);
+			path = MemberView;
+			sourceTree = "<group>";
+		};
+		F16CCD4C2AB928230037DCC6 /* InvitationList */ = {
+			isa = PBXGroup;
+			children = (
+				F16CCD4D2AB928340037DCC6 /* InvitationListView.swift */,
+				F16CCD4F2AB9283F0037DCC6 /* InvitationListViewModel.swift */,
+			);
+			path = InvitationList;
 			sourceTree = "<group>";
 		};
 		F17F49BF2A7AB6530086DDCB /* Home */ = {
@@ -1056,6 +1084,7 @@
 				F1AD87B52A788E2100A39752 /* Keychain.swift in Sources */,
 				F1028D252AAD710D005C8F5B /* WorkspaceAddressViewModel.swift in Sources */,
 				F17F4A462A7F00E90086DDCB /* Coordinator.swift in Sources */,
+				F16CCD4E2AB928340037DCC6 /* InvitationListView.swift in Sources */,
 				F17F4A7E2A8145C10086DDCB /* ProfileView.swift in Sources */,
 				F17F4A592A7F59200086DDCB /* SplashViewModel.swift in Sources */,
 				F1AD87C12A788FD900A39752 /* UserModel.swift in Sources */,
@@ -1079,6 +1108,7 @@
 				F1D372F82AA5605600846DC6 /* InvitationEntity.swift in Sources */,
 				F1AD87992A788D2D00A39752 /* ApiNetwork.swift in Sources */,
 				F1AD879D2A788D2D00A39752 /* ApiNetworkMockAsync.swift in Sources */,
+				F16CCD482AB7DB020037DCC6 /* MemberListView.swift in Sources */,
 				F136CE6E2A8432F200326730 /* CountryPickerViewModel.swift in Sources */,
 				F136CE732A85B62D00326730 /* OTPView.swift in Sources */,
 				F1D373002AA5648F00846DC6 /* InvitationUseCase.swift in Sources */,
@@ -1122,6 +1152,7 @@
 				F159C3EB2A9B990100CDAF20 /* CustomProgressView.swift in Sources */,
 				F1F637BC2A88798F00FC3A31 /* TwoFactorEnableInformationView.swift in Sources */,
 				F1AD87E42A7A1EE200A39752 /* SingleSelector.swift in Sources */,
+				F16CCD4B2AB7DCAE0037DCC6 /* MemberViewModel.swift in Sources */,
 				F1028D1F2AACC640005C8F5B /* WorkspaceAddressView.swift in Sources */,
 				F159C3E02A9A6D8E00CDAF20 /* PhotoPickerManager.swift in Sources */,
 				F17F49C12A7AB6750086DDCB /* HomeView.swift in Sources */,
@@ -1139,6 +1170,7 @@
 				F17F4A622A7FED250086DDCB /* BaseViewModel.swift in Sources */,
 				F1D372F32AA54A6200846DC6 /* InvitationView.swift in Sources */,
 				F1AD87E52A7A1EE200A39752 /* PhoneTextField.swift in Sources */,
+				F16CCD502AB9283F0037DCC6 /* InvitationListViewModel.swift in Sources */,
 				F1AD87A62A788D5B00A39752 /* Date+Extension.swift in Sources */,
 				F17F4A6E2A8040750086DDCB /* UserRepository.swift in Sources */,
 				F17F49CB2A7ABC120086DDCB /* ServerConnectionUseCase.swift in Sources */,

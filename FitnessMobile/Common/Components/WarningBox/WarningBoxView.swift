@@ -29,9 +29,10 @@ struct WarningBoxView: View {
             }
             .padding()
             .foregroundColor(Color.Dark.tone110)
-            .background(Color.Dark.tone40)
+            .background(Color.Neutral.tone70)
             .border(Color.Neutral.placeholder, width: 0.3)
             .shadow(radius: 5)
+            .cornerRadius(10)
         }
     }
 }

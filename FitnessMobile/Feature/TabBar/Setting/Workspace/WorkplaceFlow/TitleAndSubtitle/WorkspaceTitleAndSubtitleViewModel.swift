@@ -29,15 +29,42 @@ class WorkspaceTitleAndSubtitleViewModel: BaseViewModel {
         }
     }
     
+    @MainActor
     func createWorkspace() {
-        onCreateSuccess = false
-        handleError(error: APIError.imageFailed)
-        showError = true
-        
+        Task {
+            do {
+                let usecase = WorkspaceUseCase()
+                let userId = UserSession._id
+                let response = try await usecase.createWorkspace(ownerId: userId, title: titleTextFieldManager.text, subtitle: subtitleTextFieldManager.text)
+                DispatchQueue.main.async {
+                    self.onCreateSuccess = true
+                }
+            } catch {
+                DispatchQueue.main.async {
+                    self.showError = true
+                    self.handleError(error: error)
+                }
+            }
+        }
     }
     
+    @MainActor
     func updateWorkspace() {
-        onUpdateSuccess = false
+        guard let workspace = workspace else { return }
+        Task {
+            do {
+                let usecase = WorkspaceUseCase()
+                let response = try await usecase.updateWorkspace(workspaceId: workspace._id, title: titleTextFieldManager.text, subtitle: subtitleTextFieldManager.text)
+                DispatchQueue.main.async {
+                    self.onUpdateSuccess = true
+                }
+            } catch {
+                DispatchQueue.main.async {
+                    self.showError = true
+                    self.handleError(error: error)
+                }
+            }
+        }
     }
     
     var isEditing: Bool {

@@ -13,29 +13,56 @@ struct WorkspaceAddressView: View {
     @EnvironmentObject var coordinator: Coordinator
     
     var body: some View {
-        VStack {
-            CustomTextField(customTextFieldManager: viewmodel.addressTextField, title: "", placeholder: "", footer: "") { newString in
-                
-            } onDidBegin: { didBegin in
-                
-            }
+        ZStack {
+            LinearGradient(gradient: Gradient(colors: [Color.black, Color.Blue.midnight]), startPoint: .top, endPoint: .bottom)
+                .ignoresSafeArea()
             
-            if let results = googleGeocodeManager.geocodingResponse?.results {
-                List(results, id: \.self) { result in
-                    VStack {
-                        Text(result.formattedAddress)
+            VStack {
+                HStack {
+                    Text("Ingrese una dirección")
+                        .font(.largeTitle)
+                        .foregroundColor(Color.Dark.tone30)
+                    Spacer()
+                }
+                HStack {
+                    Text("Buscaremos la mejor aproximación a la dirección ingresada.")
+                        .font(.subheadline)
+                        .foregroundColor(Color.Dark.tone90)
+                    Spacer()
+                }
+                
+                CustomTextField(customTextFieldManager: viewmodel.addressTextField, title: "", placeholder: "", footer: "") { newString in
+                    
+                } onDidBegin: { didBegin in
+                    
+                }
+                
+                BasicButton(title: "Verify Address", style: .primary, isEnabled: .constant(true)) {
+                    googleGeocodeManager.fetchAddressInfo(address: viewmodel.addressTextField.text)
+                }
+                .padding(.bottom, 32)
+                
+                Spacer()
+                
+                if let results = googleGeocodeManager.geocodingResponse?.results, !results.isEmpty {
+                    HStack {
+                        Text("Resultado de la busqueda.")
+                            .font(.subheadline)
+                            .foregroundColor(Color.Dark.tone90)
+                        Spacer()
                     }
-                    .onTapGesture {
-                        viewmodel.updateWorkspaceAddress(result: result)
+                    List(results, id: \.self) { result in
+                        VStack {
+                            Text(result.formattedAddress)
+                        }
+                        .onTapGesture {
+                            viewmodel.updateWorkspaceAddress(result: result)
+                        }
                     }
+                    .scrollContentBackground(.hidden)
                 }
             }
-            
-            Spacer()
-            
-            Button("Verify Address") {
-                googleGeocodeManager.fetchAddressInfo(address: viewmodel.addressTextField.text)
-            }
+            .padding()
         }
         .onReceive(googleGeocodeManager.$onErrorAddress, perform: { onError in
             if !onError {
@@ -56,6 +83,5 @@ struct WorkspaceAddressView: View {
                 CustomProgressView(isLoading: $viewmodel.isLoading)
             }
         )
-        .padding()
     }
 }

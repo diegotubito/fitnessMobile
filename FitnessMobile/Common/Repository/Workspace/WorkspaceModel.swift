@@ -15,7 +15,7 @@ struct WorkspaceModel: Identifiable, Codable, Hashable {
     let subtitle: String
     let isEnabled: Bool
     let owner: String
-    let logo: String
+    let logo: String?
     let createdAt: String
     let updatedAt: String
     let members: [WorkspaceMember]
@@ -25,7 +25,7 @@ struct WorkspaceModel: Identifiable, Codable, Hashable {
     struct WorkspaceMember: Identifiable, Codable, Hashable {
         var id: UUID? = UUID()
         
-        let user: String
+        let user: User
         let role: String
     }
     

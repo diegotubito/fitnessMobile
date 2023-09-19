@@ -11,7 +11,7 @@ struct InvitationModel: Identifiable, Codable, Hashable {
     let id: UUID?
     
     let _id: String
-    let user: String
+    let user: User
     let workspace: WorkspaceModel
     let role: String
     let status: String

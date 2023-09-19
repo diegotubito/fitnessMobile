@@ -10,6 +10,7 @@ import Foundation
 protocol InvitationUseCaseProtocol {
     init(repository: InvitationRepositoryProtocol)
     func getInvitationsByUserId() async throws -> InvitationResult.ByUserId
+    func getInvitationsByWorkspaceId(workspaceId: String) async throws -> InvitationResult.ByWorkspace
 }
 
 class InvitationUseCase: InvitationUseCaseProtocol {
@@ -22,5 +23,10 @@ class InvitationUseCase: InvitationUseCaseProtocol {
     func getInvitationsByUserId() async throws -> InvitationResult.ByUserId {
         let request = InvitationEntity.GetByUserId.Request(userId: UserSession._id)
         return try await repository.getInvitationsByUserId(request: request)
+    }
+    
+    func getInvitationsByWorkspaceId(workspaceId: String) async throws -> InvitationResult.ByWorkspace {
+        let request = InvitationEntity.ByWorkspace.Request(workspaceId: workspaceId)
+        return try await repository.getInvitationsByWorkspace(request: request)
     }
 }

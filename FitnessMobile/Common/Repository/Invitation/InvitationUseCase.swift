@@ -11,6 +11,7 @@ protocol InvitationUseCaseProtocol {
     init(repository: InvitationRepositoryProtocol)
     func getInvitationsByUserId() async throws -> InvitationResult.ByUserId
     func getInvitationsByWorkspaceId(workspaceId: String) async throws -> InvitationResult.ByWorkspace
+    func sendInvitation(workspace: String, user: String, role: String) async throws -> InvitationResult.SendInvitation
 }
 
 class InvitationUseCase: InvitationUseCaseProtocol {
@@ -28,5 +29,10 @@ class InvitationUseCase: InvitationUseCaseProtocol {
     func getInvitationsByWorkspaceId(workspaceId: String) async throws -> InvitationResult.ByWorkspace {
         let request = InvitationEntity.ByWorkspace.Request(workspaceId: workspaceId)
         return try await repository.getInvitationsByWorkspace(request: request)
+    }
+    
+    func sendInvitation(workspace: String, user: String, role: String) async throws -> InvitationResult.SendInvitation {
+        let request = InvitationEntity.SendInvitation.Request(user: user, workspace: workspace, role: role)
+        return try await repository.sendInvitation(request: request)
     }
 }

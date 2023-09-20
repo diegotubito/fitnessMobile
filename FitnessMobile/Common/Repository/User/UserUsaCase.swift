@@ -52,5 +52,10 @@ class UserUseCase {
     func getUsers() async throws -> GetUserResult {
         return try await repository.getUsers()
     }
+    
+    func getUsersByUsernameOrEmail(username: String) async throws -> GetUserByUserNameEmail {
+        let request = UserEntity.GetByUserNameOrEmail.Request(username: username)
+        return try await repository.getUsersByUserNameEmail(request: request)
+    }
 }
 

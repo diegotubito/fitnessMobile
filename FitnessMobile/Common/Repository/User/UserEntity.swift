@@ -41,6 +41,16 @@ struct UserEntity {
         }
     }
     
+    struct GetByUserNameOrEmail {
+        struct Request: Encodable {
+            let username: String
+        }
+        
+        struct Response: Decodable {
+            let users: [User]
+        }
+    }
+    
     struct Update {
         struct Request: Codable {
             let firstName: String

@@ -215,7 +215,7 @@ struct WorkspaceDetailView: View {
                 Image(systemName: "plus")
                     .foregroundColor(.accentColor)
                     .onTapGesture {
-                        coordinator.push(.addressWorkspace(workspace: viewmodel.workspace))
+                        coordinator.push(.searchUsersWorkspace(workspace: viewmodel.workspace))
                     }
             }
             .padding(.bottom, 4)

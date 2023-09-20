@@ -34,6 +34,10 @@
 		F16CCD4B2AB7DCAE0037DCC6 /* MemberViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F16CCD4A2AB7DCAE0037DCC6 /* MemberViewModel.swift */; };
 		F16CCD4E2AB928340037DCC6 /* InvitationListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F16CCD4D2AB928340037DCC6 /* InvitationListView.swift */; };
 		F16CCD502AB9283F0037DCC6 /* InvitationListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F16CCD4F2AB9283F0037DCC6 /* InvitationListViewModel.swift */; };
+		F16CCD532ABA6D920037DCC6 /* SearchUserForInvitationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F16CCD522ABA6D920037DCC6 /* SearchUserForInvitationView.swift */; };
+		F16CCD552ABA6D9B0037DCC6 /* SearchUserForInvitationViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F16CCD542ABA6D9B0037DCC6 /* SearchUserForInvitationViewModel.swift */; };
+		F16CCD582ABAA0820037DCC6 /* PickRoleViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F16CCD572ABAA0820037DCC6 /* PickRoleViewModel.swift */; };
+		F16CCD5A2ABAA08C0037DCC6 /* PickRoleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F16CCD592ABAA08C0037DCC6 /* PickRoleView.swift */; };
 		F17F49C12A7AB6750086DDCB /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F17F49C02A7AB6750086DDCB /* HomeView.swift */; };
 		F17F49C42A7AB6990086DDCB /* SplashView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F17F49C32A7AB6990086DDCB /* SplashView.swift */; };
 		F17F49C92A7ABC080086DDCB /* ServerConnectionRepostory.swift in Sources */ = {isa = PBXBuildFile; fileRef = F17F49C82A7ABC080086DDCB /* ServerConnectionRepostory.swift */; };
@@ -170,6 +174,10 @@
 		F16CCD4A2AB7DCAE0037DCC6 /* MemberViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemberViewModel.swift; sourceTree = "<group>"; };
 		F16CCD4D2AB928340037DCC6 /* InvitationListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InvitationListView.swift; sourceTree = "<group>"; };
 		F16CCD4F2AB9283F0037DCC6 /* InvitationListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InvitationListViewModel.swift; sourceTree = "<group>"; };
+		F16CCD522ABA6D920037DCC6 /* SearchUserForInvitationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchUserForInvitationView.swift; sourceTree = "<group>"; };
+		F16CCD542ABA6D9B0037DCC6 /* SearchUserForInvitationViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchUserForInvitationViewModel.swift; sourceTree = "<group>"; };
+		F16CCD572ABAA0820037DCC6 /* PickRoleViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PickRoleViewModel.swift; sourceTree = "<group>"; };
+		F16CCD592ABAA08C0037DCC6 /* PickRoleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PickRoleView.swift; sourceTree = "<group>"; };
 		F17F49C02A7AB6750086DDCB /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
 		F17F49C32A7AB6990086DDCB /* SplashView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashView.swift; sourceTree = "<group>"; };
 		F17F49C82A7ABC080086DDCB /* ServerConnectionRepostory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServerConnectionRepostory.swift; sourceTree = "<group>"; };
@@ -302,6 +310,8 @@
 		F1028D232AACF145005C8F5B /* WorkplaceFlow */ = {
 			isa = PBXGroup;
 			children = (
+				F16CCD562ABAA06B0037DCC6 /* PickRole */,
+				F16CCD512ABA6D750037DCC6 /* SearchUserForInvitation */,
 				F16CCD492AB7DC6B0037DCC6 /* MemberView */,
 				F16CCD4C2AB928230037DCC6 /* InvitationList */,
 				F1028D262AAE13BB005C8F5B /* Detail */,
@@ -458,6 +468,24 @@
 				F16CCD4F2AB9283F0037DCC6 /* InvitationListViewModel.swift */,
 			);
 			path = InvitationList;
+			sourceTree = "<group>";
+		};
+		F16CCD512ABA6D750037DCC6 /* SearchUserForInvitation */ = {
+			isa = PBXGroup;
+			children = (
+				F16CCD522ABA6D920037DCC6 /* SearchUserForInvitationView.swift */,
+				F16CCD542ABA6D9B0037DCC6 /* SearchUserForInvitationViewModel.swift */,
+			);
+			path = SearchUserForInvitation;
+			sourceTree = "<group>";
+		};
+		F16CCD562ABAA06B0037DCC6 /* PickRole */ = {
+			isa = PBXGroup;
+			children = (
+				F16CCD572ABAA0820037DCC6 /* PickRoleViewModel.swift */,
+				F16CCD592ABAA08C0037DCC6 /* PickRoleView.swift */,
+			);
+			path = PickRole;
 			sourceTree = "<group>";
 		};
 		F17F49BF2A7AB6530086DDCB /* Home */ = {
@@ -1113,6 +1141,7 @@
 				F136CE732A85B62D00326730 /* OTPView.swift in Sources */,
 				F1D373002AA5648F00846DC6 /* InvitationUseCase.swift in Sources */,
 				F1AD879A2A788D2D00A39752 /* ApiNetworkMock.swift in Sources */,
+				F16CCD582ABAA0820037DCC6 /* PickRoleViewModel.swift in Sources */,
 				F1AD87AE2A788D7A00A39752 /* SocketManager.swift in Sources */,
 				F1D372EA2AA4E89600846DC6 /* WorkspaceRepository.swift in Sources */,
 				F159C3D42A99AC1E00CDAF20 /* DataCache.swift in Sources */,
@@ -1150,6 +1179,7 @@
 				F1AD87AB2A788D5B00A39752 /* View+Extension.swift in Sources */,
 				F17F4A6C2A803DB60086DDCB /* SignUpViewModel.swift in Sources */,
 				F159C3EB2A9B990100CDAF20 /* CustomProgressView.swift in Sources */,
+				F16CCD552ABA6D9B0037DCC6 /* SearchUserForInvitationViewModel.swift in Sources */,
 				F1F637BC2A88798F00FC3A31 /* TwoFactorEnableInformationView.swift in Sources */,
 				F1AD87E42A7A1EE200A39752 /* SingleSelector.swift in Sources */,
 				F16CCD4B2AB7DCAE0037DCC6 /* MemberViewModel.swift in Sources */,
@@ -1168,6 +1198,8 @@
 				F1D372E12AA4035000846DC6 /* WorkspaceSettingView.swift in Sources */,
 				F1F637C52A892C8800FC3A31 /* TwoFactorEnableInformationViewModel.swift in Sources */,
 				F17F4A622A7FED250086DDCB /* BaseViewModel.swift in Sources */,
+				F16CCD5A2ABAA08C0037DCC6 /* PickRoleView.swift in Sources */,
+				F16CCD532ABA6D920037DCC6 /* SearchUserForInvitationView.swift in Sources */,
 				F1D372F32AA54A6200846DC6 /* InvitationView.swift in Sources */,
 				F1AD87E52A7A1EE200A39752 /* PhoneTextField.swift in Sources */,
 				F16CCD502AB9283F0037DCC6 /* InvitationListViewModel.swift in Sources */,

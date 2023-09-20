@@ -10,11 +10,13 @@ typealias CreateUserResult = UserEntity.Create.Response
 typealias DeleteUserResult = Data
 typealias GetUserResult = UserEntity.Get.Response
 typealias UpdateUserResult = UserEntity.Update.Response
+typealias GetUserByUserNameEmail = UserEntity.GetByUserNameOrEmail.Response
 
 protocol UserRepositoryProtocol {
     func doCreate(request: UserEntity.Create.Request) async throws -> CreateUserResult
     func deleteUser() async throws -> DeleteUserResult
     func getUsers() async throws -> GetUserResult
+    func getUsersByUserNameEmail(request: UserEntity.GetByUserNameOrEmail.Request) async throws -> GetUserByUserNameEmail
     func doUpdate(request: UserEntity.Update.Request) async throws -> UpdateUserResult
     func doUpdate(request: UserEntity.UpdateProfileImage.Request) async throws -> UpdateUserResult
 }
@@ -55,6 +57,14 @@ class UserRepository: ApiNetworkAsync, UserRepositoryProtocol {
         config.path = "/api/v1/user"
         config.method = .get
         config.noTokenNeeded = true
+        return try await apiCall()
+    }
+    
+    func getUsersByUserNameEmail(request: UserEntity.GetByUserNameOrEmail.Request) async throws -> GetUserByUserNameEmail {
+        config.path = "/api/v1/user/byUsernameOrEmail"
+        config.method = .get
+        config.addQueryItem(key: "username", value: request.username)
+        
         return try await apiCall()
     }
 }

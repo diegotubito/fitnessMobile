@@ -10,11 +10,13 @@ import Foundation
 struct InvitationResult {
     typealias ByUserId = InvitationEntity.GetByUserId.Response
     typealias ByWorkspace = InvitationEntity.ByWorkspace.Response
+    typealias SendInvitation = InvitationEntity.SendInvitation.Response
 }
 
 protocol InvitationRepositoryProtocol {
     func getInvitationsByUserId(request: InvitationEntity.GetByUserId.Request) async throws -> InvitationResult.ByUserId
     func getInvitationsByWorkspace(request: InvitationEntity.ByWorkspace.Request) async throws -> InvitationResult.ByWorkspace
+    func sendInvitation(request: InvitationEntity.SendInvitation.Request) async throws -> InvitationResult.SendInvitation
 }
 
 class InvitationRepository: ApiNetworkAsync, InvitationRepositoryProtocol {
@@ -33,6 +35,14 @@ class InvitationRepository: ApiNetworkAsync, InvitationRepositoryProtocol {
         
         return try await apiCall()
     }
+    
+    func sendInvitation(request: InvitationEntity.SendInvitation.Request) async throws -> InvitationResult.SendInvitation {
+        config.path = "/api/v1/invitation"
+        config.method = .post
+        config.addRequestBody(request)
+        
+        return try await apiCall()
+    }
 }
 
 class InvitationRepositoryMock: ApiNetworkMockAsync ,InvitationRepositoryProtocol {
@@ -42,6 +52,11 @@ class InvitationRepositoryMock: ApiNetworkMockAsync ,InvitationRepositoryProtoco
     }
     
     func getInvitationsByWorkspace(request: InvitationEntity.ByWorkspace.Request) async throws -> InvitationResult.ByWorkspace {
+        mockFileName = ""
+        return try await apiCallMocked(bundle: .main)
+    }
+    
+    func sendInvitation(request: InvitationEntity.SendInvitation.Request) async throws -> InvitationResult.SendInvitation {
         mockFileName = ""
         return try await apiCallMocked(bundle: .main)
     }

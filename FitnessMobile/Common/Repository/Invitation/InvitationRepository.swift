@@ -12,6 +12,8 @@ struct InvitationResult {
     typealias ByWorkspace = InvitationEntity.ByWorkspace.Response
     typealias SendInvitation = InvitationEntity.SendInvitation.Response
     typealias DeleteById = InvitationEntity.DeleteInvitation.Response
+    typealias AcceptInvitation = InvitationEntity.AcceptInvitation.Response
+    typealias RejectInvitation = InvitationEntity.RejectInvitation.Response
 }
 
 protocol InvitationRepositoryProtocol {
@@ -19,6 +21,8 @@ protocol InvitationRepositoryProtocol {
     func getInvitationsByWorkspace(request: InvitationEntity.ByWorkspace.Request) async throws -> InvitationResult.ByWorkspace
     func sendInvitation(request: InvitationEntity.SendInvitation.Request) async throws -> InvitationResult.SendInvitation
     func deleteInvitationById(request: InvitationEntity.DeleteInvitation.Request) async throws -> InvitationResult.DeleteById
+    func acceptInvitation(request: InvitationEntity.AcceptInvitation.Request) async throws -> InvitationResult.AcceptInvitation
+    func rejectInvitation(request: InvitationEntity.RejectInvitation.Request) async throws -> InvitationResult.RejectInvitation
 }
 
 class InvitationRepository: ApiNetworkAsync, InvitationRepositoryProtocol {
@@ -53,6 +57,22 @@ class InvitationRepository: ApiNetworkAsync, InvitationRepositoryProtocol {
         
         return try await apiCall()
     }
+    
+    func acceptInvitation(request: InvitationEntity.AcceptInvitation.Request) async throws -> InvitationResult.AcceptInvitation {
+        config.path = "/api/v1/accept-invitation"
+        config.method = .post
+        config.addQueryItem(key: "_id", value: request._id)
+        
+        return try await apiCall()
+    }
+    
+    func rejectInvitation(request: InvitationEntity.RejectInvitation.Request) async throws -> InvitationResult.RejectInvitation {
+        config.path = "/api/v1/reject-invitation"
+        config.method = .post
+        config.addQueryItem(key: "_id", value: request._id)
+        
+        return try await apiCall()
+    }
 }
 
 class InvitationRepositoryMock: ApiNetworkMockAsync ,InvitationRepositoryProtocol {
@@ -72,6 +92,16 @@ class InvitationRepositoryMock: ApiNetworkMockAsync ,InvitationRepositoryProtoco
     }
     
     func deleteInvitationById(request: InvitationEntity.DeleteInvitation.Request) async throws -> InvitationResult.DeleteById {
+        mockFileName = ""
+        return try await apiCallMocked(bundle: .main)
+    }
+    
+    func acceptInvitation(request: InvitationEntity.AcceptInvitation.Request) async throws -> InvitationResult.AcceptInvitation {
+        mockFileName = ""
+        return try await apiCallMocked(bundle: .main)
+    }
+    
+    func rejectInvitation(request: InvitationEntity.RejectInvitation.Request) async throws -> InvitationResult.RejectInvitation {
         mockFileName = ""
         return try await apiCallMocked(bundle: .main)
     }

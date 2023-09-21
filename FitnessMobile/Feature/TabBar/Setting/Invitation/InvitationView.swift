@@ -9,6 +9,7 @@ import SwiftUI
 
 struct InvitationView: View {
     @StateObject var viewmodel = InvitationViewModel()
+    @EnvironmentObject var coordinator: Coordinator
     
     func invitationEmptyView() -> some View {
         return VStack {
@@ -19,8 +20,45 @@ struct InvitationView: View {
     func invitationNonEmptyView() -> some View {
         return VStack {
             ForEach(viewmodel.invitations, id: \.self) { invitation in
-                Text(invitation.workspace.title)
-                Text(invitation.status)
+                VStack(spacing: 0){
+                   
+                    HStack {
+                        Text(invitation.workspace.title)
+                            .font(.title3)
+                        Spacer()
+                    }
+                    .padding()
+                    
+                    if let formattedAddress = invitation.workspace.location?.googleGeocode?.formattedAddress {
+                        HStack {
+                            Text(formattedAddress)
+                                .font(.subheadline)
+                            Spacer()
+                        }
+                        .padding([.horizontal, .bottom])
+                    }
+                    if invitation.status == "PENDING" {
+                        HStack(spacing: 16) {
+                            BasicButton(title: "Reject", style: .secondary, isEnabled: .constant(true)) {
+                                viewmodel.rejectInvitation(invitation: invitation)
+                            }
+                            
+                            BasicButton(title: "Accept", style: .primary, isEnabled: .constant(true)) {
+                                viewmodel.acceptInvitation(invitation: invitation)
+                            }
+                        }
+                        .padding()
+                    } else {
+                        HStack {
+                            Text(invitation.status)
+                                .font(.subheadline)
+                            Spacer()
+                        }
+                        .padding([.horizontal, .bottom])
+                    }
+                }
+                .background(Color.Dark.tone100.opacity(0.5))
+                .cornerRadius(10)
             }
         }
     }
@@ -30,10 +68,23 @@ struct InvitationView: View {
             LinearGradient(gradient: Gradient(colors: [Color.black, Color.Blue.midnight]), startPoint: .top, endPoint: .bottom)
                 .ignoresSafeArea()
             
-            if viewmodel.invitations.isEmpty && !viewmodel.isLoading {
-                invitationEmptyView()
-            } else {
-                invitationNonEmptyView()
+            ScrollView {
+                VStack {
+                    HStack {
+                        Text("You've been invited to the following workspaces.")
+                            .font(.title)
+                        Spacer()
+                    }
+                    .padding(.bottom, 8)
+                    if viewmodel.invitations.isEmpty && !viewmodel.isLoading {
+                        invitationEmptyView()
+                    } else {
+                        invitationNonEmptyView()
+                    }
+                    
+                    Spacer()
+                }
+                .padding()
             }
         }
         .onAppear {
@@ -45,6 +96,16 @@ struct InvitationView: View {
                 CustomProgressView(isLoading: $viewmodel.isLoading)
             }
         )
+        .onReceive(viewmodel.$onAcceptedInvitation) { didAccept in
+            if didAccept {
+                viewmodel.loadInvitationsByUserId()
+            }
+        }
+        .onReceive(viewmodel.$onRejectedInvitation) { didReject in
+            if didReject {
+                viewmodel.loadInvitationsByUserId()
+            }
+        }
     }
 }
 

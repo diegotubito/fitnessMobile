@@ -13,6 +13,8 @@ protocol InvitationUseCaseProtocol {
     func getInvitationsByWorkspaceId(workspaceId: String) async throws -> InvitationResult.ByWorkspace
     func sendInvitation(workspace: String, user: String, role: String) async throws -> InvitationResult.SendInvitation
     func deleteInvitationById(_id: String) async throws -> InvitationResult.DeleteById
+    func acceptInvitation(_id: String) async throws -> InvitationResult.AcceptInvitation
+    func rejectInvitation(_id: String) async throws -> InvitationResult.RejectInvitation
 }
 
 class InvitationUseCase: InvitationUseCaseProtocol {
@@ -40,5 +42,15 @@ class InvitationUseCase: InvitationUseCaseProtocol {
     func deleteInvitationById(_id: String) async throws -> InvitationResult.DeleteById {
         let request = InvitationEntity.DeleteInvitation.Request(_id: _id)
         return try await repository.deleteInvitationById(request: request)
+    }
+    
+    func acceptInvitation(_id: String) async throws -> InvitationResult.AcceptInvitation {
+        let request = InvitationEntity.AcceptInvitation.Request(_id: _id)
+        return try await repository.acceptInvitation(request: request)
+    }
+    
+    func rejectInvitation(_id: String) async throws -> InvitationResult.RejectInvitation {
+        let request = InvitationEntity.RejectInvitation.Request(_id: _id)
+        return try await repository.rejectInvitation(request: request)
     }
 }

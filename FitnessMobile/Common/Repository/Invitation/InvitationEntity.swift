@@ -49,4 +49,24 @@ struct InvitationEntity {
             let success: Bool
         }
     }
+    
+    struct AcceptInvitation {
+        struct Request: Encodable {
+            let _id: String
+        }
+        
+        struct Response: Decodable {
+            let invitation: InvitationModel
+        }
+    }
+    
+    struct RejectInvitation {
+        struct Request: Encodable {
+            let _id: String
+        }
+        
+        struct Response: Decodable {
+            let invitation: InvitationModel
+        }
+    }
 }

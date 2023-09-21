@@ -71,7 +71,7 @@ struct MemberListView: View {
             
         })
         .onReceive(viewmodel.$onDeletedMember) { isDeleted in
-            if isDeleted, let userId = viewmodel.selectedMember?.user._id {
+            if isDeleted {
                 coordinator.path.removeLast()
             }
         }

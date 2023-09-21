@@ -14,6 +14,7 @@ protocol WorkspaceUseCaseProtocol {
     func updateWorkspace(workspaceId: String, title: String, subtitle: String) async throws -> WorkspaceResults.Update
     func updateWorkspaceAddress(workspaceId: String, location: WorkspaceModel.Location) async throws -> WorkspaceResults.UpdateAddress
     func deleteWorkspace(_id: String) async throws -> WorkspaceResults.Delete
+    func deleteWorkspaceMember(workspace: String, user: String) async throws -> WorkspaceResults.DeleteMember
 }
 
 class WorkspaceUseCase: WorkspaceUseCaseProtocol {
@@ -45,6 +46,11 @@ class WorkspaceUseCase: WorkspaceUseCaseProtocol {
     func deleteWorkspace(_id: String) async throws -> WorkspaceResults.Delete {
         let request = WorkspaceEntity.Delete.Request(_id: _id)
         return try await repository.deleteWorkspace(request: request)
+    }
+    
+    func deleteWorkspaceMember(workspace: String, user: String) async throws -> WorkspaceResults.DeleteMember {
+        let request = WorkspaceEntity.DeleteMember.Request(workspace: workspace, user: user)
+        return try await repository.deleteWorkspaceMember(request: request)
     }
 }
 

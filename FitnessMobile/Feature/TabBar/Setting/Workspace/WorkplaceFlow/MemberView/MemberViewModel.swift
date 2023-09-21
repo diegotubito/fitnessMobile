@@ -8,18 +8,21 @@
 import SwiftUI
 
 class MemberViewModel: BaseViewModel {
-    var receivedMembers: [WorkspaceModel.WorkspaceMember]
     var members: [WorkspaceMember] = []
+    var workspace: WorkspaceModel
     
-    init(members: [WorkspaceModel.WorkspaceMember]) {
-        self.receivedMembers = members
+    var selectedMember: MemberViewModel.WorkspaceMember?
+    @Published var onDeletedMember: Bool = false
+    
+    init(workspace: WorkspaceModel) {
+        self.workspace = workspace
        
         super .init()
         self.mapMembers()
     }
     
     func mapMembers() {
-        for member in receivedMembers {
+        for member in workspace.members {
             let new = WorkspaceMember(user: member.user, role: member.role, image: nil)
             self.members.append(new)  // Note the use of 'self' and the corrected method
         }
@@ -28,7 +31,7 @@ class MemberViewModel: BaseViewModel {
     @MainActor
     func fetchProfileImage(member: WorkspaceMember) {
         isLoading = true
-        guard let index = receivedMembers.firstIndex(where: {$0.user._id == member.user._id}) else { return }
+        guard let index = workspace.members.firstIndex(where: {$0.user._id == member.user._id}) else { return }
         Task {
             if let dataFromMemory = await DataCache.getData(identifier: "member_profile_image_\(member.user._id)") {
                 members[index].image = dataFromMemory
@@ -45,7 +48,7 @@ class MemberViewModel: BaseViewModel {
     
     @MainActor
     func loadProfileImageFromApi(member: WorkspaceMember) {
-        guard let index = receivedMembers.firstIndex(where: {$0.user._id == member.user._id}) else { return }
+        guard let index = workspace.members.firstIndex(where: {$0.user._id == member.user._id}) else { return }
         Task {
             do {
                 isLoading = true
@@ -68,5 +71,24 @@ class MemberViewModel: BaseViewModel {
         let user: User
         let role: String
         var image: Data?
+    }
+    
+    @MainActor
+    func deleteMember() {
+        guard let selectedMember = selectedMember else { return }
+        
+        Task {
+            let usecase = WorkspaceUseCase()
+            
+            isLoading = true
+            
+            do {
+                let response = try await usecase.deleteWorkspaceMember(workspace: workspace._id, user: selectedMember.user._id)
+                isLoading = false
+                onDeletedMember = true
+            } catch {
+                isLoading = false
+            }
+        }
     }
 }

@@ -199,7 +199,7 @@ struct WorkspaceDetailView: View {
                     }
             }
             .padding(.bottom, 4)
-            MemberListView(viewmodel: MemberViewModel(members: viewmodel.workspace.members))
+            MemberListView(viewmodel: MemberViewModel(workspace: viewmodel.workspace))
         }
         .padding()
         .background(Color.Neutral.tone100.opacity(0.5))

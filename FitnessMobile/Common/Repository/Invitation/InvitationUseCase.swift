@@ -12,6 +12,7 @@ protocol InvitationUseCaseProtocol {
     func getInvitationsByUserId() async throws -> InvitationResult.ByUserId
     func getInvitationsByWorkspaceId(workspaceId: String) async throws -> InvitationResult.ByWorkspace
     func sendInvitation(workspace: String, user: String, role: String) async throws -> InvitationResult.SendInvitation
+    func deleteInvitationById(_id: String) async throws -> InvitationResult.DeleteById
 }
 
 class InvitationUseCase: InvitationUseCaseProtocol {
@@ -34,5 +35,10 @@ class InvitationUseCase: InvitationUseCaseProtocol {
     func sendInvitation(workspace: String, user: String, role: String) async throws -> InvitationResult.SendInvitation {
         let request = InvitationEntity.SendInvitation.Request(user: user, workspace: workspace, role: role)
         return try await repository.sendInvitation(request: request)
+    }
+    
+    func deleteInvitationById(_id: String) async throws -> InvitationResult.DeleteById {
+        let request = InvitationEntity.DeleteInvitation.Request(_id: _id)
+        return try await repository.deleteInvitationById(request: request)
     }
 }

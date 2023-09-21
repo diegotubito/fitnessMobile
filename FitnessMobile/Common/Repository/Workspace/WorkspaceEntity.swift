@@ -62,4 +62,15 @@ struct WorkspaceEntity {
             let workspace: WorkspaceModel
         }
     }
+    
+    struct DeleteMember {
+        struct Request: Encodable {
+            let workspace: String
+            let user: String
+        }
+        
+        struct Response: Decodable {
+            let workspace: WorkspaceModel
+        }
+    }
 }

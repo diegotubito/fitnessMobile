@@ -9,6 +9,8 @@ import SwiftUI
 
 struct MemberListView: View {
     @StateObject var viewmodel: MemberViewModel
+    @State var shouldPresentSheet = false
+    @EnvironmentObject var coordinator: Coordinator
     
     var body: some View {
         VStack {
@@ -34,7 +36,8 @@ struct MemberListView: View {
                     Image(systemName: "trash")
                         .foregroundColor(Color.Red.truly)
                         .onTapGesture {
-                            
+                            shouldPresentSheet = true
+                            viewmodel.selectedMember = member
                         }
                 }
                 .onAppear {
@@ -42,23 +45,35 @@ struct MemberListView: View {
                 }
             }
         }
-    }
-}
-
-struct MemberList_Previews: PreviewProvider {
-    static var previews: some View {
-        MemberListView(viewmodel: MemberViewModel(members: [WorkspaceModel.WorkspaceMember(user: User(_id: "",
-                                                                                                      username: "UserName",
-                                                                                                      email: "mi email",
-                                                                                                      firstName: "David Diego",
-                                                                                                      lastName: "Gomez",
-                                                                                                      isEnabled: true,
-                                                                                                      phone: nil,
-                                                                                                      emailVerified: true,
-                                                                                                      createdAt: "",
-                                                                                                      updatedAt: "",
-                                                                                                      twoFactorEnabled: true,
-                                                                                                      twoFactorSecret: nil,
-                                                                                                      profileImage: nil), role: "ADMIN_ROLE")]))
+        .sheet(isPresented: $shouldPresentSheet, content: {
+            if shouldPresentSheet {
+                VStack {
+                    Text("Remove Member?")
+                        .padding()
+                        .font(.title)
+                    Text("'\(viewmodel.selectedMember?.user.username ?? "")' with email '\(viewmodel.selectedMember?.user.email ?? "")' will be removed from your list of members.")
+                        .font(.subheadline)
+                    Spacer()
+                    HStack {
+                        BasicButton(title: "Cancel", style: .secondary, isEnabled: .constant(true)) {
+                            self.shouldPresentSheet = false
+                        }
+                        BasicButton(title: "Remove", style: .destructive, isEnabled: .constant(true)) {
+                            self.viewmodel.deleteMember()
+                            self.shouldPresentSheet = false
+                        }
+                    }
+                }
+                .padding(32)
+                .presentationDetents([.medium, .fraction(0.3)])
+                .presentationBackground(Color.Blue.midnight)
+            }
+            
+        })
+        .onReceive(viewmodel.$onDeletedMember) { isDeleted in
+            if isDeleted, let userId = viewmodel.selectedMember?.user._id {
+                coordinator.path.removeLast()
+            }
+        }
     }
 }

@@ -39,4 +39,14 @@ struct InvitationEntity {
             let invitation: InvitationModel
         }
     }
+    
+    struct DeleteInvitation {
+        struct Request: Encodable {
+            let _id: String
+        }
+        
+        struct Response: Decodable {
+            let success: Bool
+        }
+    }
 }

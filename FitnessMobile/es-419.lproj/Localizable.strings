@@ -6,6 +6,79 @@
   
 */
 
+// Mark: WorkspaceAddressView
+"_WORKSPACE_ADDRESS_VIEW_TITLE" = "Ingrese una dirección.";
+"_WORKSPACE_ADDRESS_VIEW_SUBTITLE" = "Encontraremos la mejor aproximación basada en la dirección ingresada.";
+"_WORKSPACE_ADDRESS_VIEW_BUTTON_TITLE" = "Verificar Dirección";
+"_WORKSPACE_ADDRESS_VIEW_RESULT" = "Resultado de la busqueda";
+"_WORKSPACE_ADDRESS_VIEW_ADDRESS_NOT_VALID" = "Dirección no válida";
+
+// Mark: TitleAndSubtitleWorkspaceView
+"_TITLE_SUBTITLE_WORKSPACE_VIEW_TITLE" = "Título";
+"_TITLE_SUBTITLE_WORKSPACE_VIEW_ERROR_TITLE" = "Título tiene un formato incorrecto.";
+"_TITLE_SUBTITLE_WORKSPACE_VIEW_SUBTITLE" = "Subtitulo";
+"_TITLE_SUBTITLE_WORKSPACE_VIEW_ERROR_SUBTITLE" = "Subtitulo tiene un formato incorrecto.";
+"_TITLE_SUBTITLE_WORKSPACE_VIEW_BUTTON_TITLE_CREATE" = "Crear";
+"_TITLE_SUBTITLE_WORKSPACE_VIEW_BUTTON_TITLE_UPDATE" = "Actualizar";
+
+// Mark: Workspace Detail View
+"_WORKSPACE_DETAIL_VIEW_ADDRESS_NOT_VERIFIED" = "Dirección no verificada";
+"_WORKSPACE_DETAIL_VIEW_SHARE_DOCUMENT" = "Compartir documento";
+"_WORKSPACE_DETAIL_VIEW_VERIFICATION_PENDING" = "Verificación pendiente...";
+"_WORKSPACE_DETAIL_VIEW_VERIFICATION_REJECTED" = "Verificación rechazada.";
+"_WORKSPACE_DETAIL_VIEW_VERIFICATION_REJECTED_SHARE_DOCUMENT" = "Subir otro documento.";
+"_WORKSPACE_DETAIL_VIEW_VERIFICATION_ACCEPTED" = "Verificado";
+"_WORKSPACE_DETAIL_VIEW_TITLE" = "Dirección";
+"_WORKSPACE_DETAIL_VIEW_MESSAGE" = "Dirección no encontrada";
+"_WORKSPACE_DETAIL_VIEW_WARNING_NOT_VERIFIED_TITLE" = "Nota de verificación:";
+"_WORKSPACE_DETAIL_VIEW_WARNING_NOT_VERIFIED_MESSAGE" = "Recuerda que verificar tu dirección es obligatorio para que aparezca en el area del usuario. De lo contrario, tus potenciales clientes nunca sabrán que tienes un negocio.";
+"_WORKSPACE_DETAIL_VIEW_WARNING_REJECTED_TITLE" = "Nota de verificación:";
+"_WORKSPACE_DETAIL_VIEW_WARNING_REJECTED_MESSAGE" = "Tu dirección fue rechazada. Por favor, vuelve a chequer si has ingresado la dirección correcta.";
+"_WORKSPACE_DETAIL_VIEW_WARNING_EMPTY_TITLE" = "Nota de verificación:";
+"_WORKSPACE_DETAIL_VIEW_WARNING_EMPTY_MESSAGE" = "Agrega una dirección asi tus clientes puedan encontrarte.";
+"_WORKSPACE_DETAIL_MEMBER_TITLE" = "Colaboradores";
+"_WORKSPACE_DETAIL_INVITATION_TITLE" = "Invitaciones Enviadas";
+"_WORKSPACE_DETAIL_DELETE_BUTTON_TITLE" = "Borrar Espacio de Trabajo";
+"_WORKSPACE_DETAIL_DELETE_WARNING_TITLE" = "Borrar Espacio de Trabajo";
+"_WORKSPACE_DETAIL_DELETE_WARNING_MESSAGE" = "¿Estás seguro de borrar este Espacio de Trabajo? Recuerda que esto no puede deshacerse.";
+"_LATITUDE" = "Latitud";
+"_LONGITUDE" = "Longitud";
+"_COORDINATE" = "Coordenadas";
+
+
+// Mark: Invitation List
+"_REMOVE_INVITATION_TITLE" = "¿Borrar Invitación?";
+"_REMOVE_INVITATION_SUBTITLE" = "%@ con email %@ sera eliminado de la lista de invitaciones. Si el usuario es miembre, no se eliminara de la lista de miembros.";
+"_REMOVE_INVITATION_CANCEL_BUTTON" = "Cancelar";
+"_REMOVE_INVITATION_REMOVE_BUTTON" = "Eliminar";
+
+// Mark: Member List
+"_REMOVE_MEMBER_TITLE" = "¿Borrar Miembro?";
+"_REMOVE_MEMBER_SUBTITLE" = "%@ con correo %@ será eliminado de la lista de miembros.";
+"_REMOVE_MEMBER_CANCEL_BUTTON" = "Cancelar";
+"_REMOVE_MEMBER_REMOVE_BUTTON" = "Eliminar";
+
+// Mark: InvitationView
+"_INVITATION_VIEW_EMPTY_LIST" = "No tienes invitaciones pendientes.";
+"_INVITATION_VIEW_FULL_LIST_TITLE" = "Has sido invitado en los siguientes espacios de trabajos.";
+"_INVITATION_VIEW_REJECT_BUTTON" = "Rechazar";
+"_INVITATION_VIEW_ACCEPT_BUTTON" = "Aceptar";
+
+// Mark: Pick Role
+"_WORSPACE_ADMIN_ROLE" = "Admin";
+"_WORSPACE_USER_ROLE" = "User";
+"_WORSPACE_USER_READ_ONLY_ROLE" = "User Read Only";
+"_PICK_ROLE_TITLE" = "Privilegios";
+"_PICK_ROLE_SUBTITLE" = "Seleccione el privilegio que tu invitado tendra en tu espacio de trabajo.";
+"_PICK_ROLE_SELECT_TITLE" = "Selección";
+"_PICK_ROLE_BUTTON_TITLE" = "Envia la invitación";
+
+// Mark: Search User For Invitation
+"_INVITATION_SEARCH_USER_TITLE" = "Invita un usuario";
+"_INVITATION_SEARCH_USER_SUBTITLE" = "Ingresa el nombre de usuario o mail de la cuenta que quieres invitar.";
+"_INVITATION_SEARCH_USER_BUTTON_TITLE" = "Buscar";
+"_INVITATION_SEARCH_USER_RESULT_TITLE" = "Resultado de la busqueda";
+
 // Mark: BUTTONS
 "_EDIT_BUTTON" = "Editar";
 "_BACK_BUTTON" = "Atrás";

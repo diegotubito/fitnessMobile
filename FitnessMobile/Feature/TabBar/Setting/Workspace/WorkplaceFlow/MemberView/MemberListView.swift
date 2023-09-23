@@ -48,24 +48,24 @@ struct MemberListView: View {
         .sheet(isPresented: $shouldPresentSheet, content: {
             if shouldPresentSheet {
                 VStack {
-                    Text("Remove Member?")
+                    Text("_REMOVE_MEMBER_TITLE")
                         .padding()
                         .font(.title)
-                    Text("'\(viewmodel.selectedMember?.user.username ?? "")' with email '\(viewmodel.selectedMember?.user.email ?? "")' will be removed from your list of members.")
+                    Text(viewmodel.subtitle)
                         .font(.subheadline)
                     Spacer()
                     HStack {
-                        BasicButton(title: "Cancel", style: .secondary, isEnabled: .constant(true)) {
+                        BasicButton(title: "_REMOVE_MEMBER_CANCEL_BUTTON", style: .secondary, isEnabled: .constant(true)) {
                             self.shouldPresentSheet = false
                         }
-                        BasicButton(title: "Remove", style: .destructive, isEnabled: .constant(true)) {
+                        BasicButton(title: "_REMOVE_MEMBER_REMOVE_BUTTON", style: .destructive, isEnabled: .constant(true)) {
                             self.viewmodel.deleteMember()
                             self.shouldPresentSheet = false
                         }
                     }
                 }
                 .padding(32)
-                .presentationDetents([.medium, .fraction(0.3)])
+                .presentationDetents([.medium, .fraction(0.35)])
                 .presentationBackground(Color.Blue.midnight)
             }
             

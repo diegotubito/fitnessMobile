@@ -19,10 +19,10 @@ class PickRoleViewModel: BaseViewModel {
         self.workspace = workspace
     }
     
-    enum Roles: String, CaseIterable {
-        case admin = "Admin"
-        case user = "User"
-        case userReadOnly = "User Read Only"
+    enum Roles: LocalizedStringKey, CaseIterable {
+        case admin = "_WORSPACE_ADMIN_ROLE"
+        case user = "_WORSPACE_USER_ROLE"
+        case userReadOnly = "_WORSPACE_USER_READ_ONLY_ROLE"
     }
     
     @MainActor

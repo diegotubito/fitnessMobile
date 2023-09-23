@@ -19,13 +19,14 @@ struct WorkspaceAddressView: View {
             
             VStack {
                 HStack {
-                    Text("Ingrese una dirección")
+                    Text("_WORKSPACE_ADDRESS_VIEW_TITLE")
                         .font(.largeTitle)
                         .foregroundColor(Color.Dark.tone30)
                     Spacer()
                 }
+                .padding(.bottom)
                 HStack {
-                    Text("Buscaremos la mejor aproximación a la dirección ingresada.")
+                    Text("_WORKSPACE_ADDRESS_VIEW_SUBTITLE")
                         .font(.subheadline)
                         .foregroundColor(Color.Dark.tone90)
                     Spacer()
@@ -37,7 +38,7 @@ struct WorkspaceAddressView: View {
                     
                 }
                 
-                BasicButton(title: "Verify Address", style: .primary, isEnabled: .constant(true)) {
+                BasicButton(title: "_WORKSPACE_ADDRESS_VIEW_BUTTON_TITLE", style: .primary, isEnabled: .constant(true)) {
                     googleGeocodeManager.fetchAddressInfo(address: viewmodel.addressTextField.text)
                 }
                 .padding(.bottom, 32)
@@ -46,7 +47,7 @@ struct WorkspaceAddressView: View {
                 
                 if let results = googleGeocodeManager.geocodingResponse?.results, !results.isEmpty {
                     HStack {
-                        Text("Resultado de la busqueda.")
+                        Text("_WORKSPACE_ADDRESS_VIEW_RESULT")
                             .font(.subheadline)
                             .foregroundColor(Color.Dark.tone90)
                         Spacer()
@@ -66,7 +67,7 @@ struct WorkspaceAddressView: View {
         }
         .onReceive(googleGeocodeManager.$onErrorAddress, perform: { onError in
             if !onError {
-                print("address not valid")
+                print("_WORKSPACE_ADDRESS_VIEW_ADDRESS_NOT_VALID")
             }
         })
         .onReceive(googleGeocodeManager.$geocodingResponse, perform: { geocoding in

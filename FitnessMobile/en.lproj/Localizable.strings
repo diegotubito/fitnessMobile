@@ -6,6 +6,79 @@
   
 */
 
+// Mark: WorkspaceAddressView
+"_WORKSPACE_ADDRESS_VIEW_TITLE" = "Enter an address.";
+"_WORKSPACE_ADDRESS_VIEW_SUBTITLE" = "We will find the best approach based on the input address.";
+"_WORKSPACE_ADDRESS_VIEW_BUTTON_TITLE" = "Verify Address";
+"_WORKSPACE_ADDRESS_VIEW_RESULT" = "Search Result";
+"_WORKSPACE_ADDRESS_VIEW_ADDRESS_NOT_VALID" = "Address not valid";
+
+// Mark: TitleAndSubtitleWorkspaceView
+"_TITLE_SUBTITLE_WORKSPACE_VIEW_TITLE" = "Title";
+"_TITLE_SUBTITLE_WORKSPACE_VIEW_ERROR_TITLE" = "Title is badly format or empty field";
+"_TITLE_SUBTITLE_WORKSPACE_VIEW_SUBTITLE" = "Subtitle";
+"_TITLE_SUBTITLE_WORKSPACE_VIEW_ERROR_SUBTITLE" = "Subtitle is badly format or empty field";
+"_TITLE_SUBTITLE_WORKSPACE_VIEW_BUTTON_TITLE_CREATE" = "Create";
+"_TITLE_SUBTITLE_WORKSPACE_VIEW_BUTTON_TITLE_UPDATE" = "Update";
+
+// Mark: Workspace Detail View
+"_WORKSPACE_DETAIL_VIEW_ADDRESS_NOT_VERIFIED" = "Address not verified.";
+"_WORKSPACE_DETAIL_VIEW_SHARE_DOCUMENT" = "Share a document";
+"_WORKSPACE_DETAIL_VIEW_VERIFICATION_PENDING" = "Verification pending...";
+"_WORKSPACE_DETAIL_VIEW_VERIFICATION_REJECTED" = "Verification rejected";
+"_WORKSPACE_DETAIL_VIEW_VERIFICATION_REJECTED_SHARE_DOCUMENT" = "Upload another document.";
+"_WORKSPACE_DETAIL_VIEW_VERIFICATION_ACCEPTED" = "Verified";
+"_WORKSPACE_DETAIL_VIEW_TITLE" = "Address";
+"_WORKSPACE_DETAIL_VIEW_MESSAGE" = "No address found.";
+"_WORKSPACE_DETAIL_VIEW_WARNING_NOT_VERIFIED_TITLE" = "Verification Note:";
+"_WORKSPACE_DETAIL_VIEW_WARNING_NOT_VERIFIED_MESSAGE" = "Remeber that verifying your address is mandatory to be visible in user's area. Otherwise, you potential clients would never know you are running a business";
+"_WORKSPACE_DETAIL_VIEW_WARNING_REJECTED_TITLE" = "Verification Note:";
+"_WORKSPACE_DETAIL_VIEW_WARNING_REJECTED_MESSAGE" = "Your address has been rejected. Please, change your address and upload new documents";
+"_WORKSPACE_DETAIL_VIEW_WARNING_EMPTY_TITLE" = "Verification Note:";
+"_WORKSPACE_DETAIL_VIEW_WARNING_EMPTY_MESSAGE" = "Set up your address so that your customers can find you.";
+"_WORKSPACE_DETAIL_MEMBER_TITLE" = "Members";
+"_WORKSPACE_DETAIL_INVITATION_TITLE" = "Sent Invites";
+"_WORKSPACE_DETAIL_DELETE_BUTTON_TITLE" = "Delete Workspace";
+"_WORKSPACE_DETAIL_DELETE_WARNING_TITLE" = "Delete Workspace";
+"_WORKSPACE_DETAIL_DELETE_WARNING_MESSAGE" = "Are you sure you want to delete this workspace?";
+"_LATITUDE" = "Latitude";
+"_LONGITUDE" = "Longitude";
+"_COORDINATE" = "Coordinates";
+
+
+// Mark: Invitation List
+"_REMOVE_INVITATION_TITLE" = "Remove Invitation?";
+"_REMOVE_INVITATION_SUBTITLE" = "%@ with email %@ will be removed from your invitation list.";
+"_REMOVE_INVITATION_CANCEL_BUTTON" = "Cancel";
+"_REMOVE_INVITATION_REMOVE_BUTTON" = "Remove";
+
+// Mark: Member List
+"_REMOVE_MEMBER_TITLE" = "Remove Member?";
+"_REMOVE_MEMBER_SUBTITLE" = "%@ with email %@ will be removed from your member list.";
+"_REMOVE_MEMBER_CANCEL_BUTTON" = "Cancel";
+"_REMOVE_MEMBER_REMOVE_BUTTON" = "Remove";
+
+// Mark: InvitationView
+"_INVITATION_VIEW_EMPTY_LIST" = "You don't have any invitation.";
+"_INVITATION_VIEW_FULL_LIST_TITLE" = "You've been invited to the following workspaces.";
+"_INVITATION_VIEW_REJECT_BUTTON" = "Reject";
+"_INVITATION_VIEW_ACCEPT_BUTTON" = "Accept";
+
+// Mark: Pick Role
+"_WORSPACE_ADMIN_ROLE" = "Admin";
+"_WORSPACE_USER_ROLE" = "User";
+"_WORSPACE_USER_READ_ONLY_ROLE" = "User Read Only";
+"_PICK_ROLE_TITLE" = "Privilege";
+"_PICK_ROLE_SUBTITLE" = "Select the correct privilege that your guest is going to have inside your workspace.";
+"_PICK_ROLE_SELECT_TITLE" = "Select";
+"_PICK_ROLE_BUTTON_TITLE" = "Send Invite";
+
+// Mark: Search User For Invitation
+"_INVITATION_SEARCH_USER_TITLE" = "Invite user";
+"_INVITATION_SEARCH_USER_SUBTITLE" = "Enter the username or email and send them an invitation.";
+"_INVITATION_SEARCH_USER_BUTTON_TITLE" = "Search";
+"_INVITATION_SEARCH_USER_RESULT_TITLE" = "Search result.";
+
 // Mark: BUTTONS
 "_EDIT_BUTTON" = "Edit";
 "_BACK_BUTTON" = "Back";

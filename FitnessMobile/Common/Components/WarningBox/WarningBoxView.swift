@@ -8,8 +8,8 @@
 import SwiftUI
 
 struct WarningBoxView: View {
-    @State var title: String
-    @State var message: String
+    @State var title: LocalizedStringKey
+    @State var message: LocalizedStringKey
     
     var body: some View {
         VStack {

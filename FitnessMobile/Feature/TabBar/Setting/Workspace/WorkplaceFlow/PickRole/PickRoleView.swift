@@ -11,14 +11,6 @@ struct PickRoleView: View {
     @StateObject var viewmodel: PickRoleViewModel
     @EnvironmentObject var coordinator: Coordinator
     
-    enum Colores: String, CaseIterable {
-        case admin = "Admin"
-        case user = "User"
-        case userReadOnly = "User Read Only"
-    }
-    
-    @State private var selectedColor: Colores = .admin
-    
     var body: some View {
         ZStack {
             LinearGradient(gradient: Gradient(colors: [Color.black, Color.Blue.midnight]), startPoint: .top, endPoint: .bottom)
@@ -26,13 +18,14 @@ struct PickRoleView: View {
             
             VStack {
                 HStack {
-                    Text("Privilegios")
+                    Text("_PICK_ROLE_TITLE")
                         .font(.largeTitle)
                         .foregroundColor(Color.Dark.tone30)
                     Spacer()
                 }
+                .padding(.bottom)
                 HStack {
-                    Text("Selecciona el privilegio que tendrá el nuevo colaborador.")
+                    Text("_PICK_ROLE_SUBTITLE")
                         .font(.subheadline)
                         .foregroundColor(Color.Dark.tone90)
                     Spacer()
@@ -40,10 +33,10 @@ struct PickRoleView: View {
                 .padding(.bottom)
                 
                 HStack {
-                    Text("Seleccione el privilegio")
+                    Text("_PICK_ROLE_SELECT_TITLE")
                     Spacer()
-                    Picker("", selection: $selectedColor) {
-                        ForEach(Colores.allCases, id: \.self) { value in
+                    Picker("", selection: $viewmodel.selectedRole) {
+                        ForEach(PickRoleViewModel.Roles.allCases, id: \.self) { value in
                             Text(value.rawValue)
                         }
                     }
@@ -51,7 +44,7 @@ struct PickRoleView: View {
                 .padding()
                 .foregroundColor(.white)
                 
-                BasicButton(title: "Send Invitation", style: .primary, isEnabled: .constant(true)) {
+                BasicButton(title: "_PICK_ROLE_BUTTON_TITLE", style: .primary, isEnabled: .constant(true)) {
                     viewmodel.sendInvitation()
                 }
                 .padding(.bottom, 32)

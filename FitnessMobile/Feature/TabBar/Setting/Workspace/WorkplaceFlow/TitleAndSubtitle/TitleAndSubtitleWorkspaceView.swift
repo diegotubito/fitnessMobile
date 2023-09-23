@@ -25,7 +25,7 @@ struct TitleAndSubtitleWorkspaceView: View {
             VStack {
                 ScrollView {
                     VStack {
-                        CustomTextField(customTextFieldManager: viewmodel.titleTextFieldManager, title: "Title", placeholder: "", footer: "") { newString in
+                        CustomTextField(customTextFieldManager: viewmodel.titleTextFieldManager, title: "_TITLE_SUBTITLE_WORKSPACE_VIEW_TITLE", placeholder: "", footer: "") { newString in
                             viewmodel.validate()
                         } onDidBegin: { didBegin in
                             if didBegin {
@@ -33,20 +33,20 @@ struct TitleAndSubtitleWorkspaceView: View {
                             } else {
                                 focus = .subtitle
                                 if !viewmodel.isTitleValid {
-                                    viewmodel.titleTextFieldManager.showError(message: "Title is badly format or empty field")
+                                    viewmodel.titleTextFieldManager.showError(message: "_TITLE_SUBTITLE_WORKSPACE_VIEW_ERROR_TITLE")
                                 }
                             }
                         }
                         .focused($focus, equals: .title)
                         
-                        CustomTextField(customTextFieldManager: viewmodel.subtitleTextFieldManager, title: "Subtitle", placeholder: "", footer: "") { newString in
+                        CustomTextField(customTextFieldManager: viewmodel.subtitleTextFieldManager, title: "_TITLE_SUBTITLE_WORKSPACE_VIEW_SUBTITLE", placeholder: "", footer: "") { newString in
                             viewmodel.validate()
                         } onDidBegin: { didBegin in
                             if didBegin {
                                 viewmodel.subtitleTextFieldManager.shouldShowError = false
                             } else {
                                 if !viewmodel.isSubtitleValid {
-                                    viewmodel.subtitleTextFieldManager.showError(message: "Subtitle is badly format or empty field")
+                                    viewmodel.subtitleTextFieldManager.showError(message: "_TITLE_SUBTITLE_WORKSPACE_VIEW_ERROR_SUBTITLE")
                                 }
                             }
                         }
@@ -58,11 +58,11 @@ struct TitleAndSubtitleWorkspaceView: View {
                 Spacer()
                 
                 if !viewmodel.isEditing {
-                    BasicButton(title: "Create", style: .primary, isEnabled: .constant(!viewmodel.disabledButton)) {
+                    BasicButton(title: "_TITLE_SUBTITLE_WORKSPACE_VIEW_BUTTON_TITLE_CREATE", style: .primary, isEnabled: .constant(!viewmodel.disabledButton)) {
                         viewmodel.createWorkspace()
                     }
                 } else {
-                    BasicButton(title: "Update", style: .primary, isEnabled: .constant(!viewmodel.disabledButton)) {
+                    BasicButton(title: "_TITLE_SUBTITLE_WORKSPACE_VIEW_BUTTON_TITLE_UPDATE", style: .primary, isEnabled: .constant(!viewmodel.disabledButton)) {
                         viewmodel.updateWorkspace()
                     }
                 }

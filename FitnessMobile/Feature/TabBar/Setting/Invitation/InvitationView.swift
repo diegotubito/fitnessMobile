@@ -13,12 +13,19 @@ struct InvitationView: View {
     
     func invitationEmptyView() -> some View {
         return VStack {
-            Text("No tienes invitaciones pendientes.")
+            Text("_INVITATION_VIEW_EMPTY_LIST")
         }
     }
     
     func invitationNonEmptyView() -> some View {
         return VStack {
+            HStack {
+                Text("_INVITATION_VIEW_FULL_LIST_TITLE")
+                    .font(.title)
+                Spacer()
+            }
+            .padding(.bottom, 8)
+            
             ForEach(viewmodel.invitations, id: \.self) { invitation in
                 VStack(spacing: 0){
                    
@@ -39,11 +46,11 @@ struct InvitationView: View {
                     }
                     if invitation.status == "PENDING" {
                         HStack(spacing: 16) {
-                            BasicButton(title: "Reject", style: .secondary, isEnabled: .constant(true)) {
+                            BasicButton(title: "_INVITATION_VIEW_REJECT_BUTTON", style: .secondary, isEnabled: .constant(true)) {
                                 viewmodel.rejectInvitation(invitation: invitation)
                             }
                             
-                            BasicButton(title: "Accept", style: .primary, isEnabled: .constant(true)) {
+                            BasicButton(title: "_INVITATION_VIEW_ACCEPT_BUTTON", style: .primary, isEnabled: .constant(true)) {
                                 viewmodel.acceptInvitation(invitation: invitation)
                             }
                         }
@@ -70,12 +77,6 @@ struct InvitationView: View {
             
             ScrollView {
                 VStack {
-                    HStack {
-                        Text("You've been invited to the following workspaces.")
-                            .font(.title)
-                        Spacer()
-                    }
-                    .padding(.bottom, 8)
                     if viewmodel.invitations.isEmpty && !viewmodel.isLoading {
                         invitationEmptyView()
                     } else {

@@ -29,7 +29,11 @@ class WorkspaceDetailViewModel: BaseViewModel {
         let lattitude = workspace.location?.googleGeocode?.geometry.location.lat
         let longitude = workspace.location?.googleGeocode?.geometry.location.lng
         if let lattitude = lattitude, let longitude = longitude {
-            result.append("Coordinates\nlat: \(lattitude)\nlng: \(longitude)")
+            let coordinateString = NSLocalizedString("_COORDINATE", comment: "")
+            let latittueString = NSLocalizedString("_LATITUDE", comment: "")
+            let longitudeString = NSLocalizedString("_LONGITUDE", comment: "")
+
+            result.append("\(coordinateString)\n\(latittueString): \(lattitude)\n\(longitudeString): \(longitude)")
         }
         
         return result

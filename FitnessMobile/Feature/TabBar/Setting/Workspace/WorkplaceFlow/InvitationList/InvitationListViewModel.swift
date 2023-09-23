@@ -51,5 +51,17 @@ class InvitationListViewModel: BaseViewModel {
             }
         }
     }
+    
+    var username: String {
+        return selectedInvitation?.user.username ?? ""
+    }
+    
+    var subtitle: String {
+        String(format: NSLocalizedString("_REMOVE_INVITATION_SUBTITLE", comment: ""), username, email)
+    }
+    
+    var email: String {
+        selectedInvitation?.user.email ?? ""
+    }
 }
 

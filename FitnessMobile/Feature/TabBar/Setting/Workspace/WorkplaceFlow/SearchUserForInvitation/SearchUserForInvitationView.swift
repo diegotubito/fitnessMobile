@@ -18,13 +18,14 @@ struct SearchUserForInvitationView: View {
             
             VStack {
                 HStack {
-                    Text("Invitar usuario")
+                    Text("_INVITATION_SEARCH_USER_TITLE")
                         .font(.largeTitle)
                         .foregroundColor(Color.Dark.tone30)
                     Spacer()
                 }
+                .padding(.bottom)
                 HStack {
-                    Text("Busca un usuario con quien quieres compartir este ambiente de trabajo.")
+                    Text("_INVITATION_SEARCH_USER_SUBTITLE")
                         .font(.subheadline)
                         .foregroundColor(Color.Dark.tone90)
                     Spacer()
@@ -38,7 +39,7 @@ struct SearchUserForInvitationView: View {
                 .autocorrectionDisabled()
                 .textInputAutocapitalization(.never)
                 
-                BasicButton(title: "Search", style: .primary, isEnabled: .constant(true)) {
+                BasicButton(title: "_INVITATION_SEARCH_USER_BUTTON_TITLE", style: .primary, isEnabled: .constant(true)) {
                     viewmodel.fetchUsers()
                 }
                 .padding(.bottom, 32)
@@ -47,7 +48,7 @@ struct SearchUserForInvitationView: View {
                 
                 if !viewmodel.users.isEmpty {
                     HStack {
-                        Text("Resultado de la busqueda.")
+                        Text("_INVITATION_SEARCH_USER_RESULT_TITLE")
                             .font(.subheadline)
                             .foregroundColor(Color.Dark.tone90)
                         Spacer()

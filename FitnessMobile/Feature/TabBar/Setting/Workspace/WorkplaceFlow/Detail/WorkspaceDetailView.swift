@@ -59,9 +59,9 @@ struct WorkspaceDetailView: View {
                 .resizable()
                 .frame(width: 20, height: 20)
                 .foregroundColor(Color.Neutral.tone80)
-            Text("Address not verified.")
+            Text("_WORKSPACE_DETAIL_VIEW_ADDRESS_NOT_VERIFIED")
                 .foregroundColor(Color.Neutral.tone80)
-            Button("Share a document") {
+            Button("_WORKSPACE_DETAIL_VIEW_SHARE_DOCUMENT") {
                 
             }
             .font(.callout)
@@ -77,7 +77,7 @@ struct WorkspaceDetailView: View {
                 .resizable()
                 .frame(width: 20, height: 20)
                 .foregroundColor(.yellow)
-            Text("Verification pending...")
+            Text("_WORKSPACE_DETAIL_VIEW_VERIFICATION_PENDING")
             Spacer()
         }
     }
@@ -88,8 +88,8 @@ struct WorkspaceDetailView: View {
                 .resizable()
                 .frame(width: 20, height: 20)
                 .foregroundColor(.red)
-            Text("Verification rejected")
-            Button("Upload another document.") {
+            Text("_WORKSPACE_DETAIL_VIEW_VERIFICATION_REJECTED")
+            Button("_WORKSPACE_DETAIL_VIEW_VERIFICATION_REJECTED_SHARE_DOCUMENT") {
                 
             }
             Spacer()
@@ -102,7 +102,7 @@ struct WorkspaceDetailView: View {
                 .resizable()
                 .frame(width: 20, height: 20)
                 .foregroundColor(Color.Green.truly)
-            Text("Verified")
+            Text("_WORKSPACE_DETAIL_VIEW_VERIFICATION_ACCEPTED")
             Spacer()
         }
     }
@@ -111,7 +111,7 @@ struct WorkspaceDetailView: View {
         return VStack(spacing: 32) {
             VStack(spacing: 4) {
                 HStack {
-                    Text("Address")
+                    Text("_WORKSPACE_DETAIL_VIEW_TITLE")
                         .font(.headline)
                     Spacer()
                     Image(systemName: "pencil")
@@ -140,14 +140,14 @@ struct WorkspaceDetailView: View {
                         
                     case .notVerified:
                         notVerifiedView()
-                        WarningBoxView(title: "Verification Note:", message: "Remeber that verifying your address is mandatory to be visible in user's area. Otherwise, you potential clients would never know you are running a business")
+                        WarningBoxView(title: "_WORKSPACE_DETAIL_VIEW_WARNING_NOT_VERIFIED_TITLE", message: "_WORKSPACE_DETAIL_VIEW_WARNING_NOT_VERIFIED_MESSAGE")
                     case .pending:
                         pendingStatusView()
                     case .verified:
                         verifiedStatusView()
                     case .rejected:
                         rejectedStatusView()
-                        WarningBoxView(title: "Verification Note:", message: "Your address has been rejected. Please, change your address and upload new documents")
+                        WarningBoxView(title: "_WORKSPACE_DETAIL_VIEW_WARNING_REJECTED_TITLE", message: "_WORKSPACE_DETAIL_VIEW_WARNING_REJECTED_MESSAGE")
                     case .none:
                         EmptyView()
                     }
@@ -162,7 +162,7 @@ struct WorkspaceDetailView: View {
     func noAddressView() -> some View {
         VStack(spacing: 4) {
             HStack {
-                Text("Address")
+                Text("_WORKSPACE_DETAIL_VIEW_TITLE")
                     .font(.headline)
                 Spacer()
                 Image(systemName: "pencil")
@@ -173,13 +173,13 @@ struct WorkspaceDetailView: View {
             }
             
             HStack {
-                Text("No address found.")
+                Text("_WORKSPACE_DETAIL_VIEW_MESSAGE")
                 Spacer()
             }
             .padding(.bottom)
             .foregroundColor(Color.Neutral.tone80)
             
-            WarningBoxView(title: "Important Note:", message: "Set up your address so that your customers can find you.")
+            WarningBoxView(title: "_WORKSPACE_DETAIL_VIEW_WARNING_EMPTY_TITLE", message: "_WORKSPACE_DETAIL_VIEW_WARNING_EMPTY_MESSAGE")
         }
         .padding()
         .background(Color.Neutral.tone100.opacity(0.5))
@@ -189,7 +189,7 @@ struct WorkspaceDetailView: View {
     func colaborators() -> some View {
         return VStack {
             HStack {
-                Text("Colaboradores")
+                Text("_WORKSPACE_DETAIL_MEMBER_TITLE")
                     .font(.headline)
                 Spacer()
                 Image(systemName: "plus")
@@ -209,7 +209,7 @@ struct WorkspaceDetailView: View {
     func invitations() -> some View {
         return VStack {
             HStack {
-                Text("Invitations")
+                Text("_WORKSPACE_DETAIL_INVITATION_TITLE")
                     .font(.headline)
                 Spacer()
             }
@@ -238,18 +238,18 @@ struct WorkspaceDetailView: View {
                     invitations()
                     
                     HStack {
-                        BasicButton(title: "Delete Workspace", style: .destructive, isEnabled: .constant(true)) {
-                            coordinator.presentDesctructiveAlert(title: "Delete Workspace", message: "Are you sure you want to delete this workspace?") {
+                        BasicButton(title: "_WORKSPACE_DETAIL_DELETE_BUTTON_TITLE", style: .destructive, isEnabled: .constant(true)) {
+                            coordinator.presentDesctructiveAlert(title: "_WORKSPACE_DETAIL_DELETE_WARNING_TITLE", message: "_WORKSPACE_DETAIL_DELETE_WARNING_MESSAGE") {
                                 viewmodel.removeWorkspace()
                             } secondaryTapped: { }
                         }
-                        .onReceive(viewmodel.$onDeleteSuccess) { isDeleted in
-                            if isDeleted {
-                                coordinator.path.removeLast()
-                            }
-                        }
                     }
                     
+                }
+            }
+            .onReceive(viewmodel.$onDeleteSuccess) { isDeleted in
+                if isDeleted {
+                    coordinator.path.removeLast()
                 }
             }
             .scrollIndicators(.hidden)

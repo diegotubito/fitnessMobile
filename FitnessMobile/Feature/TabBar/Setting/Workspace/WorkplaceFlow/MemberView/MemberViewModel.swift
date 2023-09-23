@@ -91,4 +91,17 @@ class MemberViewModel: BaseViewModel {
             }
         }
     }
+    
+    var username: String {
+        return selectedMember?.user.username ?? ""
+    }
+    
+    var subtitle: String {
+        String(format: NSLocalizedString("_REMOVE_MEMBER_SUBTITLE", comment: ""), username, email)
+    }
+    
+    var email: String {
+        selectedMember?.user.email ?? ""
+    }
+
 }

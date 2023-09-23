@@ -31,24 +31,25 @@ struct InvitationListView: View {
         .sheet(isPresented: $shouldPresentSheet, content: {
             if shouldPresentSheet {
                 VStack {
-                    Text("Remove Invitation?")
+                    Text("_REMOVE_INVITATION_TITLE")
                         .padding()
                         .font(.title)
-                    Text("This will remove the invitation permanently.")
+                    Text(viewmodel.subtitle)
                         .font(.subheadline)
+                    Spacer()
 
                     HStack {
-                        BasicButton(title: "Cancel", style: .secondary, isEnabled: .constant(true)) {
+                        BasicButton(title: "_REMOVE_INVITATION_CANCEL_BUTTON", style: .secondary, isEnabled: .constant(true)) {
                             self.shouldPresentSheet = false
                         }
-                        BasicButton(title: "Remove", style: .destructive, isEnabled: .constant(true)) {
+                        BasicButton(title: "_REMOVE_INVITATION_REMOVE_BUTTON", style: .destructive, isEnabled: .constant(true)) {
                             self.viewmodel.deleteInvitationById(_id: viewmodel.selectedInvitation?._id ?? "")
                             self.shouldPresentSheet = false
                         }
                     }
-                    .padding(32)
                 }
-                .presentationDetents([.medium, .fraction(0.3)])
+                .padding(32)
+                .presentationDetents([.medium, .fraction(0.35)])
                 .presentationBackground(Color.Blue.midnight)
             }
             

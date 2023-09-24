@@ -13,25 +13,23 @@ struct MemberListView: View {
     @EnvironmentObject var coordinator: Coordinator
     
     var body: some View {
-        VStack {
-            ForEach(viewmodel.members, id: \.self) { member in
+        ForEach(viewmodel.members, id: \.self) { member in
+            VStack {
                 HStack {
                     if let image = member.image, let uiimage = UIImage(data: image) {
                         Image(uiImage: uiimage)
                             .resizable()
-                            .scaledToFit()
-                            .frame(width: 40)
+                            .frame(width: 20, height: 20)
                             .clipShape(Circle())
                     } else {
                         Image(systemName: "person")
-                            .frame(width: 40, height: 40)
+                            .resizable()
+                            .frame(width: 20, height: 20)
                             .clipShape(Circle())
                     }
                     
-                    VStack {
-                        Text("\(member.user.username) (\(member.user.firstName) \(member.user.lastName))")
-                        Text("\(member.user.email)")
-                    }
+                    Text("\(member.user.username) (\(member.user.firstName) \(member.user.lastName))")
+                        .font(.callout)
                     Spacer()
                     Image(systemName: "trash")
                         .foregroundColor(Color.Red.truly)
@@ -40,9 +38,11 @@ struct MemberListView: View {
                             viewmodel.selectedMember = member
                         }
                 }
-                .onAppear {
-                    viewmodel.fetchProfileImage(member: member)
-                }
+                .foregroundColor(Color.Neutral.tone90)
+                Divider()
+            }
+            .onAppear {
+                viewmodel.fetchProfileImage(member: member)
             }
         }
         .sheet(isPresented: $shouldPresentSheet, content: {

@@ -13,44 +13,39 @@ struct WorkspaceDetailView: View {
     
     func headerView() -> some View {
         HStack {
-            HStack {
-                Spacer()
-                Image("logo")
-                    .resizable()
-                    .scaledToFit()
-                    .frame(width: 100)
-                
-                titleAndSubtitleView()
-            }
-        }
-        .background(Color.Neutral.tone100.opacity(0.5))
-        .cornerRadius(10)
-    }
-    
-    func titleAndSubtitleView() -> some View {
-        return VStack(spacing: 0) {
+            Image("logo")
+                .resizable()
+                .scaledToFit()
+                .frame(width: 50)
+            
             VStack {
                 HStack {
-                    Spacer()
-                    Image(systemName: "pencil")
-                }
-                .foregroundColor(.accentColor)
-                .onTapGesture {
-                    coordinator.push(.workspaceTitleAndSubtitle(workspace: viewmodel.workspace))
-                }
-                
-                HStack {
                     Text(viewmodel.workspace.title)
+                        .font(.title2)
+                        .foregroundColor(Color.Neutral.tone80)
                     Spacer()
                 }
                 HStack {
                     Text(viewmodel.workspace.subtitle)
+                        .font(.title3)
+                        .foregroundColor(Color.Neutral.tone80)
                     Spacer()
                 }
             }
-            .padding()
-            .foregroundColor(Color.Neutral.tone80)
+            
+            Spacer()
+            HStack {
+                Spacer()
+                Image(systemName: "pencil")
+            }
+            .foregroundColor(.accentColor)
+            .onTapGesture {
+                coordinator.push(.workspaceTitleAndSubtitle(workspace: viewmodel.workspace))
+            }
         }
+        .padding()
+        .background(Color.Neutral.tone100.opacity(0.5))
+        .cornerRadius(10)
     }
     
     func notVerifiedView() -> some View {
@@ -113,6 +108,7 @@ struct WorkspaceDetailView: View {
                 HStack {
                     Text("_WORKSPACE_DETAIL_VIEW_TITLE")
                         .font(.headline)
+                        .foregroundColor(Color.Neutral.tone80)
                     Spacer()
                     Image(systemName: "pencil")
                         .foregroundColor(.accentColor)
@@ -120,7 +116,7 @@ struct WorkspaceDetailView: View {
                             coordinator.push(.addressWorkspace(workspace: viewmodel.workspace))
                         }
                 }
-                .padding(.bottom, 4)
+                .padding(.bottom, 8)
                 
                 
                 VStack {
@@ -152,6 +148,8 @@ struct WorkspaceDetailView: View {
                         EmptyView()
                     }
                 }
+                .foregroundColor(Color.Neutral.tone90)
+                .padding(.leading)
             }
         }
         .padding()
@@ -164,6 +162,7 @@ struct WorkspaceDetailView: View {
             HStack {
                 Text("_WORKSPACE_DETAIL_VIEW_TITLE")
                     .font(.headline)
+                    .foregroundColor(Color.Neutral.tone80)
                 Spacer()
                 Image(systemName: "pencil")
                     .foregroundColor(.accentColor)
@@ -191,6 +190,7 @@ struct WorkspaceDetailView: View {
             HStack {
                 Text("_WORKSPACE_DETAIL_MEMBER_TITLE")
                     .font(.headline)
+                    .foregroundColor(Color.Neutral.tone80)
                 Spacer()
                 Image(systemName: "plus")
                     .foregroundColor(.accentColor)
@@ -198,8 +198,9 @@ struct WorkspaceDetailView: View {
                         coordinator.push(.searchUsersWorkspace(workspace: viewmodel.workspace))
                     }
             }
-            .padding(.bottom, 4)
+            .padding(.bottom, 8)
             MemberListView(viewmodel: MemberViewModel(workspace: viewmodel.workspace))
+                .padding(.leading)
         }
         .padding()
         .background(Color.Neutral.tone100.opacity(0.5))
@@ -211,10 +212,12 @@ struct WorkspaceDetailView: View {
             HStack {
                 Text("_WORKSPACE_DETAIL_INVITATION_TITLE")
                     .font(.headline)
+                    .foregroundColor(Color.Neutral.tone80)
                 Spacer()
             }
-            .padding(.bottom, 4)
+            .padding(.bottom, 8)
             InvitationListView(viewmodel: InvitationListViewModel(workspace: viewmodel.workspace))
+                .padding(.leading)
         }
         .padding()
         .background(Color.Neutral.tone100.opacity(0.5))
@@ -226,7 +229,7 @@ struct WorkspaceDetailView: View {
             LinearGradient(gradient: Gradient(colors: [Color.black, Color.Blue.midnight]), startPoint: .top, endPoint: .bottom)
                 .ignoresSafeArea()
             ScrollView {
-                VStack {
+                VStack(spacing: 8) {
                     headerView()
                     if viewmodel.hasLocation {
                         addressView()

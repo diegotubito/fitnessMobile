@@ -14,6 +14,12 @@ struct InvitationModel: Identifiable, Codable, Hashable {
     let user: User
     let workspace: WorkspaceModel
     let role: String
-    let status: String
+    let status: Status
     let expiration: String
+    
+    enum Status: String, Codable {
+        case pending = "INVITATION_PENDING"
+        case accepted = "INVITATION_ACCEPTED"
+        case rejected = "INVITATION_REJECTED"
+    }
 }

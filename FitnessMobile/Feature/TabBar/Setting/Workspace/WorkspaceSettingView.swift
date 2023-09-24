@@ -12,13 +12,19 @@ struct WorkspaceSettingView: View {
     @EnvironmentObject var coordinator: Coordinator
     
     func ownerWorkspaceView() -> some View {
-        return VStack {
+        return VStack(spacing: 0) {
             
             if !viewmodel.ownWorkspaces.isEmpty {
                 
-                Text("Tus propios Espacios")
+                HStack {
+                    Text("_YOUR_OWN_WORKSPACE_TITLE")
+                        .font(.title)
+                    Spacer()
+                }
+                .padding()
+                
                 List(viewmodel.ownWorkspaces, id: \.self) { own in
-                    Text(own.title)
+                    Text("\(own.title), \(own.subtitle).")
                         .onTapGesture {
                             coordinator.push(.workspaceDetail(workspace: own))
                         }
@@ -34,9 +40,15 @@ struct WorkspaceSettingView: View {
             
             if !viewmodel.invitedWorkspaces.isEmpty {
                 
-                Text("Espacios como invitado")
+                HStack {
+                    Text("_YOUR_GUEST_WORKSPACE_TITLE")
+                        .font(.title)
+                    Spacer()
+                }
+                .padding()
+                
                 List(viewmodel.invitedWorkspaces, id: \.self) { invited in
-                    Text(invited.title)
+                    Text("\(invited.title), \(invited.subtitle).")
                 }
                 .scrollContentBackground(.hidden)
             }
@@ -52,10 +64,6 @@ struct WorkspaceSettingView: View {
             VStack {
                 ownerWorkspaceView()
                 invitedWorkspaceView()
-                Spacer()
-                Button("Create a new Workspace") {
-                    coordinator.push(.workspaceTitleAndSubtitle(workspace: nil))
-                }
             }
             
         }
@@ -68,6 +76,15 @@ struct WorkspaceSettingView: View {
                 CustomProgressView(isLoading: $viewmodel.isLoading)
             }
         )
+        .toolbar(content: {
+
+            ToolbarItem(placement: .navigationBarTrailing) {
+                Button("_NEW_WORSPACE_BUTTON_TITLE") {
+                    coordinator.push(.workspaceTitleAndSubtitle(workspace: nil))
+                }.disabled(false)
+            }
+            
+        })
     }
 }
 

@@ -6,6 +6,15 @@
   
 */
 
+// Mark: WorkspaceSettingView
+"_YOUR_OWN_WORKSPACE_TITLE" = "Your own workpaces.";
+"_YOUR_GUEST_WORKSPACE_TITLE" = "Your workspaces as a Guest";
+
+// Mark: Invitation Status
+"INVITATION_PENDING" = "Pending";
+"INVITATION_ACCEPTED" = "Accepted";
+"INVITATION_REJECTED" = "Rejected";
+
 // Mark: WorkspaceAddressView
 "_WORKSPACE_ADDRESS_VIEW_TITLE" = "Enter an address.";
 "_WORKSPACE_ADDRESS_VIEW_SUBTITLE" = "We will find the best approach based on the input address.";
@@ -84,6 +93,7 @@
 "_BACK_BUTTON" = "Back";
 "_SAVE_BUTTON" = "Save";
 "_CANCEL_BUTTON" = "Cancel";
+"_NEW_WORSPACE_BUTTON_TITLE" = "Add";
 
 // Mark: PHONE TEXTVIEW
 "_COUNTRY_TEXTFIELD_TITLE" = "Country";

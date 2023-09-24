@@ -44,7 +44,7 @@ struct InvitationView: View {
                         }
                         .padding([.horizontal, .bottom])
                     }
-                    if invitation.status == "PENDING" {
+                    if invitation.status == .pending {
                         HStack(spacing: 16) {
                             BasicButton(title: "_INVITATION_VIEW_REJECT_BUTTON", style: .secondary, isEnabled: .constant(true)) {
                                 viewmodel.rejectInvitation(invitation: invitation)
@@ -57,7 +57,7 @@ struct InvitationView: View {
                         .padding()
                     } else {
                         HStack {
-                            Text(invitation.status)
+                            Text(invitation.status.rawValue)
                                 .font(.subheadline)
                             Spacer()
                         }

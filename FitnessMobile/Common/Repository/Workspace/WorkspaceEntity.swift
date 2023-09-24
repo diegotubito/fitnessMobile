@@ -73,4 +73,14 @@ struct WorkspaceEntity {
             let workspace: WorkspaceModel
         }
     }
+    
+    struct DeleteLocation {
+        struct Request: Decodable {
+            let _id: String
+        }
+        
+        struct Response: Decodable {
+            let workspace: WorkspaceModel
+        }
+    }
 }

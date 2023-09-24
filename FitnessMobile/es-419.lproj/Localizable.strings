@@ -22,6 +22,12 @@
 "_WORKSPACE_ADDRESS_VIEW_RESULT" = "Resultado de la busqueda";
 "_WORKSPACE_ADDRESS_VIEW_ADDRESS_NOT_VALID" = "Dirección no válida";
 
+"_WORKSPACE_ADDRESS_VIEW_CURRENT_LOCATION_TITLE" = "Dirección actual.";
+"_WORKSPACE_ADDRESS_VIEW_CURRENT_LOCATION_REMOVE_TITLE" = "¿Borrar Dirección?";
+"_WORKSPACE_ADDRESS_VIEW_CURRENT_LOCATION_REMOVE_SUBTITLE" = "Si tu dirección está verifcada, tendras que volver a verificarla.";
+"_WORKSPACE_ADDRESS_VIEW_CURRENT_LOCATION_REMOVE_BUTTON" = "Borrar";
+"_WORKSPACE_ADDRESS_VIEW_CURRENT_LOCATION_CANCEL_BUTTON" = "Cancelar";
+
 // Mark: TitleAndSubtitleWorkspaceView
 "_TITLE_SUBTITLE_WORKSPACE_VIEW_TITLE" = "Título";
 "_TITLE_SUBTITLE_WORKSPACE_VIEW_ERROR_TITLE" = "Título tiene un formato incorrecto.";

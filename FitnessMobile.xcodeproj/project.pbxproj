@@ -38,6 +38,7 @@
 		F16CCD552ABA6D9B0037DCC6 /* SearchUserForInvitationViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F16CCD542ABA6D9B0037DCC6 /* SearchUserForInvitationViewModel.swift */; };
 		F16CCD582ABAA0820037DCC6 /* PickRoleViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F16CCD572ABAA0820037DCC6 /* PickRoleViewModel.swift */; };
 		F16CCD5A2ABAA08C0037DCC6 /* PickRoleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F16CCD592ABAA08C0037DCC6 /* PickRoleView.swift */; };
+		F16CCD5E2AC0DEC10037DCC6 /* DeleteSheetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F16CCD5D2AC0DEC10037DCC6 /* DeleteSheetView.swift */; };
 		F17F49C12A7AB6750086DDCB /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F17F49C02A7AB6750086DDCB /* HomeView.swift */; };
 		F17F49C42A7AB6990086DDCB /* SplashView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F17F49C32A7AB6990086DDCB /* SplashView.swift */; };
 		F17F49C92A7ABC080086DDCB /* ServerConnectionRepostory.swift in Sources */ = {isa = PBXBuildFile; fileRef = F17F49C82A7ABC080086DDCB /* ServerConnectionRepostory.swift */; };
@@ -178,6 +179,7 @@
 		F16CCD542ABA6D9B0037DCC6 /* SearchUserForInvitationViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchUserForInvitationViewModel.swift; sourceTree = "<group>"; };
 		F16CCD572ABAA0820037DCC6 /* PickRoleViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PickRoleViewModel.swift; sourceTree = "<group>"; };
 		F16CCD592ABAA08C0037DCC6 /* PickRoleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PickRoleView.swift; sourceTree = "<group>"; };
+		F16CCD5D2AC0DEC10037DCC6 /* DeleteSheetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeleteSheetView.swift; sourceTree = "<group>"; };
 		F17F49C02A7AB6750086DDCB /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
 		F17F49C32A7AB6990086DDCB /* SplashView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashView.swift; sourceTree = "<group>"; };
 		F17F49C82A7ABC080086DDCB /* ServerConnectionRepostory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServerConnectionRepostory.swift; sourceTree = "<group>"; };
@@ -486,6 +488,22 @@
 				F16CCD592ABAA08C0037DCC6 /* PickRoleView.swift */,
 			);
 			path = PickRole;
+			sourceTree = "<group>";
+		};
+		F16CCD5B2AC0DE940037DCC6 /* SheetView */ = {
+			isa = PBXGroup;
+			children = (
+				F16CCD5C2AC0DEAF0037DCC6 /* DeleteSheetView */,
+			);
+			path = SheetView;
+			sourceTree = "<group>";
+		};
+		F16CCD5C2AC0DEAF0037DCC6 /* DeleteSheetView */ = {
+			isa = PBXGroup;
+			children = (
+				F16CCD5D2AC0DEC10037DCC6 /* DeleteSheetView.swift */,
+			);
+			path = DeleteSheetView;
 			sourceTree = "<group>";
 		};
 		F17F49BF2A7AB6530086DDCB /* Home */ = {
@@ -809,6 +827,7 @@
 		F1AD87D42A7A1EE100A39752 /* Components */ = {
 			isa = PBXGroup;
 			children = (
+				F16CCD5B2AC0DE940037DCC6 /* SheetView */,
 				F1028D2B2AAFF6AA005C8F5B /* WarningBox */,
 				F159C3E92A9B98DF00CDAF20 /* ProgressView */,
 				F159C3E62A9B8B6100CDAF20 /* CustomAlert */,
@@ -1167,6 +1186,7 @@
 				F111439A2AA82ED4008EC3DC /* WorkspaceTitleAndSubtitleViewModel.swift in Sources */,
 				F17F49C42A7AB6990086DDCB /* SplashView.swift in Sources */,
 				F1AD87B32A788DFF00A39752 /* ColorAsset.swift in Sources */,
+				F16CCD5E2AC0DEC10037DCC6 /* DeleteSheetView.swift in Sources */,
 				F1AD87A72A788D5B00A39752 /* UIImage+Extension.swift in Sources */,
 				F1D372E32AA4E17E00846DC6 /* WorkspaceSettingViewModel.swift in Sources */,
 				F1AD875A2A788B4B00A39752 /* FitnessMobileApp.swift in Sources */,

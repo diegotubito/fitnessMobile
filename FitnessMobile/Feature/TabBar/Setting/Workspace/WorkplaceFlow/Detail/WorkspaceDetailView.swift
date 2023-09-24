@@ -6,11 +6,21 @@
 //
 
 import SwiftUI
-
 struct WorkspaceDetailView: View {
     @StateObject var viewmodel: WorkspaceDetailViewModel
     @EnvironmentObject var coordinator: Coordinator
-    @State var shouldPresentSheet = false
+    
+    @State private var selectedItem: SheetItem? = nil
+    
+    struct SheetItem: Identifiable {
+        let id: UUID? = UUID()
+        let sheetView: Sheets
+        
+        enum Sheets {
+            case address
+            case member
+        }
+    }
     
     func headerView() -> some View {
         HStack {
@@ -128,7 +138,7 @@ struct WorkspaceDetailView: View {
                             Image(systemName: "trash")
                                 .foregroundColor(Color.Red.truly)
                                 .onTapGesture {
-                                    shouldPresentSheet = true
+                                    selectedItem = SheetItem(sheetView: .address)
                                 }
                         }
                         .padding([.leading, .bottom])
@@ -142,7 +152,7 @@ struct WorkspaceDetailView: View {
                 }
                 .foregroundColor(Color.Neutral.tone90)
                 .padding(.bottom)
-
+                
                 VStack {
                     switch viewmodel.workspace.locationVerificationStatus {
                         
@@ -166,37 +176,7 @@ struct WorkspaceDetailView: View {
         .padding()
         .background(Color.Neutral.tone100.opacity(0.5))
         .cornerRadius(10)
-        .sheet(isPresented: $shouldPresentSheet, content: {
-            if shouldPresentSheet {
-                VStack {
-                    Text("_WORKSPACE_ADDRESS_VIEW_CURRENT_LOCATION_REMOVE_TITLE")
-                        .padding()
-                        .font(.title)
-                    Text("_WORKSPACE_ADDRESS_VIEW_CURRENT_LOCATION_REMOVE_SUBTITLE")
-                        .font(.subheadline)
-                    Spacer()
-
-                    HStack {
-                        BasicButton(title: "_WORKSPACE_ADDRESS_VIEW_CURRENT_LOCATION_CANCEL_BUTTON", style: .secondary, isEnabled: .constant(true)) {
-                            self.shouldPresentSheet = false
-                        }
-                        BasicButton(title: "_WORKSPACE_ADDRESS_VIEW_CURRENT_LOCATION_REMOVE_BUTTON", style: .destructive, isEnabled: .constant(true)) {
-                            viewmodel.deleteWorkspaceLocation()
-                            self.shouldPresentSheet = false
-                        }
-                    }
-                }
-                .padding(32)
-                .presentationDetents([.medium, .fraction(0.35)])
-                .presentationBackground(Color.Blue.midnight)
-            }
-            
-        })
-        .onReceive(viewmodel.$onDeletedLocationWorkspace, perform: { workspaceWithNoLocation in
-            if let workspaceWithNoLocation = workspaceWithNoLocation {
-                viewmodel.loadWorkspacesById()
-            }
-        })
+        
     }
     
     func noAddressView() -> some View {
@@ -235,12 +215,16 @@ struct WorkspaceDetailView: View {
                     }
             }
             .padding(.bottom, 8)
-            MemberListView(viewmodel: MemberViewModel(workspace: viewmodel.workspace))
-                .padding(.leading)
+            MemberListView(viewmodel: MemberViewModel(members: viewmodel.workspace.members), trushTapped: { memberTapped in
+                viewmodel.selectedMember = memberTapped
+                selectedItem = SheetItem(sheetView: .member)
+            })
+            .padding(.leading)
         }
         .padding()
         .background(Color.Neutral.tone100.opacity(0.5))
         .cornerRadius(10)
+       
     }
     
     func invitations() -> some View {
@@ -286,11 +270,6 @@ struct WorkspaceDetailView: View {
                     
                 }
             }
-            .onReceive(viewmodel.$onDeleteSuccess) { isDeleted in
-                if isDeleted {
-                    coordinator.path.removeLast()
-                }
-            }
             .onAppear {
                 viewmodel.loadWorkspacesById()
             }
@@ -302,6 +281,38 @@ struct WorkspaceDetailView: View {
                 }
             )
         }
+        .sheet(item: $selectedItem, content: { item in
+            if item.sheetView == .member {
+                DeleteSheetView(title: "_REMOVE_MEMBER_TITLE", subtitle: viewmodel.memberSubtitle, onTapped: { optionTapped in
+                    selectedItem = .none
+                    if optionTapped == .accept {
+                        viewmodel.deleteMember()
+                    }
+                })
+                    .presentationDetents([.medium, .fraction(0.35)])
+                    .presentationBackground(Color.Blue.midnight)
+            } else if item.sheetView == .address {
+                DeleteSheetView(title: "_WORKSPACE_ADDRESS_VIEW_CURRENT_LOCATION_REMOVE_TITLE", subtitle: "_WORKSPACE_ADDRESS_VIEW_CURRENT_LOCATION_REMOVE_SUBTITLE", onTapped: { optionTapped in
+                    if optionTapped == .accept {
+                        viewmodel.deleteWorkspaceLocation()
+                    }
+                    selectedItem = .none
+                })
+                    .presentationDetents([.medium, .fraction(0.35)])
+                    .presentationBackground(Color.Blue.midnight)
+            }
+        })
+        .onReceive(viewmodel.$onDeleteSuccess) { isDeleted in
+            if isDeleted {
+                coordinator.path.removeLast()
+            }
+        }
+        .onReceive(viewmodel.$onDeletedMember) { isDeleted in
+            viewmodel.loadWorkspacesById()
+        }
+        .onReceive(viewmodel.$onDeletedLocationWorkspace, perform: { workspaceWithNoLocation in
+            viewmodel.loadWorkspacesById()
+        })
     }
 }
 

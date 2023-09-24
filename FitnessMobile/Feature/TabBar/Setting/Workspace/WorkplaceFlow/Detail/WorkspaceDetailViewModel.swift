@@ -11,6 +11,9 @@ class WorkspaceDetailViewModel: BaseViewModel {
     @Published var workspace: WorkspaceModel
     @Published var onDeleteSuccess: Bool = false
     @Published var onDeletedLocationWorkspace: WorkspaceModel?
+    @Published var onDeletedMember: Bool = false
+    
+    var selectedMember: WorkspaceModel.WorkspaceMember?
     
     init(workspace: WorkspaceModel) {
         self.workspace = workspace
@@ -47,7 +50,7 @@ class WorkspaceDetailViewModel: BaseViewModel {
             isLoading = true
             do {
                 let response = try await workspaceUseCase.getWorkspace(_id: workspace._id)
-
+                
                 DispatchQueue.main.async {
                     self.workspace = response.workspace
                     self.isLoading = false
@@ -96,5 +99,39 @@ class WorkspaceDetailViewModel: BaseViewModel {
                 }
             }
         }
+    }
+    
+    @MainActor
+    func deleteMember() {
+        guard let selectedMember = selectedMember else { return }
+        Task {
+            let usecase = WorkspaceUseCase()
+            
+            isLoading = true
+            
+            do {
+                let response = try await usecase.deleteWorkspaceMember(workspace: workspace._id, user: selectedMember.user._id)
+                DispatchQueue.main.async {
+                    self.isLoading = false
+                    self.onDeletedMember = true
+                }
+            } catch {
+                DispatchQueue.main.async {
+                    self.isLoading = false
+                }
+            }
+        }
+    }
+    
+    var username: String {
+        return selectedMember?.user.username ?? ""
+    }
+    
+    var memberSubtitle: LocalizedStringKey {
+        LocalizedStringKey(String(format: NSLocalizedString("_REMOVE_MEMBER_SUBTITLE", comment: ""), username, email))
+    }
+    
+    var email: String {
+        selectedMember?.user.email ?? ""
     }
 }

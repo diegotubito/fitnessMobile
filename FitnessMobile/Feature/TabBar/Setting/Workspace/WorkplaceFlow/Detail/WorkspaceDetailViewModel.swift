@@ -10,6 +10,7 @@ import SwiftUI
 class WorkspaceDetailViewModel: BaseViewModel {
     var workspace: WorkspaceModel
     @Published var onDeleteSuccess: Bool = false
+    @Published var onDeletedLocationWorkspace: WorkspaceModel?
     
     init(workspace: WorkspaceModel) {
         self.workspace = workspace
@@ -47,6 +48,24 @@ class WorkspaceDetailViewModel: BaseViewModel {
                 let response = try await usecase.deleteWorkspace(_id: workspace._id)
                 DispatchQueue.main.async {
                     self.onDeleteSuccess = true
+                }
+            } catch {
+                DispatchQueue.main.async {
+                    self.showError = true
+                    self.handleError(error: error)
+                }
+            }
+        }
+    }
+    
+    @MainActor
+    func deleteWorkspaceLocation() {
+        Task {
+            do {
+                let usecase = WorkspaceUseCase()
+                let response = try await usecase.deleteWorkspaceLocation(_id: workspace._id)
+                DispatchQueue.main.async {
+                    self.onDeletedLocationWorkspace = response.workspace
                 }
             } catch {
                 DispatchQueue.main.async {

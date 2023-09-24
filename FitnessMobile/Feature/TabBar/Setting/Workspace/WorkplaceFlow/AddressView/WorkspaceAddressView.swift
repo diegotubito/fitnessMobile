@@ -11,7 +11,6 @@ struct WorkspaceAddressView: View {
     @StateObject var viewmodel: WorkspaceAddressViewModel
     @StateObject var googleGeocodeManager = GoogleGeocodeManager()
     @EnvironmentObject var coordinator: Coordinator
-    @State var shouldPresentSheet = false
     
     var body: some View {
         ZStack {
@@ -19,29 +18,6 @@ struct WorkspaceAddressView: View {
                 .ignoresSafeArea()
             
             VStack {
-                if viewmodel.workspace.location != nil {
-                    VStack {
-                        HStack {
-                            Text("_WORKSPACE_ADDRESS_VIEW_CURRENT_LOCATION_TITLE")
-                                .font(.largeTitle)
-                                .foregroundColor(Color.Dark.tone30)
-                            Spacer()
-                        }
-                        .padding(.bottom)
-                        HStack {
-                            Text(viewmodel.workspace.location?.googleGeocode?.formattedAddress ?? "")
-                            Spacer()
-                            Image(systemName: "trash")
-                                .foregroundColor(Color.Red.truly)
-                                .onTapGesture {
-                                    shouldPresentSheet = true
-                                }
-                        }
-                    }
-                    
-                    .padding(.bottom)
-                }
-                
                 HStack {
                     Text("_WORKSPACE_ADDRESS_VIEW_TITLE")
                         .font(.largeTitle)
@@ -102,42 +78,11 @@ struct WorkspaceAddressView: View {
                 coordinator.path.removeLast(2)
             } 
         })
-        .onReceive(viewmodel.$onDeletedLocationWorkspace, perform: { workspaceWithNoLocation in
-            if let workspaceWithNoLocation = workspaceWithNoLocation {
-                coordinator.path.removeLast(2)
-            }
-        })
         .overlay(
             Group {
                 CustomAlertView(isPresented: $viewmodel.showError, title: $viewmodel.errorTitle, message: $viewmodel.errorMessage)
                 CustomProgressView(isLoading: $viewmodel.isLoading)
             }
         )
-        .sheet(isPresented: $shouldPresentSheet, content: {
-            if shouldPresentSheet {
-                VStack {
-                    Text("_WORKSPACE_ADDRESS_VIEW_CURRENT_LOCATION_REMOVE_TITLE")
-                        .padding()
-                        .font(.title)
-                    Text("_WORKSPACE_ADDRESS_VIEW_CURRENT_LOCATION_REMOVE_SUBTITLE")
-                        .font(.subheadline)
-                    Spacer()
-
-                    HStack {
-                        BasicButton(title: "_WORKSPACE_ADDRESS_VIEW_CURRENT_LOCATION_CANCEL_BUTTON", style: .secondary, isEnabled: .constant(true)) {
-                            self.shouldPresentSheet = false
-                        }
-                        BasicButton(title: "_WORKSPACE_ADDRESS_VIEW_CURRENT_LOCATION_REMOVE_BUTTON", style: .destructive, isEnabled: .constant(true)) {
-                            viewmodel.deleteWorkspaceLocation()
-                            self.shouldPresentSheet = false
-                        }
-                    }
-                }
-                .padding(32)
-                .presentationDetents([.medium, .fraction(0.35)])
-                .presentationBackground(Color.Blue.midnight)
-            }
-            
-        })
     }
 }

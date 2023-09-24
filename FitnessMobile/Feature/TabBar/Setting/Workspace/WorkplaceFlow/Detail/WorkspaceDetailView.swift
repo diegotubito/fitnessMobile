@@ -10,6 +10,7 @@ import SwiftUI
 struct WorkspaceDetailView: View {
     @StateObject var viewmodel: WorkspaceDetailViewModel
     @EnvironmentObject var coordinator: Coordinator
+    @State var shouldPresentSheet = false
     
     func headerView() -> some View {
         HStack {
@@ -124,14 +125,25 @@ struct WorkspaceDetailView: View {
                         HStack {
                             Text(formattedAddress)
                             Spacer()
+                            Image(systemName: "trash")
+                                .foregroundColor(Color.Red.truly)
+                                .onTapGesture {
+                                    shouldPresentSheet = true
+                                }
                         }
+                        .padding([.leading, .bottom])
                         
                         HStack {
                             Text(viewmodel.getCoordinates())
                             Spacer()
                         }
+                        .padding(.leading)
                     }
-                    
+                }
+                .foregroundColor(Color.Neutral.tone90)
+                .padding(.bottom)
+
+                VStack {
                     switch viewmodel.workspace.locationVerificationStatus {
                         
                     case .notVerified:
@@ -149,12 +161,42 @@ struct WorkspaceDetailView: View {
                     }
                 }
                 .foregroundColor(Color.Neutral.tone90)
-                .padding(.leading)
             }
         }
         .padding()
         .background(Color.Neutral.tone100.opacity(0.5))
         .cornerRadius(10)
+        .sheet(isPresented: $shouldPresentSheet, content: {
+            if shouldPresentSheet {
+                VStack {
+                    Text("_WORKSPACE_ADDRESS_VIEW_CURRENT_LOCATION_REMOVE_TITLE")
+                        .padding()
+                        .font(.title)
+                    Text("_WORKSPACE_ADDRESS_VIEW_CURRENT_LOCATION_REMOVE_SUBTITLE")
+                        .font(.subheadline)
+                    Spacer()
+
+                    HStack {
+                        BasicButton(title: "_WORKSPACE_ADDRESS_VIEW_CURRENT_LOCATION_CANCEL_BUTTON", style: .secondary, isEnabled: .constant(true)) {
+                            self.shouldPresentSheet = false
+                        }
+                        BasicButton(title: "_WORKSPACE_ADDRESS_VIEW_CURRENT_LOCATION_REMOVE_BUTTON", style: .destructive, isEnabled: .constant(true)) {
+                            viewmodel.deleteWorkspaceLocation()
+                            self.shouldPresentSheet = false
+                        }
+                    }
+                }
+                .padding(32)
+                .presentationDetents([.medium, .fraction(0.35)])
+                .presentationBackground(Color.Blue.midnight)
+            }
+            
+        })
+        .onReceive(viewmodel.$onDeletedLocationWorkspace, perform: { workspaceWithNoLocation in
+            if let workspaceWithNoLocation = workspaceWithNoLocation {
+                coordinator.path.removeLast()
+            }
+        })
     }
     
     func noAddressView() -> some View {
@@ -164,19 +206,13 @@ struct WorkspaceDetailView: View {
                     .font(.headline)
                     .foregroundColor(Color.Neutral.tone80)
                 Spacer()
-                Image(systemName: "pencil")
+                Image(systemName: "plus")
                     .foregroundColor(.accentColor)
                     .onTapGesture {
                         coordinator.push(.addressWorkspace(workspace: viewmodel.workspace))
                     }
             }
-            
-            HStack {
-                Text("_WORKSPACE_DETAIL_VIEW_MESSAGE")
-                Spacer()
-            }
-            .padding(.bottom)
-            .foregroundColor(Color.Neutral.tone80)
+            .padding(.bottom, 8)
             
             WarningBoxView(title: "_WORKSPACE_DETAIL_VIEW_WARNING_EMPTY_TITLE", message: "_WORKSPACE_DETAIL_VIEW_WARNING_EMPTY_MESSAGE")
         }

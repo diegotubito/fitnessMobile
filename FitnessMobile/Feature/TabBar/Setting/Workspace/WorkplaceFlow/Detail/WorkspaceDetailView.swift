@@ -194,7 +194,7 @@ struct WorkspaceDetailView: View {
         })
         .onReceive(viewmodel.$onDeletedLocationWorkspace, perform: { workspaceWithNoLocation in
             if let workspaceWithNoLocation = workspaceWithNoLocation {
-                coordinator.path.removeLast()
+                viewmodel.loadWorkspacesById()
             }
         })
     }
@@ -290,6 +290,9 @@ struct WorkspaceDetailView: View {
                 if isDeleted {
                     coordinator.path.removeLast()
                 }
+            }
+            .onAppear {
+                viewmodel.loadWorkspacesById()
             }
             .scrollIndicators(.hidden)
             .overlay(

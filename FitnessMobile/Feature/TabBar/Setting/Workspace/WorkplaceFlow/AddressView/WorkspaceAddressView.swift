@@ -75,7 +75,7 @@ struct WorkspaceAddressView: View {
         })
         .onReceive(viewmodel.$onWorkspaceUpdated, perform: { updateValue in
             if let workspace = updateValue {
-                coordinator.path.removeLast(2)
+                coordinator.path.removeLast()
             } 
         })
         .overlay(

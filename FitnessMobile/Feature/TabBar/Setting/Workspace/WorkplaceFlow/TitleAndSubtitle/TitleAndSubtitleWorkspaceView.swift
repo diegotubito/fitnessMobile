@@ -69,12 +69,12 @@ struct TitleAndSubtitleWorkspaceView: View {
             }
             .onReceive(viewmodel.$onUpdateSuccess, perform: { updated in
                 if updated {
-                    coordinator.path.removeLast(2)
+                    coordinator.path.removeLast()
                 }
             })
             .onReceive(viewmodel.$onCreateSuccess, perform: { created in
                 if created {
-                    coordinator.path.removeLast(1)
+                    coordinator.path.removeLast()
                 }
             })
             .padding()

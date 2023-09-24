@@ -8,7 +8,7 @@
 import SwiftUI
 
 class WorkspaceDetailViewModel: BaseViewModel {
-    var workspace: WorkspaceModel
+    @Published var workspace: WorkspaceModel
     @Published var onDeleteSuccess: Bool = false
     @Published var onDeletedLocationWorkspace: WorkspaceModel?
     
@@ -38,6 +38,28 @@ class WorkspaceDetailViewModel: BaseViewModel {
         }
         
         return result
+    }
+    
+    @MainActor
+    func loadWorkspacesById() {
+        Task {
+            let workspaceUseCase = WorkspaceUseCase()
+            isLoading = true
+            do {
+                let response = try await workspaceUseCase.getWorkspace(_id: workspace._id)
+
+                DispatchQueue.main.async {
+                    self.workspace = response.workspace
+                    self.isLoading = false
+                }
+            } catch {
+                DispatchQueue.main.async {
+                    self.handleError(error: error)
+                    self.showError = true
+                    self.isLoading = false
+                }
+            }
+        }
     }
     
     @MainActor

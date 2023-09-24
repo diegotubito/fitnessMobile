@@ -15,9 +15,11 @@ struct WorkspaceResults {
     typealias Delete = WorkspaceEntity.Delete.Response
     typealias DeleteMember = WorkspaceEntity.DeleteMember.Response
     typealias DeleteLocation = WorkspaceEntity.DeleteLocation.Response
+    typealias Find = WorkspaceEntity.Find.Response
 }
 
 protocol WorkspaceRepositoryProtocol {
+    func getWorkspace(request: WorkspaceEntity.Find.Request) async throws -> WorkspaceResults.Find
     func getWorkspacesByUserId(request: WorkspaceEntity.FindByUserId.Request) async throws -> WorkspaceResults.FindById
     func createWorkspace(request: WorkspaceEntity.Create.Request) async throws -> WorkspaceResults.Create
     func updateWorkspace(request: WorkspaceEntity.Update.Request) async throws -> WorkspaceResults.Update
@@ -28,6 +30,14 @@ protocol WorkspaceRepositoryProtocol {
 }
 
 class WorkspaceRepository: ApiNetworkAsync, WorkspaceRepositoryProtocol {
+    func getWorkspace(request: WorkspaceEntity.Find.Request) async throws -> WorkspaceResults.Find {
+        config.path = "/api/v1/workspace"
+        config.addQueryItem(key: "_id", value: request._id)
+        config.method = .get
+        
+        return try await apiCall()
+    }
+    
     func getWorkspacesByUserId(request: WorkspaceEntity.FindByUserId.Request) async throws -> WorkspaceResults.FindById {
         config.path = "/api/v1/workspace-by-user-id"
         config.method = .get
@@ -88,6 +98,11 @@ class WorkspaceRepository: ApiNetworkAsync, WorkspaceRepositoryProtocol {
 }
 
 class WorkspaceRepositoryMock: ApiNetworkMockAsync, WorkspaceRepositoryProtocol {
+    func getWorkspace(request: WorkspaceEntity.Find.Request) async throws -> WorkspaceResults.Find {
+        mockFileName = ""
+        return try await apiCallMocked(bundle: Bundle.main)
+    }
+   
     func getWorkspacesByUserId(request: WorkspaceEntity.FindByUserId.Request) async throws -> WorkspaceResults.FindById {
         mockFileName = "load_workspace_by_id_response"
         return try await apiCallMocked(bundle: Bundle.main)

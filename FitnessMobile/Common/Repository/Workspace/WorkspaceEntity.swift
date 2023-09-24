@@ -8,6 +8,16 @@
 import Foundation
 
 struct WorkspaceEntity {
+    struct Find {
+        struct Request: Decodable {
+            let _id: String
+        }
+        
+        struct Response: Decodable {
+            let workspace: WorkspaceModel
+        }
+    }
+    
     struct FindByUserId {
         struct Request: Encodable {
             let userId: String

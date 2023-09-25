@@ -80,9 +80,9 @@
 "_INVITATION_VIEW_ACCEPT_BUTTON" = "Aceptar";
 
 // Mark: Pick Role
-"_WORSPACE_ADMIN_ROLE" = "Admin";
-"_WORSPACE_USER_ROLE" = "User";
-"_WORSPACE_USER_READ_ONLY_ROLE" = "User Read Only";
+"ADMIN_ROLE" = "Administrador";
+"USER_ROLE" = "Usuario";
+"USER_READ_ONLY_ROLE" = "Usuario Solo Lectura";
 "_PICK_ROLE_TITLE" = "Privilegios";
 "_PICK_ROLE_SUBTITLE" = "Seleccione el privilegio que tu invitado tendra en tu espacio de trabajo.";
 "_PICK_ROLE_SELECT_TITLE" = "Selección";

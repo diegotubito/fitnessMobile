@@ -14,6 +14,17 @@ class MemberViewModel: BaseViewModel {
         self.members = members
     }
     
+    func getRole(role: WorkspaceModel.Role) -> LocalizedStringKey {
+        switch role {
+        case .admin:
+            return "ADMIN_ROLE"
+        case .user:
+            return "USER_ROLE"
+        case .userReadOnly:
+            return "USER_READ_ONLY_ROLE"
+        }
+    }
+    
     /*
     @MainActor
     func fetchProfileImage(member: WorkspaceModel.WorkspaceMember) {

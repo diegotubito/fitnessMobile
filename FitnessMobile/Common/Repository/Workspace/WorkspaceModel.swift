@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import SwiftUI
 
 struct WorkspaceModel: Identifiable, Codable, Hashable {
     var id: UUID? = UUID()
@@ -26,7 +27,7 @@ struct WorkspaceModel: Identifiable, Codable, Hashable {
         var id: UUID? = UUID()
         
         let user: User
-        let role: String
+        let role: Role
     }
     
     struct Location: Codable, Hashable {
@@ -39,6 +40,12 @@ struct WorkspaceModel: Identifiable, Codable, Hashable {
         case pending = "ADDRESS_PENDING"
         case verified = "ADDRESS_VERIFIED"
         case rejected = "ADDRESS_REJECTED"
+    }
+    
+    enum Role: String, CaseIterable, Codable {
+        case admin = "ADMIN_ROLE"
+        case user = "USER_ROLE"
+        case userReadOnly = "USER_READ_ONLY_ROLE"
     }
 }
 

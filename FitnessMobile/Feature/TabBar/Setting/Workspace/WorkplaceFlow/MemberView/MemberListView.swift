@@ -31,6 +31,7 @@ struct MemberListView: View {
                      */
                     Text("\(member.user.username) (\(member.user.firstName) \(member.user.lastName))")
                         .font(.callout)
+                    Text(viewmodel.getRole(role: member.role))
                     Spacer()
                     Image(systemName: "trash")
                         .foregroundColor(Color.Red.truly)

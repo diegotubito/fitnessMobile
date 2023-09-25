@@ -82,9 +82,9 @@
 "_INVITATION_VIEW_ACCEPT_BUTTON" = "Accept";
 
 // Mark: Pick Role
-"_WORSPACE_ADMIN_ROLE" = "Admin";
-"_WORSPACE_USER_ROLE" = "User";
-"_WORSPACE_USER_READ_ONLY_ROLE" = "User Read Only";
+"ADMIN_ROLE" = "Admin";
+"USER_ROLE" = "User";
+"USER_READ_ONLY_ROLE" = "User Read Only";
 "_PICK_ROLE_TITLE" = "Privilege";
 "_PICK_ROLE_SUBTITLE" = "Select the correct privilege that your guest is going to have inside your workspace.";
 "_PICK_ROLE_SELECT_TITLE" = "Select";

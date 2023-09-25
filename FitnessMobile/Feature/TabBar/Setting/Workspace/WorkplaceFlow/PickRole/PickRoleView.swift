@@ -36,7 +36,7 @@ struct PickRoleView: View {
                     Text("_PICK_ROLE_SELECT_TITLE")
                     Spacer()
                     Picker("", selection: $viewmodel.selectedRole) {
-                        ForEach(PickRoleViewModel.Roles.allCases, id: \.self) { value in
+                        ForEach(WorkspaceModel.Role.allCases, id: \.self) { value in
                             Text(value.rawValue)
                         }
                     }

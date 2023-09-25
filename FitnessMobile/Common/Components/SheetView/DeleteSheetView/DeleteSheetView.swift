@@ -41,6 +41,7 @@ struct DeleteSheetView: View {
                 }
             }
         }
+        .padding()
     }
 }
 

@@ -19,6 +19,7 @@ struct WorkspaceDetailView: View {
         enum Sheets {
             case address
             case member
+            case invitation
         }
     }
     
@@ -236,7 +237,10 @@ struct WorkspaceDetailView: View {
                 Spacer()
             }
             .padding(.bottom, 8)
-            InvitationListView(viewmodel: InvitationListViewModel(workspace: viewmodel.workspace))
+            InvitationListView(viewmodel: InvitationListViewModel(invitations: viewmodel.invitations), trushTapped: { invitationTapped in
+                viewmodel.selectedInvitation = invitationTapped
+                selectedItem = SheetItem(sheetView: .invitation)
+            })
                 .padding(.leading)
         }
         .padding()
@@ -281,16 +285,19 @@ struct WorkspaceDetailView: View {
                 }
             )
         }
-        .sheet(item: $selectedItem, content: { item in
+        .sheet(item: $selectedItem, onDismiss: {
+            
+        }, content: { item in
             if item.sheetView == .member {
                 DeleteSheetView(title: "_REMOVE_MEMBER_TITLE", subtitle: viewmodel.memberSubtitle, onTapped: { optionTapped in
-                    selectedItem = .none
                     if optionTapped == .accept {
                         viewmodel.deleteMember()
                     }
+                    selectedItem = .none
                 })
-                    .presentationDetents([.medium, .fraction(0.35)])
+                    .presentationDetents([.medium, .fraction(0.30)])
                     .presentationBackground(Color.Blue.midnight)
+                    
             } else if item.sheetView == .address {
                 DeleteSheetView(title: "_WORKSPACE_ADDRESS_VIEW_CURRENT_LOCATION_REMOVE_TITLE", subtitle: "_WORKSPACE_ADDRESS_VIEW_CURRENT_LOCATION_REMOVE_SUBTITLE", onTapped: { optionTapped in
                     if optionTapped == .accept {
@@ -298,7 +305,16 @@ struct WorkspaceDetailView: View {
                     }
                     selectedItem = .none
                 })
-                    .presentationDetents([.medium, .fraction(0.35)])
+                    .presentationDetents([.medium, .fraction(0.30)])
+                    .presentationBackground(Color.Blue.midnight)
+            } else if item.sheetView == .invitation {
+                DeleteSheetView(title: "_REMOVE_INVITATION_TITLE", subtitle: "_REMOVE_INVITATION_SUBTITLE", onTapped: { optionTapped in
+                    if optionTapped == .accept {
+                        viewmodel.deleteInvitationById()
+                    }
+                    selectedItem = .none
+                })
+                    .presentationDetents([.medium, .fraction(0.30)])
                     .presentationBackground(Color.Blue.midnight)
             }
         })
@@ -307,12 +323,6 @@ struct WorkspaceDetailView: View {
                 coordinator.path.removeLast()
             }
         }
-        .onReceive(viewmodel.$onDeletedMember) { isDeleted in
-            viewmodel.loadWorkspacesById()
-        }
-        .onReceive(viewmodel.$onDeletedLocationWorkspace, perform: { workspaceWithNoLocation in
-            viewmodel.loadWorkspacesById()
-        })
     }
 }
 

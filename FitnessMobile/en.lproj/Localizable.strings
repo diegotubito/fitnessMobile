@@ -44,7 +44,7 @@
 "_WORKSPACE_DETAIL_VIEW_VERIFICATION_PENDING" = "Verification pending...";
 "_WORKSPACE_DETAIL_VIEW_VERIFICATION_REJECTED" = "Verification rejected";
 "_WORKSPACE_DETAIL_VIEW_VERIFICATION_REJECTED_SHARE_DOCUMENT" = "Upload another document.";
-"_WORKSPACE_DETAIL_VIEW_VERIFICATION_ACCEPTED" = "Verified";
+"_WORKSPACE_DETAIL_VIEW_VERIFICATION_ACCEPTED" = "Address Verified";
 "_WORKSPACE_DETAIL_VIEW_TITLE" = "Address";
 "_WORKSPACE_DETAIL_VIEW_MESSAGE" = "No address found.";
 "_WORKSPACE_DETAIL_VIEW_WARNING_NOT_VERIFIED_TITLE" = "Verification Note:";
@@ -65,7 +65,7 @@
 
 // Mark: Invitation List
 "_REMOVE_INVITATION_TITLE" = "Remove Invitation?";
-"_REMOVE_INVITATION_SUBTITLE" = "%@ with email %@ will be removed from your invitation list.";
+"_REMOVE_INVITATION_SUBTITLE" = "This invitation is pending, do you want to remove it?";
 "_REMOVE_INVITATION_CANCEL_BUTTON" = "Cancel";
 "_REMOVE_INVITATION_REMOVE_BUTTON" = "Remove";
 

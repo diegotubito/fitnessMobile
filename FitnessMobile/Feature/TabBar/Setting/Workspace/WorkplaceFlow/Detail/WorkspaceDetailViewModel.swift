@@ -9,11 +9,12 @@ import SwiftUI
 
 class WorkspaceDetailViewModel: BaseViewModel {
     @Published var workspace: WorkspaceModel
+    @Published var invitations: [InvitationModel] = []
     @Published var onDeleteSuccess: Bool = false
-    @Published var onDeletedLocationWorkspace: WorkspaceModel?
-    @Published var onDeletedMember: Bool = false
+    @Published var onDeletedInvitation = false
     
     var selectedMember: WorkspaceModel.WorkspaceMember?
+    var selectedInvitation: InvitationModel?
     
     init(workspace: WorkspaceModel) {
         self.workspace = workspace
@@ -36,7 +37,7 @@ class WorkspaceDetailViewModel: BaseViewModel {
             let coordinateString = NSLocalizedString("_COORDINATE", comment: "")
             let latittueString = NSLocalizedString("_LATITUDE", comment: "")
             let longitudeString = NSLocalizedString("_LONGITUDE", comment: "")
-
+            
             result.append("\(coordinateString)\n\(latittueString): \(lattitude)\n\(longitudeString): \(longitude)")
         }
         
@@ -47,20 +48,14 @@ class WorkspaceDetailViewModel: BaseViewModel {
     func loadWorkspacesById() {
         Task {
             let workspaceUseCase = WorkspaceUseCase()
-            isLoading = true
             do {
                 let response = try await workspaceUseCase.getWorkspace(_id: workspace._id)
+                self.workspace = response.workspace
+                self.fetchInvitationsByWorkspace()
                 
-                DispatchQueue.main.async {
-                    self.workspace = response.workspace
-                    self.isLoading = false
-                }
             } catch {
-                DispatchQueue.main.async {
-                    self.handleError(error: error)
-                    self.showError = true
-                    self.isLoading = false
-                }
+                self.handleError(error: error)
+                self.showError = true
             }
         }
     }
@@ -68,17 +63,16 @@ class WorkspaceDetailViewModel: BaseViewModel {
     @MainActor
     func removeWorkspace() {
         Task {
+            isLoading = true
             do {
                 let usecase = WorkspaceUseCase()
                 let response = try await usecase.deleteWorkspace(_id: workspace._id)
-                DispatchQueue.main.async {
-                    self.onDeleteSuccess = true
-                }
+                isLoading = false
+                onDeleteSuccess = true
             } catch {
-                DispatchQueue.main.async {
-                    self.showError = true
-                    self.handleError(error: error)
-                }
+                isLoading = false
+                showError = true
+                handleError(error: error)
             }
         }
     }
@@ -87,41 +81,68 @@ class WorkspaceDetailViewModel: BaseViewModel {
     func deleteWorkspaceLocation() {
         Task {
             do {
+                isLoading = true
                 let usecase = WorkspaceUseCase()
                 let response = try await usecase.deleteWorkspaceLocation(_id: workspace._id)
-                DispatchQueue.main.async {
-                    self.onDeletedLocationWorkspace = response.workspace
-                }
+                isLoading = false
+                self.loadWorkspacesById()
             } catch {
-                DispatchQueue.main.async {
-                    self.showError = true
-                    self.handleError(error: error)
-                }
+                isLoading = false
+                self.showError = true
+                self.handleError(error: error)
             }
         }
     }
     
     @MainActor
     func deleteMember() {
-        guard let selectedMember = selectedMember else { return }
         Task {
+            guard let selectedMember = selectedMember else { return }
             let usecase = WorkspaceUseCase()
+            isLoading = true
+            do {
+                let response = try await usecase.deleteWorkspaceMember(workspace: workspace._id, user: selectedMember.user._id)
+                isLoading = false
+                workspace = response.workspace
+                fetchInvitationsByWorkspace()
+            } catch {
+                isLoading = false
+            }
+        }
+    }
+    
+    @MainActor
+    func deleteInvitationById() {
+        Task {
+            guard let _id = selectedInvitation?._id else { return }
+            let usecase = InvitationUseCase()
             
             isLoading = true
             
             do {
-                let response = try await usecase.deleteWorkspaceMember(workspace: workspace._id, user: selectedMember.user._id)
-                DispatchQueue.main.async {
-                    self.isLoading = false
-                    self.onDeletedMember = true
-                }
+                let response = try await usecase.deleteInvitationById(_id: _id)
+                isLoading = false
+                fetchInvitationsByWorkspace()
             } catch {
-                DispatchQueue.main.async {
-                    self.isLoading = false
-                }
+                isLoading = false
             }
         }
     }
+    
+    @MainActor
+    func fetchInvitationsByWorkspace() {
+        Task {
+            let usecase = InvitationUseCase()
+            do {
+                let response = try await usecase.getInvitationsByWorkspaceId(workspaceId: workspace._id)
+                invitations = response.invitations
+            } catch {
+                showError = true
+                handleError(error: error)
+            }
+        }
+    }
+    
     
     var username: String {
         return selectedMember?.user.username ?? ""

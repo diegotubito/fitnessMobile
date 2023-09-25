@@ -42,7 +42,7 @@
 "_WORKSPACE_DETAIL_VIEW_VERIFICATION_PENDING" = "Verificación pendiente...";
 "_WORKSPACE_DETAIL_VIEW_VERIFICATION_REJECTED" = "Verificación rechazada.";
 "_WORKSPACE_DETAIL_VIEW_VERIFICATION_REJECTED_SHARE_DOCUMENT" = "Subir otro documento.";
-"_WORKSPACE_DETAIL_VIEW_VERIFICATION_ACCEPTED" = "Verificado";
+"_WORKSPACE_DETAIL_VIEW_VERIFICATION_ACCEPTED" = "Dirección Verificada";
 "_WORKSPACE_DETAIL_VIEW_TITLE" = "Dirección";
 "_WORKSPACE_DETAIL_VIEW_MESSAGE" = "Dirección no encontrada";
 "_WORKSPACE_DETAIL_VIEW_WARNING_NOT_VERIFIED_TITLE" = "Nota de verificación:";
@@ -63,7 +63,7 @@
 
 // Mark: Invitation List
 "_REMOVE_INVITATION_TITLE" = "¿Borrar Invitación?";
-"_REMOVE_INVITATION_SUBTITLE" = "%@ con email %@ sera eliminado de la lista de invitaciones. Si el usuario es miembre, no se eliminara de la lista de miembros.";
+"_REMOVE_INVITATION_SUBTITLE" = "¿Desea eliminar esta invitación aún pendiente?";
 "_REMOVE_INVITATION_CANCEL_BUTTON" = "Cancelar";
 "_REMOVE_INVITATION_REMOVE_BUTTON" = "Eliminar";
 

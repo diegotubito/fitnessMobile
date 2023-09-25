@@ -8,7 +8,7 @@
 import SwiftUI
 
 class MemberViewModel: BaseViewModel {
-    @Published var members: [WorkspaceModel.WorkspaceMember]
+    var members: [WorkspaceModel.WorkspaceMember]
 
     init(members: [WorkspaceModel.WorkspaceMember]) {
         self.members = members

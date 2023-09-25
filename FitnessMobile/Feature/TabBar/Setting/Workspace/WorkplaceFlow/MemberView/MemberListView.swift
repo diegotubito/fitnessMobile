@@ -42,9 +42,6 @@ struct MemberListView: View {
                 .foregroundColor(Color.Neutral.tone90)
                 Divider()
             }
-            .onAppear {
-                // viewmodel.fetchProfileImage(member: member)
-            }
         }
         
     }

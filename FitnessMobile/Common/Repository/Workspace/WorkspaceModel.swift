@@ -35,10 +35,10 @@ struct WorkspaceModel: Identifiable, Codable, Hashable {
     }
     
     enum Status: String, Codable, CaseIterable {
-        case notVerified = "NOT_VERIFIED"
-        case pending = "PENDING"
-        case verified = "VERIFIED"
-        case rejected = "REJECTED"
+        case notVerified = "ADDRESS_NOT_VERIFIED"
+        case pending = "ADDRESS_PENDING"
+        case verified = "ADDRESS_VERIFIED"
+        case rejected = "ADDRESS_REJECTED"
     }
 }
 

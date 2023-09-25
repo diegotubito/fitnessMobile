@@ -312,11 +312,11 @@
 		F1028D232AACF145005C8F5B /* WorkplaceFlow */ = {
 			isa = PBXGroup;
 			children = (
+				F1028D262AAE13BB005C8F5B /* Detail */,
 				F16CCD562ABAA06B0037DCC6 /* PickRole */,
 				F16CCD512ABA6D750037DCC6 /* SearchUserForInvitation */,
 				F16CCD492AB7DC6B0037DCC6 /* MemberView */,
 				F16CCD4C2AB928230037DCC6 /* InvitationList */,
-				F1028D262AAE13BB005C8F5B /* Detail */,
 				F11143962AA82EAC008EC3DC /* TitleAndSubtitle */,
 				F1028D202AACD2F0005C8F5B /* AddressView */,
 			);

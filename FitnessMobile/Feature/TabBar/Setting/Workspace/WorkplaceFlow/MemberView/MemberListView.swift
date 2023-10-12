@@ -10,7 +10,7 @@ import SwiftUI
 struct MemberListView: View {
     @ObservedObject var viewmodel: MemberViewModel
     
-    var trushTapped: ((WorkspaceModel.WorkspaceMember) -> Void)?
+    var cellTapped: ((WorkspaceModel.WorkspaceMember) -> Void)?
     
     var body: some View {
         ForEach(viewmodel.members, id: \.self) { member in
@@ -33,15 +33,16 @@ struct MemberListView: View {
                         .font(.callout)
                     Text(viewmodel.getRole(role: member.role))
                     Spacer()
-                    Image(systemName: "trash")
-                        .foregroundColor(Color.Red.truly)
-                        .onTapGesture {
-                            
-                            self.trushTapped?(member)
-                        }
+                    Image(systemName: "chevron.right")
+                        
                 }
                 .foregroundColor(Color.Neutral.tone90)
                 Divider()
+            }
+            .contentShape(Rectangle()) // <-- Make the entire cell tappable
+            .onTapGesture {
+                
+                self.cellTapped?(member)
             }
         }
         

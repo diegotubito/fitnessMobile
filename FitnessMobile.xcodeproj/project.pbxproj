@@ -102,6 +102,8 @@
 		F1AD87E82A7A1EE200A39752 /* CustomTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1AD87E02A7A1EE100A39752 /* CustomTextField.swift */; };
 		F1AD87E92A7A1EE200A39752 /* CheckBoxSelector.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1AD87E22A7A1EE100A39752 /* CheckBoxSelector.swift */; };
 		F1AD87EC2A7A1F9000A39752 /* SignUpView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1AD87EB2A7A1F9000A39752 /* SignUpView.swift */; };
+		F1CC095E2AC8F51F00C5E0CD /* MemberDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1CC095D2AC8F51F00C5E0CD /* MemberDetailView.swift */; };
+		F1CC09602AC8F5BB00C5E0CD /* MemberDetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1CC095F2AC8F5BB00C5E0CD /* MemberDetailViewModel.swift */; };
 		F1D372E12AA4035000846DC6 /* WorkspaceSettingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1D372E02AA4035000846DC6 /* WorkspaceSettingView.swift */; };
 		F1D372E32AA4E17E00846DC6 /* WorkspaceSettingViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1D372E22AA4E17E00846DC6 /* WorkspaceSettingViewModel.swift */; };
 		F1D372E62AA4E87D00846DC6 /* WorkspaceEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1D372E52AA4E87D00846DC6 /* WorkspaceEntity.swift */; };
@@ -247,6 +249,8 @@
 		F1AD87E02A7A1EE100A39752 /* CustomTextField.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomTextField.swift; sourceTree = "<group>"; };
 		F1AD87E22A7A1EE100A39752 /* CheckBoxSelector.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CheckBoxSelector.swift; sourceTree = "<group>"; };
 		F1AD87EB2A7A1F9000A39752 /* SignUpView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpView.swift; sourceTree = "<group>"; };
+		F1CC095D2AC8F51F00C5E0CD /* MemberDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemberDetailView.swift; sourceTree = "<group>"; };
+		F1CC095F2AC8F5BB00C5E0CD /* MemberDetailViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemberDetailViewModel.swift; sourceTree = "<group>"; };
 		F1D372E02AA4035000846DC6 /* WorkspaceSettingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkspaceSettingView.swift; sourceTree = "<group>"; };
 		F1D372E22AA4E17E00846DC6 /* WorkspaceSettingViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkspaceSettingViewModel.swift; sourceTree = "<group>"; };
 		F1D372E52AA4E87D00846DC6 /* WorkspaceEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkspaceEntity.swift; sourceTree = "<group>"; };
@@ -312,6 +316,7 @@
 		F1028D232AACF145005C8F5B /* WorkplaceFlow */ = {
 			isa = PBXGroup;
 			children = (
+				F1CC095C2AC8F4FF00C5E0CD /* MemberDetail */,
 				F1028D262AAE13BB005C8F5B /* Detail */,
 				F16CCD562ABAA06B0037DCC6 /* PickRole */,
 				F16CCD512ABA6D750037DCC6 /* SearchUserForInvitation */,
@@ -899,6 +904,15 @@
 			path = SignUp;
 			sourceTree = "<group>";
 		};
+		F1CC095C2AC8F4FF00C5E0CD /* MemberDetail */ = {
+			isa = PBXGroup;
+			children = (
+				F1CC095D2AC8F51F00C5E0CD /* MemberDetailView.swift */,
+				F1CC095F2AC8F5BB00C5E0CD /* MemberDetailViewModel.swift */,
+			);
+			path = MemberDetail;
+			sourceTree = "<group>";
+		};
 		F1D372DF2AA4033F00846DC6 /* Workspace */ = {
 			isa = PBXGroup;
 			children = (
@@ -1213,6 +1227,7 @@
 				F1AD87BE2A788F6000A39752 /* LoginViewModel.swift in Sources */,
 				F1AD87BF2A788F6000A39752 /* LoginView.swift in Sources */,
 				F1D372EC2AA4E8B200846DC6 /* WorkspaceUseCase.swift in Sources */,
+				F1CC095E2AC8F51F00C5E0CD /* MemberDetailView.swift in Sources */,
 				F159C3DA2A9A533C00CDAF20 /* ApplicationVersion.swift in Sources */,
 				F1AD87EC2A7A1F9000A39752 /* SignUpView.swift in Sources */,
 				F1D372E12AA4035000846DC6 /* WorkspaceSettingView.swift in Sources */,
@@ -1220,6 +1235,7 @@
 				F17F4A622A7FED250086DDCB /* BaseViewModel.swift in Sources */,
 				F16CCD5A2ABAA08C0037DCC6 /* PickRoleView.swift in Sources */,
 				F16CCD532ABA6D920037DCC6 /* SearchUserForInvitationView.swift in Sources */,
+				F1CC09602AC8F5BB00C5E0CD /* MemberDetailViewModel.swift in Sources */,
 				F1D372F32AA54A6200846DC6 /* InvitationView.swift in Sources */,
 				F1AD87E52A7A1EE200A39752 /* PhoneTextField.swift in Sources */,
 				F16CCD502AB9283F0037DCC6 /* InvitationListViewModel.swift in Sources */,
@@ -1331,6 +1347,8 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				MACOSX_DEPLOYMENT_TARGET = 14.0;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -1383,6 +1401,8 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				MACOSX_DEPLOYMENT_TARGET = 14.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SWIFT_COMPILATION_MODE = wholemodule;

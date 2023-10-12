@@ -16,6 +16,9 @@ struct InvitationModel: Identifiable, Codable, Hashable {
     let role: WorkspaceModel.Role
     let status: Status
     let expiration: String
+    let host: User
+    let createdAt: String
+    let updatedAt: String
     
     enum Status: String, Codable {
         case pending = "INVITATION_PENDING"

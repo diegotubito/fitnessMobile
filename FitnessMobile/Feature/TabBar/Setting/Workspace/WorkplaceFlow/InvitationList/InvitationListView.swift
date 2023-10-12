@@ -19,6 +19,7 @@ struct InvitationListView: View {
                     HStack {
                         Text("\(invitation.user.username)")
                             .font(.callout)
+                        Text(invitation.host.username)
                         Spacer()
                         
                         if invitation.status == .pending {

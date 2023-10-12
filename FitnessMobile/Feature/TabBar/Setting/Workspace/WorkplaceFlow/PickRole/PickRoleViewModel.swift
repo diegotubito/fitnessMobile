@@ -24,7 +24,7 @@ class PickRoleViewModel: BaseViewModel {
         Task {
             do {
                 let usecase = InvitationUseCase()
-                let response = try await usecase.sendInvitation(workspace: workspace._id, user: user._id, role: selectedRole.rawValue)
+                let response = try await usecase.sendInvitation(workspace: workspace._id, user: user._id, role: selectedRole.rawValue, host: UserSession._id)
                 sendInvitationSuccess = true
             } catch {
                 handleError(error: error)

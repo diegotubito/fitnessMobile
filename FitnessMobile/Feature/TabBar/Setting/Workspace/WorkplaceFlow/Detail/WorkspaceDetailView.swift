@@ -216,9 +216,10 @@ struct WorkspaceDetailView: View {
                     }
             }
             .padding(.bottom, 8)
-            MemberListView(viewmodel: MemberViewModel(members: viewmodel.workspace.members), trushTapped: { memberTapped in
+            MemberListView(viewmodel: MemberViewModel(members: viewmodel.workspace.members), cellTapped: { memberTapped in
                 viewmodel.selectedMember = memberTapped
-                selectedItem = SheetItem(sheetView: .member)
+                coordinator.push(.memberDetail(workspace: viewmodel.workspace, member: memberTapped))
+                //selectedItem = SheetItem(sheetView: .member)
             })
             .padding(.leading)
         }
@@ -288,17 +289,7 @@ struct WorkspaceDetailView: View {
         .sheet(item: $selectedItem, onDismiss: {
             
         }, content: { item in
-            if item.sheetView == .member {
-                DeleteSheetView(title: "_REMOVE_MEMBER_TITLE", subtitle: viewmodel.memberSubtitle, onTapped: { optionTapped in
-                    if optionTapped == .accept {
-                        viewmodel.deleteMember()
-                    }
-                    selectedItem = .none
-                })
-                    .presentationDetents([.medium, .fraction(0.30)])
-                    .presentationBackground(Color.Blue.midnight)
-                    
-            } else if item.sheetView == .address {
+            if item.sheetView == .address {
                 DeleteSheetView(title: "_WORKSPACE_ADDRESS_VIEW_CURRENT_LOCATION_REMOVE_TITLE", subtitle: "_WORKSPACE_ADDRESS_VIEW_CURRENT_LOCATION_REMOVE_SUBTITLE", onTapped: { optionTapped in
                     if optionTapped == .accept {
                         viewmodel.deleteWorkspaceLocation()

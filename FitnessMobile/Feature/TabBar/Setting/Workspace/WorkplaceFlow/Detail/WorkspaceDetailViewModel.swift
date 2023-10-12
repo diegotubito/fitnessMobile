@@ -95,23 +95,6 @@ class WorkspaceDetailViewModel: BaseViewModel {
     }
     
     @MainActor
-    func deleteMember() {
-        Task {
-            guard let selectedMember = selectedMember else { return }
-            let usecase = WorkspaceUseCase()
-            isLoading = true
-            do {
-                let response = try await usecase.deleteWorkspaceMember(workspace: workspace._id, user: selectedMember.user._id)
-                isLoading = false
-                workspace = response.workspace
-                fetchInvitationsByWorkspace()
-            } catch {
-                isLoading = false
-            }
-        }
-    }
-    
-    @MainActor
     func deleteInvitationById() {
         Task {
             guard let _id = selectedInvitation?._id else { return }

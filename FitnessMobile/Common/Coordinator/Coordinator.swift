@@ -95,6 +95,7 @@ class Coordinator: ObservableObject {
         case addressWorkspace(workspace: WorkspaceModel)
         case searchUsersWorkspace(workspace: WorkspaceModel)
         case pickRoleForInvitation(workspace: WorkspaceModel, user: User)
+        case memberDetail(workspace: WorkspaceModel, member: WorkspaceModel.WorkspaceMember)
     }
     
     enum SheetView: Identifiable {
@@ -152,6 +153,8 @@ class Coordinator: ObservableObject {
             SearchUserForInvitationView(viewmodel: SearchUserForInvitationViewModel(workspace: workspace))
         case .pickRoleForInvitation(workspace: let workspace, user: let user):
             PickRoleView(viewmodel: PickRoleViewModel(workspace: workspace, user: user))
+        case .memberDetail(workspace: let workspace, member: let member):
+            MemberDetailView(viewmodel: MemberDetailViewModel(workspace: workspace, member: member))
         }
     }
     

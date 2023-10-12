@@ -33,6 +33,7 @@ struct InvitationEntity {
             let user: String
             let workspace: String
             let role: String
+            let host: String
         }
         
         struct Response: Decodable {

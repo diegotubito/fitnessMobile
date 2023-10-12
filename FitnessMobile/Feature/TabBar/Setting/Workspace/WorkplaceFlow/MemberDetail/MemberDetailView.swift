@@ -36,6 +36,9 @@ struct MemberDetailView: View {
             HStack {
                 Text(viewmodel.member.user.username)
             }
+            HStack {
+                Text(viewmodel.member.host.username)
+            }
             Spacer()
         }
         Text(viewmodel.member.role.rawValue)

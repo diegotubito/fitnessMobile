@@ -45,6 +45,7 @@ class PhotoPickerManager: BaseViewModel {
                 isLoading = false
                 print("image loaded from api")
             } catch {
+                imageData = nil
                 isLoading = false
             }
         }

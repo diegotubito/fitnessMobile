@@ -14,41 +14,50 @@ struct MemberDetailView: View {
     @State var uiimage: UIImage?
     
     var body: some View {
-        VStack {
-            viewmodel.imageLoaded
-                .resizable()
-                .scaledToFill()
-                .frame(width: 60, height: 60)
-                .clipShape(Circle())
-                .overlay {
-                    Circle()
-                        .stroke(Color.white, lineWidth: 2)
-                }
-                .overlay {
-                    if viewmodel.isLoading {
-                        ProgressView()
+        ZStack {
+            LinearGradient(colors: [Color.black, Color.Blue.midnight], startPoint: .top, endPoint: .bottom)
+                .ignoresSafeArea()
+            
+            VStack(alignment: .leading) {
+                VStack {
+                    viewmodel.imageLoaded
+                        .resizable()
+                        .scaledToFill()
+                        .frame(width: 120, height: 120)
+                        .clipShape(Circle())
+                        .overlay {
+                            Circle()
+                                .stroke(Color.white, lineWidth: 2)
+                        }
+                        .overlay {
+                            if viewmodel.isLoading {
+                                ProgressView()
+                            }
+                        }
+                    
+                    HStack {
+                        Text("\(viewmodel.member.user.lastName) \(viewmodel.member.user.firstName)")
+                    }
+                    HStack {
+                        Text(viewmodel.member.user.username)
                     }
                 }
-            
-            HStack {
-                Text("\(viewmodel.member.user.lastName) \(viewmodel.member.user.firstName)")
-            }
-            HStack {
-                Text(viewmodel.member.user.username)
-            }
-            HStack {
+                Text(viewmodel.member.role.rawValue)
+                    .padding()
+                Text("host:")
                 Text(viewmodel.member.host.username)
+                Text(viewmodel.member.createdAt.toDate()?.toString() ?? "")
+                
+                
+                Spacer()
+                HStack {
+                    BasicButton(title: "Delete Member", style: .secondary, isEnabled: .constant(true)) {
+                        shouldPresentSheet = true
+                    }
+                    
+                }
             }
-            Spacer()
-        }
-        Text(viewmodel.member.role.rawValue)
             .padding()
-        Spacer()
-        HStack {
-            BasicButton(title: "Delete Member", style: .secondary, isEnabled: .constant(true)) {
-                shouldPresentSheet = true
-            }
-            
         }
         .overlay(
             Group {
@@ -56,8 +65,6 @@ struct MemberDetailView: View {
                 CustomProgressView(isLoading: $viewmodel.isLoading)
             }
         )
-        .padding()
-        
         .sheet(isPresented: $shouldPresentSheet, content: {
             DeleteSheetView(title: "Eliminar Miembro", subtitle: "Estas seguro de eliminar este miembro de tu espacio de trabajo?", onTapped: { optionTapped in
                 if optionTapped == .accept {
@@ -74,7 +81,6 @@ struct MemberDetailView: View {
                 coordinator.path.removeLast()
             }
         })
-        
         .onAppear {
             viewmodel.loadProfileImageFromApi()
         }

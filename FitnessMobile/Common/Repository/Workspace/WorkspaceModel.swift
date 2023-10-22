@@ -29,6 +29,7 @@ struct WorkspaceModel: Identifiable, Codable, Hashable {
         let user: User
         let role: Role
         let host: User
+        let createdAt: String
     }
     
     struct Location: Codable, Hashable {

@@ -6,6 +6,10 @@
   
 */
 
+// Mark: Workspace Upload Document View
+"_WORKSPACE_UPLOAD_DOCUMENT_TITLE" = "Select Source File";
+"_WORKSPACE_UPLOAD_DOCUMENT_SUBTITLE" = "";
+
 // Mark: WorkspaceSettingView
 "_YOUR_OWN_WORKSPACE_TITLE" = "Your own workpaces.";
 "_YOUR_GUEST_WORKSPACE_TITLE" = "Your workspaces as a Guest";

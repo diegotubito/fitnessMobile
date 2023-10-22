@@ -69,7 +69,7 @@ struct WorkspaceDetailView: View {
             Text("_WORKSPACE_DETAIL_VIEW_ADDRESS_NOT_VERIFIED")
                 .foregroundColor(Color.Neutral.tone80)
             Button("_WORKSPACE_DETAIL_VIEW_SHARE_DOCUMENT") {
-                
+                coordinator.push(.shareDocumentView)
             }
             .font(.callout)
             .foregroundColor(.accentColor)

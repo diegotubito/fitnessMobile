@@ -52,9 +52,10 @@ struct WorkspaceEntity {
         }
     }
     
-    struct AddDocument {
+    struct Document {
         struct Request: Encodable {
             let _id: String
+            let documentId: String
             let url: String
         }
         

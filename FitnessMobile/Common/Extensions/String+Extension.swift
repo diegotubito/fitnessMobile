@@ -66,3 +66,19 @@ extension String {
         return Double(cleanedStringWithNoSpaces)
     }
 }
+
+extension String {
+    static func generateMongoDBObjectId() -> String {
+        let timestamp = Int(Date().timeIntervalSince1970)
+        let machineId = Int.random(in: 0..<16777216) // 3 bytes in hexadecimal
+        let processId = Int.random(in: 0..<65536) // 2 bytes in hexadecimal
+        let counter = Int.random(in: 0..<16777216) // 3 bytes in hexadecimal
+        
+        let timestampHex = String(format: "%08x", timestamp)
+        let machineIdHex = String(format: "%06x", machineId)
+        let processIdHex = String(format: "%04x", processId)
+        let counterHex = String(format: "%06x", counter)
+        
+        return timestampHex + machineIdHex + processIdHex + counterHex
+    }
+}

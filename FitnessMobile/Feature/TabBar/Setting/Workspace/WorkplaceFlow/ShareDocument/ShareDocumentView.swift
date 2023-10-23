@@ -19,7 +19,7 @@ struct ShareDocumentView: View {
         
         enum SheetStyle {
             case uploadNewDocument
-            case removeDocument(url: String)
+            case removeDocument(document: WorkspaceModel.AddressDocument)
         }
     }
     
@@ -42,10 +42,10 @@ struct ShareDocumentView: View {
                     .padding(.bottom)
                 
                 ScrollView {
-                    ForEach(Array(workspace.locationVerifiedDocuments.enumerated()), id: \.offset) { index, url in
-                        Text("Document \(index + 1)")
+                    ForEach(Array(workspace.locationVerifiedDocuments.enumerated()), id: \.offset) { index, document in
+                        Text("Document \(index + 1) \(document._id)")
                             .onTapGesture {
-                                selectedSheet = Sheet(sheet: .removeDocument(url: url))
+                                selectedSheet = Sheet(sheet: .removeDocument(document: document))
                             }
                     }
                 }
@@ -77,12 +77,10 @@ struct ShareDocumentView: View {
                 }
                 .presentationDetents([.medium, .fraction(0.30)])
                 .presentationBackground(Color.Blue.midnight)
-            case .removeDocument(url: let url):
+            case .removeDocument(document: let document):
                 DeleteSheetView(title: "_REMOVE_WORKSPACE_DOCUMENT_TITLE", subtitle: "_REMOVE_WORKSPACE_DOCUMENT_SUBTITLE", onTapped: { optionTapped in
                     if optionTapped == .accept {
-                        Task {
-                            await photoPickerManager.removeDocuemtnUrlToWorskspace(workspaceId: workspace._id, url: url)
-                        }
+                        photoPickerManager.removeDocumentImage(workspaceId: workspace._id, url: document.url, documentId: document._id)
                     }
                     selectedSheet = .none
                 })
@@ -100,5 +98,11 @@ struct ShareDocumentView: View {
                 coordinator.path.removeLast()
             }
         }
+        .overlay(
+            Group {
+                CustomAlertView(isPresented: $photoPickerManager.showError, title: $photoPickerManager.errorTitle, message: $photoPickerManager.errorMessage)
+                CustomProgressView(isLoading: $photoPickerManager.isLoading)
+            }
+        )
     }
 }

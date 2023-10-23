@@ -20,7 +20,6 @@
 		F136CE732A85B62D00326730 /* OTPView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F136CE722A85B62D00326730 /* OTPView.swift */; };
 		F136CE752A85B63600326730 /* OTPViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F136CE742A85B63500326730 /* OTPViewModel.swift */; };
 		F138EEB32AE5B2E3007913A1 /* ShareDocumentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F138EEB22AE5B2E3007913A1 /* ShareDocumentView.swift */; };
-		F138EEB62AE5BA13007913A1 /* UploadDocumentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F138EEB52AE5BA13007913A1 /* UploadDocumentView.swift */; };
 		F138EEBA2AE5C34D007913A1 /* UploadFileSheetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F138EEB92AE5C34D007913A1 /* UploadFileSheetView.swift */; };
 		F159C3D42A99AC1E00CDAF20 /* DataCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = F159C3D32A99AC1E00CDAF20 /* DataCache.swift */; };
 		F159C3D62A99AE8700CDAF20 /* DataDisk.swift in Sources */ = {isa = PBXBuildFile; fileRef = F159C3D52A99AE8700CDAF20 /* DataDisk.swift */; };
@@ -165,7 +164,6 @@
 		F136CE722A85B62D00326730 /* OTPView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OTPView.swift; sourceTree = "<group>"; };
 		F136CE742A85B63500326730 /* OTPViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OTPViewModel.swift; sourceTree = "<group>"; };
 		F138EEB22AE5B2E3007913A1 /* ShareDocumentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShareDocumentView.swift; sourceTree = "<group>"; };
-		F138EEB52AE5BA13007913A1 /* UploadDocumentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UploadDocumentView.swift; sourceTree = "<group>"; };
 		F138EEB92AE5C34D007913A1 /* UploadFileSheetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UploadFileSheetView.swift; sourceTree = "<group>"; };
 		F159C3D32A99AC1E00CDAF20 /* DataCache.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataCache.swift; sourceTree = "<group>"; };
 		F159C3D52A99AE8700CDAF20 /* DataDisk.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataDisk.swift; sourceTree = "<group>"; };
@@ -390,18 +388,9 @@
 		F138EEB12AE5B2D4007913A1 /* ShareDocument */ = {
 			isa = PBXGroup;
 			children = (
-				F138EEB42AE5BA02007913A1 /* SheetView */,
 				F138EEB22AE5B2E3007913A1 /* ShareDocumentView.swift */,
 			);
 			path = ShareDocument;
-			sourceTree = "<group>";
-		};
-		F138EEB42AE5BA02007913A1 /* SheetView */ = {
-			isa = PBXGroup;
-			children = (
-				F138EEB52AE5BA13007913A1 /* UploadDocumentView.swift */,
-			);
-			path = SheetView;
 			sourceTree = "<group>";
 		};
 		F138EEB82AE5C339007913A1 /* UploadFileSheetView */ = {
@@ -1175,7 +1164,6 @@
 			files = (
 				F159C3E82A9B8B7200CDAF20 /* CustomAlertView.swift in Sources */,
 				F1AD87CC2A788FE000A39752 /* LoginRepository.swift in Sources */,
-				F138EEB62AE5BA13007913A1 /* UploadDocumentView.swift in Sources */,
 				F1AD87B52A788E2100A39752 /* Keychain.swift in Sources */,
 				F1028D252AAD710D005C8F5B /* WorkspaceAddressViewModel.swift in Sources */,
 				F17F4A462A7F00E90086DDCB /* Coordinator.swift in Sources */,

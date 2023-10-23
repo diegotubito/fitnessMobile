@@ -77,9 +77,9 @@ class PhotoPickerManager: BaseViewModel {
             do {
                 isLoading = true
                 let storageUseCase = StorageUseCase()
-                let timestamp = Int(Date().timeIntervalSince1970)
-                let response = try await storageUseCase.uploadFile(imageData: data, filepath: "address_documents/\(UserSession._id)/\(timestamp).png")
-                await addDocuemtnUrlToWorskspace(workspaceId: workspaceId, url: response.url)
+                let uniqueID = String.generateMongoDBObjectId()
+                let response = try await storageUseCase.uploadFile(imageData: data, filepath: "address_documents/\(UserSession._id)/\(uniqueID).png")
+                await addDocuemtnUrlToWorskspace(workspaceId: workspaceId, url: response.url, uniqueID: uniqueID)
             } catch {
                 handleError(error: error)
                 imageUploaded = false
@@ -90,12 +90,12 @@ class PhotoPickerManager: BaseViewModel {
     }
         
     @MainActor
-    func addDocuemtnUrlToWorskspace(workspaceId: String, url: String) async {
+    func addDocuemtnUrlToWorskspace(workspaceId: String, url: String, uniqueID: String) async {
         Task {
             do {
                 isLoading = true
                 let workspaceUseCase = WorkspaceUseCase()
-                let response = try await workspaceUseCase.addDocumentUrlToWorkspace(_id: workspaceId, url: url)
+                let response = try await workspaceUseCase.addDocumentUrlToWorkspace(_id: workspaceId, url: url, documentId: uniqueID)
                 
                 imageUploaded = true
                 self.isLoading = false
@@ -108,29 +108,23 @@ class PhotoPickerManager: BaseViewModel {
         }
     }
     
-    /*
-     
-     para haccer un remove document necesito tener un id por cada documento, y guardar ese docuemnto con el id.
-     
     @MainActor
-    func removeDocumentImage(workspaceId: String, url: String) {
+    func removeDocumentImage(workspaceId: String, url: String, documentId: String) {
         
         Task {
             do {
                 isLoading = true
                 let storageUseCase = StorageUseCase()
-                let timestamp = Int(Date().timeIntervalSince1970)
-                let response = try await storageUseCase.uploadFile(imageData: data, filepath: "address_documents/\(UserSession._id)/\(timestamp).png")
-                await addDocuemtnUrlToWorskspace(workspaceId: workspaceId, url: response.url)
+                let response = try await storageUseCase.deleteFile(filepath: "address_documents/\(UserSession._id)/\(documentId).png")
+                await removeDocuemtnUrlToWorskspace(workspaceId: workspaceId, url: url)
             } catch {
                 handleError(error: error)
-                imageUploaded = false
+                urlRemoved = false
                 isLoading = false
                 showError = true
             }
         }
     }
-*/
     
     @MainActor
     func removeDocuemtnUrlToWorskspace(workspaceId: String, url: String) async {

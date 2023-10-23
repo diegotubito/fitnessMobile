@@ -17,8 +17,8 @@ protocol WorkspaceUseCaseProtocol {
     func deleteWorkspace(_id: String) async throws -> WorkspaceResults.Delete
     func deleteWorkspaceMember(workspace: String, user: String) async throws -> WorkspaceResults.DeleteMember
     func deleteWorkspaceLocation(_id: String) async throws -> WorkspaceResults.DeleteLocation
-    func addDocumentUrlToWorkspace(_id: String, url: String) async throws -> WorkspaceResults.AddDocument
-    func removeDocumentUrlToWorkspace(_id: String, url: String) async throws -> WorkspaceResults.AddDocument
+    func addDocumentUrlToWorkspace(_id: String, url: String, documentId: String) async throws -> WorkspaceResults.Document
+    func removeDocumentUrlToWorkspace(_id: String, url: String) async throws -> WorkspaceResults.Document
 }
 
 class WorkspaceUseCase: WorkspaceUseCaseProtocol {
@@ -67,13 +67,13 @@ class WorkspaceUseCase: WorkspaceUseCaseProtocol {
         return try await repository.deleteWorkspaceLocation(request: request)
     }
 
-    func addDocumentUrlToWorkspace(_id: String, url: String) async throws -> WorkspaceResults.AddDocument {
-        let request = WorkspaceEntity.AddDocument.Request(_id: _id, url: url)
+    func addDocumentUrlToWorkspace(_id: String, url: String, documentId: String) async throws -> WorkspaceResults.Document {
+        let request = WorkspaceEntity.Document.Request(_id: _id, documentId: documentId, url: url)
         return try await repository.addDocumentUrlToWorkspace(request: request)
     }
     
-    func removeDocumentUrlToWorkspace(_id: String, url: String) async throws -> WorkspaceResults.AddDocument {
-        let request = WorkspaceEntity.AddDocument.Request(_id: _id, url: url)
+    func removeDocumentUrlToWorkspace(_id: String, url: String) async throws -> WorkspaceResults.Document {
+        let request = WorkspaceEntity.Document.Request(_id: _id, documentId: "", url: url)
         return try await repository.removeDocumentUrlToWorkspace(request: request)
     }
 }

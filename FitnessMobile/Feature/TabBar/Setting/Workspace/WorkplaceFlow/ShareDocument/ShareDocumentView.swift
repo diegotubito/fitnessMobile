@@ -9,6 +9,7 @@ import SwiftUI
 
 struct ShareDocumentView: View {
     @EnvironmentObject var coordinator: Coordinator
+    @StateObject var photoPickerManager = PhotoPickerManager()
     
     @State private var selectedSheet: Sheet? = nil
     
@@ -18,8 +19,14 @@ struct ShareDocumentView: View {
         
         enum SheetStyle {
             case uploadNewDocument
-            case removeDocument
+            case removeDocument(url: String)
         }
+    }
+    
+    var workspace: WorkspaceModel
+    
+    init(workspace: WorkspaceModel) {
+        self.workspace = workspace
     }
     
     var body: some View {
@@ -34,7 +41,15 @@ struct ShareDocumentView: View {
                     .font(.subheadline)
                     .padding(.bottom)
                 
-                Text("You have no documents uploaded.")
+                ScrollView {
+                    ForEach(Array(workspace.locationVerifiedDocuments.enumerated()), id: \.offset) { index, url in
+                        Text("Document \(index + 1)")
+                            .onTapGesture {
+                                selectedSheet = Sheet(sheet: .removeDocument(url: url))
+                            }
+                    }
+                }
+
                 Spacer()
             }
             .padding()
@@ -52,16 +67,22 @@ struct ShareDocumentView: View {
         .sheet(item: $selectedSheet, onDismiss: {
             
         }, content: { item in
-            if item.sheet == .uploadNewDocument {
-                UploadFileSheetView { image in
+            switch item.sheet {
+            case .uploadNewDocument:
+                UploadFileSheetView { imageData in
                     selectedSheet = .none
+                    if let imageData = imageData {
+                        photoPickerManager.uploadDocumentImage(workspaceId: workspace._id, data: imageData)
+                    }
                 }
                 .presentationDetents([.medium, .fraction(0.30)])
                 .presentationBackground(Color.Blue.midnight)
-            } else if item.sheet == .removeDocument {
-                DeleteSheetView(title: "_REMOVE_INVITATION_TITLE", subtitle: "_REMOVE_INVITATION_SUBTITLE", onTapped: { optionTapped in
+            case .removeDocument(url: let url):
+                DeleteSheetView(title: "_REMOVE_WORKSPACE_DOCUMENT_TITLE", subtitle: "_REMOVE_WORKSPACE_DOCUMENT_SUBTITLE", onTapped: { optionTapped in
                     if optionTapped == .accept {
-                        // handle accept button here
+                        Task {
+                            await photoPickerManager.removeDocuemtnUrlToWorskspace(workspaceId: workspace._id, url: url)
+                        }
                     }
                     selectedSheet = .none
                 })
@@ -69,5 +90,15 @@ struct ShareDocumentView: View {
                     .presentationBackground(Color.Blue.midnight)
             }
         })
+        .onReceive(photoPickerManager.$imageUploaded) { value in
+            if value {
+                coordinator.path.removeLast()
+            }
+        }
+        .onReceive(photoPickerManager.$urlRemoved) { value in
+            if value {
+                coordinator.path.removeLast()
+            }
+        }
     }
 }

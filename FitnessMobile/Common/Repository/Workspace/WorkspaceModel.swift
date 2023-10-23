@@ -22,6 +22,7 @@ struct WorkspaceModel: Identifiable, Codable, Hashable {
     let members: [WorkspaceMember]
     let location: Location?
     let locationVerificationStatus: Status?
+    let locationVerifiedDocuments: [String]
     
     struct WorkspaceMember: Identifiable, Codable, Hashable {
         var id: UUID? = UUID()

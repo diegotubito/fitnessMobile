@@ -16,6 +16,7 @@ struct WorkspaceResults {
     typealias DeleteMember = WorkspaceEntity.DeleteMember.Response
     typealias DeleteLocation = WorkspaceEntity.DeleteLocation.Response
     typealias Find = WorkspaceEntity.Find.Response
+    typealias AddDocument = WorkspaceEntity.AddDocument.Response
 }
 
 protocol WorkspaceRepositoryProtocol {
@@ -27,6 +28,8 @@ protocol WorkspaceRepositoryProtocol {
     func deleteWorkspace(request: WorkspaceEntity.Delete.Request) async throws -> WorkspaceResults.Delete
     func deleteWorkspaceMember(request: WorkspaceEntity.DeleteMember.Request) async throws -> WorkspaceResults.DeleteMember
     func deleteWorkspaceLocation(request: WorkspaceEntity.DeleteLocation.Request) async throws -> WorkspaceResults.DeleteLocation
+    func addDocumentUrlToWorkspace(request: WorkspaceEntity.AddDocument.Request) async throws -> WorkspaceResults.AddDocument
+    func removeDocumentUrlToWorkspace(request: WorkspaceEntity.AddDocument.Request) async throws -> WorkspaceResults.AddDocument
 }
 
 class WorkspaceRepository: ApiNetworkAsync, WorkspaceRepositoryProtocol {
@@ -95,6 +98,22 @@ class WorkspaceRepository: ApiNetworkAsync, WorkspaceRepositoryProtocol {
         
         return try await apiCall()
     }
+    
+    func addDocumentUrlToWorkspace(request: WorkspaceEntity.AddDocument.Request) async throws -> WorkspaceResults.AddDocument {
+        config.path = "/api/v1/add-document-workspace"
+        config.method = .post
+        config.addRequestBody(request)
+        
+        return try await apiCall()
+    }
+    
+    func removeDocumentUrlToWorkspace(request: WorkspaceEntity.AddDocument.Request) async throws -> WorkspaceResults.AddDocument {
+        config.path = "/api/v1/add-document-workspace"
+        config.method = .delete
+        config.addRequestBody(request)
+        
+        return try await apiCall()
+    }
 }
 
 class WorkspaceRepositoryMock: ApiNetworkMockAsync, WorkspaceRepositoryProtocol {
@@ -134,6 +153,16 @@ class WorkspaceRepositoryMock: ApiNetworkMockAsync, WorkspaceRepositoryProtocol 
     }
     
     func deleteWorkspaceMember(request: WorkspaceEntity.DeleteMember.Request) async throws -> WorkspaceResults.DeleteMember {
+        mockFileName = ""
+        return try await apiCallMocked(bundle: Bundle.main)
+    }
+    
+    func addDocumentUrlToWorkspace(request: WorkspaceEntity.AddDocument.Request) async throws -> WorkspaceResults.AddDocument {
+        mockFileName = ""
+        return try await apiCallMocked(bundle: Bundle.main)
+    }
+    
+    func removeDocumentUrlToWorkspace(request: WorkspaceEntity.AddDocument.Request) async throws -> WorkspaceResults.AddDocument {
         mockFileName = ""
         return try await apiCallMocked(bundle: Bundle.main)
     }

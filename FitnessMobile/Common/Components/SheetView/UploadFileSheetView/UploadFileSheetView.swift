@@ -13,7 +13,7 @@ struct UploadFileSheetView: View {
     @State private var isCameraPresented = false
     @State private var imageFromCamera: UIImage? = nil
     
-    var onImage: ((UIImage?) -> Void)
+    var onImage: ((Data?) -> Void)
     
     var body: some View {
         VStack {
@@ -29,17 +29,17 @@ struct UploadFileSheetView: View {
         }
         .onChange(of: selectedItem) { _ in
             Task {
-                if let data = try? await selectedItem?.loadTransferable(type: Data.self),
-                   let image = UIImage(data: data) {
-                    onImage(image)
+                if let data = try? await selectedItem?.loadTransferable(type: Data.self) {
+                    onImage(data)
                 } else {
                     onImage(nil)
                 }
             }
         }
         .onChange(of: imageFromCamera, perform: { value in
-            if let image = imageFromCamera {
-                onImage(image)
+            if let image = imageFromCamera,
+               let data = image.pngData() {
+                onImage(data)
             } else {
                 onImage(nil)
             }

@@ -52,6 +52,17 @@ struct WorkspaceEntity {
         }
     }
     
+    struct AddDocument {
+        struct Request: Encodable {
+            let _id: String
+            let url: String
+        }
+        
+        struct Response: Decodable {
+            let workspace: WorkspaceModel
+        }
+    }
+    
     struct UpdateAddress {
         struct Request: Encodable {
             let _id: String

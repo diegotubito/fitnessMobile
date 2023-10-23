@@ -6,6 +6,10 @@
   
 */
 
+// Mark: Workspace Upload Document View
+"_REMOVE_WORKSPACE_DOCUMENT_TITLE" = "Borrar Documento";
+"_REMOVE_WORKSPACE_DOCUMENT_SUBTITLE" = "¿Deseas borrar este documento?";
+
 // Mark: WorkspaceSettingView
 "_YOUR_OWN_WORKSPACE_TITLE" = "Tus propios Espacios de Trabajos.";
 "_YOUR_GUEST_WORKSPACE_TITLE" = "Tus Espacios de Trabajos como Invitado";

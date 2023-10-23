@@ -69,7 +69,7 @@ struct WorkspaceDetailView: View {
             Text("_WORKSPACE_DETAIL_VIEW_ADDRESS_NOT_VERIFIED")
                 .foregroundColor(Color.Neutral.tone80)
             Button("_WORKSPACE_DETAIL_VIEW_SHARE_DOCUMENT") {
-                coordinator.push(.shareDocumentView)
+                coordinator.push(.shareDocumentView(workspace: viewmodel.workspace))
             }
             .font(.callout)
             .foregroundColor(.accentColor)
@@ -327,6 +327,6 @@ struct WorkspaceDetailView_Previews: PreviewProvider {
                                                                                           logo: "",
                                                                                           createdAt: "",
                                                                                           updatedAt: "",
-                                                                                          members: [], location: nil, locationVerificationStatus: nil)))
+                                                                                          members: [], location: nil, locationVerificationStatus: nil, locationVerifiedDocuments: [])))
     }
 }

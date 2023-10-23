@@ -96,7 +96,7 @@ class Coordinator: ObservableObject {
         case searchUsersWorkspace(workspace: WorkspaceModel)
         case pickRoleForInvitation(workspace: WorkspaceModel, user: User)
         case memberDetail(workspace: WorkspaceModel, member: WorkspaceModel.WorkspaceMember)
-        case shareDocumentView
+        case shareDocumentView(workspace: WorkspaceModel)
         case addNewDocumentView
     }
     
@@ -157,8 +157,8 @@ class Coordinator: ObservableObject {
             PickRoleView(viewmodel: PickRoleViewModel(workspace: workspace, user: user))
         case .memberDetail(workspace: let workspace, member: let member):
             MemberDetailView(viewmodel: MemberDetailViewModel(workspace: workspace, member: member))
-        case .shareDocumentView:
-            ShareDocumentView()
+        case .shareDocumentView(workspace: let workspace):
+            ShareDocumentView(workspace: workspace)
         case .addNewDocumentView:
             UploadDocumentView()
         }

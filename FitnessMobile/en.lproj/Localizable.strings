@@ -7,8 +7,8 @@
 */
 
 // Mark: Workspace Upload Document View
-"_WORKSPACE_UPLOAD_DOCUMENT_TITLE" = "Select Source File";
-"_WORKSPACE_UPLOAD_DOCUMENT_SUBTITLE" = "";
+"_REMOVE_WORKSPACE_DOCUMENT_TITLE" = "Remove a Document";
+"_REMOVE_WORKSPACE_DOCUMENT_SUBTITLE" = "Do you want to remove this document?";
 
 // Mark: WorkspaceSettingView
 "_YOUR_OWN_WORKSPACE_TITLE" = "Your own workpaces.";

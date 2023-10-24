@@ -157,7 +157,7 @@ class Coordinator: ObservableObject {
         case .memberDetail(workspace: let workspace, member: let member):
             MemberDetailView(viewmodel: MemberDetailViewModel(workspace: workspace, member: member))
         case .shareDocumentView(workspace: let workspace):
-            ShareDocumentView(workspace: workspace)
+            ShareDocumentView(viewmodel: ShareDocumentViewModel(workspace: workspace))
         }
     }
     

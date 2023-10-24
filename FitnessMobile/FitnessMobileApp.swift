@@ -18,6 +18,21 @@ struct FitnessMobileApp: App {
     
     @UIApplicationDelegateAdaptor(AppDelegate.self) var appDelegate
     
+    init() {
+        let appearance = UINavigationBarAppearance()
+        appearance.backgroundColor = UIColor.blue.withAlphaComponent(0.8)
+        appearance.titleTextAttributes = [.foregroundColor: UIColor.lightText]
+        appearance.largeTitleTextAttributes = [.foregroundColor: UIColor.lightText, .font: UIFont.systemFont(ofSize: 40, weight: .bold)]
+      //  appearance.buttonAppearance.normal.titleTextAttributes = [.foregroundColor: UIColor.yellow]
+      //  appearance.doneButtonAppearance.normal.titleTextAttributes = [.foregroundColor: UIColor.green]
+        appearance.shadowColor = UIColor.gray
+
+        UINavigationBar.appearance().standardAppearance = appearance
+        UINavigationBar.appearance().scrollEdgeAppearance = appearance
+        
+        
+    }
+    
     var body: some Scene {
         WindowGroup {
             CoordinatorMainView()

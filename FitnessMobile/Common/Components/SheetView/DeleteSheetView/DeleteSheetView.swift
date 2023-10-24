@@ -29,8 +29,10 @@ struct DeleteSheetView: View {
             Text(title)
                 .padding()
                 .font(.title)
+                .foregroundColor(Color.Neutral.tone80)
             Text(subtitle)
                 .font(.subheadline)
+                .foregroundColor(Color.Neutral.tone80)
             Spacer()
             HStack {
                 BasicButton(title: "_REMOVE_MEMBER_CANCEL_BUTTON", style: .secondary, isEnabled: .constant(true)) {

@@ -19,6 +19,8 @@ struct WorkspaceSettingView: View {
                 HStack {
                     Text("_YOUR_OWN_WORKSPACE_TITLE")
                         .font(.title)
+                        .foregroundColor(Color.Neutral.tone80)
+
                     Spacer()
                 }
                 .padding()
@@ -43,6 +45,7 @@ struct WorkspaceSettingView: View {
                 HStack {
                     Text("_YOUR_GUEST_WORKSPACE_TITLE")
                         .font(.title)
+                        .foregroundColor(Color.Neutral.tone80)
                     Spacer()
                 }
                 .padding()

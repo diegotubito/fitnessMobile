@@ -7,6 +7,9 @@
 */
 
 // Mark: Workspace Upload Document View
+"_WORKSPACE_SHARE_DOCUMENT_NAV_TITLE"="Compartir Documento";
+"_WORKSPACE_SHARE_DOCUMENT_TITLE"="Comaprtir documento es crucial para consiguir una aprobación.";
+"_WORKSPACE_SHARE_DOCUMENT_SUBTITLE"="Puedes subir cualquier tipo de documento que te pertenezca con la direccion visible que ingresaste.";
 "_WORKSPACE_UPLOAD_DOCUMENT_TITLE" = "Subir Foto";
 "_WORKSPACE_UPLOAD_DOCUMENT_SUBTITLE" = "Selecciona la fuente de la imagen";
 "_REMOVE_WORKSPACE_DOCUMENT_TITLE" = "Borrar Documento";

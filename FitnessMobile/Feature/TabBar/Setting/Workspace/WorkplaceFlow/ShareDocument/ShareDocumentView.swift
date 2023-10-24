@@ -9,7 +9,6 @@ import SwiftUI
 
 struct ShareDocumentView: View {
     @EnvironmentObject var coordinator: Coordinator
-    @StateObject var photoPickerManager = PhotoPickerManager()
     
     @State private var selectedSheet: Sheet? = nil
     
@@ -23,38 +22,40 @@ struct ShareDocumentView: View {
         }
     }
     
-    var workspace: WorkspaceModel
+    @StateObject var viewmodel: ShareDocumentViewModel
     
-    init(workspace: WorkspaceModel) {
-        self.workspace = workspace
-    }
+    var gridItemLayout = [GridItem(.flexible()), GridItem(.flexible()), GridItem(.flexible())]
     
     var body: some View {
         ZStack {
             LinearGradient(colors: [Color.Blue.midnight, .black], startPoint: .topLeading, endPoint: .bottomTrailing)
                 .ignoresSafeArea()
             VStack(alignment: .leading) {
-                Text("Sharing documents it's crucial to approve your address.")
+                Text("_WORKSPACE_SHARE_DOCUMENT_TITLE")
                     .font(.title)
+                    .foregroundColor(Color.Neutral.tone80)
                     .padding(.bottom)
-                Text("You can upload any kind of document that belongs to you and the address match with the one you declared.")
+                Text("_WORKSPACE_SHARE_DOCUMENT_SUBTITLE")
                     .font(.subheadline)
+                    .foregroundColor(Color.Neutral.tone80)
                     .padding(.bottom)
                 
                 ScrollView {
-                    ForEach(Array(workspace.locationVerifiedDocuments.enumerated()), id: \.offset) { index, document in
-                        Text("Document \(index + 1) \(document._id)")
-                            .onTapGesture {
-                                selectedSheet = Sheet(sheet: .removeDocument(document: document))
-                            }
+                    LazyVGrid(columns: gridItemLayout, spacing: 20) {
+                        ForEach(viewmodel.workspace.locationVerifiedDocuments, id: \.self) { document in
+                            DocumentCell(viewmodel: DocumentCellViewModel(document: document))
+                                .onTapGesture {
+                                    selectedSheet = Sheet(sheet: .removeDocument(document: document))
+                                }
+                        }
                     }
                 }
-
+                
                 Spacer()
             }
             .padding()
         }
-        .navigationTitle("Share Documents")
+        .navigationTitle("_WORKSPACE_SHARE_DOCUMENT_NAV_TITLE")
         .toolbar(content: {
 
             ToolbarItem(placement: .navigationBarTrailing) {
@@ -72,7 +73,7 @@ struct ShareDocumentView: View {
                 UploadFileSheetView { imageData in
                     selectedSheet = .none
                     if let imageData = imageData {
-                        photoPickerManager.uploadDocumentImage(workspaceId: workspace._id, data: imageData)
+                        viewmodel.uploadDocumentImage(workspaceId: viewmodel.workspace._id, data: imageData)
                     }
                 }
                 .presentationDetents([.medium, .fraction(0.30)])
@@ -80,7 +81,7 @@ struct ShareDocumentView: View {
             case .removeDocument(document: let document):
                 DeleteSheetView(title: "_REMOVE_WORKSPACE_DOCUMENT_TITLE", subtitle: "_REMOVE_WORKSPACE_DOCUMENT_SUBTITLE", onTapped: { optionTapped in
                     if optionTapped == .accept {
-                        photoPickerManager.removeDocumentImage(workspaceId: workspace._id, url: document.url, documentId: document._id)
+                        viewmodel.removeDocumentImage(workspaceId: viewmodel.workspace._id, url: document.url, documentId: document._id)
                     }
                     selectedSheet = .none
                 })
@@ -88,20 +89,20 @@ struct ShareDocumentView: View {
                     .presentationBackground(Color.Blue.midnight)
             }
         })
-        .onReceive(photoPickerManager.$imageUploaded) { value in
+        .onReceive(viewmodel.$onUploadedImage) { value in
             if value {
-                coordinator.path.removeLast()
+                viewmodel.loadWorkspacesById()
             }
         }
-        .onReceive(photoPickerManager.$urlRemoved) { value in
+        .onReceive(viewmodel.$onRemovedImage) { value in
             if value {
-                coordinator.path.removeLast()
+                viewmodel.loadWorkspacesById()
             }
         }
         .overlay(
             Group {
-                CustomAlertView(isPresented: $photoPickerManager.showError, title: $photoPickerManager.errorTitle, message: $photoPickerManager.errorMessage)
-                CustomProgressView(isLoading: $photoPickerManager.isLoading)
+                CustomAlertView(isPresented: $viewmodel.showError, title: $viewmodel.errorTitle, message: $viewmodel.errorMessage)
+                CustomProgressView(isLoading: $viewmodel.isLoading)
             }
         )
     }

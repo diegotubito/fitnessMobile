@@ -85,6 +85,11 @@ struct WorkspaceDetailView: View {
                 .frame(width: 20, height: 20)
                 .foregroundColor(.yellow)
             Text("_WORKSPACE_DETAIL_VIEW_VERIFICATION_PENDING")
+            Button("_WORKSPACE_DETAIL_VIEW_SHARE_DOCUMENT") {
+                coordinator.push(.shareDocumentView(workspace: viewmodel.workspace))
+            }
+            .font(.callout)
+            .foregroundColor(.accentColor)
             Spacer()
         }
     }
@@ -96,9 +101,11 @@ struct WorkspaceDetailView: View {
                 .frame(width: 20, height: 20)
                 .foregroundColor(.red)
             Text("_WORKSPACE_DETAIL_VIEW_VERIFICATION_REJECTED")
-            Button("_WORKSPACE_DETAIL_VIEW_VERIFICATION_REJECTED_SHARE_DOCUMENT") {
-                
+            Button("_WORKSPACE_DETAIL_VIEW_SHARE_DOCUMENT") {
+                coordinator.push(.shareDocumentView(workspace: viewmodel.workspace))
             }
+            .font(.callout)
+            .foregroundColor(.accentColor)
             Spacer()
         }
     }

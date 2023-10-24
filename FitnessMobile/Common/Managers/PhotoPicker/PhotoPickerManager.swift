@@ -10,7 +10,6 @@ import SwiftUI
 class PhotoPickerManager: BaseViewModel {
     @Published var imageData: Data?
     @Published var imageUploaded: Bool = false
-    @Published var urlRemoved: Bool = false
     
     @MainActor
     func fetchProfileImage() {
@@ -69,82 +68,6 @@ class PhotoPickerManager: BaseViewModel {
             }
         }
     }
-    
-    @MainActor
-    func uploadDocumentImage(workspaceId: String, data: Data) {
-        
-        Task {
-            do {
-                isLoading = true
-                let storageUseCase = StorageUseCase()
-                let uniqueID = String.generateMongoDBObjectId()
-                let response = try await storageUseCase.uploadFile(imageData: data, filepath: "address_documents/\(UserSession._id)/\(uniqueID).png")
-                await addDocuemtnUrlToWorskspace(workspaceId: workspaceId, url: response.url, uniqueID: uniqueID)
-            } catch {
-                handleError(error: error)
-                imageUploaded = false
-                isLoading = false
-                showError = true
-            }
-        }
-    }
-        
-    @MainActor
-    func addDocuemtnUrlToWorskspace(workspaceId: String, url: String, uniqueID: String) async {
-        Task {
-            do {
-                isLoading = true
-                let workspaceUseCase = WorkspaceUseCase()
-                let response = try await workspaceUseCase.addDocumentUrlToWorkspace(_id: workspaceId, url: url, documentId: uniqueID)
-                
-                imageUploaded = true
-                self.isLoading = false
-            } catch {
-                imageUploaded = false
-                self.isLoading = false
-                self.handleError(error: error)
-                showError = true
-            }
-        }
-    }
-    
-    @MainActor
-    func removeDocumentImage(workspaceId: String, url: String, documentId: String) {
-        
-        Task {
-            do {
-                isLoading = true
-                let storageUseCase = StorageUseCase()
-                let response = try await storageUseCase.deleteFile(filepath: "address_documents/\(UserSession._id)/\(documentId).png")
-                await removeDocuemtnUrlToWorskspace(workspaceId: workspaceId, url: url)
-            } catch {
-                handleError(error: error)
-                urlRemoved = false
-                isLoading = false
-                showError = true
-            }
-        }
-    }
-    
-    @MainActor
-    func removeDocuemtnUrlToWorskspace(workspaceId: String, url: String) async {
-        Task {
-            do {
-                isLoading = true
-                let workspaceUseCase = WorkspaceUseCase()
-                let response = try await workspaceUseCase.removeDocumentUrlToWorkspace(_id: workspaceId, url: url)
-                
-                urlRemoved = true
-                self.isLoading = false
-            } catch {
-                urlRemoved = false
-                self.isLoading = false
-                self.handleError(error: error)
-                showError = true
-            }
-        }
-    }
-
     
     @MainActor
     func updateUser(url: String) async {

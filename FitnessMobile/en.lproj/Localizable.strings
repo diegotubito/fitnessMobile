@@ -7,6 +7,10 @@
 */
 
 // Mark: Workspace Upload Document View
+
+"_WORKSPACE_SHARE_DOCUMENT_NAV_TITLE"="Share Documents";
+"_WORKSPACE_SHARE_DOCUMENT_TITLE"="Sharing documents it's crucial to approve your address.";
+"_WORKSPACE_SHARE_DOCUMENT_SUBTITLE"="You can upload any kind of document that belongs to you and the address match with the one you declared.";
 "_WORKSPACE_UPLOAD_DOCUMENT_TITLE" = "Upload Image";
 "_WORKSPACE_UPLOAD_DOCUMENT_SUBTITLE" = "Select the image source";
 "_REMOVE_WORKSPACE_DOCUMENT_TITLE" = "Remove a Document";

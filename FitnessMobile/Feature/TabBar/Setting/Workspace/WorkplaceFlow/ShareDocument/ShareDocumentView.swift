@@ -18,7 +18,7 @@ struct ShareDocumentView: View {
         
         enum SheetStyle {
             case uploadNewDocument
-            case removeDocument(document: WorkspaceModel.AddressDocument)
+            case removeDocument(document: ImageModel)
         }
     }
     
@@ -42,7 +42,7 @@ struct ShareDocumentView: View {
                 
                 ScrollView {
                     LazyVGrid(columns: gridItemLayout, spacing: 20) {
-                        ForEach(viewmodel.workspace.locationVerifiedDocuments, id: \.self) { document in
+                        ForEach(viewmodel.workspace.documentImages, id: \.self) { document in
                             DocumentCell(viewmodel: DocumentCellViewModel(document: document))
                                 .onTapGesture {
                                     selectedSheet = Sheet(sheet: .removeDocument(document: document))
@@ -70,10 +70,10 @@ struct ShareDocumentView: View {
         }, content: { item in
             switch item.sheet {
             case .uploadNewDocument:
-                UploadFileSheetView { imageData in
+                UploadFileSheetView { imageData, size, dimensions in
                     selectedSheet = .none
-                    if let imageData = imageData {
-                        viewmodel.uploadDocumentImage(workspaceId: viewmodel.workspace._id, data: imageData)
+                    if let imageData = imageData, let size = size, let dimensions = dimensions {
+                        viewmodel.uploadDocumentImage(workspaceId: viewmodel.workspace._id, data: imageData, size: size, fileType: "PNG", dimensions: dimensions)
                     }
                 }
                 .presentationDetents([.medium, .fraction(0.30)])

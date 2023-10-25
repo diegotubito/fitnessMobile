@@ -57,6 +57,10 @@ struct WorkspaceEntity {
             let _id: String
             let documentId: String
             let url: String
+            let size: Int
+            let fileType: String
+            let dimensions: Dimensions
+            let creator: String
         }
         
         struct Response: Decodable {

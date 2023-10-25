@@ -36,7 +36,7 @@ class ShareDocumentViewModel: BaseViewModel {
     }
     
     @MainActor
-    func uploadDocumentImage(workspaceId: String, data: Data) {
+    func uploadDocumentImage(workspaceId: String, data: Data, size: Int, fileType: String, dimensions: Dimensions) {
         
         Task {
             do {
@@ -44,7 +44,7 @@ class ShareDocumentViewModel: BaseViewModel {
                 let storageUseCase = StorageUseCase()
                 let uniqueID = String.generateMongoDBObjectId()
                 let response = try await storageUseCase.uploadFile(imageData: data, filepath: "address_documents/\(UserSession._id)/\(uniqueID).png")
-                await addDocuemtnUrlToWorskspace(workspaceId: workspaceId, url: response.url, uniqueID: uniqueID)
+                await addDocuemtnUrlToWorskspace(workspaceId: workspaceId, url: response.url, uniqueID: uniqueID, size: size, fileType: fileType, dimensions: dimensions)
             } catch {
                 handleError(error: error)
                 onUploadedImage = false
@@ -55,12 +55,18 @@ class ShareDocumentViewModel: BaseViewModel {
     }
         
     @MainActor
-    func addDocuemtnUrlToWorskspace(workspaceId: String, url: String, uniqueID: String) async {
+    func addDocuemtnUrlToWorskspace(workspaceId: String, url: String, uniqueID: String, size: Int, fileType: String, dimensions: Dimensions) async {
         Task {
             do {
                 isLoading = true
                 let workspaceUseCase = WorkspaceUseCase()
-                let response = try await workspaceUseCase.addDocumentUrlToWorkspace(_id: workspaceId, url: url, documentId: uniqueID)
+                let response = try await workspaceUseCase.addDocumentUrlToWorkspace(_id: workspaceId,
+                                                                                    url: url,
+                                                                                    documentId: uniqueID,
+                                                                                    size: size,
+                                                                                    fileType: fileType,
+                                                                                    dimensions: dimensions,
+                                                                                    creator: UserSession._id)
                 
                 onUploadedImage = true
                 self.isLoading = false

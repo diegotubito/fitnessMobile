@@ -10,9 +10,9 @@ import SwiftUI
 class DocumentCellViewModel: BaseViewModel {
     @Published var image: UIImage?
     var imageSize: Int?
-    @Published var document: WorkspaceModel.AddressDocument
+    @Published var document: ImageModel
     
-    init(document: WorkspaceModel.AddressDocument) {
+    init(document: ImageModel) {
         self.document = document
     }
     

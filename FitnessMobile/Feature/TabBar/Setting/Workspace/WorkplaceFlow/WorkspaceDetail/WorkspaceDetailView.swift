@@ -334,6 +334,6 @@ struct WorkspaceDetailView_Previews: PreviewProvider {
                                                                                           logo: "",
                                                                                           createdAt: "",
                                                                                           updatedAt: "",
-                                                                                          members: [], location: nil, locationVerificationStatus: nil, locationVerifiedDocuments: [])))
+                                                                                          members: [], location: nil, locationVerificationStatus: nil, documentImages: [])))
     }
 }

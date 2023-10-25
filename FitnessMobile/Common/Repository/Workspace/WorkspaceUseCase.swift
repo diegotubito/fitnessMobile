@@ -17,7 +17,7 @@ protocol WorkspaceUseCaseProtocol {
     func deleteWorkspace(_id: String) async throws -> WorkspaceResults.Delete
     func deleteWorkspaceMember(workspace: String, user: String) async throws -> WorkspaceResults.DeleteMember
     func deleteWorkspaceLocation(_id: String) async throws -> WorkspaceResults.DeleteLocation
-    func addDocumentUrlToWorkspace(_id: String, url: String, documentId: String) async throws -> WorkspaceResults.Document
+    func addDocumentUrlToWorkspace(_id: String, url: String, documentId: String, size: Int, fileType: String, dimensions: Dimensions, creator: String) async throws -> WorkspaceResults.Document
     func removeDocumentUrlToWorkspace(_id: String, url: String) async throws -> WorkspaceResults.Document
 }
 
@@ -67,13 +67,13 @@ class WorkspaceUseCase: WorkspaceUseCaseProtocol {
         return try await repository.deleteWorkspaceLocation(request: request)
     }
 
-    func addDocumentUrlToWorkspace(_id: String, url: String, documentId: String) async throws -> WorkspaceResults.Document {
-        let request = WorkspaceEntity.Document.Request(_id: _id, documentId: documentId, url: url)
+    func addDocumentUrlToWorkspace(_id: String, url: String, documentId: String, size: Int, fileType: String, dimensions: Dimensions, creator: String) async throws -> WorkspaceResults.Document {
+        let request = WorkspaceEntity.Document.Request(_id: _id, documentId: documentId, url: url, size: size, fileType: fileType, dimensions: dimensions, creator: creator)
         return try await repository.addDocumentUrlToWorkspace(request: request)
     }
     
     func removeDocumentUrlToWorkspace(_id: String, url: String) async throws -> WorkspaceResults.Document {
-        let request = WorkspaceEntity.Document.Request(_id: _id, documentId: "", url: url)
+        let request = WorkspaceEntity.Document.Request(_id: _id, documentId: "", url: url, size: 0, fileType: "", dimensions: Dimensions(width: 0, height: 0), creator: "")
         return try await repository.removeDocumentUrlToWorkspace(request: request)
     }
 }

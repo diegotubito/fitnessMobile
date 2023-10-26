@@ -53,19 +53,31 @@ struct WorkspaceEntity {
     }
     
     struct Document {
-        struct Request: Encodable {
-            let _id: String
-            let documentId: String
-            let url: String
-            let size: Int
-            let fileType: String
-            let dimensions: Dimensions
-            let creator: String
+        struct Push {
+            struct Request: Encodable {
+                let _id: String
+                let documentId: String
+                let creator: String
+                let highResImage: SingleImageModel?
+                let thumbnailImage: SingleImageModel?
+            }
+            
+            struct Response: Decodable {
+                let workspace: WorkspaceModel
+            }
         }
         
-        struct Response: Decodable {
-            let workspace: WorkspaceModel
+        struct Delete {
+            struct Request: Encodable {
+                let _id: String
+                let documentId: String
+            }
+            
+            struct Response: Decodable {
+                let workspace: WorkspaceModel
+            }
         }
+
     }
     
     struct UpdateAddress {

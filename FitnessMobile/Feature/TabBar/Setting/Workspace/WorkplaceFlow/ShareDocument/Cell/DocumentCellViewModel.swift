@@ -18,11 +18,15 @@ class DocumentCellViewModel: BaseViewModel {
     
     @MainActor
     func loadDocumentImageFromApi() {
+        guard let url = document.thumbnailImage?.url else {
+            image = UIImage(named: "clipboard")
+            return
+        }
         isLoading = true
         Task {
             do {
                 let storageUseCase = StorageUseCase()
-                let response = try await storageUseCase.downloadImageWithUrl(url: document.url)
+                let response = try await storageUseCase.downloadImageWithUrl(url: url)
                 image = UIImage(data: response)
                 imageSize = response.count
                 isLoading = false

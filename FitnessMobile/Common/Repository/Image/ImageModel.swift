@@ -10,10 +10,17 @@ import Foundation
 struct ImageModel: Identifiable, Codable, Hashable {
     var id: UUID? = UUID()
     let _id: String
-    let url: String
-    let size: Double?
-    let dimensions: Dimensions?
     let creator: String
+    let highResImage: SingleImageModel?
+    let thumbnailImage: SingleImageModel?
+}
+
+struct SingleImageModel: Codable, Identifiable, Hashable {
+    var id: UUID? = UUID()
+    let url: String
+    let size: Int?
+    let fileType: String?
+    let dimensions: Dimensions?
 }
 
 struct Dimensions: Identifiable, Codable, Hashable {

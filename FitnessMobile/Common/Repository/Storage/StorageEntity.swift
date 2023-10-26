@@ -10,7 +10,7 @@ import Foundation
 struct StorageEntity {
     struct Upload {
         struct Request: Encodable {
-            let imageData: Data
+            let imageData: Data?
             let filepath: String
         }
         

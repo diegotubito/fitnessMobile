@@ -16,7 +16,8 @@ struct WorkspaceResults {
     typealias DeleteMember = WorkspaceEntity.DeleteMember.Response
     typealias DeleteLocation = WorkspaceEntity.DeleteLocation.Response
     typealias Find = WorkspaceEntity.Find.Response
-    typealias Document = WorkspaceEntity.Document.Response
+    typealias DocumentPush = WorkspaceEntity.Document.Push.Response
+    typealias DocumentDelete = WorkspaceEntity.Document.Delete.Response
 }
 
 protocol WorkspaceRepositoryProtocol {
@@ -28,8 +29,8 @@ protocol WorkspaceRepositoryProtocol {
     func deleteWorkspace(request: WorkspaceEntity.Delete.Request) async throws -> WorkspaceResults.Delete
     func deleteWorkspaceMember(request: WorkspaceEntity.DeleteMember.Request) async throws -> WorkspaceResults.DeleteMember
     func deleteWorkspaceLocation(request: WorkspaceEntity.DeleteLocation.Request) async throws -> WorkspaceResults.DeleteLocation
-    func addDocumentUrlToWorkspace(request: WorkspaceEntity.Document.Request) async throws -> WorkspaceResults.Document
-    func removeDocumentUrlToWorkspace(request: WorkspaceEntity.Document.Request) async throws -> WorkspaceResults.Document
+    func addDocumentUrlToWorkspace(request: WorkspaceEntity.Document.Push.Request) async throws -> WorkspaceResults.DocumentPush
+    func removeDocumentUrlToWorkspace(request: WorkspaceEntity.Document.Delete.Request) async throws -> WorkspaceResults.DocumentDelete
 }
 
 class WorkspaceRepository: ApiNetworkAsync, WorkspaceRepositoryProtocol {
@@ -99,7 +100,7 @@ class WorkspaceRepository: ApiNetworkAsync, WorkspaceRepositoryProtocol {
         return try await apiCall()
     }
     
-    func addDocumentUrlToWorkspace(request: WorkspaceEntity.Document.Request) async throws -> WorkspaceResults.Document {
+    func addDocumentUrlToWorkspace(request: WorkspaceEntity.Document.Push.Request) async throws -> WorkspaceResults.DocumentPush {
         config.path = "/api/v1/add-document-workspace"
         config.method = .post
         config.addRequestBody(request)
@@ -107,7 +108,7 @@ class WorkspaceRepository: ApiNetworkAsync, WorkspaceRepositoryProtocol {
         return try await apiCall()
     }
     
-    func removeDocumentUrlToWorkspace(request: WorkspaceEntity.Document.Request) async throws -> WorkspaceResults.Document {
+    func removeDocumentUrlToWorkspace(request: WorkspaceEntity.Document.Delete.Request) async throws -> WorkspaceResults.DocumentDelete {
         config.path = "/api/v1/add-document-workspace"
         config.method = .delete
         config.addRequestBody(request)
@@ -157,12 +158,12 @@ class WorkspaceRepositoryMock: ApiNetworkMockAsync, WorkspaceRepositoryProtocol 
         return try await apiCallMocked(bundle: Bundle.main)
     }
     
-    func addDocumentUrlToWorkspace(request: WorkspaceEntity.Document.Request) async throws -> WorkspaceResults.Document {
+    func addDocumentUrlToWorkspace(request: WorkspaceEntity.Document.Push.Request) async throws -> WorkspaceResults.DocumentPush {
         mockFileName = ""
         return try await apiCallMocked(bundle: Bundle.main)
     }
     
-    func removeDocumentUrlToWorkspace(request: WorkspaceEntity.Document.Request) async throws -> WorkspaceResults.Document {
+    func removeDocumentUrlToWorkspace(request: WorkspaceEntity.Document.Delete.Request) async throws -> WorkspaceResults.DocumentDelete {
         mockFileName = ""
         return try await apiCallMocked(bundle: Bundle.main)
     }

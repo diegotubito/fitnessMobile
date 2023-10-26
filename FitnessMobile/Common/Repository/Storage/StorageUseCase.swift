@@ -14,7 +14,7 @@ class StorageUseCase {
         self.repository = repository
     }
     
-    func uploadFile(imageData: Data, filepath: String) async throws -> StorageUploadResult {
+    func uploadFile(imageData: Data?, filepath: String) async throws -> StorageUploadResult {
         let request = StorageEntity.Upload.Request(imageData: imageData, filepath: filepath)
         return try await repository.uploadFile(request: request)
     }

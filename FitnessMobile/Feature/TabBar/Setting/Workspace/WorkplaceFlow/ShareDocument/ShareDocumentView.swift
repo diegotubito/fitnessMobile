@@ -73,7 +73,7 @@ struct ShareDocumentView: View {
                 UploadFileSheetView { imageData, size, dimensions in
                     selectedSheet = .none
                     if let imageData = imageData, let size = size, let dimensions = dimensions {
-                        viewmodel.uploadDocumentImage(workspaceId: viewmodel.workspace._id, data: imageData, size: size, fileType: "PNG", dimensions: dimensions)
+                        viewmodel.uploadDocumentImage(data: imageData)
                     }
                 }
                 .presentationDetents([.medium, .fraction(0.30)])
@@ -81,7 +81,7 @@ struct ShareDocumentView: View {
             case .removeDocument(document: let document):
                 DeleteSheetView(title: "_REMOVE_WORKSPACE_DOCUMENT_TITLE", subtitle: "_REMOVE_WORKSPACE_DOCUMENT_SUBTITLE", onTapped: { optionTapped in
                     if optionTapped == .accept {
-                        viewmodel.removeDocumentImage(workspaceId: viewmodel.workspace._id, url: document.url, documentId: document._id)
+                        viewmodel.removeDocumentImage(documentId: document._id)
                     }
                     selectedSheet = .none
                 })

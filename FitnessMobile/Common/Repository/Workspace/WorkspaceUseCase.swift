@@ -19,6 +19,8 @@ protocol WorkspaceUseCaseProtocol {
     func deleteWorkspaceLocation(_id: String) async throws -> WorkspaceResults.DeleteLocation
     func addDocumentUrlToWorkspace(_id: String, documentId: String, creator: String, highResImage: SingleImageModel?, thumbnailImage: SingleImageModel?) async throws -> WorkspaceResults.DocumentPush
     func removeDocumentUrlToWorkspace(_id: String, documentId: String) async throws -> WorkspaceResults.DocumentDelete 
+    func updateWorkspaceDefaultImage(_id: String, creator: String, highResImage: SingleImageModel?, thumbnailImage: SingleImageModel?) async throws -> WorkspaceResults.DocumentPush
+    func updateWorkspaceDefaultBackgroundImage(_id: String, creator: String, highResImage: SingleImageModel?, thumbnailImage: SingleImageModel?) async throws -> WorkspaceResults.DocumentPush
 }
 
 class WorkspaceUseCase: WorkspaceUseCaseProtocol {
@@ -75,6 +77,16 @@ class WorkspaceUseCase: WorkspaceUseCaseProtocol {
     func removeDocumentUrlToWorkspace(_id: String, documentId: String) async throws -> WorkspaceResults.DocumentDelete {
         let request = WorkspaceEntity.Document.Delete.Request(_id: _id, documentId: documentId)
         return try await repository.removeDocumentUrlToWorkspace(request: request)
+    }
+    
+    func updateWorkspaceDefaultImage(_id: String, creator: String, highResImage: SingleImageModel?, thumbnailImage: SingleImageModel?) async throws -> WorkspaceResults.DocumentPush {
+        let request = WorkspaceEntity.Document.Push.Request(_id: _id, documentId: "", creator: creator, highResImage: highResImage, thumbnailImage: thumbnailImage)
+        return try await repository.updateWorkspaceDefaultImage(request: request)
+    }
+    
+    func updateWorkspaceDefaultBackgroundImage(_id: String, creator: String, highResImage: SingleImageModel?, thumbnailImage: SingleImageModel?) async throws -> WorkspaceResults.DocumentPush {
+        let request = WorkspaceEntity.Document.Push.Request(_id: _id, documentId: "", creator: creator, highResImage: highResImage, thumbnailImage: thumbnailImage)
+        return try await repository.updateWorkspaceDefaultBackgroundImage(request: request)
     }
 }
 

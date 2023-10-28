@@ -9,7 +9,7 @@ import SwiftUI
 struct WorkspaceDetailView: View {
     @StateObject var viewmodel: WorkspaceDetailViewModel
     @EnvironmentObject var coordinator: Coordinator
-    
+    @StateObject var photoPickerManager = PhotoPickerManager()
     @State private var selectedItem: SheetItem? = nil
     
     struct SheetItem: Identifiable {
@@ -23,8 +23,45 @@ struct WorkspaceDetailView: View {
         }
     }
     
+    struct Constants {
+        static let size: CGFloat = 100
+    }
+    
     func headerView() -> some View {
         HStack {
+            photoPickerManager.getImageView()
+                .resizable()
+                .scaledToFill()
+                .frame(width: Constants.size, height: Constants.size)
+                .clipShape(Circle())
+                .overlay {
+                    if photoPickerManager.isLoading {
+                        ProgressView()
+                            .frame(width: Constants.size, height: Constants.size)
+                            .overlay {
+                                Circle()
+                                    .stroke(Color.Dark.tone20, lineWidth: 2)
+                            }
+                            .shadow(radius: 5)
+                    } else {
+                        Circle()
+                            .stroke(Color.Dark.tone20, lineWidth: 2)
+                        Text("_EDIT_BUTTON")
+                            .padding(3)
+                            .padding(.horizontal, 2)
+                            .font(.caption)
+                            .foregroundColor(Color.Blue.truly)
+                            .background(Color.Dark.tone20)
+                            .cornerRadius(5)
+                            .offset(CGSize(width: 0, height: Constants.size / 2))
+                            .shadow(radius: 5)
+                    }
+                }
+                .shadow(radius: 10)
+                .onTapGesture {
+                    coordinator.push(.workspaceImagesView(workspace: viewmodel.workspace))
+                }
+            
             Image("logo")
                 .resizable()
                 .scaledToFit()
@@ -331,9 +368,13 @@ struct WorkspaceDetailView_Previews: PreviewProvider {
                                                                                           subtitle: "Testing subtitle",
                                                                                           isEnabled: true,
                                                                                           owner: "",
-                                                                                          logo: "",
                                                                                           createdAt: "",
                                                                                           updatedAt: "",
-                                                                                          members: [], location: nil, locationVerificationStatus: nil, documentImages: [])))
+                                                                                          members: [],
+                                                                                          location: nil,
+                                                                                          locationVerificationStatus: nil,
+                                                                                          documentImages: [],
+                                                                                          defaultImage: nil,
+                                                                                          defaultBackgroundImage: nil)))
     }
 }

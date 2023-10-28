@@ -16,13 +16,14 @@ struct WorkspaceModel: Identifiable, Codable, Hashable {
     let subtitle: String
     let isEnabled: Bool
     let owner: String
-    let logo: String?
     let createdAt: String
     let updatedAt: String
     let members: [WorkspaceMember]
     let location: Location?
     let locationVerificationStatus: Status?
     let documentImages: [ImageModel]
+    let defaultImage: ImageModel?
+    let defaultBackgroundImage: ImageModel?
     
     struct WorkspaceMember: Identifiable, Codable, Hashable {
         var id: UUID? = UUID()
@@ -51,4 +52,3 @@ struct WorkspaceModel: Identifiable, Codable, Hashable {
         case userReadOnly = "USER_READ_ONLY_ROLE"
     }
 }
-

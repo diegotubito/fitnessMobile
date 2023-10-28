@@ -36,6 +36,9 @@ open class ApiNetworkMock {
             return
         }
         
+        let json = try? JSONSerialization.jsonObject(with: data)
+        print("mi data: ", json)
+        
         guard let register = try? JSONDecoder().decode(T.self, from: data) else {
             completionBlock(.failure(.serialization))
             return

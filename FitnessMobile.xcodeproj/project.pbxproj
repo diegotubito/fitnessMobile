@@ -104,6 +104,10 @@
 		F1AD87E82A7A1EE200A39752 /* CustomTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1AD87E02A7A1EE100A39752 /* CustomTextField.swift */; };
 		F1AD87E92A7A1EE200A39752 /* CheckBoxSelector.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1AD87E22A7A1EE100A39752 /* CheckBoxSelector.swift */; };
 		F1AD87EC2A7A1F9000A39752 /* SignUpView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1AD87EB2A7A1F9000A39752 /* SignUpView.swift */; };
+		F1B48D482AEDBB6600EE732E /* EditDefaultImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1B48D472AEDBB6600EE732E /* EditDefaultImageView.swift */; };
+		F1B48D4A2AEDBC9E00EE732E /* EditDefaultImageViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1B48D492AEDBC9E00EE732E /* EditDefaultImageViewModel.swift */; };
+		F1B48D4D2AEDC98100EE732E /* EditBackgroundImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1B48D4C2AEDC98100EE732E /* EditBackgroundImageView.swift */; };
+		F1B48D4F2AEDC98B00EE732E /* EditBackgroundImageViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1B48D4E2AEDC98B00EE732E /* EditBackgroundImageViewModel.swift */; };
 		F1CC095E2AC8F51F00C5E0CD /* MemberDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1CC095D2AC8F51F00C5E0CD /* MemberDetailView.swift */; };
 		F1CC09602AC8F5BB00C5E0CD /* MemberDetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1CC095F2AC8F5BB00C5E0CD /* MemberDetailViewModel.swift */; };
 		F1D372E12AA4035000846DC6 /* WorkspaceSettingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1D372E02AA4035000846DC6 /* WorkspaceSettingView.swift */; };
@@ -135,6 +139,11 @@
 		F1F859532AE873A300D5E7DF /* DocumentCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1F859522AE873A300D5E7DF /* DocumentCell.swift */; };
 		F1F859562AE8741500D5E7DF /* DocumentCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1F859552AE8741500D5E7DF /* DocumentCellViewModel.swift */; };
 		F1F859592AE9DDB900D5E7DF /* ImageModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1F859582AE9DDB900D5E7DF /* ImageModel.swift */; };
+		F1F8595C2AEC434C00D5E7DF /* WorkspaceImagesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1F8595B2AEC434C00D5E7DF /* WorkspaceImagesView.swift */; };
+		F1F8595E2AEC45F500D5E7DF /* WorkspaceImagesViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1F8595D2AEC45F500D5E7DF /* WorkspaceImagesViewModel.swift */; };
+		F1F859612AEC480E00D5E7DF /* WorkspaceMockViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1F859602AEC480E00D5E7DF /* WorkspaceMockViewModel.swift */; };
+		F1F859632AEC51B800D5E7DF /* WorkspaceRepositorySync.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1F859622AEC51B800D5E7DF /* WorkspaceRepositorySync.swift */; };
+		F1F859652AEC69D700D5E7DF /* WorkspaceUseCaseSync.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1F859642AEC69D700D5E7DF /* WorkspaceUseCaseSync.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -257,6 +266,10 @@
 		F1AD87E02A7A1EE100A39752 /* CustomTextField.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomTextField.swift; sourceTree = "<group>"; };
 		F1AD87E22A7A1EE100A39752 /* CheckBoxSelector.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CheckBoxSelector.swift; sourceTree = "<group>"; };
 		F1AD87EB2A7A1F9000A39752 /* SignUpView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpView.swift; sourceTree = "<group>"; };
+		F1B48D472AEDBB6600EE732E /* EditDefaultImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditDefaultImageView.swift; sourceTree = "<group>"; };
+		F1B48D492AEDBC9E00EE732E /* EditDefaultImageViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditDefaultImageViewModel.swift; sourceTree = "<group>"; };
+		F1B48D4C2AEDC98100EE732E /* EditBackgroundImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditBackgroundImageView.swift; sourceTree = "<group>"; };
+		F1B48D4E2AEDC98B00EE732E /* EditBackgroundImageViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditBackgroundImageViewModel.swift; sourceTree = "<group>"; };
 		F1CC095D2AC8F51F00C5E0CD /* MemberDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemberDetailView.swift; sourceTree = "<group>"; };
 		F1CC095F2AC8F5BB00C5E0CD /* MemberDetailViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemberDetailViewModel.swift; sourceTree = "<group>"; };
 		F1D372E02AA4035000846DC6 /* WorkspaceSettingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkspaceSettingView.swift; sourceTree = "<group>"; };
@@ -288,6 +301,11 @@
 		F1F859522AE873A300D5E7DF /* DocumentCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DocumentCell.swift; sourceTree = "<group>"; };
 		F1F859552AE8741500D5E7DF /* DocumentCellViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DocumentCellViewModel.swift; sourceTree = "<group>"; };
 		F1F859582AE9DDB900D5E7DF /* ImageModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageModel.swift; sourceTree = "<group>"; };
+		F1F8595B2AEC434C00D5E7DF /* WorkspaceImagesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkspaceImagesView.swift; sourceTree = "<group>"; };
+		F1F8595D2AEC45F500D5E7DF /* WorkspaceImagesViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkspaceImagesViewModel.swift; sourceTree = "<group>"; };
+		F1F859602AEC480E00D5E7DF /* WorkspaceMockViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkspaceMockViewModel.swift; sourceTree = "<group>"; };
+		F1F859622AEC51B800D5E7DF /* WorkspaceRepositorySync.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkspaceRepositorySync.swift; sourceTree = "<group>"; };
+		F1F859642AEC69D700D5E7DF /* WorkspaceUseCaseSync.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkspaceUseCaseSync.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -328,6 +346,7 @@
 		F1028D232AACF145005C8F5B /* WorkplaceFlow */ = {
 			isa = PBXGroup;
 			children = (
+				F1F8595A2AEC433800D5E7DF /* WorkspaceImages */,
 				F138EEB12AE5B2D4007913A1 /* ShareDocument */,
 				F1CC095C2AC8F4FF00C5E0CD /* MemberDetail */,
 				F1028D262AAE13BB005C8F5B /* WorkspaceDetail */,
@@ -729,6 +748,7 @@
 		F1AD87862A788BC700A39752 /* Common */ = {
 			isa = PBXGroup;
 			children = (
+				F1F8595F2AEC47F100D5E7DF /* Mock */,
 				F159C3DE2A9A6D7900CDAF20 /* Managers */,
 				F159C3D72A9A531700CDAF20 /* Singleton */,
 				F17F4A602A7FED1E0086DDCB /* Base */,
@@ -937,6 +957,24 @@
 			path = SignUp;
 			sourceTree = "<group>";
 		};
+		F1B48D462AEDBB2000EE732E /* EditDefaultImageView */ = {
+			isa = PBXGroup;
+			children = (
+				F1B48D472AEDBB6600EE732E /* EditDefaultImageView.swift */,
+				F1B48D492AEDBC9E00EE732E /* EditDefaultImageViewModel.swift */,
+			);
+			path = EditDefaultImageView;
+			sourceTree = "<group>";
+		};
+		F1B48D4B2AEDC97300EE732E /* EditBackgroundImageView */ = {
+			isa = PBXGroup;
+			children = (
+				F1B48D4C2AEDC98100EE732E /* EditBackgroundImageView.swift */,
+				F1B48D4E2AEDC98B00EE732E /* EditBackgroundImageViewModel.swift */,
+			);
+			path = EditBackgroundImageView;
+			sourceTree = "<group>";
+		};
 		F1CC095C2AC8F4FF00C5E0CD /* MemberDetail */ = {
 			isa = PBXGroup;
 			children = (
@@ -961,6 +999,8 @@
 			children = (
 				F1D372EB2AA4E8B200846DC6 /* WorkspaceUseCase.swift */,
 				F1D372E92AA4E89600846DC6 /* WorkspaceRepository.swift */,
+				F1F859622AEC51B800D5E7DF /* WorkspaceRepositorySync.swift */,
+				F1F859642AEC69D700D5E7DF /* WorkspaceUseCaseSync.swift */,
 				F1D372E52AA4E87D00846DC6 /* WorkspaceEntity.swift */,
 				F1D372E72AA4E88700846DC6 /* WorkspaceModel.swift */,
 				F1D372ED2AA4E8F800846DC6 /* load_workspace_by_id_response.json */,
@@ -1044,6 +1084,25 @@
 				F1F859582AE9DDB900D5E7DF /* ImageModel.swift */,
 			);
 			path = Image;
+			sourceTree = "<group>";
+		};
+		F1F8595A2AEC433800D5E7DF /* WorkspaceImages */ = {
+			isa = PBXGroup;
+			children = (
+				F1B48D4B2AEDC97300EE732E /* EditBackgroundImageView */,
+				F1B48D462AEDBB2000EE732E /* EditDefaultImageView */,
+				F1F8595B2AEC434C00D5E7DF /* WorkspaceImagesView.swift */,
+				F1F8595D2AEC45F500D5E7DF /* WorkspaceImagesViewModel.swift */,
+			);
+			path = WorkspaceImages;
+			sourceTree = "<group>";
+		};
+		F1F8595F2AEC47F100D5E7DF /* Mock */ = {
+			isa = PBXGroup;
+			children = (
+				F1F859602AEC480E00D5E7DF /* WorkspaceMockViewModel.swift */,
+			);
+			path = Mock;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -1192,6 +1251,7 @@
 			files = (
 				F159C3E82A9B8B7200CDAF20 /* CustomAlertView.swift in Sources */,
 				F1AD87CC2A788FE000A39752 /* LoginRepository.swift in Sources */,
+				F1F859652AEC69D700D5E7DF /* WorkspaceUseCaseSync.swift in Sources */,
 				F1AD87B52A788E2100A39752 /* Keychain.swift in Sources */,
 				F1028D252AAD710D005C8F5B /* WorkspaceAddressViewModel.swift in Sources */,
 				F17F4A462A7F00E90086DDCB /* Coordinator.swift in Sources */,
@@ -1203,6 +1263,7 @@
 				F1AD87CB2A788FE000A39752 /* LoginEntity.swift in Sources */,
 				F1028D2A2AAE14AB005C8F5B /* WorkspaceDetailViewModel.swift in Sources */,
 				F159C3D62A99AE8700CDAF20 /* DataDisk.swift in Sources */,
+				F1B48D4A2AEDBC9E00EE732E /* EditDefaultImageViewModel.swift in Sources */,
 				F1D372F62AA5604C00846DC6 /* InvitationModel.swift in Sources */,
 				F1AD87B72A788E2D00A39752 /* UserSession.swift in Sources */,
 				F17F4A702A80407D0086DDCB /* UserEntity.swift in Sources */,
@@ -1214,8 +1275,10 @@
 				F1AD879C2A788D2D00A39752 /* ApiNetworkAsync.swift in Sources */,
 				F1A1FA4B2A9BD92B00C816AC /* OpenCameraWrapper.swift in Sources */,
 				F16CCD442AB36D2D0037DCC6 /* GoogleGeocodeModel.swift in Sources */,
+				F1B48D4F2AEDC98B00EE732E /* EditBackgroundImageViewModel.swift in Sources */,
 				F136CE692A81EB4100326730 /* ProfileHeader.swift in Sources */,
 				F17F4A7B2A8080300086DDCB /* UserList.swift in Sources */,
+				F1B48D4D2AEDC98100EE732E /* EditBackgroundImageView.swift in Sources */,
 				F1D372F82AA5605600846DC6 /* InvitationEntity.swift in Sources */,
 				F1AD87992A788D2D00A39752 /* ApiNetwork.swift in Sources */,
 				F1AD879D2A788D2D00A39752 /* ApiNetworkMockAsync.swift in Sources */,
@@ -1223,9 +1286,11 @@
 				F136CE6E2A8432F200326730 /* CountryPickerViewModel.swift in Sources */,
 				F136CE732A85B62D00326730 /* OTPView.swift in Sources */,
 				F1D373002AA5648F00846DC6 /* InvitationUseCase.swift in Sources */,
+				F1F8595E2AEC45F500D5E7DF /* WorkspaceImagesViewModel.swift in Sources */,
 				F1AD879A2A788D2D00A39752 /* ApiNetworkMock.swift in Sources */,
 				F16CCD582ABAA0820037DCC6 /* PickRoleViewModel.swift in Sources */,
 				F1AD87AE2A788D7A00A39752 /* SocketManager.swift in Sources */,
+				F1F8595C2AEC434C00D5E7DF /* WorkspaceImagesView.swift in Sources */,
 				F1F859532AE873A300D5E7DF /* DocumentCell.swift in Sources */,
 				F1D372EA2AA4E89600846DC6 /* WorkspaceRepository.swift in Sources */,
 				F159C3D42A99AC1E00CDAF20 /* DataCache.swift in Sources */,
@@ -1248,7 +1313,9 @@
 				F1AD87AA2A788D5B00A39752 /* Color+Extensions.swift in Sources */,
 				F17F4A652A8021070086DDCB /* SettingView.swift in Sources */,
 				F1AD87E82A7A1EE200A39752 /* CustomTextField.swift in Sources */,
+				F1F859612AEC480E00D5E7DF /* WorkspaceMockViewModel.swift in Sources */,
 				F1AD879B2A788D2D00A39752 /* ApiNetworkErrorModel.swift in Sources */,
+				F1F859632AEC51B800D5E7DF /* WorkspaceRepositorySync.swift in Sources */,
 				F111439A2AA82ED4008EC3DC /* WorkspaceTitleAndSubtitleViewModel.swift in Sources */,
 				F17F49C42A7AB6990086DDCB /* SplashView.swift in Sources */,
 				F1AD87B32A788DFF00A39752 /* ColorAsset.swift in Sources */,
@@ -1294,6 +1361,7 @@
 				F1CC09602AC8F5BB00C5E0CD /* MemberDetailViewModel.swift in Sources */,
 				F1D372F32AA54A6200846DC6 /* InvitationView.swift in Sources */,
 				F1AD87E52A7A1EE200A39752 /* PhoneTextField.swift in Sources */,
+				F1B48D482AEDBB6600EE732E /* EditDefaultImageView.swift in Sources */,
 				F16CCD502AB9283F0037DCC6 /* InvitationListViewModel.swift in Sources */,
 				F1AD87A62A788D5B00A39752 /* Date+Extension.swift in Sources */,
 				F17F4A6E2A8040750086DDCB /* UserRepository.swift in Sources */,

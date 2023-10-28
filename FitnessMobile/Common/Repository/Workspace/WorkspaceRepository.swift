@@ -31,6 +31,9 @@ protocol WorkspaceRepositoryProtocol {
     func deleteWorkspaceLocation(request: WorkspaceEntity.DeleteLocation.Request) async throws -> WorkspaceResults.DeleteLocation
     func addDocumentUrlToWorkspace(request: WorkspaceEntity.Document.Push.Request) async throws -> WorkspaceResults.DocumentPush
     func removeDocumentUrlToWorkspace(request: WorkspaceEntity.Document.Delete.Request) async throws -> WorkspaceResults.DocumentDelete
+    func updateWorkspaceDefaultImage(request: WorkspaceEntity.Document.Push.Request) async throws -> WorkspaceResults.DocumentPush
+    func updateWorkspaceDefaultBackgroundImage(request: WorkspaceEntity.Document.Push.Request) async throws -> WorkspaceResults.DocumentPush
+
 }
 
 class WorkspaceRepository: ApiNetworkAsync, WorkspaceRepositoryProtocol {
@@ -115,6 +118,22 @@ class WorkspaceRepository: ApiNetworkAsync, WorkspaceRepositoryProtocol {
         
         return try await apiCall()
     }
+    
+    func updateWorkspaceDefaultImage(request: WorkspaceEntity.Document.Push.Request) async throws -> WorkspaceResults.DocumentPush {
+        config.path = "/api/v1/workspace/default-image"
+        config.method = .post
+        config.addRequestBody(request)
+        
+        return try await apiCall()
+    }
+    
+    func updateWorkspaceDefaultBackgroundImage(request: WorkspaceEntity.Document.Push.Request) async throws -> WorkspaceResults.DocumentPush {
+        config.path = "/api/v1/workspace/default-background-image"
+        config.method = .post
+        config.addRequestBody(request)
+        
+        return try await apiCall()
+    }
 }
 
 class WorkspaceRepositoryMock: ApiNetworkMockAsync, WorkspaceRepositoryProtocol {
@@ -164,6 +183,16 @@ class WorkspaceRepositoryMock: ApiNetworkMockAsync, WorkspaceRepositoryProtocol 
     }
     
     func removeDocumentUrlToWorkspace(request: WorkspaceEntity.Document.Delete.Request) async throws -> WorkspaceResults.DocumentDelete {
+        mockFileName = ""
+        return try await apiCallMocked(bundle: Bundle.main)
+    }
+    
+    func updateWorkspaceDefaultImage(request: WorkspaceEntity.Document.Push.Request) async throws -> WorkspaceResults.DocumentPush {
+        mockFileName = ""
+        return try await apiCallMocked(bundle: Bundle.main)
+    }
+    
+    func updateWorkspaceDefaultBackgroundImage(request: WorkspaceEntity.Document.Push.Request) async throws -> WorkspaceResults.DocumentPush {
         mockFileName = ""
         return try await apiCallMocked(bundle: Bundle.main)
     }

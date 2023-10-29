@@ -26,12 +26,16 @@ struct EditBackgroundImageView: View {
                 
                 VStack {
                     PhotoView(geometry: geometry)
-                        .padding(.bottom)
+                        .padding([.top, .bottom])
                     Spacer()
                     Buttons()
                 }
             }
-            .navigationBarItems(trailing: ColoredButton(action: {
+            .navigationBarBackButtonHidden()
+            .navigationBarItems(leading: CustomNavigationBackButton(action: {
+                coordinator.path.removeLast()
+            }))
+            .navigationBarItems(trailing: CustomNavigationButton(action: {
                 if viewmodel.imageData != nil {
                     viewmodel.uploadImage()
                 } else {
@@ -90,7 +94,7 @@ struct EditBackgroundImageView: View {
                 .clipShape(Rectangle())
                 .overlay {
                     Rectangle()
-                        .stroke(Color.white, lineWidth: 2)
+                        .stroke(Color.white, lineWidth: 1)
                 }
         }
     }

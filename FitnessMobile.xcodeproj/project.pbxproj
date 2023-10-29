@@ -114,6 +114,7 @@
 		F1B48D592AEE098900EE732E /* ImageListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1B48D582AEE098900EE732E /* ImageListViewModel.swift */; };
 		F1B48D5C2AEEBAF700EE732E /* DefaultImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1B48D5B2AEEBAF700EE732E /* DefaultImageView.swift */; };
 		F1B48D5F2AEEC05800EE732E /* DefaultBackgroundImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1B48D5E2AEEC05800EE732E /* DefaultBackgroundImageView.swift */; };
+		F1B48D622AEEE11A00EE732E /* CustomNavigationButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1B48D612AEEE11A00EE732E /* CustomNavigationButton.swift */; };
 		F1CC095E2AC8F51F00C5E0CD /* MemberDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1CC095D2AC8F51F00C5E0CD /* MemberDetailView.swift */; };
 		F1CC09602AC8F5BB00C5E0CD /* MemberDetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1CC095F2AC8F5BB00C5E0CD /* MemberDetailViewModel.swift */; };
 		F1D372E12AA4035000846DC6 /* WorkspaceSettingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1D372E02AA4035000846DC6 /* WorkspaceSettingView.swift */; };
@@ -282,6 +283,7 @@
 		F1B48D582AEE098900EE732E /* ImageListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageListViewModel.swift; sourceTree = "<group>"; };
 		F1B48D5B2AEEBAF700EE732E /* DefaultImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultImageView.swift; sourceTree = "<group>"; };
 		F1B48D5E2AEEC05800EE732E /* DefaultBackgroundImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultBackgroundImageView.swift; sourceTree = "<group>"; };
+		F1B48D612AEEE11A00EE732E /* CustomNavigationButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomNavigationButton.swift; sourceTree = "<group>"; };
 		F1CC095D2AC8F51F00C5E0CD /* MemberDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemberDetailView.swift; sourceTree = "<group>"; };
 		F1CC095F2AC8F5BB00C5E0CD /* MemberDetailViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemberDetailViewModel.swift; sourceTree = "<group>"; };
 		F1D372E02AA4035000846DC6 /* WorkspaceSettingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkspaceSettingView.swift; sourceTree = "<group>"; };
@@ -897,6 +899,7 @@
 		F1AD87D42A7A1EE100A39752 /* Components */ = {
 			isa = PBXGroup;
 			children = (
+				F1B48D602AEEE10800EE732E /* CustomNavigationButton */,
 				F16CCD5B2AC0DE940037DCC6 /* SheetView */,
 				F1028D2B2AAFF6AA005C8F5B /* WarningBox */,
 				F159C3E92A9B98DF00CDAF20 /* ProgressView */,
@@ -1022,6 +1025,14 @@
 				F1B48D4E2AEDC98B00EE732E /* DefaultBackgroundImageViewModel.swift */,
 			);
 			path = DefaultBackgroundImageView;
+			sourceTree = "<group>";
+		};
+		F1B48D602AEEE10800EE732E /* CustomNavigationButton */ = {
+			isa = PBXGroup;
+			children = (
+				F1B48D612AEEE11A00EE732E /* CustomNavigationButton.swift */,
+			);
+			path = CustomNavigationButton;
 			sourceTree = "<group>";
 		};
 		F1CC095C2AC8F4FF00C5E0CD /* MemberDetail */ = {
@@ -1347,6 +1358,7 @@
 				F1B48D572AEE098100EE732E /* ImageListView.swift in Sources */,
 				F1AD87E62A7A1EE200A39752 /* MultiplePhotoSelectorView.swift in Sources */,
 				F17F49CE2A7AC72C0086DDCB /* OfflineInternetView.swift in Sources */,
+				F1B48D622AEEE11A00EE732E /* CustomNavigationButton.swift in Sources */,
 				F17F4A722A8040830086DDCB /* UserUsaCase.swift in Sources */,
 				F1AD87E32A7A1EE200A39752 /* BasicButtonView.swift in Sources */,
 				F17F4A6A2A80227D0086DDCB /* DeleteAccountViewModel.swift in Sources */,

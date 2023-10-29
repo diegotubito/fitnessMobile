@@ -8,20 +8,6 @@
 import SwiftUI
 import PhotosUI
 
-struct ColoredButton: View {
-    var action: () -> Void
-    var title: LocalizedStringKey
-    var body: some View {
-        Button(action: action) {
-            Text(title)
-                .foregroundColor(.white)
-        }
-        .padding(EdgeInsets(top: 5, leading: 5, bottom: 5, trailing: 10))
-        .background(Color.Blue.midnight)  // Your background color
-        .cornerRadius(5.0)
-    }
-}
-
 struct EditDefaultImageView: View {
     @Environment(\.dismiss) var dismiss
     @StateObject var viewmodel: DefaultImageViewModel
@@ -45,7 +31,11 @@ struct EditDefaultImageView: View {
                     Buttons()
                 }
             }
-            .navigationBarItems(trailing: ColoredButton(action: {
+            .navigationBarBackButtonHidden(true)
+            .navigationBarItems(leading: CustomNavigationBackButton(action: {
+                coordinator.path.removeLast()
+            }))
+            .navigationBarItems(trailing: CustomNavigationButton(action: {
                 if viewmodel.imageData != nil {
                     viewmodel.uploadImage()
                 } else {

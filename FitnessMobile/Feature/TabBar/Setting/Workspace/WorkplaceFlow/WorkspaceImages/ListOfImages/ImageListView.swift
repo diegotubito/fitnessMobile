@@ -52,9 +52,13 @@ struct ImageListView: View {
             .padding()
         }
         .navigationTitle("_WORKSPACE_IMAGE_LIST_NAV_TITLE")
-        .navigationBarItems(trailing: ColoredButton(action: {
+        .navigationBarBackButtonHidden(true)
+        .navigationBarItems(trailing: CustomNavigationButton(action: {
             selectedSheet = Sheet(sheet: .uploadNewDocument)
         }, title: "_WORKSPACE_UPLOAD_IMAGE_TITLE"))
+        .navigationBarItems(leading: CustomNavigationBackButton(action: {
+            coordinator.path.removeLast()
+        }))
         .sheet(item: $selectedSheet, onDismiss: {
             
         }, content: { item in

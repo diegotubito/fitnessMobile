@@ -20,8 +20,10 @@ struct UploadFileSheetView: View {
             Text("_WORKSPACE_UPLOAD_DOCUMENT_TITLE")
                 .padding()
                 .font(.title)
+                .foregroundColor(Color.Neutral.tone80)
             Text("_WORKSPACE_UPLOAD_DOCUMENT_SUBTITLE")
                 .font(.subheadline)
+                .foregroundColor(Color.Neutral.tone80)
             Spacer()
             HStack {
                Buttons()

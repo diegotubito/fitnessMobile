@@ -24,6 +24,7 @@ struct WorkspaceModel: Identifiable, Codable, Hashable {
     let documentImages: [ImageModel]
     let defaultImage: ImageModel?
     let defaultBackgroundImage: ImageModel?
+    let images: [ImageModel]?
     
     struct WorkspaceMember: Identifiable, Codable, Hashable {
         var id: UUID? = UUID()

@@ -25,7 +25,6 @@ struct WorkspaceImagesView: View {
                 defaultIamgeViewModel.getImageView()
                     .resizable()
                     .frame(width: proxy.size.width / 3, height: proxy.size.width / 3)
-                    .background(Color.white)
                     .clipShape(Circle())
                     .onAppear {
                         defaultIamgeViewModel.fetchDefaultImage()
@@ -68,9 +67,7 @@ struct WorkspaceImagesView: View {
         return VStack {
             defaultBackgroundIamgeViewModel.getImageView()
                 .resizable()
-                .frame(width: proxy.size.width, height: proxy.size.height / 3)
                 .scaledToFill()
-                .background(Color.gray)
                 .onAppear {
                     defaultBackgroundIamgeViewModel.fetchBackgroundImage()
                 }
@@ -96,17 +93,24 @@ struct WorkspaceImagesView: View {
     }
     
     var body: some View {
-        ZStack {
-            LinearGradient(gradient: Gradient(colors: [Color.black, Color.Blue.midnight]), startPoint: .top, endPoint: .bottom)
-                .ignoresSafeArea()
-            GeometryReader { proxy in
-                defaultImageView(proxy: proxy)
-                    .background {
+        GeometryReader { proxy in
+            ZStack {
+                LinearGradient(gradient: Gradient(colors: [Color.black, Color.Blue.midnight]), startPoint: .top, endPoint: .bottom)
+                    .ignoresSafeArea()
+                VStack {
+                    ZStack {
                         defaultBackgroundImageView(proxy: proxy)
+                            .frame(width: proxy.size.width, height: proxy.size.height / 4)
+                            .ignoresSafeArea()
+                        defaultImageView(proxy: proxy)
                     }
+                    
+                    ImageListView(viewmodel: ImageListViewModel(workspace: viewmodel.workspace))
+                }
             }
         }
     }
+        
 }
 
 #Preview {

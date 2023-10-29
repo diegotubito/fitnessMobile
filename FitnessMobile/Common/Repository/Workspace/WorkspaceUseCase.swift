@@ -21,6 +21,8 @@ protocol WorkspaceUseCaseProtocol {
     func removeDocumentUrlToWorkspace(_id: String, documentId: String) async throws -> WorkspaceResults.DocumentDelete 
     func updateWorkspaceDefaultImage(_id: String, creator: String, highResImage: SingleImageModel?, thumbnailImage: SingleImageModel?) async throws -> WorkspaceResults.DocumentPush
     func updateWorkspaceDefaultBackgroundImage(_id: String, creator: String, highResImage: SingleImageModel?, thumbnailImage: SingleImageModel?) async throws -> WorkspaceResults.DocumentPush
+    func pushWorkspaceImage(_id: String, documentId: String, creator: String, highResImage: SingleImageModel?, thumbnailImage: SingleImageModel?) async throws -> WorkspaceResults.DocumentPush
+    func pullWorkspaceImage(_id: String, documentId: String) async throws -> WorkspaceResults.DocumentDelete
 }
 
 class WorkspaceUseCase: WorkspaceUseCaseProtocol {
@@ -87,6 +89,16 @@ class WorkspaceUseCase: WorkspaceUseCaseProtocol {
     func updateWorkspaceDefaultBackgroundImage(_id: String, creator: String, highResImage: SingleImageModel?, thumbnailImage: SingleImageModel?) async throws -> WorkspaceResults.DocumentPush {
         let request = WorkspaceEntity.Document.Push.Request(_id: _id, documentId: "", creator: creator, highResImage: highResImage, thumbnailImage: thumbnailImage)
         return try await repository.updateWorkspaceDefaultBackgroundImage(request: request)
+    }
+    
+    func pushWorkspaceImage(_id: String, documentId: String, creator: String, highResImage: SingleImageModel?, thumbnailImage: SingleImageModel?) async throws -> WorkspaceResults.DocumentPush {
+        let request = WorkspaceEntity.Document.Push.Request(_id: _id, documentId: documentId, creator: creator, highResImage: highResImage, thumbnailImage: thumbnailImage)
+        return try await repository.pushWorkspaceImage(request: request)
+    }
+    
+    func pullWorkspaceImage(_id: String, documentId: String) async throws -> WorkspaceResults.DocumentDelete {
+        let request = WorkspaceEntity.Document.Delete.Request(_id: _id, documentId: documentId)
+        return try await repository.pullWorkspaceImage(request: request)
     }
 }
 

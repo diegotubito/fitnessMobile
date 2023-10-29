@@ -7,6 +7,7 @@
 */
 
 // Mark: Workspace Upload Document View
+
 "_WORKSPACE_SHARE_DOCUMENT_NAV_TITLE"="Compartir Documento";
 "_WORKSPACE_SHARE_DOCUMENT_TITLE"="Comaprtir documento es crucial para consiguir una aprobación.";
 "_WORKSPACE_SHARE_DOCUMENT_SUBTITLE"="Puedes subir cualquier tipo de documento que te pertenezca con la direccion visible que ingresaste.";
@@ -104,6 +105,8 @@
 "_INVITATION_SEARCH_USER_RESULT_TITLE" = "Resultado de la busqueda";
 
 // Mark: BUTTONS
+"_EDIT_BUTTON_DEFAULT_IMAGE" = "Editar perfil";
+"_EDIT_BUTTON_DEFAULT_BACKGROUND_IMAGE" = "Editar fondo";
 "_EDIT_BUTTON" = "Editar";
 "_BACK_BUTTON" = "Atrás";
 "_SAVE_BUTTON" = "Guardar";

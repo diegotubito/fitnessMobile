@@ -70,7 +70,7 @@ class EditBackgroundImageViewModel: BaseViewModel {
     }
     
     @MainActor
-    func updateWorkspaceDefaultImage(workspaceId: String, documentId: String, creator: String, highResImage: SingleImageModel, thumbnailImage: SingleImageModel) async {
+    func updateWorkspaceDefaultImage(workspaceId: String, documentId: String, creator: String, highResImage: SingleImageModel?, thumbnailImage: SingleImageModel?) async {
         Task {
             do {
                 isLoading = true
@@ -88,8 +88,32 @@ class EditBackgroundImageViewModel: BaseViewModel {
         }
     }
     
+    @MainActor
+    func removeImage() {
+        guard let imageId = workspace.defaultBackgroundImage?._id else { return }
+        
+        Task {
+            do {
+                isLoading = true
+                let storageUseCaseHighRes = StorageUseCase()
+                let response = try await storageUseCaseHighRes.deleteFile(filepath: "default_background_image/\(workspace._id)/default_background_image.png")
+                
+                let storageUseCaseThumbnail = StorageUseCase()
+                let response2 = try await storageUseCaseThumbnail.deleteFile(filepath: "default_background_image/\(workspace._id)/default_background_image_thumbnail.png")
+                
+                await updateWorkspaceDefaultImage(workspaceId: workspace._id, documentId: imageId, creator: UserSession._id, highResImage: nil, thumbnailImage: nil)
+                
+            } catch {
+                handleError(error: error)
+                imageUploaded = false
+                isLoading = false
+                showError = true
+            }
+        }
+    }
+    
     func getImageView() -> Image {
-        let defaultImage = Image("image")
+        let defaultImage = Image("")
         return imageData?.asImage ?? defaultImage
     }
 }

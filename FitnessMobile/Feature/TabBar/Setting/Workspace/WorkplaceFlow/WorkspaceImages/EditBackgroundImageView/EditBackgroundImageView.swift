@@ -93,15 +93,29 @@ struct EditBackgroundImageView: View {
     
     func Buttons() -> some View {
         return HStack(spacing: 16) {
+            VStack{
+                Image(systemName: "camera")
+                    .resizable()
+                    .frame(width: 20, height: 20)
+                Text("Remove")
+                    .font(.subheadline)
+            }
+            .padding()
+            .background(Color.Dark.tone90)
+            .foregroundColor(Color.white)
+            .cornerRadius(10)
+            .onTapGesture {
+                viewmodel.removeImage()
+            }
             PhotosPicker(
                 selection: $selectedItem,
                 matching: .images,
                 photoLibrary: .shared()) {
-                    HStack{
+                    VStack{
                         Image(systemName: "photo")
                             .resizable()
                             .frame(width: 20, height: 20)
-                        Text("From Gallery")
+                        Text("Gallery")
                             .font(.subheadline)
                         
                     }
@@ -112,11 +126,11 @@ struct EditBackgroundImageView: View {
                     
                 }
             
-            HStack{
+            VStack{
                 Image(systemName: "camera")
                     .resizable()
                     .frame(width: 20, height: 20)
-                Text("New Photo")
+                Text("Camera")
                     .font(.subheadline)
             }
             .padding()

@@ -71,7 +71,7 @@ class EditDefaultImageViewModel: BaseViewModel {
     }
     
     @MainActor
-    func updateWorkspaceDefaultImage(workspaceId: String, documentId: String, creator: String, highResImage: SingleImageModel, thumbnailImage: SingleImageModel) async {
+    func updateWorkspaceDefaultImage(workspaceId: String, documentId: String, creator: String, highResImage: SingleImageModel?, thumbnailImage: SingleImageModel?) async {
         Task {
             do {
                 isLoading = true
@@ -84,6 +84,30 @@ class EditDefaultImageViewModel: BaseViewModel {
                 imageUploaded = false
                 self.isLoading = false
                 self.handleError(error: error)
+                showError = true
+            }
+        }
+    }
+    
+    @MainActor
+    func removeImage() {
+        guard let imageId = workspace.defaultImage?._id else { return }
+        
+        Task {
+            do {
+                isLoading = true
+                let storageUseCaseHighRes = StorageUseCase()
+                let response = try await storageUseCaseHighRes.deleteFile(filepath: "default_image/\(workspace._id)/default_image.png")
+                
+                let storageUseCaseThumbnail = StorageUseCase()
+                let response2 = try await storageUseCaseThumbnail.deleteFile(filepath: "default_image/\(workspace._id)/default_image_thumbnail.png")
+                
+                await updateWorkspaceDefaultImage(workspaceId: workspace._id, documentId: imageId, creator: UserSession._id, highResImage: nil, thumbnailImage: nil)
+                
+            } catch {
+                handleError(error: error)
+                imageUploaded = false
+                isLoading = false
                 showError = true
             }
         }

@@ -9,7 +9,6 @@ import SwiftUI
 struct WorkspaceDetailView: View {
     @StateObject var viewmodel: WorkspaceDetailViewModel
     @EnvironmentObject var coordinator: Coordinator
-    @StateObject var defaultIamgeViewModel: EditDefaultImageViewModel
     @State private var selectedItem: SheetItem? = nil
     
     struct SheetItem: Identifiable {
@@ -29,40 +28,9 @@ struct WorkspaceDetailView: View {
     
     func headerView() -> some View {
         HStack {
-            defaultIamgeViewModel.getImageView()
-                .resizable()
-                .scaledToFill()
-                .frame(width: Constants.size, height: Constants.size)
-                .clipShape(Circle())
-                .overlay {
-                    if defaultIamgeViewModel.isLoading {
-                        ProgressView()
-                            .frame(width: Constants.size, height: Constants.size)
-                            .overlay {
-                                Circle()
-                                    .stroke(Color.Dark.tone20, lineWidth: 2)
-                            }
-                            .shadow(radius: 5)
-                    } else {
-                        Circle()
-                            .stroke(Color.Dark.tone20, lineWidth: 2)
-                        Text("_EDIT_BUTTON")
-                            .padding(3)
-                            .padding(.horizontal, 2)
-                            .font(.caption)
-                            .foregroundColor(Color.Blue.truly)
-                            .background(Color.Dark.tone20)
-                            .cornerRadius(5)
-                            .offset(CGSize(width: 0, height: Constants.size / 2))
-                            .shadow(radius: 5)
-                    }
-                }
-                .shadow(radius: 10)
+            DefaultImageView(defaultIamgeViewModel: EditDefaultImageViewModel(workspace: viewmodel.workspace))
                 .onTapGesture {
                     coordinator.push(.workspaceImagesView(workspace: viewmodel.workspace))
-                }
-                .onAppear {
-                    defaultIamgeViewModel.fetchDefaultImage()
                 }
             
             VStack {
@@ -362,7 +330,7 @@ struct WorkspaceDetailView: View {
 #Preview {
     let workspace = WorkspaceViewModelMock.getWorkspaces().first
     if let workspace = workspace {
-        return  WorkspaceDetailView(viewmodel: WorkspaceDetailViewModel(workspace: workspace), defaultIamgeViewModel: EditDefaultImageViewModel(workspace: workspace))
+        return  WorkspaceDetailView(viewmodel: WorkspaceDetailViewModel(workspace: workspace))
     } else {
         return Text("Loading...")
     }

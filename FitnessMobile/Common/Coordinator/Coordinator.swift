@@ -148,7 +148,7 @@ class Coordinator: ObservableObject {
         case .invitationSetting:
             InvitationView()
         case .workspaceDetail(workspace: let workspace):
-            WorkspaceDetailView(viewmodel: WorkspaceDetailViewModel(workspace: workspace), defaultIamgeViewModel: EditDefaultImageViewModel(workspace: workspace))
+            WorkspaceDetailView(viewmodel: WorkspaceDetailViewModel(workspace: workspace))
         case .workspaceTitleAndSubtitle(workspace: let workspace):
             TitleAndSubtitleWorkspaceView(viewmodel: WorkspaceTitleAndSubtitleViewModel(workspace: workspace))
         case .addressWorkspace(workspace: let workspace):
@@ -162,7 +162,7 @@ class Coordinator: ObservableObject {
         case .shareDocumentView(workspace: let workspace):
             ShareDocumentView(viewmodel: ShareDocumentViewModel(workspace: workspace))
         case .workspaceImagesView(workspace: let workspace):
-            WorkspaceImagesView(viewmodel: WorkspaceImagesViewModel(workspace: workspace), defaultIamgeViewModel: EditDefaultImageViewModel(workspace: workspace), defaultBackgroundIamgeViewModel: EditBackgroundImageViewModel(workspace: workspace))
+            WorkspaceImagesView(viewmodel: WorkspaceImagesViewModel(workspace: workspace), defaultBackgroundIamgeViewModel: EditBackgroundImageViewModel(workspace: workspace))
         case .workspaceEditDefaultImageView(workspace: let workspace):
             EditDefaultImageView(viewmodel: EditDefaultImageViewModel(workspace: workspace))
         case .workspaceEditBackgroundImageView(workspace: let workspace):

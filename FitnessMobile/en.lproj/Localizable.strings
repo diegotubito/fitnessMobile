@@ -107,6 +107,8 @@
 "_INVITATION_SEARCH_USER_RESULT_TITLE" = "Search result.";
 
 // Mark: BUTTONS
+"_EDIT_BUTTON_DEFAULT_IMAGE" = "Edit Profile";
+"_EDIT_BUTTON_DEFAULT_BACKGROUND_IMAGE" = "Edit Background";
 "_EDIT_BUTTON" = "Edit";
 "_BACK_BUTTON" = "Back";
 "_SAVE_BUTTON" = "Save";

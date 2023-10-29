@@ -9,7 +9,6 @@ import SwiftUI
 
 struct WorkspaceImagesView: View {
     @StateObject var viewmodel: WorkspaceImagesViewModel
-    @StateObject var defaultIamgeViewModel: EditDefaultImageViewModel
     @StateObject var defaultBackgroundIamgeViewModel: EditBackgroundImageViewModel
     
     @EnvironmentObject var coordinator: Coordinator
@@ -19,104 +18,56 @@ struct WorkspaceImagesView: View {
         static let deafultBackgroundImageSize: CGFloat = 300
     }
     
-    func defaultImageView(proxy: GeometryProxy) -> some View {
-        return VStack {
-            HStack {
-                defaultIamgeViewModel.getImageView()
+    func defaultBackgroundImageView() -> some View {
+        return  GeometryReader { proxy in
+            ZStack {
+                defaultBackgroundIamgeViewModel.getImageView()
                     .resizable()
-                    .frame(width: proxy.size.width / 3, height: proxy.size.width / 3)
-                    .clipShape(Circle())
+                    .scaledToFill()
                     .onAppear {
-                        defaultIamgeViewModel.fetchDefaultImage()
+                        defaultBackgroundIamgeViewModel.fetchBackgroundImage()
                     }
-                Spacer()
-            }
-            .overlay {
-                if viewmodel.isLoading {
-                    ProgressView()
-                        .frame(width: proxy.size.width / 3, height: proxy.size.width / 3)
-                        .overlay {
-                            Circle()
-                                .stroke(Color.Dark.tone20, lineWidth: 2)
-                        }
-                        .shadow(radius: 5)
-                } else {
-                    Group {
-                        Circle()
-                            .stroke(Color.Dark.tone20, lineWidth: 2)
-                            .position(x: proxy.size.width / 6, y: proxy.size.width / 6)
-                        Text("_EDIT_BUTTON")
-                            .padding(3)
-                            .padding(.horizontal, 16)
-                            .font(.caption)
-                            .foregroundColor(Color.Blue.truly)
-                            .background(Color.Dark.tone20)
-                            .cornerRadius(5)
-                            .position(x: proxy.size.width / 6, y: proxy.size.width / 3.2)
-                    }
+                Text("_EDIT_BUTTON_DEFAULT_BACKGROUND_IMAGE")
+                    .padding(3)
+                    .padding(.horizontal, 16)
+                    .font(.caption)
+                    .foregroundColor(Color.Blue.truly)
+                    .background(Color.Dark.tone20)
+                    .cornerRadius(5)
                     .shadow(radius: 10)
                     .onTapGesture {
-                        coordinator.push(.workspaceEditDefaultImageView(workspace: viewmodel.workspace))
+                        coordinator.push(.workspaceEditBackgroundImageView(workspace: viewmodel.workspace))
                     }
-                }
-            }
-        }
-    }
-    
-    func defaultBackgroundImageView(proxy: GeometryProxy) -> some View {
-        return VStack {
-            defaultBackgroundIamgeViewModel.getImageView()
-                .resizable()
-                .scaledToFill()
-                .onAppear {
-                    defaultBackgroundIamgeViewModel.fetchBackgroundImage()
-                }
-            .overlay {
-                if viewmodel.isLoading {
-                    ProgressView()
-                } else {
-                    Text("_EDIT_BUTTON")
-                        .padding(3)
-                        .padding(.horizontal, 16)
-                        .font(.caption)
-                        .foregroundColor(Color.Blue.truly)
-                        .background(Color.Dark.tone20)
-                        .cornerRadius(5)
-                        .position(x: proxy.size.width - 50, y: proxy.size.height / 3.2)
-                        .shadow(radius: 10)
-                        .onTapGesture {
-                            coordinator.push(.workspaceEditBackgroundImageView(workspace: viewmodel.workspace))
-                        }
-                }
+                    .position(x: proxy.size.width - 70, y: proxy.size.height - 16)
             }
         }
     }
     
     var body: some View {
-        GeometryReader { proxy in
-            ZStack {
-                LinearGradient(gradient: Gradient(colors: [Color.black, Color.Blue.midnight]), startPoint: .top, endPoint: .bottom)
-                    .ignoresSafeArea()
-                VStack {
-                    ZStack {
-                        defaultBackgroundImageView(proxy: proxy)
-                            .frame(width: proxy.size.width, height: proxy.size.height / 4)
-                            .ignoresSafeArea()
-                        defaultImageView(proxy: proxy)
-                    }
-                    
-                    ImageListView(viewmodel: ImageListViewModel(workspace: viewmodel.workspace))
+        ZStack {
+            LinearGradient(gradient: Gradient(colors: [Color.black, Color.Blue.midnight]), startPoint: .top, endPoint: .bottom)
+                .ignoresSafeArea()
+            VStack {
+                ZStack {
+                    defaultBackgroundImageView()
+                        
+                    DefaultImageView(defaultIamgeViewModel: EditDefaultImageViewModel(workspace: viewmodel.workspace))
+                        .onTapGesture {
+                            coordinator.push(.workspaceEditDefaultImageView(workspace: viewmodel.workspace))
+                        }
                 }
+                
+                ImageListView(viewmodel: ImageListViewModel(workspace: viewmodel.workspace))
             }
         }
     }
-        
+    
 }
 
 #Preview {
     let workspace = WorkspaceViewModelMock.getWorkspaces().first
     if let workspace = workspace {
-        return WorkspaceImagesView(viewmodel: WorkspaceImagesViewModel(workspace: workspace), defaultIamgeViewModel: EditDefaultImageViewModel(workspace: workspace), defaultBackgroundIamgeViewModel: EditBackgroundImageViewModel(workspace: workspace))
+        return WorkspaceImagesView(viewmodel: WorkspaceImagesViewModel(workspace: workspace), defaultBackgroundIamgeViewModel: EditBackgroundImageViewModel(workspace: workspace))
     } else {
         return Text("Loading...")
     }

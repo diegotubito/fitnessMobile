@@ -79,9 +79,7 @@ struct EditBackgroundImageView: View {
             }
         )
         .sheet(isPresented: $isCameraPresented, content: {
-            if isCameraPresented {
-                ImagePicker(sourceType: .camera, selectedImage: $imageFromCamera)
-            }
+            ImagePicker(sourceType: .camera, selectedImage: $imageFromCamera)
         })
     }
     
@@ -102,7 +100,7 @@ struct EditBackgroundImageView: View {
     func Buttons() -> some View {
         return HStack(spacing: 32) {
             VStack{
-                Image(systemName: "camera")
+                Image(systemName: "trash")
                     .resizable()
                     .frame(width: 20, height: 20)
                 Text("_REMOVE_IMAGE")

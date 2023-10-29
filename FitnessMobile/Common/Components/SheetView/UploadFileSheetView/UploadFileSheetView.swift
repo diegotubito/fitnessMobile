@@ -47,9 +47,7 @@ struct UploadFileSheetView: View {
             }
         })
         .sheet(isPresented: $isCameraPresented, content: {
-            if isCameraPresented {
-                ImagePicker(sourceType: .camera, selectedImage: $imageFromCamera)
-            }
+            ImagePicker(sourceType: .camera, selectedImage: $imageFromCamera)
         })
         .padding()
     }

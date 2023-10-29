@@ -63,17 +63,17 @@ struct UserEntity {
         }
     }
     
-    struct UpdateProfileImage {
-        struct Request: Codable {
-            let profileImage: ProfileImageRequest
+    struct SetProfileImage {
+        struct Request: Encodable {
+            let _id: String
+            let documentId: String
+            let creator: String
+            let highResImage: SingleImageModel?
+            let thumbnailImage: SingleImageModel?
         }
         
         struct Response: Decodable {
             let user: User
         }
-    }
-    
-    struct ProfileImageRequest: Codable {
-        let url: String
     }
 }

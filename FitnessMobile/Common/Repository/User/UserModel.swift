@@ -22,7 +22,7 @@ struct User: Identifiable, Codable, Hashable {
     let updatedAt: String
     let twoFactorEnabled: Bool
     let twoFactorSecret: String?
-    let profileImage: ProfileImage?
+    let profileImage: ImageModel?
 }
 
 struct Phone: Identifiable, Codable, Hashable {
@@ -31,13 +31,4 @@ struct Phone: Identifiable, Codable, Hashable {
     var number: String
     let phoneCode: String
     let countryCode: String
-}
-
-struct ProfileImage: Identifiable, Codable, Hashable {
-    var id: UUID? = UUID()
-    
-    let _id: String
-    let url: String
-    let updatedAt: String
-    let createdAt: String
 }

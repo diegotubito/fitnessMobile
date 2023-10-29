@@ -39,7 +39,7 @@ class MemberDetailViewModel: BaseViewModel {
             do {
                 isLoading = true
                 let storageUseCase = StorageUseCase()
-                let response = try await storageUseCase.downloadImageWithUrl(url: member.user.profileImage?.url ?? "")
+                let response = try await storageUseCase.downloadImageWithUrl(url: member.user.profileImage?.thumbnailImage?.url ?? "")
                 setImage(response)
                 isLoading = false
             } catch {

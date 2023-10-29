@@ -11,6 +11,7 @@ typealias DeleteUserResult = Data
 typealias GetUserResult = UserEntity.Get.Response
 typealias UpdateUserResult = UserEntity.Update.Response
 typealias GetUserByUserNameEmail = UserEntity.GetByUserNameOrEmail.Response
+typealias SetProfileImageResult = UserEntity.SetProfileImage.Response
 
 protocol UserRepositoryProtocol {
     func doCreate(request: UserEntity.Create.Request) async throws -> CreateUserResult
@@ -18,7 +19,7 @@ protocol UserRepositoryProtocol {
     func getUsers() async throws -> GetUserResult
     func getUsersByUserNameEmail(request: UserEntity.GetByUserNameOrEmail.Request) async throws -> GetUserByUserNameEmail
     func doUpdate(request: UserEntity.Update.Request) async throws -> UpdateUserResult
-    func doUpdate(request: UserEntity.UpdateProfileImage.Request) async throws -> UpdateUserResult
+    func setProfileImage(request: UserEntity.SetProfileImage.Request) async throws -> SetProfileImageResult
 }
 
 class UserRepository: ApiNetworkAsync, UserRepositoryProtocol {
@@ -31,14 +32,6 @@ class UserRepository: ApiNetworkAsync, UserRepositoryProtocol {
     }
     
     func doUpdate(request: UserEntity.Update.Request) async throws -> UpdateUserResult {
-        config.path = "/api/v1/user"
-        config.method = .put
-        config.addQueryItem(key: "_id", value: UserSession.getUser()?._id ?? "")
-        config.addRequestBody(request)
-        return try await apiCall()
-    }
-    
-    func doUpdate(request: UserEntity.UpdateProfileImage.Request) async throws -> UpdateUserResult {
         config.path = "/api/v1/user"
         config.method = .put
         config.addQueryItem(key: "_id", value: UserSession.getUser()?._id ?? "")
@@ -65,6 +58,13 @@ class UserRepository: ApiNetworkAsync, UserRepositoryProtocol {
         config.method = .get
         config.addQueryItem(key: "username", value: request.username)
         
+        return try await apiCall()
+    }
+    
+    func setProfileImage(request: UserEntity.SetProfileImage.Request) async throws -> SetProfileImageResult {
+        config.path = "/api/v1/user/profile-image"
+        config.method = .put
+        config.addRequestBody(request)
         return try await apiCall()
     }
 }

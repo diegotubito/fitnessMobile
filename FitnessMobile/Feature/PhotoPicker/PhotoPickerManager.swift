@@ -38,7 +38,7 @@ class PhotoPickerManager: BaseViewModel {
             do {
                 isLoading = true
                 let storageUseCase = StorageUseCase()
-                let response = try await storageUseCase.downloadImageWithUrl(url: UserSession.getUser()?.profileImage?.url ?? "")
+                let response = try await storageUseCase.downloadImageWithUrl(url: UserSession.getUser()?.profileImage?.thumbnailImage?.url ?? "")
                 imageData = response
                 DataCache.saveData(data: response, identifier: UserSession._id)
                 DataDisk.saveData(data: response, identifier: UserSession._id)
@@ -51,20 +51,32 @@ class PhotoPickerManager: BaseViewModel {
         }
     }
     
+    func getCompressData(data: Data) -> Data? {
+        let originalImage = UIImage(data: data)
+        let maxSize: CGFloat = 150.0  // Max thumbnail dimension
+        let compressionQuality: CGFloat = 0.1// Compression ratio
+        
+        return originalImage?.resizedAndCompressed(maxSize: maxSize, compressionQuality: compressionQuality)
+    }
+    
     @MainActor
     func uploadImage() {
         guard let imageData = imageData else { return }
         Task {
             do {
                 isLoading = true
+                let documentId = String.generateMongoDBObjectId()
                 let storageUseCase = StorageUseCase()
-                let response = try await storageUseCase.uploadFile(imageData: imageData, filepath: "profile_pictures/\(UserSession._id)/profile.png")
+                let response = try await storageUseCase.uploadFile(imageData: imageData, filepath: "profile_image/\(UserSession._id)/profile_image.png")
                 
+                let compressImageData = getCompressData(data: imageData)
+                let storageThumbnailUseCase = StorageUseCase()
+                let responseThumbnail = try await storageThumbnailUseCase.uploadFile(imageData: imageData, filepath: "profile_image/\(UserSession._id)/profile_image_thumbnail.png")
+
+                let highResImage = SingleImageModel(url: response.url, size: imageData.count, fileType: "PNG", dimensions: nil)
+                let thumbnailImage = SingleImageModel(url: responseThumbnail.url, size: compressImageData?.count ?? 0, fileType: "PNG", dimensions: nil)
                 
-                
-                
-                
-                await updateUser(url: response.url)
+                await setProfileImage(documentId: documentId, highResImage: highResImage, thumbnailImage: thumbnailImage)
             } catch {
                 handleError(error: error)
                 imageUploaded = false
@@ -75,12 +87,15 @@ class PhotoPickerManager: BaseViewModel {
     }
     
     @MainActor
-    func updateUser(url: String) async {
+    func setProfileImage(documentId: String, highResImage: SingleImageModel?, thumbnailImage: SingleImageModel?) async {
         Task {
             do {
                 isLoading = true
-                let userUsecase = UserUseCase()
-                let response = try await userUsecase.doUpdateProfileImage(url: url)
+                let workspaceUseCase = UserUseCase()
+                
+                //creator id is not needed
+                let response = try await workspaceUseCase.setProfileImage(_id: UserSession._id, documentId: documentId, creator: UserSession._id, highResImage: highResImage, thumbnailImage: thumbnailImage)
+                
                 UserSession.saveUser(user: response.user)
                 DataDisk.removeData(identifier: UserSession._id)
                 DataCache.removeData(identifier: UserSession._id)
@@ -91,36 +106,33 @@ class PhotoPickerManager: BaseViewModel {
                 self.isLoading = false
                 self.handleError(error: error)
                 showError = true
-
             }
         }
     }
     
-    /*
     @MainActor
     func removeImage() {
-        guard let imageId = workspace.defaultImage?._id else { return }
-        
+        guard let user = UserSession.getUser() else { return }
         Task {
             do {
+                
                 isLoading = true
                 let storageUseCaseHighRes = StorageUseCase()
-                let response = try await storageUseCaseHighRes.deleteFile(filepath: "profile_pictures/\(UserSession._id)/default_image.png")
+                let response = try await storageUseCaseHighRes.deleteFile(filepath: "profile_image/\( user._id)/profile_image.png")
                 
                 let storageUseCaseThumbnail = StorageUseCase()
-                let response2 = try await storageUseCaseThumbnail.deleteFile(filepath: "default_image/\(UserSession._id)/default_image_thumbnail.png")
+                let responseThumbnail = try await storageUseCaseThumbnail.deleteFile(filepath: "profile_image/\( user._id)/profile_image_thumbnail.png")
                 
-                await updateWorkspaceDefaultImage(workspaceId: workspace._id, documentId: imageId, creator: UserSession._id, highResImage: nil, thumbnailImage: nil)
+                await setProfileImage(documentId: user.profileImage?._id ?? "", highResImage: nil, thumbnailImage: nil)
                 
             } catch {
-                handleError(error: error)
                 imageUploaded = false
-                isLoading = false
+                self.isLoading = false
+                self.handleError(error: error)
                 showError = true
             }
         }
     }
-     */
     
     func getImageView() -> Image {
         let defaultImage = Image(systemName: "person.crop.circle.fill")

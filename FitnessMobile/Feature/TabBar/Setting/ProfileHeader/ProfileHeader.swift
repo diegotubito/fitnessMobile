@@ -47,7 +47,7 @@ struct ProfileHeader: View {
                     }
                     .shadow(radius: 10)
                     .onTapGesture {
-                        coordinator.presentModal(.photoPicker)
+                        coordinator.push(.photoPicker)
                     }
                
             VStack(spacing: 2) {

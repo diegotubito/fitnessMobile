@@ -10,7 +10,7 @@ import PhotosUI
 
 struct PhotoPickerView: View {
     @Environment(\.dismiss) var dismiss
-    @StateObject var photoPickerManager = PhotoPickerManager()
+    @StateObject var viewmodel = PhotoPickerManager()
     @State private var selectedItem: PhotosPickerItem?
     @EnvironmentObject var coordinator: Coordinator
     
@@ -21,22 +21,27 @@ struct PhotoPickerView: View {
         GeometryReader { geometry in
             
             ZStack {
-                RadialGradient(gradient: Gradient(colors: [Color.black, Color.Blue.midnight]), center: .center, startRadius: 0, endRadius: geometry.size.width)
+                LinearGradient(gradient: Gradient(colors: [Color.black, Color.Blue.midnight]), startPoint: .top, endPoint: .bottom)
                     .ignoresSafeArea()
                 
                 VStack {
-                    HeaderView()
-                    Spacer()
                     PhotoView(geometry: geometry)
                         .padding(.bottom)
+                    Spacer()
                     Buttons()
                     Spacer()
                 }
             }
         }
-        
+        .navigationBarItems(trailing: CustomNavigationButton(action: {
+            if viewmodel.imageData != nil {
+                viewmodel.uploadImage()
+            } else {
+                //viewmodel.removeImage()
+            }
+        }, title: "_SAVE_IMAGE"))
         .onAppear {
-            photoPickerManager.fetchProfileImage()
+            viewmodel.fetchProfileImage()
         }
         .onChange(of: selectedItem) { _ in
             Task {
@@ -45,9 +50,9 @@ struct PhotoPickerView: View {
                    let compressedData = image.jpegData(compressionQuality: 0.1) {
                     print("Original Image Sized: \(data.count)")
                     print("Compressed Image Sized: \(compressedData.count)")
-                    photoPickerManager.imageData = compressedData
+                    viewmodel.imageData = compressedData
                 } else {
-                    photoPickerManager.imageData = nil
+                    viewmodel.imageData = nil
                 }
             }
         }
@@ -55,18 +60,18 @@ struct PhotoPickerView: View {
             if let image = imageFromCamera,
                let compressedData = image.jpegData(compressionQuality: 0.1) {
                 print("Compressed Image Sized: \(compressedData.count)")
-                photoPickerManager.imageData = compressedData
+                viewmodel.imageData = compressedData
             }
         })
-        .onReceive(photoPickerManager.$imageUploaded) { value in
+        .onReceive(viewmodel.$imageUploaded) { value in
             if value {
                 dismiss()
             }
         }
         .overlay(
             Group {
-                CustomAlertView(isPresented: $photoPickerManager.showError, title: $photoPickerManager.errorTitle, message: $photoPickerManager.errorMessage)
-                CustomProgressView(isLoading: $photoPickerManager.isLoading)
+                CustomAlertView(isPresented: $viewmodel.showError, title: $viewmodel.errorTitle, message: $viewmodel.errorMessage)
+                CustomProgressView(isLoading: $viewmodel.isLoading)
             }
         )
         .sheet(isPresented: $isCameraPresented, content: {
@@ -76,28 +81,9 @@ struct PhotoPickerView: View {
         })
     }
     
-    func HeaderView() -> some View {
-        return VStack {
-            HStack {
-                Button("_CANCEL_BUTTON") {
-                    dismiss()
-                }
-                .foregroundColor(.accentColor)
-                Spacer()
-                Button("_SAVE_BUTTON") {
-                    photoPickerManager.uploadImage()
-                }
-                .foregroundColor(.accentColor)
-                
-            }
-            .padding()
-            .padding(.horizontal)
-        }
-    }
-    
     func PhotoView(geometry: GeometryProxy) -> some View {
         return VStack {
-            photoPickerManager.getImageView()
+            viewmodel.getImageView()
                 .resizable()
                 .scaledToFill()
                 .frame(width: geometry.size.width * 0.8, height: geometry.size.width * 0.8)
@@ -110,16 +96,30 @@ struct PhotoPickerView: View {
     }
     
     func Buttons() -> some View {
-        return HStack(spacing: 16) {
+        return HStack(spacing: 32) {
+            VStack{
+                Image(systemName: "camera")
+                    .resizable()
+                    .frame(width: 20, height: 20)
+                Text("_REMOVE_IMAGE")
+                    .font(.subheadline)
+            }
+            .padding()
+            .background(Color.Dark.tone90)
+            .foregroundColor(Color.white)
+            .cornerRadius(10)
+            .onTapGesture {
+                viewmodel.imageData = nil
+            }
             PhotosPicker(
                 selection: $selectedItem,
                 matching: .images,
                 photoLibrary: .shared()) {
-                    HStack{
+                    VStack{
                         Image(systemName: "photo")
                             .resizable()
                             .frame(width: 20, height: 20)
-                        Text("From Gallery")
+                        Text("_GALLERY")
                             .font(.subheadline)
                         
                     }
@@ -130,11 +130,11 @@ struct PhotoPickerView: View {
                     
                 }
             
-            HStack{
+            VStack{
                 Image(systemName: "camera")
                     .resizable()
                     .frame(width: 20, height: 20)
-                Text("New Photo")
+                Text("_CAMERA")
                     .font(.subheadline)
             }
             .padding()

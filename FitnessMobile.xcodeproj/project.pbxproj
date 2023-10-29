@@ -476,6 +476,7 @@
 			isa = PBXGroup;
 			children = (
 				F159C3DC2A9A61CA00CDAF20 /* PhotoPickerView.swift */,
+				F159C3DF2A9A6D8E00CDAF20 /* PhotoPickerManager.swift */,
 				F1A1FA4A2A9BD92B00C816AC /* OpenCameraWrapper.swift */,
 			);
 			path = PhotoPicker;
@@ -485,17 +486,8 @@
 			isa = PBXGroup;
 			children = (
 				F1AD87AC2A788D7A00A39752 /* SocketIO */,
-				F159C3E12A9A70FE00CDAF20 /* PhotoPicker */,
 			);
 			path = Managers;
-			sourceTree = "<group>";
-		};
-		F159C3E12A9A70FE00CDAF20 /* PhotoPicker */ = {
-			isa = PBXGroup;
-			children = (
-				F159C3DF2A9A6D8E00CDAF20 /* PhotoPickerManager.swift */,
-			);
-			path = PhotoPicker;
 			sourceTree = "<group>";
 		};
 		F159C3E62A9B8B6100CDAF20 /* CustomAlert */ = {

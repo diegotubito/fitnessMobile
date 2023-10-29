@@ -100,6 +100,7 @@ class Coordinator: ObservableObject {
         case workspaceImagesView(workspace: WorkspaceModel)
         case workspaceEditDefaultImageView(workspace: WorkspaceModel)
         case workspaceEditBackgroundImageView(workspace: WorkspaceModel)
+        case photoPicker
     }
     
     enum SheetView: Identifiable {
@@ -115,12 +116,11 @@ class Coordinator: ObservableObject {
     
     enum ModalView: Identifiable {
         case noInternet
-        case photoPicker
         case login
       
         var id: UUID {
             switch self {
-            case .noInternet, .login, .photoPicker:
+            case .noInternet, .login:
                 return UUID()
             }
         }
@@ -167,6 +167,8 @@ class Coordinator: ObservableObject {
             EditDefaultImageView(viewmodel: DefaultImageViewModel(workspace: workspace))
         case .workspaceEditBackgroundImageView(workspace: let workspace):
             EditBackgroundImageView(viewmodel: DefaultBackgroundImageViewModel(workspace: workspace))
+        case .photoPicker:
+            PhotoPickerView()
         }
     }
     
@@ -185,8 +187,6 @@ class Coordinator: ObservableObject {
             OfflineInternetView()
         case .login:
             LoginView(allowSighUp: true)
-        case .photoPicker:
-            PhotoPickerView()
         }
     }
 }

@@ -21,7 +21,7 @@ struct EditBackgroundImageView: View {
         GeometryReader { geometry in
             
             ZStack {
-                RadialGradient(gradient: Gradient(colors: [Color.black, Color.Blue.midnight]), center: .center, startRadius: 0, endRadius: geometry.size.width)
+                LinearGradient(gradient: Gradient(colors: [Color.black, Color.Blue.midnight]), startPoint: .top, endPoint: .bottom)
                     .ignoresSafeArea()
                 
                 VStack {
@@ -100,7 +100,7 @@ struct EditBackgroundImageView: View {
     }
     
     func Buttons() -> some View {
-        return HStack(spacing: 16) {
+        return HStack(spacing: 32) {
             VStack{
                 Image(systemName: "camera")
                     .resizable()

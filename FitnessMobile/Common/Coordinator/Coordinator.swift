@@ -162,11 +162,11 @@ class Coordinator: ObservableObject {
         case .shareDocumentView(workspace: let workspace):
             ShareDocumentView(viewmodel: ShareDocumentViewModel(workspace: workspace))
         case .workspaceImagesView(workspace: let workspace):
-            WorkspaceImagesView(viewmodel: WorkspaceImagesViewModel(workspace: workspace), defaultBackgroundIamgeViewModel: EditBackgroundImageViewModel(workspace: workspace))
+            WorkspaceImagesView(viewmodel: WorkspaceImagesViewModel(workspace: workspace))
         case .workspaceEditDefaultImageView(workspace: let workspace):
-            EditDefaultImageView(viewmodel: EditDefaultImageViewModel(workspace: workspace))
+            EditDefaultImageView(viewmodel: DefaultImageViewModel(workspace: workspace))
         case .workspaceEditBackgroundImageView(workspace: let workspace):
-            EditBackgroundImageView(viewmodel: EditBackgroundImageViewModel(workspace: workspace))
+            EditBackgroundImageView(viewmodel: DefaultBackgroundImageViewModel(workspace: workspace))
         }
     }
     

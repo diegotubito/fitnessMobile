@@ -31,7 +31,7 @@ struct ImageListView: View {
             LinearGradient(colors: [Color.Blue.midnight, .black], startPoint: .topLeading, endPoint: .bottomTrailing)
                 .ignoresSafeArea()
             VStack(alignment: .leading) {
-                Text("_WORKSPACE_SHARE_DOCUMENT_SUBTITLE")
+                Text("_WORKSPACE_IMAGE_LIST_SUBTITLE")
                     .font(.subheadline)
                     .foregroundColor(Color.Neutral.tone80)
                     .padding(.bottom)
@@ -51,16 +51,10 @@ struct ImageListView: View {
             }
             .padding()
         }
-        .navigationTitle("_WORKSPACE_SHARE_DOCUMENT_NAV_TITLE")
-        .toolbar(content: {
-
-            ToolbarItem(placement: .navigationBarTrailing) {
-                Button("_NEW_WORSPACE_BUTTON_TITLE") {
-                    selectedSheet = Sheet(sheet: .uploadNewDocument)
-                }.disabled(false)
-            }
-            
-        })
+        .navigationTitle("_WORKSPACE_IMAGE_LIST_NAV_TITLE")
+        .navigationBarItems(trailing: ColoredButton(action: {
+            selectedSheet = Sheet(sheet: .uploadNewDocument)
+        }, title: "_WORKSPACE_UPLOAD_IMAGE_TITLE"))
         .sheet(item: $selectedSheet, onDismiss: {
             
         }, content: { item in
@@ -75,7 +69,7 @@ struct ImageListView: View {
                 .presentationDetents([.medium, .fraction(0.30)])
                 .presentationBackground(Color.Blue.midnight)
             case .removeDocument(document: let document):
-                DeleteSheetView(title: "_REMOVE_WORKSPACE_DOCUMENT_TITLE", subtitle: "_REMOVE_WORKSPACE_DOCUMENT_SUBTITLE", onTapped: { optionTapped in
+                DeleteSheetView(title: "_REMOVE_WORKSPACE_IMAGE_TITLE", subtitle: "_REMOVE_WORKSPACE_IMAGE_SUBTITLE", onTapped: { optionTapped in
                     if optionTapped == .accept {
                         viewmodel.removeImage(documentId: document._id)
                     }

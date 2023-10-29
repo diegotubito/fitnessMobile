@@ -20,6 +20,7 @@ struct ImageListCell: View {
                 .overlay {
                     if viewmodel.isLoading {
                         ProgressView()
+                            .tint(.white)
                     }
                 }
             Text(viewmodel.getImageSize())

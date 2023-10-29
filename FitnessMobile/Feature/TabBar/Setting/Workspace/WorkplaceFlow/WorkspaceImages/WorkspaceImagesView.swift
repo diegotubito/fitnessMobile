@@ -9,7 +9,6 @@ import SwiftUI
 
 struct WorkspaceImagesView: View {
     @StateObject var viewmodel: WorkspaceImagesViewModel
-    @StateObject var defaultBackgroundIamgeViewModel: EditBackgroundImageViewModel
     
     @EnvironmentObject var coordinator: Coordinator
     
@@ -18,46 +17,31 @@ struct WorkspaceImagesView: View {
         static let deafultBackgroundImageSize: CGFloat = 300
     }
     
-    func defaultBackgroundImageView() -> some View {
-        return  GeometryReader { proxy in
-            ZStack {
-                defaultBackgroundIamgeViewModel.getImageView()
-                    .resizable()
-                    .scaledToFill()
-                    .onAppear {
-                        defaultBackgroundIamgeViewModel.fetchBackgroundImage()
-                    }
-                Text("_EDIT_BUTTON_DEFAULT_BACKGROUND_IMAGE")
-                    .padding(3)
-                    .padding(.horizontal, 16)
-                    .font(.caption)
-                    .foregroundColor(Color.Blue.truly)
-                    .background(Color.Dark.tone20)
-                    .cornerRadius(5)
-                    .shadow(radius: 10)
-                    .onTapGesture {
-                        coordinator.push(.workspaceEditBackgroundImageView(workspace: viewmodel.workspace))
-                    }
-                    .position(x: proxy.size.width - 70, y: proxy.size.height - 16)
-            }
-        }
-    }
-    
     var body: some View {
-        ZStack {
-            LinearGradient(gradient: Gradient(colors: [Color.black, Color.Blue.midnight]), startPoint: .top, endPoint: .bottom)
-                .ignoresSafeArea()
-            VStack {
-                ZStack {
-                    defaultBackgroundImageView()
+            ZStack {
+                LinearGradient(gradient: Gradient(colors: [Color.black, Color.Blue.midnight]), startPoint: .top, endPoint: .bottom)
+                    .ignoresSafeArea()
+
+                GeometryReader { geometry in
+
+                VStack {
+                    ZStack {
+                        DefaultBackgroundImageView(defaultBackgroundIamgeViewModel: DefaultBackgroundImageViewModel(workspace: viewmodel.workspace))
+                            .onTapGesture {
+                                coordinator.push(.workspaceEditBackgroundImageView(workspace: viewmodel.workspace))
+                            }
                         
-                    DefaultImageView(defaultIamgeViewModel: EditDefaultImageViewModel(workspace: viewmodel.workspace))
-                        .onTapGesture {
-                            coordinator.push(.workspaceEditDefaultImageView(workspace: viewmodel.workspace))
-                        }
+                        
+                        DefaultImageView(defaultIamgeViewModel: DefaultImageViewModel(workspace: viewmodel.workspace), size: Constants.deafultImageSize)
+                            .onTapGesture {
+                                coordinator.push(.workspaceEditDefaultImageView(workspace: viewmodel.workspace))
+                            }
+                            .position(x: geometry.size.width - (Constants.deafultImageSize / 2), y: Constants.deafultImageSize * 1.3)
+                    }
+                    
+                    ImageListView(viewmodel: ImageListViewModel(workspace: viewmodel.workspace))
                 }
-                
-                ImageListView(viewmodel: ImageListViewModel(workspace: viewmodel.workspace))
+                .ignoresSafeArea()
             }
         }
     }
@@ -67,7 +51,7 @@ struct WorkspaceImagesView: View {
 #Preview {
     let workspace = WorkspaceViewModelMock.getWorkspaces().first
     if let workspace = workspace {
-        return WorkspaceImagesView(viewmodel: WorkspaceImagesViewModel(workspace: workspace), defaultBackgroundIamgeViewModel: EditBackgroundImageViewModel(workspace: workspace))
+        return WorkspaceImagesView(viewmodel: WorkspaceImagesViewModel(workspace: workspace))
     } else {
         return Text("Loading...")
     }

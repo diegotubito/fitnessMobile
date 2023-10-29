@@ -1,13 +1,14 @@
 //
-//  EditBackgroundImageViewModel.swift
+//  EditDefaultImageViewModel.swift
 //  FitnessMobile
 //
 //  Created by David Diego Gomez on 28/10/2023.
 //
 
+
 import SwiftUI
 
-class EditBackgroundImageViewModel: BaseViewModel {
+class DefaultImageViewModel: BaseViewModel {
     @Published var imageData: Data?
     @Published var imageUploaded: Bool = false
     @Published var workspace: WorkspaceModel
@@ -17,8 +18,8 @@ class EditBackgroundImageViewModel: BaseViewModel {
     }
     
     @MainActor
-    func fetchBackgroundImage() {
-        guard let url = workspace.defaultBackgroundImage?.highResImage?.url else { return }
+    func fetchDefaultImage() {
+        guard let url = workspace.defaultImage?.thumbnailImage?.url else { return }
         
         Task {
             do {
@@ -43,10 +44,10 @@ class EditBackgroundImageViewModel: BaseViewModel {
                 
                 let documentId = String.generateMongoDBObjectId()
                 let storageUseCase = StorageUseCase()
-                let response = try await storageUseCase.uploadFile(imageData: imageData, filepath: "default_background_image/\(workspace._id)/default_background_image.png")
+                let response = try await storageUseCase.uploadFile(imageData: imageData, filepath: "default_image/\(workspace._id)/default_image.png")
                 let storageUseCaseThumbnail = StorageUseCase()
                 let compressImageData = getCompressData(data: imageData)
-                let responseThumbnail = try await storageUseCaseThumbnail.uploadFile(imageData: compressImageData, filepath: "default_background_image/\(workspace._id)/default_background_image_thumbnail.png")
+                let responseThumbnail = try await storageUseCaseThumbnail.uploadFile(imageData: compressImageData, filepath: "default_image/\(workspace._id)/default_image_thumbnail.png")
                 
                 let highResImage = SingleImageModel(url: response.url, size: imageData.count, fileType: "PNG", dimensions: nil)
                 let thumbnailImage = SingleImageModel(url: responseThumbnail.url, size: compressImageData?.count ?? 0, fileType: "PNG", dimensions: nil)
@@ -75,7 +76,7 @@ class EditBackgroundImageViewModel: BaseViewModel {
             do {
                 isLoading = true
                 let workspaceUseCase = WorkspaceUseCase()
-                let response = try await workspaceUseCase.updateWorkspaceDefaultBackgroundImage(_id: workspaceId, creator: creator, highResImage: highResImage, thumbnailImage: thumbnailImage)
+                let response = try await workspaceUseCase.updateWorkspaceDefaultImage(_id: workspaceId, creator: creator, highResImage: highResImage, thumbnailImage: thumbnailImage)
                 
                 imageUploaded = true
                 self.isLoading = false
@@ -90,16 +91,16 @@ class EditBackgroundImageViewModel: BaseViewModel {
     
     @MainActor
     func removeImage() {
-        guard let imageId = workspace.defaultBackgroundImage?._id else { return }
+        guard let imageId = workspace.defaultImage?._id else { return }
         
         Task {
             do {
                 isLoading = true
                 let storageUseCaseHighRes = StorageUseCase()
-                let response = try await storageUseCaseHighRes.deleteFile(filepath: "default_background_image/\(workspace._id)/default_background_image.png")
+                let response = try await storageUseCaseHighRes.deleteFile(filepath: "default_image/\(workspace._id)/default_image.png")
                 
                 let storageUseCaseThumbnail = StorageUseCase()
-                let response2 = try await storageUseCaseThumbnail.deleteFile(filepath: "default_background_image/\(workspace._id)/default_background_image_thumbnail.png")
+                let response2 = try await storageUseCaseThumbnail.deleteFile(filepath: "default_image/\(workspace._id)/default_image_thumbnail.png")
                 
                 await updateWorkspaceDefaultImage(workspaceId: workspace._id, documentId: imageId, creator: UserSession._id, highResImage: nil, thumbnailImage: nil)
                 
@@ -113,9 +114,8 @@ class EditBackgroundImageViewModel: BaseViewModel {
     }
     
     func getImageView() -> Image {
-        let defaultImage = Image("")
+        let defaultImage = Image(systemName: "person.crop.circle.fill")
         return imageData?.asImage ?? defaultImage
     }
 }
-
 

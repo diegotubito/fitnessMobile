@@ -1,5 +1,5 @@
 //
-//  EditDefaultImageView.swift
+//  EditBackgroundImageView.swift
 //  FitnessMobile
 //
 //  Created by David Diego Gomez on 28/10/2023.
@@ -8,9 +8,9 @@
 import SwiftUI
 import PhotosUI
 
-struct EditDefaultImageView: View {
+struct EditBackgroundImageView: View {
     @Environment(\.dismiss) var dismiss
-    @StateObject var viewmodel: EditDefaultImageViewModel
+    @StateObject var viewmodel: DefaultBackgroundImageViewModel
     @State private var selectedItem: PhotosPickerItem?
     @EnvironmentObject var coordinator: Coordinator
     
@@ -31,13 +31,17 @@ struct EditDefaultImageView: View {
                     Buttons()
                 }
             }
-            .navigationBarItems(trailing: Button("Save") {
-                viewmodel.uploadImage()
-            })
+            .navigationBarItems(trailing: ColoredButton(action: {
+                if viewmodel.imageData != nil {
+                    viewmodel.uploadImage()
+                } else {
+                    viewmodel.removeImage()
+                }
+            }, title: "_SAVE_IMAGE"))
         }
         
         .onAppear {
-            viewmodel.fetchDefaultImage()
+            viewmodel.fetchBackgroundImage()
         }
         .onChange(of: selectedItem) { _ in
             Task {
@@ -81,11 +85,11 @@ struct EditDefaultImageView: View {
         return VStack {
             viewmodel.getImageView()
                 .resizable()
-                .scaledToFill()
-                .frame(width: geometry.size.width * 0.6, height: geometry.size.width * 0.6)
-                .clipShape(Circle())
+                .scaledToFit()
+                .frame(width: geometry.size.width * 0.9, height: geometry.size.width * 0.6)
+                .clipShape(Rectangle())
                 .overlay {
-                    Circle()
+                    Rectangle()
                         .stroke(Color.white, lineWidth: 2)
                 }
         }
@@ -97,7 +101,7 @@ struct EditDefaultImageView: View {
                 Image(systemName: "camera")
                     .resizable()
                     .frame(width: 20, height: 20)
-                Text("Remove")
+                Text("_REMOVE_IMAGE")
                     .font(.subheadline)
             }
             .padding()
@@ -105,7 +109,7 @@ struct EditDefaultImageView: View {
             .foregroundColor(Color.white)
             .cornerRadius(10)
             .onTapGesture {
-                viewmodel.removeImage()
+                viewmodel.imageData = nil
             }
             PhotosPicker(
                 selection: $selectedItem,
@@ -115,7 +119,7 @@ struct EditDefaultImageView: View {
                         Image(systemName: "photo")
                             .resizable()
                             .frame(width: 20, height: 20)
-                        Text("Gallery")
+                        Text("_GALLERY")
                             .font(.subheadline)
                         
                     }
@@ -130,7 +134,7 @@ struct EditDefaultImageView: View {
                 Image(systemName: "camera")
                     .resizable()
                     .frame(width: 20, height: 20)
-                Text("Camera")
+                Text("_CAMERA")
                     .font(.subheadline)
             }
             .padding()
@@ -144,10 +148,10 @@ struct EditDefaultImageView: View {
     }
 }
 
-struct EditDefaultImageView_Previews: PreviewProvider {
+struct EditBackgroundImageView_Previews: PreviewProvider {
     static var previews: some View {
         if let workspace = WorkspaceViewModelMock.getWorkspaces().first {
-            EditDefaultImageView(viewmodel: EditDefaultImageViewModel(workspace: workspace))
+            EditBackgroundImageView(viewmodel: DefaultBackgroundImageViewModel(workspace: workspace))
         } else {
             Text("loading")
         }

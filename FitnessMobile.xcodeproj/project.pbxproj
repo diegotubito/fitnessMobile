@@ -105,14 +105,15 @@
 		F1AD87E92A7A1EE200A39752 /* CheckBoxSelector.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1AD87E22A7A1EE100A39752 /* CheckBoxSelector.swift */; };
 		F1AD87EC2A7A1F9000A39752 /* SignUpView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1AD87EB2A7A1F9000A39752 /* SignUpView.swift */; };
 		F1B48D482AEDBB6600EE732E /* EditDefaultImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1B48D472AEDBB6600EE732E /* EditDefaultImageView.swift */; };
-		F1B48D4A2AEDBC9E00EE732E /* EditDefaultImageViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1B48D492AEDBC9E00EE732E /* EditDefaultImageViewModel.swift */; };
+		F1B48D4A2AEDBC9E00EE732E /* DefaultImageViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1B48D492AEDBC9E00EE732E /* DefaultImageViewModel.swift */; };
 		F1B48D4D2AEDC98100EE732E /* EditBackgroundImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1B48D4C2AEDC98100EE732E /* EditBackgroundImageView.swift */; };
-		F1B48D4F2AEDC98B00EE732E /* EditBackgroundImageViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1B48D4E2AEDC98B00EE732E /* EditBackgroundImageViewModel.swift */; };
+		F1B48D4F2AEDC98B00EE732E /* DefaultBackgroundImageViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1B48D4E2AEDC98B00EE732E /* DefaultBackgroundImageViewModel.swift */; };
 		F1B48D532AEE08DC00EE732E /* ImageListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1B48D522AEE08DC00EE732E /* ImageListCell.swift */; };
 		F1B48D552AEE08E700EE732E /* ImageListCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1B48D542AEE08E700EE732E /* ImageListCellViewModel.swift */; };
 		F1B48D572AEE098100EE732E /* ImageListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1B48D562AEE098100EE732E /* ImageListView.swift */; };
 		F1B48D592AEE098900EE732E /* ImageListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1B48D582AEE098900EE732E /* ImageListViewModel.swift */; };
 		F1B48D5C2AEEBAF700EE732E /* DefaultImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1B48D5B2AEEBAF700EE732E /* DefaultImageView.swift */; };
+		F1B48D5F2AEEC05800EE732E /* DefaultBackgroundImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1B48D5E2AEEC05800EE732E /* DefaultBackgroundImageView.swift */; };
 		F1CC095E2AC8F51F00C5E0CD /* MemberDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1CC095D2AC8F51F00C5E0CD /* MemberDetailView.swift */; };
 		F1CC09602AC8F5BB00C5E0CD /* MemberDetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1CC095F2AC8F5BB00C5E0CD /* MemberDetailViewModel.swift */; };
 		F1D372E12AA4035000846DC6 /* WorkspaceSettingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1D372E02AA4035000846DC6 /* WorkspaceSettingView.swift */; };
@@ -272,14 +273,15 @@
 		F1AD87E22A7A1EE100A39752 /* CheckBoxSelector.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CheckBoxSelector.swift; sourceTree = "<group>"; };
 		F1AD87EB2A7A1F9000A39752 /* SignUpView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpView.swift; sourceTree = "<group>"; };
 		F1B48D472AEDBB6600EE732E /* EditDefaultImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditDefaultImageView.swift; sourceTree = "<group>"; };
-		F1B48D492AEDBC9E00EE732E /* EditDefaultImageViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditDefaultImageViewModel.swift; sourceTree = "<group>"; };
+		F1B48D492AEDBC9E00EE732E /* DefaultImageViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultImageViewModel.swift; sourceTree = "<group>"; };
 		F1B48D4C2AEDC98100EE732E /* EditBackgroundImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditBackgroundImageView.swift; sourceTree = "<group>"; };
-		F1B48D4E2AEDC98B00EE732E /* EditBackgroundImageViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditBackgroundImageViewModel.swift; sourceTree = "<group>"; };
+		F1B48D4E2AEDC98B00EE732E /* DefaultBackgroundImageViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultBackgroundImageViewModel.swift; sourceTree = "<group>"; };
 		F1B48D522AEE08DC00EE732E /* ImageListCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageListCell.swift; sourceTree = "<group>"; };
 		F1B48D542AEE08E700EE732E /* ImageListCellViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageListCellViewModel.swift; sourceTree = "<group>"; };
 		F1B48D562AEE098100EE732E /* ImageListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageListView.swift; sourceTree = "<group>"; };
 		F1B48D582AEE098900EE732E /* ImageListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageListViewModel.swift; sourceTree = "<group>"; };
 		F1B48D5B2AEEBAF700EE732E /* DefaultImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultImageView.swift; sourceTree = "<group>"; };
+		F1B48D5E2AEEC05800EE732E /* DefaultBackgroundImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultBackgroundImageView.swift; sourceTree = "<group>"; };
 		F1CC095D2AC8F51F00C5E0CD /* MemberDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemberDetailView.swift; sourceTree = "<group>"; };
 		F1CC095F2AC8F5BB00C5E0CD /* MemberDetailViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemberDetailViewModel.swift; sourceTree = "<group>"; };
 		F1D372E02AA4035000846DC6 /* WorkspaceSettingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkspaceSettingView.swift; sourceTree = "<group>"; };
@@ -971,7 +973,6 @@
 			isa = PBXGroup;
 			children = (
 				F1B48D472AEDBB6600EE732E /* EditDefaultImageView.swift */,
-				F1B48D492AEDBC9E00EE732E /* EditDefaultImageViewModel.swift */,
 			);
 			path = EditDefaultImageView;
 			sourceTree = "<group>";
@@ -980,7 +981,6 @@
 			isa = PBXGroup;
 			children = (
 				F1B48D4C2AEDC98100EE732E /* EditBackgroundImageView.swift */,
-				F1B48D4E2AEDC98B00EE732E /* EditBackgroundImageViewModel.swift */,
 			);
 			path = EditBackgroundImageView;
 			sourceTree = "<group>";
@@ -1007,9 +1007,21 @@
 		F1B48D5A2AEEBAE900EE732E /* DefaultImageView */ = {
 			isa = PBXGroup;
 			children = (
+				F1B48D462AEDBB2000EE732E /* EditDefaultImageView */,
 				F1B48D5B2AEEBAF700EE732E /* DefaultImageView.swift */,
+				F1B48D492AEDBC9E00EE732E /* DefaultImageViewModel.swift */,
 			);
 			path = DefaultImageView;
+			sourceTree = "<group>";
+		};
+		F1B48D5D2AEEBFED00EE732E /* DefaultBackgroundImageView */ = {
+			isa = PBXGroup;
+			children = (
+				F1B48D4B2AEDC97300EE732E /* EditBackgroundImageView */,
+				F1B48D5E2AEEC05800EE732E /* DefaultBackgroundImageView.swift */,
+				F1B48D4E2AEDC98B00EE732E /* DefaultBackgroundImageViewModel.swift */,
+			);
+			path = DefaultBackgroundImageView;
 			sourceTree = "<group>";
 		};
 		F1CC095C2AC8F4FF00C5E0CD /* MemberDetail */ = {
@@ -1126,10 +1138,9 @@
 		F1F8595A2AEC433800D5E7DF /* WorkspaceImages */ = {
 			isa = PBXGroup;
 			children = (
+				F1B48D5D2AEEBFED00EE732E /* DefaultBackgroundImageView */,
 				F1B48D5A2AEEBAE900EE732E /* DefaultImageView */,
 				F1B48D502AEE089D00EE732E /* ListOfImages */,
-				F1B48D462AEDBB2000EE732E /* EditDefaultImageView */,
-				F1B48D4B2AEDC97300EE732E /* EditBackgroundImageView */,
 				F1F8595B2AEC434C00D5E7DF /* WorkspaceImagesView.swift */,
 				F1F8595D2AEC45F500D5E7DF /* WorkspaceImagesViewModel.swift */,
 			);
@@ -1302,7 +1313,7 @@
 				F1AD87CB2A788FE000A39752 /* LoginEntity.swift in Sources */,
 				F1028D2A2AAE14AB005C8F5B /* WorkspaceDetailViewModel.swift in Sources */,
 				F159C3D62A99AE8700CDAF20 /* DataDisk.swift in Sources */,
-				F1B48D4A2AEDBC9E00EE732E /* EditDefaultImageViewModel.swift in Sources */,
+				F1B48D4A2AEDBC9E00EE732E /* DefaultImageViewModel.swift in Sources */,
 				F1D372F62AA5604C00846DC6 /* InvitationModel.swift in Sources */,
 				F1AD87B72A788E2D00A39752 /* UserSession.swift in Sources */,
 				F17F4A702A80407D0086DDCB /* UserEntity.swift in Sources */,
@@ -1314,7 +1325,7 @@
 				F1AD879C2A788D2D00A39752 /* ApiNetworkAsync.swift in Sources */,
 				F1A1FA4B2A9BD92B00C816AC /* OpenCameraWrapper.swift in Sources */,
 				F16CCD442AB36D2D0037DCC6 /* GoogleGeocodeModel.swift in Sources */,
-				F1B48D4F2AEDC98B00EE732E /* EditBackgroundImageViewModel.swift in Sources */,
+				F1B48D4F2AEDC98B00EE732E /* DefaultBackgroundImageViewModel.swift in Sources */,
 				F136CE692A81EB4100326730 /* ProfileHeader.swift in Sources */,
 				F17F4A7B2A8080300086DDCB /* UserList.swift in Sources */,
 				F1B48D4D2AEDC98100EE732E /* EditBackgroundImageView.swift in Sources */,
@@ -1368,6 +1379,7 @@
 				F17F4A482A7F01350086DDCB /* CoordinatorMainView.swift in Sources */,
 				F17F4A5C2A7F5BB10086DDCB /* NetworkMonitor.swift in Sources */,
 				F17F49C92A7ABC080086DDCB /* ServerConnectionRepostory.swift in Sources */,
+				F1B48D5F2AEEC05800EE732E /* DefaultBackgroundImageView.swift in Sources */,
 				F1AD87CA2A788FE000A39752 /* LoginUseCase.swift in Sources */,
 				F1F859512AE8379C00D5E7DF /* ShareDocumentViewModel.swift in Sources */,
 				F1AD87E92A7A1EE200A39752 /* CheckBoxSelector.swift in Sources */,

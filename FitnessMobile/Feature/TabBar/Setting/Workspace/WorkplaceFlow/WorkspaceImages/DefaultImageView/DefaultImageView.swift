@@ -8,28 +8,27 @@
 import SwiftUI
 
 struct DefaultImageView: View {
-    @StateObject var defaultIamgeViewModel: EditDefaultImageViewModel
+    @StateObject var defaultIamgeViewModel: DefaultImageViewModel
     
-    struct Constants {
-        static let size: CGFloat = 100
-    }
+    var size: CGFloat
     
     var body: some View {
         VStack {
             defaultIamgeViewModel.getImageView()
                 .resizable()
                 .scaledToFill()
-                .frame(width: Constants.size, height: Constants.size)
+                .frame(width: size, height: size)
                 .clipShape(Circle())
                 .overlay {
                     if defaultIamgeViewModel.isLoading {
                         ProgressView()
-                            .frame(width: Constants.size, height: Constants.size)
+                            .frame(width: size, height: size)
                             .overlay {
                                 Circle()
                                     .stroke(Color.Dark.tone20, lineWidth: 2)
                             }
                             .shadow(radius: 5)
+                            .tint(.white)
                     } else {
                         Circle()
                             .stroke(Color.Dark.tone20, lineWidth: 2)
@@ -40,7 +39,7 @@ struct DefaultImageView: View {
                             .foregroundColor(Color.Blue.truly)
                             .background(Color.Dark.tone20)
                             .cornerRadius(5)
-                            .offset(CGSize(width: 0, height: Constants.size / 2))
+                            .offset(CGSize(width: 0, height: size / 2))
                             .shadow(radius: 5)
                     }
                 }
@@ -55,7 +54,7 @@ struct DefaultImageView: View {
 #Preview {
     let workspace = WorkspaceViewModelMock.getWorkspaces().first
     if let workspace = workspace {
-        return DefaultImageView(defaultIamgeViewModel: EditDefaultImageViewModel(workspace: workspace))
+        return DefaultImageView(defaultIamgeViewModel: DefaultImageViewModel(workspace: workspace), size: 100)
     } else {
         return Text("Loading...")
     }

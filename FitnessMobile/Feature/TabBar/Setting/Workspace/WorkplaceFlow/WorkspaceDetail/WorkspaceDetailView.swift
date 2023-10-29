@@ -22,13 +22,9 @@ struct WorkspaceDetailView: View {
         }
     }
     
-    struct Constants {
-        static let size: CGFloat = 100
-    }
-    
     func headerView() -> some View {
         HStack {
-            DefaultImageView(defaultIamgeViewModel: EditDefaultImageViewModel(workspace: viewmodel.workspace))
+            DefaultImageView(defaultIamgeViewModel: DefaultImageViewModel(workspace: viewmodel.workspace), size: 100)
                 .onTapGesture {
                     coordinator.push(.workspaceImagesView(workspace: viewmodel.workspace))
                 }

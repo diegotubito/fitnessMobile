@@ -1,5 +1,5 @@
 //
-//  EditBackgroundImageView.swift
+//  EditDefaultImageView.swift
 //  FitnessMobile
 //
 //  Created by David Diego Gomez on 28/10/2023.
@@ -8,9 +8,23 @@
 import SwiftUI
 import PhotosUI
 
-struct EditBackgroundImageView: View {
+struct ColoredButton: View {
+    var action: () -> Void
+    var title: LocalizedStringKey
+    var body: some View {
+        Button(action: action) {
+            Text(title)
+                .foregroundColor(.white)
+        }
+        .padding(EdgeInsets(top: 5, leading: 5, bottom: 5, trailing: 10))
+        .background(Color.Blue.midnight)  // Your background color
+        .cornerRadius(5.0)
+    }
+}
+
+struct EditDefaultImageView: View {
     @Environment(\.dismiss) var dismiss
-    @StateObject var viewmodel: EditBackgroundImageViewModel
+    @StateObject var viewmodel: DefaultImageViewModel
     @State private var selectedItem: PhotosPickerItem?
     @EnvironmentObject var coordinator: Coordinator
     
@@ -31,13 +45,18 @@ struct EditBackgroundImageView: View {
                     Buttons()
                 }
             }
-            .navigationBarItems(trailing: Button("Save") {
-                viewmodel.uploadImage()
-            })
+            .navigationBarItems(trailing: ColoredButton(action: {
+                if viewmodel.imageData != nil {
+                    viewmodel.uploadImage()
+                } else {
+                    viewmodel.removeImage()
+                }
+            }, title: "_SAVE_IMAGE"))
+
         }
         
         .onAppear {
-            viewmodel.fetchBackgroundImage()
+            viewmodel.fetchDefaultImage()
         }
         .onChange(of: selectedItem) { _ in
             Task {
@@ -82,10 +101,10 @@ struct EditBackgroundImageView: View {
             viewmodel.getImageView()
                 .resizable()
                 .scaledToFill()
-                .frame(width: geometry.size.width * 0.9, height: geometry.size.width * 0.6)
-                .clipShape(Rectangle())
+                .frame(width: geometry.size.width * 0.6, height: geometry.size.width * 0.6)
+                .clipShape(Circle())
                 .overlay {
-                    Rectangle()
+                    Circle()
                         .stroke(Color.white, lineWidth: 2)
                 }
         }
@@ -97,7 +116,7 @@ struct EditBackgroundImageView: View {
                 Image(systemName: "camera")
                     .resizable()
                     .frame(width: 20, height: 20)
-                Text("Remove")
+                Text("_REMOVE_IMAGE")
                     .font(.subheadline)
             }
             .padding()
@@ -105,7 +124,7 @@ struct EditBackgroundImageView: View {
             .foregroundColor(Color.white)
             .cornerRadius(10)
             .onTapGesture {
-                viewmodel.removeImage()
+                viewmodel.imageData = nil
             }
             PhotosPicker(
                 selection: $selectedItem,
@@ -115,7 +134,7 @@ struct EditBackgroundImageView: View {
                         Image(systemName: "photo")
                             .resizable()
                             .frame(width: 20, height: 20)
-                        Text("Gallery")
+                        Text("_GALLERY")
                             .font(.subheadline)
                         
                     }
@@ -130,7 +149,7 @@ struct EditBackgroundImageView: View {
                 Image(systemName: "camera")
                     .resizable()
                     .frame(width: 20, height: 20)
-                Text("Camera")
+                Text("_CAMERA")
                     .font(.subheadline)
             }
             .padding()
@@ -144,10 +163,10 @@ struct EditBackgroundImageView: View {
     }
 }
 
-struct EditBackgroundImageView_Previews: PreviewProvider {
+struct EditDefaultImageView_Previews: PreviewProvider {
     static var previews: some View {
         if let workspace = WorkspaceViewModelMock.getWorkspaces().first {
-            EditBackgroundImageView(viewmodel: EditBackgroundImageViewModel(workspace: workspace))
+            EditDefaultImageView(viewmodel: DefaultImageViewModel(workspace: workspace))
         } else {
             Text("loading")
         }

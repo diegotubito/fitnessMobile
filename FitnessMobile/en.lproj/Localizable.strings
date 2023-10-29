@@ -6,6 +6,22 @@
   
 */
 
+// IMAGE SOURCE
+
+"_SAVE_IMAGE"="Save";
+"_REMOVE_IMAGE"="Remove";
+"_GALLERY"="Gallery";
+"_CAMERA"="Camera";
+
+// Mark: Workspace Upload Images
+
+"_WORKSPACE_IMAGE_LIST_NAV_TITLE"="Images";
+"_WORKSPACE_IMAGE_LIST_SUBTITLE"="Upload fotos so that your clients can see what's your bussines about";
+"_WORKSPACE_UPLOAD_IMAGE_TITLE" = "Upload Photo";
+"_WORKSPACE_UPLOAD_IMAGE_SUBTITLE" = "Select the image source";
+"_REMOVE_WORKSPACE_IMAGE_TITLE" = "Remove Image";
+"_REMOVE_WORKSPACE_IMAGE_SUBTITLE" = "Do you want to remove this image";
+
 // Mark: Workspace Upload Document View
 
 "_WORKSPACE_SHARE_DOCUMENT_NAV_TITLE"="Share Documents";

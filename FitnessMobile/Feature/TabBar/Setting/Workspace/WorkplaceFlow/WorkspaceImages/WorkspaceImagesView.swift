@@ -9,6 +9,9 @@ import SwiftUI
 
 struct WorkspaceImagesView: View {
     @StateObject var viewmodel: WorkspaceImagesViewModel
+    @StateObject var defaultIamgeViewModel: EditDefaultImageViewModel
+    @StateObject var defaultBackgroundIamgeViewModel: EditBackgroundImageViewModel
+    
     @EnvironmentObject var coordinator: Coordinator
     
     struct Constants {
@@ -19,10 +22,14 @@ struct WorkspaceImagesView: View {
     func defaultImageView(proxy: GeometryProxy) -> some View {
         return VStack {
             HStack {
-                Image(systemName: "person.crop.circle.fill")
+                defaultIamgeViewModel.getImageView()
                     .resizable()
                     .frame(width: proxy.size.width / 3, height: proxy.size.width / 3)
                     .background(Color.white)
+                    .clipShape(Circle())
+                    .onAppear {
+                        defaultIamgeViewModel.fetchDefaultImage()
+                    }
                 Spacer()
             }
             .overlay {
@@ -38,6 +45,7 @@ struct WorkspaceImagesView: View {
                     Group {
                         Circle()
                             .stroke(Color.Dark.tone20, lineWidth: 2)
+                            .position(x: proxy.size.width / 6, y: proxy.size.width / 6)
                         Text("_EDIT_BUTTON")
                             .padding(3)
                             .padding(.horizontal, 16)
@@ -45,8 +53,8 @@ struct WorkspaceImagesView: View {
                             .foregroundColor(Color.Blue.truly)
                             .background(Color.Dark.tone20)
                             .cornerRadius(5)
+                            .position(x: proxy.size.width / 6, y: proxy.size.width / 3.2)
                     }
-                    .position(x: proxy.size.width / 6, y: proxy.size.width / 6)
                     .shadow(radius: 10)
                     .onTapGesture {
                         coordinator.push(.workspaceEditDefaultImageView(workspace: viewmodel.workspace))
@@ -58,36 +66,29 @@ struct WorkspaceImagesView: View {
     
     func defaultBackgroundImageView(proxy: GeometryProxy) -> some View {
         return VStack {
-            Image("image")
+            defaultBackgroundIamgeViewModel.getImageView()
                 .resizable()
                 .frame(width: proxy.size.width, height: proxy.size.height / 4)
                 .background(Color.gray)
+                .onAppear {
+                    defaultBackgroundIamgeViewModel.fetchBackgroundImage()
+                }
             .overlay {
                 if viewmodel.isLoading {
                     ProgressView()
-                        .frame(width: proxy.size.width, height: proxy.size.height / 4)
-                        .overlay {
-                            Circle()
-                                .stroke(Color.Dark.tone20, lineWidth: 2)
-                        }
-                        .shadow(radius: 5)
                 } else {
-                    Group {
-                        Circle()
-                            .stroke(Color.Dark.tone20, lineWidth: 2)
-                        Text("_EDIT_BUTTON")
-                            .padding(3)
-                            .padding(.horizontal, 16)
-                            .font(.caption)
-                            .foregroundColor(Color.Blue.truly)
-                            .background(Color.Dark.tone20)
-                            .cornerRadius(5)
-                    }
-                    .position(x: proxy.size.width / 2, y: proxy.size.height / 8)
-                    .shadow(radius: 10)
-                    .onTapGesture {
-                        coordinator.push(.workspaceEditBackgroundImageView(workspace: viewmodel.workspace))
-                    }
+                    Text("_EDIT_BUTTON")
+                        .padding(3)
+                        .padding(.horizontal, 16)
+                        .font(.caption)
+                        .foregroundColor(Color.Blue.truly)
+                        .background(Color.Dark.tone20)
+                        .cornerRadius(5)
+                        .position(x: proxy.size.width - 50, y: proxy.size.height / 5)
+                        .shadow(radius: 10)
+                        .onTapGesture {
+                            coordinator.push(.workspaceEditBackgroundImageView(workspace: viewmodel.workspace))
+                        }
                 }
             }
         }
@@ -106,7 +107,7 @@ struct WorkspaceImagesView: View {
 #Preview {
     let workspace = WorkspaceViewModelMock.getWorkspaces().first
     if let workspace = workspace {
-        return WorkspaceImagesView(viewmodel: WorkspaceImagesViewModel(workspace: workspace))
+        return WorkspaceImagesView(viewmodel: WorkspaceImagesViewModel(workspace: workspace), defaultIamgeViewModel: EditDefaultImageViewModel(workspace: workspace), defaultBackgroundIamgeViewModel: EditBackgroundImageViewModel(workspace: workspace))
     } else {
         return Text("Loading...")
     }

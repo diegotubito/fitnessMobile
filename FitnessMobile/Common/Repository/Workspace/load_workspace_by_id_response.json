@@ -71,7 +71,7 @@
                 }
             ],
             "createdAt": "2023-10-13T22:15:55.692Z",
-            "updatedAt": "2023-10-27T01:54:49.980Z",
+            "updatedAt": "2023-10-28T23:47:42.203Z",
             "__v": 200,
             "location": {
                 "coordinates": [
@@ -252,7 +252,39 @@
                     "createdAt": "2023-10-26T18:11:51.500Z",
                     "updatedAt": "2023-10-26T18:11:51.500Z"
                 }
-            ]
+            ],
+            "defaultImage": {
+                "highResImage": {
+                    "url": "https://storage.googleapis.com/fitnessapp-3b183.appspot.com/default_image/6510c9e1c41220abb9b02401/default_image.png?GoogleAccessId=firebase-adminsdk-703jw%40fitnessapp-3b183.iam.gserviceaccount.com&Expires=3408145200&Signature=RFW0qgTZu5HJGYJK%2B1xarNG9%2BD7rBlto93Ltu%2BiDSk6Nj66NEYbiJ92QcVtEuIxlvlLB77QXe8SHvJjN%2FbrTzuKMpG2mx%2FKgpLvXXlNyjg%2F5HMGCvA8Y4ggU9A8YmfahvyAChpousK7FOKoWXPYp4gariltr6GGZUKODLLXGqYG59pGswj6OQsScyFbGG5Utc%2Fz%2BO0Zi%2FlSVXCZ9vAUmHzzoYrcdk4VfndqMROrQz07Jh0eXjh%2F92SLH4qKDXT9VMtk3qtZtsMn2yzYhMR8rC78PQjQxDVIpeIMtqdMmIRxvdwmiNntMT3QA32UBG6133hEtqp0EaXnlu%2B9WjGGy0g%3D%3D",
+                    "size": 185418,
+                    "fileType": "PNG"
+                },
+                "thumbnailImage": {
+                    "url": "https://storage.googleapis.com/fitnessapp-3b183.appspot.com/default_image/6510c9e1c41220abb9b02401/default_image_thumbnail.png?GoogleAccessId=firebase-adminsdk-703jw%40fitnessapp-3b183.iam.gserviceaccount.com&Expires=3408145200&Signature=sRu5JmmykUg9zMKnd8MVfw1wV6OogcLB7edmtTo50RSxWj%2BfrxYk8xhqff783%2FYYcM0n71os1zzHZvuoN4Kmi%2BVgelybG3RJJbgzQQ30ljSu0gl%2FWrMtBvBtLBQz3rfn1wd3D2sauNbde9kqy80y99pGvntHfMoLjIgg9zxAMiYj8E8BX4q8NcGdE8W1jtoHBt%2FBcpT6fE%2B9Tpp85pkvoCZ2H3PrN%2FXN26q9czCU4h8yg5K6%2Fuw%2FZDjqeVLh6SZ756ljXuq2QOZlczX586TjUz0IMQKnRSq2bPLM%2BP5OkE1V8e0y%2FZfxFgt67ePFlFx1L0sxEGEOYMJ%2FhBTI69e5VQ%3D%3D",
+                    "size": 38146,
+                    "fileType": "PNG"
+                },
+                "creator": "6510c9e1c41220abb9b02401",
+                "_id": "653d90b4efc21e447619a230",
+                "createdAt": "2023-10-28T22:52:36.687Z",
+                "updatedAt": "2023-10-28T22:52:36.687Z"
+            },
+            "defaultBackgroundImage": {
+                "highResImage": {
+                    "url": "https://storage.googleapis.com/fitnessapp-3b183.appspot.com/default_background_image/6510c9e1c41220abb9b02401/default_background_image.png?GoogleAccessId=firebase-adminsdk-703jw%40fitnessapp-3b183.iam.gserviceaccount.com&Expires=3408145200&Signature=rqzVGl3im0dfMC6sTrwXUJSe4WxnSimlHrXreJSUMO8QTsxbNKqEESCr24dzzBlWC6R%2BNYgP3zM5MkHuwpPkP94oA4CQorLU57rhXhTrG5oFQTKVo%2FGNPuP1Z9lMVkIRJUTOxfqTPsu7qjh30C4JdolYKR5k%2F1JEyFHP6gAE%2B1PDdca%2FqLIJWeu1%2BFWv9AbvLdvazSqWB%2BeoHkLH%2B7SKAm5kFcrawiZcLjEMyem20e19tofsJ6VOpVqo%2BMWRp93GnEfi1GkvnkILtrVj76NBvn9vW3YSRz86BJ8P%2BgKPgLaVX4G1wksKn0f3VmNHqow4dyXmrUFQ8rH5M0VU50UMUA%3D%3D",
+                    "size": 394546,
+                    "fileType": "PNG"
+                },
+                "thumbnailImage": {
+                    "url": "https://storage.googleapis.com/fitnessapp-3b183.appspot.com/default_background_image/6510c9e1c41220abb9b02401/default_background_image_thumbnail.png?GoogleAccessId=firebase-adminsdk-703jw%40fitnessapp-3b183.iam.gserviceaccount.com&Expires=3408145200&Signature=OQCl2apVJpSZ1tGgyXLXiavB2DcIxaRV4jH%2FzFUDldYJBPqLGJ3sLHhn2EUf0rqrtWVnFwyoviDlEgAId3EgvDmCJ7%2FCCqtAiwr1%2FjjJ647BBk4OP0Cu4GDtoQtrjDcx1TwthnTSWPCb5myNcnquQiH5PX4MHSLdhqwiaG09%2BqIZg6JqVj0UG6SbIP4g6e6tX8R68R1kbZvT0fRQbWw5u8%2FqfmH5Mic5czkVNO%2B5E%2F1sqIO8ISLL54ykd%2F%2B0tQcTsib1T35rXRqG7bdAbXBG77mFK355cPm%2B8vym9%2BfFcJhCsaLSNvCosOVnmSJS5R8syjnNsVAw7uWdNv2hEkpW%2Fw%3D%3D",
+                    "size": 50751,
+                    "fileType": "PNG"
+                },
+                "creator": "6510c9e1c41220abb9b02401",
+                "_id": "653d9d9e6ea49b0a9544a904",
+                "createdAt": "2023-10-28T23:47:42.202Z",
+                "updatedAt": "2023-10-28T23:47:42.202Z"
+            }
         }
     ]
 }

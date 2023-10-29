@@ -9,7 +9,7 @@ import SwiftUI
 struct WorkspaceDetailView: View {
     @StateObject var viewmodel: WorkspaceDetailViewModel
     @EnvironmentObject var coordinator: Coordinator
-    @StateObject var photoPickerManager = PhotoPickerManager()
+    @StateObject var defaultIamgeViewModel: EditDefaultImageViewModel
     @State private var selectedItem: SheetItem? = nil
     
     struct SheetItem: Identifiable {
@@ -29,13 +29,13 @@ struct WorkspaceDetailView: View {
     
     func headerView() -> some View {
         HStack {
-            photoPickerManager.getImageView()
+            defaultIamgeViewModel.getImageView()
                 .resizable()
                 .scaledToFill()
                 .frame(width: Constants.size, height: Constants.size)
                 .clipShape(Circle())
                 .overlay {
-                    if photoPickerManager.isLoading {
+                    if defaultIamgeViewModel.isLoading {
                         ProgressView()
                             .frame(width: Constants.size, height: Constants.size)
                             .overlay {
@@ -61,11 +61,9 @@ struct WorkspaceDetailView: View {
                 .onTapGesture {
                     coordinator.push(.workspaceImagesView(workspace: viewmodel.workspace))
                 }
-            
-            Image("logo")
-                .resizable()
-                .scaledToFit()
-                .frame(width: 50)
+                .onAppear {
+                    defaultIamgeViewModel.fetchDefaultImage()
+                }
             
             VStack {
                 HStack {
@@ -361,20 +359,11 @@ struct WorkspaceDetailView: View {
     }
 }
 
-struct WorkspaceDetailView_Previews: PreviewProvider {
-    static var previews: some View {
-        WorkspaceDetailView(viewmodel: WorkspaceDetailViewModel(workspace: WorkspaceModel(_id: "0",
-                                                                                          title: "Test ABC",
-                                                                                          subtitle: "Testing subtitle",
-                                                                                          isEnabled: true,
-                                                                                          owner: "",
-                                                                                          createdAt: "",
-                                                                                          updatedAt: "",
-                                                                                          members: [],
-                                                                                          location: nil,
-                                                                                          locationVerificationStatus: nil,
-                                                                                          documentImages: [],
-                                                                                          defaultImage: nil,
-                                                                                          defaultBackgroundImage: nil)))
+#Preview {
+    let workspace = WorkspaceViewModelMock.getWorkspaces().first
+    if let workspace = workspace {
+        return  WorkspaceDetailView(viewmodel: WorkspaceDetailViewModel(workspace: workspace), defaultIamgeViewModel: EditDefaultImageViewModel(workspace: workspace))
+    } else {
+        return Text("Loading...")
     }
 }

@@ -113,7 +113,7 @@ class DefaultBackgroundImageViewModel: BaseViewModel {
     }
     
     func getImageView() -> Image {
-        let defaultImage = Image("")
+        let defaultImage = Image("background_example")
         return imageData?.asImage ?? defaultImage
     }
 }

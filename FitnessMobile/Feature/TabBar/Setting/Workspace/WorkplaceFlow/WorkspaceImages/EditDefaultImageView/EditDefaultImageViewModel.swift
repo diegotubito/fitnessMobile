@@ -44,10 +44,10 @@ class EditDefaultImageViewModel: BaseViewModel {
                 
                 let documentId = String.generateMongoDBObjectId()
                 let storageUseCase = StorageUseCase()
-                let response = try await storageUseCase.uploadFile(imageData: imageData, filepath: "default_image/\(UserSession._id)/default_image.png")
+                let response = try await storageUseCase.uploadFile(imageData: imageData, filepath: "default_image/\(workspace._id)/default_image.png")
                 let storageUseCaseThumbnail = StorageUseCase()
                 let compressImageData = getCompressData(data: imageData)
-                let responseThumbnail = try await storageUseCaseThumbnail.uploadFile(imageData: compressImageData, filepath: "default_image/\(UserSession._id)/default_image_thumbnail.png")
+                let responseThumbnail = try await storageUseCaseThumbnail.uploadFile(imageData: compressImageData, filepath: "default_image/\(workspace._id)/default_image_thumbnail.png")
                 
                 let highResImage = SingleImageModel(url: response.url, size: imageData.count, fileType: "PNG", dimensions: nil)
                 let thumbnailImage = SingleImageModel(url: responseThumbnail.url, size: compressImageData?.count ?? 0, fileType: "PNG", dimensions: nil)

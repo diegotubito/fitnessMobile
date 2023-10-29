@@ -51,11 +51,11 @@ class ImageListViewModel: BaseViewModel {
                 let storageUseCaseForHighRes = StorageUseCase()
                 let documentId = String.generateMongoDBObjectId()
                 
-                let highResImageResponse = try await storageUseCaseForHighRes.uploadFile(imageData: data, filepath: "images/\(UserSession._id)/\(documentId).png")
+                let highResImageResponse = try await storageUseCaseForHighRes.uploadFile(imageData: data, filepath: "images/\(workspace._id)/\(documentId).png")
                 
                 let storageUseCaseForThumbnail = StorageUseCase()
                 let compressImageData = getCompressData(data: data)
-                let thumbnailImageResponse = try await storageUseCaseForThumbnail.uploadFile(imageData: compressImageData, filepath: "images/\(UserSession._id)/\(documentId)_thumbnail.png")
+                let thumbnailImageResponse = try await storageUseCaseForThumbnail.uploadFile(imageData: compressImageData, filepath: "images/\(workspace._id)/\(documentId)_thumbnail.png")
                 
                 let highResImage = SingleImageModel(url: highResImageResponse.url, size: data.count, fileType: "PNG", dimensions: nil)
                 let thumbnailImage = SingleImageModel(url: thumbnailImageResponse.url, size: compressImageData?.count ?? 0, fileType: "PNG", dimensions: nil)
@@ -96,10 +96,10 @@ class ImageListViewModel: BaseViewModel {
             do {
                 isLoading = true
                 let storageUseCaseHighRes = StorageUseCase()
-                let response = try await storageUseCaseHighRes.deleteFile(filepath: "images/\(UserSession._id)/\(documentId).png")
+                let response = try await storageUseCaseHighRes.deleteFile(filepath: "images/\(workspace._id)/\(documentId).png")
                 
                 let storageUseCaseThumbnail = StorageUseCase()
-                let response2 = try await storageUseCaseThumbnail.deleteFile(filepath: "images/\(UserSession._id)/\(documentId)_thumbnail.png")
+                let response2 = try await storageUseCaseThumbnail.deleteFile(filepath: "images/\(workspace._id)/\(documentId)_thumbnail.png")
                 
                 await pullWorkspaceImage(documentId: documentId)
                 

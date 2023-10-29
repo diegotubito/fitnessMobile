@@ -18,7 +18,7 @@ class EditBackgroundImageViewModel: BaseViewModel {
     
     @MainActor
     func fetchBackgroundImage() {
-        guard let url = workspace.defaultBackgroundImage?.thumbnailImage?.url else { return }
+        guard let url = workspace.defaultBackgroundImage?.highResImage?.url else { return }
         
         Task {
             do {

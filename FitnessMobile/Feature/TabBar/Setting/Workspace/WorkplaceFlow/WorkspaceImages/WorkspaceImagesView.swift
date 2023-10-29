@@ -68,7 +68,8 @@ struct WorkspaceImagesView: View {
         return VStack {
             defaultBackgroundIamgeViewModel.getImageView()
                 .resizable()
-                .frame(width: proxy.size.width, height: proxy.size.height / 4)
+                .frame(width: proxy.size.width, height: proxy.size.height / 3)
+                .scaledToFill()
                 .background(Color.gray)
                 .onAppear {
                     defaultBackgroundIamgeViewModel.fetchBackgroundImage()
@@ -84,7 +85,7 @@ struct WorkspaceImagesView: View {
                         .foregroundColor(Color.Blue.truly)
                         .background(Color.Dark.tone20)
                         .cornerRadius(5)
-                        .position(x: proxy.size.width - 50, y: proxy.size.height / 5)
+                        .position(x: proxy.size.width - 50, y: proxy.size.height / 3.2)
                         .shadow(radius: 10)
                         .onTapGesture {
                             coordinator.push(.workspaceEditBackgroundImageView(workspace: viewmodel.workspace))
@@ -95,11 +96,15 @@ struct WorkspaceImagesView: View {
     }
     
     var body: some View {
-        GeometryReader { proxy in
-            defaultImageView(proxy: proxy)
-                .background {
-                    defaultBackgroundImageView(proxy: proxy)
-                }
+        ZStack {
+            LinearGradient(gradient: Gradient(colors: [Color.black, Color.Blue.midnight]), startPoint: .top, endPoint: .bottom)
+                .ignoresSafeArea()
+            GeometryReader { proxy in
+                defaultImageView(proxy: proxy)
+                    .background {
+                        defaultBackgroundImageView(proxy: proxy)
+                    }
+            }
         }
     }
 }

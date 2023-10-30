@@ -71,7 +71,7 @@ class PhotoPickerManager: BaseViewModel {
                 
                 let compressImageData = getCompressData(data: imageData)
                 let storageThumbnailUseCase = StorageUseCase()
-                let responseThumbnail = try await storageThumbnailUseCase.uploadFile(imageData: imageData, filepath: "profile_image/\(UserSession._id)/profile_image_thumbnail.png")
+                let responseThumbnail = try await storageThumbnailUseCase.uploadFile(imageData: compressImageData, filepath: "profile_image/\(UserSession._id)/profile_image_thumbnail.png")
 
                 let highResImage = SingleImageModel(url: response.url, size: imageData.count, fileType: "PNG", dimensions: nil)
                 let thumbnailImage = SingleImageModel(url: responseThumbnail.url, size: compressImageData?.count ?? 0, fileType: "PNG", dimensions: nil)

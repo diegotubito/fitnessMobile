@@ -49,12 +49,8 @@ struct EditBackgroundImageView: View {
         }
         .onChange(of: selectedItem) { _ in
             Task {
-                if let data = try? await selectedItem?.loadTransferable(type: Data.self),
-                   let image = UIImage(data: data),
-                   let compressedData = image.jpegData(compressionQuality: 0.1) {
-                    print("Original Image Sized: \(data.count)")
-                    print("Compressed Image Sized: \(compressedData.count)")
-                    viewmodel.imageData = compressedData
+                if let data = try? await selectedItem?.loadTransferable(type: Data.self) {
+                    viewmodel.imageData = data
                 } else {
                     viewmodel.imageData = nil
                 }
@@ -62,8 +58,7 @@ struct EditBackgroundImageView: View {
         }
         .onChange(of: imageFromCamera, perform: { value in
             if let image = imageFromCamera,
-               let compressedData = image.jpegData(compressionQuality: 0.1) {
-                print("Compressed Image Sized: \(compressedData.count)")
+               let compressedData = image.jpegData(compressionQuality: 1) {
                 viewmodel.imageData = compressedData
             }
         })

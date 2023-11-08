@@ -23,11 +23,13 @@ struct TwoFactorSettingView: View {
                     HStack {
                         Text("Two factor authentication")
                             .font(.title)
+                            .foregroundColor(Color.Neutral.tone80)
                         Spacer()
                     }
                     .padding(.bottom)
                     HStack {
                         Text("Increase your security adding a two factor extra layer.")
+                            .foregroundColor(Color.Neutral.tone80)
                         Spacer()
                     }
                     Spacer()

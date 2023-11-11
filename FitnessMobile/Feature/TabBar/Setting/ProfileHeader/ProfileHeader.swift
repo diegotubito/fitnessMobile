@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct ProfileHeader: View {
-    @EnvironmentObject var coordinator: Coordinator
+    @EnvironmentObject var settingCoordinator: SettingCoordinator
     @StateObject var photoPickerManager = PhotoPickerManager()
     
     struct Constants {
@@ -47,7 +47,7 @@ struct ProfileHeader: View {
                     }
                     .shadow(radius: 10)
                     .onTapGesture {
-                        coordinator.push(.photoPicker)
+                        settingCoordinator.push(.photoPicker)
                     }
                
             VStack(spacing: 2) {

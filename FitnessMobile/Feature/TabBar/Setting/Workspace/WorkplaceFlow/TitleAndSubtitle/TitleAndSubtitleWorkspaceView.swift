@@ -9,7 +9,7 @@ import SwiftUI
 
 struct TitleAndSubtitleWorkspaceView: View {
     @StateObject var viewmodel: WorkspaceTitleAndSubtitleViewModel
-    @EnvironmentObject var coordinator: Coordinator
+    @EnvironmentObject var settingCoordinator: SettingCoordinator
     @FocusState var focus: Focus?
     
     enum Focus {
@@ -69,12 +69,12 @@ struct TitleAndSubtitleWorkspaceView: View {
             }
             .onReceive(viewmodel.$onUpdateSuccess, perform: { updated in
                 if updated {
-                    coordinator.path.removeLast()
+                    settingCoordinator.path.removeLast()
                 }
             })
             .onReceive(viewmodel.$onCreateSuccess, perform: { created in
                 if created {
-                    coordinator.path.removeLast()
+                    settingCoordinator.path.removeLast()
                 }
             })
             .padding()

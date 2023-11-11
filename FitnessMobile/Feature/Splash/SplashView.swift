@@ -8,36 +8,15 @@
 import SwiftUI
 
 struct SplashView: View {
-    @StateObject var networkMonitor = NetworkMonitor()
-    @StateObject var socketIOManager = SocketIOManager()
-    @StateObject var coordinator = Coordinator()
-    @Environment(\.scenePhase) var scenePhase
+    @EnvironmentObject var mainModalCoordinator: MainModalCoordinator
 
-    @State var shouldShowSplash = true
-    
     var body: some View {
         VStack {
-            if shouldShowSplash {
-                Text("Splash View")
-            } else {
-                CoordinatorMainView()
-                    .environmentObject(socketIOManager)
-                    .environmentObject(coordinator)
-                    .environmentObject(networkMonitor)
-                    .onChange(of: scenePhase) { newPhase in
-                        if newPhase == .active {
-                            print("Active")
-                        } else if newPhase == .inactive {
-                            print("Inactive")
-                        } else if newPhase == .background {
-                            print("Background")
-                        }
-                    }
-            }
+            Text("Splash View")
         }
         .onAppear {
             DispatchQueue.main.asyncAfter(deadline: .now() + 3, execute: {
-                shouldShowSplash = false
+                mainModalCoordinator.modal = MainModalView(screen: .login)
             })
         }
     }

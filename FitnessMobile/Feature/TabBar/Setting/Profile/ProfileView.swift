@@ -9,7 +9,7 @@ import SwiftUI
 
 struct ProfileView: View {
     @StateObject var viewmodel = ProfileViewModel()
-    @EnvironmentObject var coordinator: Coordinator
+    @EnvironmentObject var settingCoordinator: SettingCoordinator
     @Environment(\.dismiss) var dismiss
     @FocusState var focus: Focus?
     
@@ -90,7 +90,7 @@ struct ProfileView: View {
         .onReceive(viewmodel.$updateUserResult, perform: { result in
             if let result = result {
                 UserSession.saveUser(user: result.user)
-                coordinator.path.removeLast()
+                settingCoordinator.path.removeLast()
             }
         })
         .onAppear {

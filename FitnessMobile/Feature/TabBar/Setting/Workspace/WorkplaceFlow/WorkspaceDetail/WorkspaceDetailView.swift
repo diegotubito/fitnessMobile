@@ -8,7 +8,7 @@
 import SwiftUI
 struct WorkspaceDetailView: View {
     @StateObject var viewmodel: WorkspaceDetailViewModel
-    @EnvironmentObject var coordinator: Coordinator
+    @EnvironmentObject var settingCoordinator: SettingCoordinator
     @State private var selectedItem: SheetItem? = nil
     
     struct SheetItem: Identifiable {
@@ -26,7 +26,7 @@ struct WorkspaceDetailView: View {
         HStack {
             DefaultImageView(defaultIamgeViewModel: DefaultImageViewModel(workspace: viewmodel.workspace), size: 100)
                 .onTapGesture {
-                    coordinator.push(.workspaceImagesView(workspace: viewmodel.workspace))
+                    settingCoordinator.push(.workspaceImagesView(workspace: viewmodel.workspace))
                 }
             
             VStack {
@@ -51,7 +51,7 @@ struct WorkspaceDetailView: View {
             }
             .foregroundColor(.accentColor)
             .onTapGesture {
-                coordinator.push(.workspaceTitleAndSubtitle(workspace: viewmodel.workspace))
+                settingCoordinator.push(.workspaceTitleAndSubtitle(workspace: viewmodel.workspace))
             }
         }
         .padding()
@@ -68,7 +68,7 @@ struct WorkspaceDetailView: View {
             Text("_WORKSPACE_DETAIL_VIEW_ADDRESS_NOT_VERIFIED")
                 .foregroundColor(Color.Neutral.tone80)
             Button("_WORKSPACE_DETAIL_VIEW_SHARE_DOCUMENT") {
-                coordinator.push(.shareDocumentView(workspace: viewmodel.workspace))
+                settingCoordinator.push(.shareDocumentView(workspace: viewmodel.workspace))
             }
             .font(.callout)
             .foregroundColor(.accentColor)
@@ -85,7 +85,7 @@ struct WorkspaceDetailView: View {
                 .foregroundColor(.yellow)
             Text("_WORKSPACE_DETAIL_VIEW_VERIFICATION_PENDING")
             Button("_WORKSPACE_DETAIL_VIEW_SHARE_DOCUMENT") {
-                coordinator.push(.shareDocumentView(workspace: viewmodel.workspace))
+                settingCoordinator.push(.shareDocumentView(workspace: viewmodel.workspace))
             }
             .font(.callout)
             .foregroundColor(.accentColor)
@@ -101,7 +101,7 @@ struct WorkspaceDetailView: View {
                 .foregroundColor(.red)
             Text("_WORKSPACE_DETAIL_VIEW_VERIFICATION_REJECTED")
             Button("_WORKSPACE_DETAIL_VIEW_SHARE_DOCUMENT") {
-                coordinator.push(.shareDocumentView(workspace: viewmodel.workspace))
+                settingCoordinator.push(.shareDocumentView(workspace: viewmodel.workspace))
             }
             .font(.callout)
             .foregroundColor(.accentColor)
@@ -131,7 +131,7 @@ struct WorkspaceDetailView: View {
                     Image(systemName: "pencil")
                         .foregroundColor(.accentColor)
                         .onTapGesture {
-                            coordinator.push(.addressWorkspace(workspace: viewmodel.workspace))
+                            settingCoordinator.push(.addressWorkspace(workspace: viewmodel.workspace))
                         }
                 }
                 .padding(.bottom, 8)
@@ -196,7 +196,7 @@ struct WorkspaceDetailView: View {
                 Image(systemName: "plus")
                     .foregroundColor(.accentColor)
                     .onTapGesture {
-                        coordinator.push(.addressWorkspace(workspace: viewmodel.workspace))
+                        settingCoordinator.push(.addressWorkspace(workspace: viewmodel.workspace))
                     }
             }
             .padding(.bottom, 8)
@@ -218,13 +218,13 @@ struct WorkspaceDetailView: View {
                 Image(systemName: "plus")
                     .foregroundColor(.accentColor)
                     .onTapGesture {
-                        coordinator.push(.searchUsersWorkspace(workspace: viewmodel.workspace))
+                        settingCoordinator.push(.searchUsersWorkspace(workspace: viewmodel.workspace))
                     }
             }
             .padding(.bottom, 8)
             MemberListView(viewmodel: MemberViewModel(members: viewmodel.workspace.members), cellTapped: { memberTapped in
                 viewmodel.selectedMember = memberTapped
-                coordinator.push(.memberDetail(workspace: viewmodel.workspace, member: memberTapped))
+                settingCoordinator.push(.memberDetail(workspace: viewmodel.workspace, member: memberTapped))
                 //selectedItem = SheetItem(sheetView: .member)
             })
             .padding(.leading)
@@ -273,7 +273,7 @@ struct WorkspaceDetailView: View {
                     
                     HStack {
                         BasicButton(title: "_WORKSPACE_DETAIL_DELETE_BUTTON_TITLE", style: .destructive, isEnabled: .constant(true)) {
-                            coordinator.presentDesctructiveAlert(title: "_WORKSPACE_DETAIL_DELETE_WARNING_TITLE", message: "_WORKSPACE_DETAIL_DELETE_WARNING_MESSAGE") {
+                            settingCoordinator.presentDesctructiveAlert(title: "_WORKSPACE_DETAIL_DELETE_WARNING_TITLE", message: "_WORKSPACE_DETAIL_DELETE_WARNING_MESSAGE") {
                                 viewmodel.removeWorkspace()
                             } secondaryTapped: { }
                         }
@@ -317,7 +317,7 @@ struct WorkspaceDetailView: View {
         })
         .onReceive(viewmodel.$onDeleteSuccess) { isDeleted in
             if isDeleted {
-                coordinator.path.removeLast()
+                settingCoordinator.path.removeLast()
             }
         }
     }

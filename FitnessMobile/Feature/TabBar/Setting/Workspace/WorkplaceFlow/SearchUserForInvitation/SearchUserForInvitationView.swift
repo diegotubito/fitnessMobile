@@ -9,7 +9,7 @@ import SwiftUI
 
 struct SearchUserForInvitationView: View {
     @StateObject var viewmodel: SearchUserForInvitationViewModel
-    @EnvironmentObject var coordinator: Coordinator
+    @EnvironmentObject var settingCoordinator: SettingCoordinator
     
     var body: some View {
         ZStack {
@@ -58,7 +58,7 @@ struct SearchUserForInvitationView: View {
                             Text("\(user.email) (\(user.username))")
                         }
                         .onTapGesture {
-                            coordinator.push(.pickRoleForInvitation(workspace: viewmodel.workspace, user: user))
+                            settingCoordinator.push(.pickRoleForInvitation(workspace: viewmodel.workspace, user: user))
                             
                         }
                     }

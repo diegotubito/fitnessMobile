@@ -21,6 +21,8 @@
 		F136CE752A85B63600326730 /* OTPViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F136CE742A85B63500326730 /* OTPViewModel.swift */; };
 		F138EEB32AE5B2E3007913A1 /* ShareDocumentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F138EEB22AE5B2E3007913A1 /* ShareDocumentView.swift */; };
 		F138EEBA2AE5C34D007913A1 /* UploadFileSheetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F138EEB92AE5C34D007913A1 /* UploadFileSheetView.swift */; };
+		F1542FAA2AFF133A0008C483 /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1542FA92AFF133A0008C483 /* MainView.swift */; };
+		F1542FAC2AFF2B110008C483 /* SettingCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1542FAB2AFF2B110008C483 /* SettingCoordinator.swift */; };
 		F159C3D42A99AC1E00CDAF20 /* DataCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = F159C3D32A99AC1E00CDAF20 /* DataCache.swift */; };
 		F159C3D62A99AE8700CDAF20 /* DataDisk.swift in Sources */ = {isa = PBXBuildFile; fileRef = F159C3D52A99AE8700CDAF20 /* DataDisk.swift */; };
 		F159C3DA2A9A533C00CDAF20 /* ApplicationVersion.swift in Sources */ = {isa = PBXBuildFile; fileRef = F159C3D92A9A533C00CDAF20 /* ApplicationVersion.swift */; };
@@ -47,7 +49,7 @@
 		F17F49CB2A7ABC120086DDCB /* ServerConnectionUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = F17F49CA2A7ABC120086DDCB /* ServerConnectionUseCase.swift */; };
 		F17F49CE2A7AC72C0086DDCB /* OfflineInternetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F17F49CD2A7AC72C0086DDCB /* OfflineInternetView.swift */; };
 		F17F49D92A7C55870086DDCB /* TabBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = F17F49D82A7C55870086DDCB /* TabBar.swift */; };
-		F17F4A462A7F00E90086DDCB /* Coordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = F17F4A452A7F00E90086DDCB /* Coordinator.swift */; };
+		F17F4A462A7F00E90086DDCB /* CoordinatorLegacy.swift in Sources */ = {isa = PBXBuildFile; fileRef = F17F4A452A7F00E90086DDCB /* CoordinatorLegacy.swift */; };
 		F17F4A482A7F01350086DDCB /* CoordinatorMainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F17F4A472A7F01350086DDCB /* CoordinatorMainView.swift */; };
 		F17F4A592A7F59200086DDCB /* SplashViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F17F4A582A7F59200086DDCB /* SplashViewModel.swift */; };
 		F17F4A5C2A7F5BB10086DDCB /* NetworkMonitor.swift in Sources */ = {isa = PBXBuildFile; fileRef = F17F4A5B2A7F5BB10086DDCB /* NetworkMonitor.swift */; };
@@ -185,6 +187,8 @@
 		F136CE742A85B63500326730 /* OTPViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OTPViewModel.swift; sourceTree = "<group>"; };
 		F138EEB22AE5B2E3007913A1 /* ShareDocumentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShareDocumentView.swift; sourceTree = "<group>"; };
 		F138EEB92AE5C34D007913A1 /* UploadFileSheetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UploadFileSheetView.swift; sourceTree = "<group>"; };
+		F1542FA92AFF133A0008C483 /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
+		F1542FAB2AFF2B110008C483 /* SettingCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingCoordinator.swift; sourceTree = "<group>"; };
 		F159C3D32A99AC1E00CDAF20 /* DataCache.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataCache.swift; sourceTree = "<group>"; };
 		F159C3D52A99AE8700CDAF20 /* DataDisk.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataDisk.swift; sourceTree = "<group>"; };
 		F159C3D92A9A533C00CDAF20 /* ApplicationVersion.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApplicationVersion.swift; sourceTree = "<group>"; };
@@ -212,7 +216,7 @@
 		F17F49CA2A7ABC120086DDCB /* ServerConnectionUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServerConnectionUseCase.swift; sourceTree = "<group>"; };
 		F17F49CD2A7AC72C0086DDCB /* OfflineInternetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OfflineInternetView.swift; sourceTree = "<group>"; };
 		F17F49D82A7C55870086DDCB /* TabBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBar.swift; sourceTree = "<group>"; };
-		F17F4A452A7F00E90086DDCB /* Coordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Coordinator.swift; sourceTree = "<group>"; };
+		F17F4A452A7F00E90086DDCB /* CoordinatorLegacy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoordinatorLegacy.swift; sourceTree = "<group>"; };
 		F17F4A472A7F01350086DDCB /* CoordinatorMainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoordinatorMainView.swift; sourceTree = "<group>"; };
 		F17F4A582A7F59200086DDCB /* SplashViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashViewModel.swift; sourceTree = "<group>"; };
 		F17F4A5B2A7F5BB10086DDCB /* NetworkMonitor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkMonitor.swift; sourceTree = "<group>"; };
@@ -612,13 +616,13 @@
 			path = TabBar;
 			sourceTree = "<group>";
 		};
-		F17F4A4D2A7F39530086DDCB /* Coordinator */ = {
+		F17F4A4D2A7F39530086DDCB /* CoordinatorLegacy */ = {
 			isa = PBXGroup;
 			children = (
 				F17F4A472A7F01350086DDCB /* CoordinatorMainView.swift */,
-				F17F4A452A7F00E90086DDCB /* Coordinator.swift */,
+				F17F4A452A7F00E90086DDCB /* CoordinatorLegacy.swift */,
 			);
-			path = Coordinator;
+			path = CoordinatorLegacy;
 			sourceTree = "<group>";
 		};
 		F17F4A5A2A7F5BA60086DDCB /* NetworkMonitor */ = {
@@ -641,6 +645,7 @@
 			isa = PBXGroup;
 			children = (
 				F17F4A642A8021070086DDCB /* SettingView.swift */,
+				F1542FAB2AFF2B110008C483 /* SettingCoordinator.swift */,
 				F1D372EF2AA54A4100846DC6 /* Invitation */,
 				F1D372DF2AA4033F00846DC6 /* Workspace */,
 				F136CE672A81EB3600326730 /* ProfileHeader */,
@@ -703,6 +708,7 @@
 				F15CDE7F2A926BCE003DCB14 /* Info.plist */,
 				F15CDE7B2A9269BC003DCB14 /* AppDelegate.swift */,
 				F1AD87592A788B4B00A39752 /* FitnessMobileApp.swift */,
+				F1542FA92AFF133A0008C483 /* MainView.swift */,
 				F1AD87862A788BC700A39752 /* Common */,
 				F1AD87842A788BB700A39752 /* Feature */,
 				F1AD87892A788BFE00A39752 /* Resources */,
@@ -759,7 +765,7 @@
 				F159C3D72A9A531700CDAF20 /* Singleton */,
 				F17F4A602A7FED1E0086DDCB /* Base */,
 				F17F4A5A2A7F5BA60086DDCB /* NetworkMonitor */,
-				F17F4A4D2A7F39530086DDCB /* Coordinator */,
+				F17F4A4D2A7F39530086DDCB /* CoordinatorLegacy */,
 				F1AD87D42A7A1EE100A39752 /* Components */,
 				F1AD87B12A788DD000A39752 /* Color */,
 				F1AD879F2A788D5B00A39752 /* Extensions */,
@@ -1307,7 +1313,7 @@
 				F1F859652AEC69D700D5E7DF /* WorkspaceUseCaseSync.swift in Sources */,
 				F1AD87B52A788E2100A39752 /* Keychain.swift in Sources */,
 				F1028D252AAD710D005C8F5B /* WorkspaceAddressViewModel.swift in Sources */,
-				F17F4A462A7F00E90086DDCB /* Coordinator.swift in Sources */,
+				F17F4A462A7F00E90086DDCB /* CoordinatorLegacy.swift in Sources */,
 				F16CCD4E2AB928340037DCC6 /* InvitationListView.swift in Sources */,
 				F17F4A7E2A8145C10086DDCB /* ProfileView.swift in Sources */,
 				F17F4A592A7F59200086DDCB /* SplashViewModel.swift in Sources */,
@@ -1375,6 +1381,7 @@
 				F17F49C42A7AB6990086DDCB /* SplashView.swift in Sources */,
 				F1AD87B32A788DFF00A39752 /* ColorAsset.swift in Sources */,
 				F16CCD5E2AC0DEC10037DCC6 /* DeleteSheetView.swift in Sources */,
+				F1542FAA2AFF133A0008C483 /* MainView.swift in Sources */,
 				F1B48D532AEE08DC00EE732E /* ImageListCell.swift in Sources */,
 				F1AD87A72A788D5B00A39752 /* UIImage+Extension.swift in Sources */,
 				F1D372E32AA4E17E00846DC6 /* WorkspaceSettingViewModel.swift in Sources */,
@@ -1423,6 +1430,7 @@
 				F1B48D482AEDBB6600EE732E /* EditDefaultImageView.swift in Sources */,
 				F16CCD502AB9283F0037DCC6 /* InvitationListViewModel.swift in Sources */,
 				F1AD87A62A788D5B00A39752 /* Date+Extension.swift in Sources */,
+				F1542FAC2AFF2B110008C483 /* SettingCoordinator.swift in Sources */,
 				F17F4A6E2A8040750086DDCB /* UserRepository.swift in Sources */,
 				F17F49CB2A7ABC120086DDCB /* ServerConnectionUseCase.swift in Sources */,
 				F11143982AA82EC5008EC3DC /* TitleAndSubtitleWorkspaceView.swift in Sources */,

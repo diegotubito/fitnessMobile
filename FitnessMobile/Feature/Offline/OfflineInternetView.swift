@@ -9,7 +9,7 @@ import SwiftUI
 
 struct OfflineInternetView: View {
     @EnvironmentObject var networkMonitor: NetworkMonitor
-    @EnvironmentObject var coordinator: Coordinator
+    @EnvironmentObject var coordinator: CoordinatorLegacy
     
     var body: some View {
         VStack {
@@ -27,7 +27,7 @@ struct OfflineInternetView: View {
 }
 
 struct OfflineView_Previews: PreviewProvider {
-    @State static var coordinator = Coordinator()
+    @State static var coordinator = CoordinatorLegacy()
     static var previews: some View {
         NavigationStack {
             OfflineInternetView()

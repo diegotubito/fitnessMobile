@@ -8,8 +8,6 @@
 import SwiftUI
 
 struct ShareDocumentView: View {
-    @EnvironmentObject var coordinator: Coordinator
-    
     @State private var selectedSheet: Sheet? = nil
     
     struct Sheet: Identifiable {

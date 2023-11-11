@@ -1,19 +1,13 @@
 //
-//  Coordinator.swift
+//  SettingCoordinator.swift
 //  FitnessMobile
 //
-//  Created by David Diego Gomez on 05/08/2023.
+//  Created by David Diego Gomez on 11/11/2023.
 //
-
 import SwiftUI
 
-@MainActor
-class Coordinator: ObservableObject {
-    
-    @Published var path: NavigationPath = NavigationPath()
-    @Published var page: PageView = .tabbar
-    @Published var sheet: SheetView?
-    @Published var modal: ModalView?
+class SettingCoordinator: ObservableObject {
+    @Published var path: [Screen] = []
     
     @Published var showAlert: Bool = false
     @Published var showSecondaryAlert: Bool = false
@@ -36,29 +30,6 @@ class Coordinator: ObservableObject {
         showAlert = true
     }
     
-    func root() {
-        path = NavigationPath()
-    }
-    
-    func push(_ page: PageView) {
-        path.append(page)
-    }
-    
-    func presentSheet(_ sheet: SheetView) {
-        //self.modal = nil
-        self.sheet = sheet
-    }
-    
-    func presentModal(_ modal: ModalView) {
-        //self.sheet = nil
-        self.modal = modal
-    }
-    
-    func closeModal() {
-        self.modal = nil
-    }
-    
-    
     struct AlertDetail: Identifiable {
         let id = UUID()
         var title: LocalizedStringKey
@@ -80,14 +51,11 @@ class Coordinator: ObservableObject {
         }
     }
     
-    enum PageView: Hashable {
-        case tabbar
-        case home
+    enum Screen: Hashable {
         case deleteAccount
-        case signUp
-        case profile
         case settingTwoFactor
         case twoFactorEnableInformation(qrImage: UIImage, activationCode: String)
+        case profile
         case workspaceSetting
         case invitationSetting
         case workspaceTitleAndSubtitle(workspace: WorkspaceModel?)
@@ -103,54 +71,31 @@ class Coordinator: ObservableObject {
         case photoPicker
     }
     
-    enum SheetView: Identifiable {
-        case tac
-        
-        var id: UUID {
-            switch self {
-            case .tac:
-                return UUID()
-            }
-        }
-    }
-    
-    enum ModalView: Identifiable {
-        case noInternet
-        case login
-      
-        var id: UUID {
-            switch self {
-            case .noInternet, .login:
-                return UUID()
-            }
-        }
+    func push(_ screen: Screen) {
+        path.append(screen)
     }
     
     @ViewBuilder
-    func getPage(_ page: PageView) -> some View {
-        switch page {
-        case .tabbar:
-            TabBarView()
-        case .home:
-            HomeView()
+    func getPage(_ screen: Screen) -> some View {
+        switch screen {
         case .deleteAccount:
             DeleteAccountView()
-        case .signUp:
-            SignUpView()
-        case .profile:
-            ProfileView()
         case .settingTwoFactor:
             TwoFactorSettingView()
-        case .twoFactorEnableInformation(qrImage: let qrImage, activationCode: let activationCode):
-            TwoFactorEnableInformationView(qrImage: qrImage, activationCode: activationCode)
         case .workspaceSetting:
             WorkspaceSettingView()
-        case .invitationSetting:
-            InvitationView()
         case .workspaceDetail(workspace: let workspace):
             WorkspaceDetailView(viewmodel: WorkspaceDetailViewModel(workspace: workspace))
         case .workspaceTitleAndSubtitle(workspace: let workspace):
             TitleAndSubtitleWorkspaceView(viewmodel: WorkspaceTitleAndSubtitleViewModel(workspace: workspace))
+        case .invitationSetting:
+            InvitationView()
+        case .profile:
+            ProfileView()
+        case .photoPicker:
+            PhotoPickerView()
+        case .twoFactorEnableInformation(qrImage: let qrImage, activationCode: let activationCode):
+            TwoFactorEnableInformationView(qrImage: qrImage, activationCode: activationCode)
         case .addressWorkspace(workspace: let workspace):
             WorkspaceAddressView(viewmodel: WorkspaceAddressViewModel(workspace: workspace))
         case .searchUsersWorkspace(workspace: let workspace):
@@ -167,26 +112,6 @@ class Coordinator: ObservableObject {
             EditDefaultImageView(viewmodel: DefaultImageViewModel(workspace: workspace))
         case .workspaceEditBackgroundImageView(workspace: let workspace):
             EditBackgroundImageView(viewmodel: DefaultBackgroundImageViewModel(workspace: workspace))
-        case .photoPicker:
-            PhotoPickerView()
-        }
-    }
-    
-    @ViewBuilder
-    func getSheet(_ sheet: SheetView) -> some View {
-        switch sheet {
-        case .tac:
-            Text("Terms and Conditions")
-        }
-    }
-    
-   @ViewBuilder
-    func getModal(_ modal: ModalView) -> some View {
-        switch modal {
-        case .noInternet:
-            OfflineInternetView()
-        case .login:
-            LoginView(allowSighUp: true)
         }
     }
 }

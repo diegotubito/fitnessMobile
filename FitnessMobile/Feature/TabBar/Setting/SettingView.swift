@@ -7,10 +7,40 @@
 
 import SwiftUI
 
+
 struct SettingView: View {
-    @EnvironmentObject var coordinator: Coordinator
+    @StateObject var settingCoordinator = SettingCoordinator()
+    @EnvironmentObject var mainModalCoordinator: MainModalCoordinator
     
     var body: some View {
+        NavigationStack(path: $settingCoordinator.path) {
+            contentView()
+                .navigationDestination(for: SettingCoordinator.Screen.self) { value in
+                    settingCoordinator.getPage(value)
+                }
+                .alert(isPresented: $settingCoordinator.showAlert) {
+                    switch settingCoordinator.alertDetail?.alertStyle ?? .secondary {
+                    case .secondary:
+                        return Alert(
+                            title: Text(settingCoordinator.alertDetail?.title ?? ""),
+                            message: Text(settingCoordinator.alertDetail?.message ?? ""),
+                            primaryButton: .cancel(Text(settingCoordinator.alertDetail?.primaryButtonTitle ?? "_ALERT_CANCEL"), action: settingCoordinator.primaryTapped),
+                            secondaryButton: .default(Text(settingCoordinator.alertDetail?.secondaryButtonTitle ?? "_ALERT_ACCEPT"), action: settingCoordinator.secondaryTapped)
+                        )
+                    case .destructive:
+                        return Alert(
+                            title: Text(settingCoordinator.alertDetail?.title ?? ""),
+                            message: Text(settingCoordinator.alertDetail?.message ?? ""),
+                            primaryButton: .destructive(Text(settingCoordinator.alertDetail?.primaryButtonTitle ?? "_ALERT_REMOVE"), action: settingCoordinator.primaryTapped),
+                            secondaryButton: .cancel(Text(settingCoordinator.alertDetail?.secondaryButtonTitle ?? "_ALERT_CANCEL"), action: settingCoordinator.secondaryTapped)
+                        )
+                    }
+                }
+        }
+        .environmentObject(settingCoordinator)
+    }
+    
+    func contentView() -> some View {
         ZStack {
             LinearGradient(gradient: Gradient(colors: [Color.black, Color.Blue.midnight]), startPoint: .top, endPoint: .bottom)
                 .ignoresSafeArea()
@@ -23,7 +53,7 @@ struct SettingView: View {
                         HStack {
                             Image("laptop-computer")
                             Button("_SETTING_WORKSPACES") {
-                                coordinator.push(.workspaceSetting)
+                                settingCoordinator.push(.workspaceSetting)
                             }
                             Spacer()
                             Image(systemName: "chevron.right")
@@ -32,7 +62,7 @@ struct SettingView: View {
                         HStack {
                             Image("users")
                             Button("_SETTING_INVITATIONS") {
-                                coordinator.push(.invitationSetting)
+                                settingCoordinator.push(.invitationSetting)
                             }
                             Spacer()
                             Image(systemName: "chevron.right")
@@ -43,7 +73,7 @@ struct SettingView: View {
                         HStack {
                             Image("profile")
                             Button("_SETTING_PROFILE", action: {
-                                coordinator.push(.profile)
+                                settingCoordinator.push(.profile)
                             })
                             Spacer()
                             Image(systemName: "chevron.right")
@@ -53,7 +83,7 @@ struct SettingView: View {
                         HStack {
                             Image("key")
                             Button("_SETTING_2FA", action: {
-                                coordinator.push(.settingTwoFactor)
+                                settingCoordinator.push(.settingTwoFactor)
                             })
                             Spacer()
                             Image(systemName: "chevron.right")
@@ -66,7 +96,7 @@ struct SettingView: View {
                         HStack {
                             Image("log-out")
                             Button("_LOGOUT", action: {
-                                coordinator.presentSecondaryAlert(title: "_LOGOUT_ALERT_WARNING_TITLE", message: "_LOGOUT_ALERT_WARNING_MESSAGE") { } secondaryTapped: {
+                                settingCoordinator.presentSecondaryAlert(title: "_LOGOUT_ALERT_WARNING_TITLE", message: "_LOGOUT_ALERT_WARNING_MESSAGE") { } secondaryTapped: {
                                     closeSession()
                                 }
                             })
@@ -76,7 +106,7 @@ struct SettingView: View {
                         HStack {
                             Image("delete")
                             Button("_DELETE_ACCOUNT", action: {
-                                coordinator.push(.deleteAccount)
+                                settingCoordinator.push(.deleteAccount)
                             })
                             Spacer()
                             Image(systemName: "chevron.right")
@@ -114,16 +144,15 @@ struct SettingView: View {
                 }
             }
         }
-    
     }
     
     func closeSession() {
-        NotificationCenter.default.post(Notification(name: .MustLogin))
+        mainModalCoordinator.modal = MainModalView(screen: .login)
     }
 }
 
 struct SettingView_Previews: PreviewProvider {
-    @State static var coordinator = Coordinator()
+    @State static var coordinator = CoordinatorLegacy()
     static var previews: some View {
         NavigationStack {
             SettingView()

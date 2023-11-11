@@ -12,7 +12,6 @@ import UserNotifications
 struct FitnessMobileApp: App {
     @StateObject var networkMonitor = NetworkMonitor()
     @StateObject var socketIOManager = SocketIOManager()
-    @StateObject var coordinator = Coordinator()
     @StateObject var userSession = UserSession()
     @Environment(\.scenePhase) var scenePhase
     
@@ -20,9 +19,8 @@ struct FitnessMobileApp: App {
     
     var body: some Scene {
         WindowGroup {
-            CoordinatorMainView()
+            MainView()
                 .environmentObject(socketIOManager)
-                .environmentObject(coordinator)
                 .environmentObject(networkMonitor)
                 .environmentObject(userSession)
                 .onChange(of: scenePhase) { newPhase in

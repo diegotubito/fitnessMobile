@@ -9,7 +9,7 @@ import SwiftUI
 
 struct WorkspaceSettingView: View {
     @StateObject var viewmodel = WorkspaceSettingViewModel()
-    @EnvironmentObject var coordinator: Coordinator
+    @EnvironmentObject var settingCoordinator: SettingCoordinator
     
     func ownerWorkspaceView() -> some View {
         return VStack(spacing: 0) {
@@ -28,7 +28,7 @@ struct WorkspaceSettingView: View {
                 List(viewmodel.ownWorkspaces, id: \.self) { own in
                     Text("\(own.title), \(own.subtitle).")
                         .onTapGesture {
-                            coordinator.push(.workspaceDetail(workspace: own))
+                            settingCoordinator.push(.workspaceDetail(workspace: own))
                         }
                 }
                 .scrollContentBackground(.hidden)
@@ -83,7 +83,7 @@ struct WorkspaceSettingView: View {
 
             ToolbarItem(placement: .navigationBarTrailing) {
                 Button("_NEW_WORSPACE_BUTTON_TITLE") {
-                    coordinator.push(.workspaceTitleAndSubtitle(workspace: nil))
+                    settingCoordinator.push(.workspaceTitleAndSubtitle(workspace: nil))
                 }.disabled(false)
             }
             

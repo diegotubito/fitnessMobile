@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct ImageListView: View {
-    @EnvironmentObject var coordinator: Coordinator
+    @EnvironmentObject var settingCoordinator: SettingCoordinator
     
     @State private var selectedSheet: Sheet? = nil
     
@@ -57,7 +57,7 @@ struct ImageListView: View {
             selectedSheet = Sheet(sheet: .uploadNewDocument)
         }, title: "_WORKSPACE_UPLOAD_IMAGE_TITLE"))
         .navigationBarItems(leading: CustomNavigationBackButton(action: {
-            coordinator.path.removeLast()
+            settingCoordinator.path.removeLast()
         }))
         .sheet(item: $selectedSheet, onDismiss: {
             

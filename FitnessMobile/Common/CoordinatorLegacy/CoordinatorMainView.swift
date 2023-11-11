@@ -13,11 +13,11 @@ extension NSNotification.Name {
 }
 
 struct CoordinatorMainView: View {
-    @EnvironmentObject var coordinator: Coordinator
+    @EnvironmentObject var coordinator: CoordinatorLegacy
     @EnvironmentObject var networkMonitor: NetworkMonitor
     @EnvironmentObject var userSession: UserSession
     
-    @State var currentPage: Coordinator.PageView = .tabbar
+    @State var currentPage: CoordinatorLegacy.PageView = .tabbar
        
     var body: some View {
         NavigationStack(path: $coordinator.path) {
@@ -26,7 +26,7 @@ struct CoordinatorMainView: View {
                     coordinator.getSheet(sheet)
                         .presentationDetents([.medium])
                 }
-                .navigationDestination(for: Coordinator.PageView.self) { page in
+                .navigationDestination(for: CoordinatorLegacy.PageView.self) { page in
                     coordinator.getPage(page)
                 }
                 .fullScreenCover(item: $coordinator.modal) { modal in
@@ -71,7 +71,7 @@ struct CoordinatorMainView: View {
 }
 
 struct MainView_Previews: PreviewProvider {
-    @State static var coordinator = Coordinator()
+    @State static var coordinator = CoordinatorLegacy()
     
     static var previews: some View {
         NavigationStack {

@@ -10,7 +10,7 @@ import SwiftUI
 struct WorkspaceAddressView: View {
     @StateObject var viewmodel: WorkspaceAddressViewModel
     @StateObject var googleGeocodeManager = GoogleGeocodeManager()
-    @EnvironmentObject var coordinator: Coordinator
+    @EnvironmentObject var settingCoordinator: SettingCoordinator
     
     var body: some View {
         ZStack {
@@ -75,7 +75,7 @@ struct WorkspaceAddressView: View {
         })
         .onReceive(viewmodel.$onWorkspaceUpdated, perform: { updateValue in
             if let workspace = updateValue {
-                coordinator.path.removeLast()
+                settingCoordinator.path.removeLast()
             } 
         })
         .overlay(

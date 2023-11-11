@@ -9,7 +9,7 @@ import SwiftUI
 
 struct TwoFactorSettingView: View {
     @StateObject var viewmodel = TwoFactorSettingViewModel()
-    @EnvironmentObject var coordinator: Coordinator
+    @EnvironmentObject var settingCoordinator: SettingCoordinator
     
     @State var toggleIsEnabled: Bool = true
     
@@ -35,7 +35,7 @@ struct TwoFactorSettingView: View {
                     Spacer()
                     HStack {
                         BasicButton(title: "Secure Your Account", style: .primary, isEnabled: .constant(true)) {
-                            coordinator.presentSecondaryAlert(title: "Enable 2FA", message: "You are going to enable two factor auth.") {
+                            settingCoordinator.presentSecondaryAlert(title: "Enable 2FA", message: "You are going to enable two factor auth.") {
                                 
                             } secondaryTapped: {
                                 enable2FA()
@@ -69,7 +69,7 @@ struct TwoFactorSettingView: View {
                         UserSession.saveTempToken(value: response.tempToken)
                         let imageData = Data(base64Encoded: response.qrImage)
                         let image = UIImage(data: imageData ?? Data())
-                        coordinator.push(.twoFactorEnableInformation(qrImage: image ?? UIImage(), activationCode: response.activationCode))
+                        settingCoordinator.push(.twoFactorEnableInformation(qrImage: image ?? UIImage(), activationCode: response.activationCode))
                     }
                 }
                 .overlay(
@@ -84,7 +84,7 @@ struct TwoFactorSettingView: View {
                         .padding()
                         .onChange(of: toggleIsEnabled, perform: { newValue in
                             if !newValue {
-                                coordinator.presentSecondaryAlert(title: "Disablle 2FA", message: "Disabling this security layer is not recomended.") {
+                                settingCoordinator.presentSecondaryAlert(title: "Disablle 2FA", message: "Disabling this security layer is not recomended.") {
                                     toggleIsEnabled.toggle()
                                 } secondaryTapped: {
                                     disable2FA()
@@ -96,7 +96,7 @@ struct TwoFactorSettingView: View {
                 }
                 .onReceive(viewmodel.$twoFactorDisabled) { response in
                     if response != nil {
-                        coordinator.path.removeLast()
+                        settingCoordinator.path.removeLast()
                     } else {
                         toggleIsEnabled = true
                     }

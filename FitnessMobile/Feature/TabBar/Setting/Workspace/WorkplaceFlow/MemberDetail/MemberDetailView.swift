@@ -9,7 +9,7 @@ import SwiftUI
 
 struct MemberDetailView: View {
     @StateObject var viewmodel: MemberDetailViewModel
-    @EnvironmentObject var coordinator: Coordinator
+    @EnvironmentObject var settingCoordinator: SettingCoordinator
     @State var shouldPresentSheet: Bool = false
     @State var uiimage: UIImage?
     
@@ -78,7 +78,7 @@ struct MemberDetailView: View {
         })
         .onReceive(viewmodel.$memberDeleted, perform: { isDeleted in
             if isDeleted {
-                coordinator.path.removeLast()
+                settingCoordinator.path.removeLast()
             }
         })
         .onAppear {

@@ -10,7 +10,7 @@ import SwiftUI
 struct WorkspaceImagesView: View {
     @StateObject var viewmodel: WorkspaceImagesViewModel
     
-    @EnvironmentObject var coordinator: Coordinator
+    @EnvironmentObject var settingCoordinator: SettingCoordinator
     
     struct Constants {
         static let deafultImageSize: CGFloat = 150
@@ -28,13 +28,13 @@ struct WorkspaceImagesView: View {
                     ZStack {
                         DefaultBackgroundImageView(defaultBackgroundIamgeViewModel: DefaultBackgroundImageViewModel(workspace: viewmodel.workspace))
                             .onTapGesture {
-                                coordinator.push(.workspaceEditBackgroundImageView(workspace: viewmodel.workspace))
+                                settingCoordinator.push(.workspaceEditBackgroundImageView(workspace: viewmodel.workspace))
                             }
                         
                         
                         DefaultImageView(defaultIamgeViewModel: DefaultImageViewModel(workspace: viewmodel.workspace), size: Constants.deafultImageSize)
                             .onTapGesture {
-                                coordinator.push(.workspaceEditDefaultImageView(workspace: viewmodel.workspace))
+                                settingCoordinator.push(.workspaceEditDefaultImageView(workspace: viewmodel.workspace))
                             }
                             .position(x: geometry.size.width - (Constants.deafultImageSize / 2), y: Constants.deafultImageSize * 1.3)
                     }

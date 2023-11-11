@@ -9,7 +9,7 @@ import SwiftUI
 
 struct DeleteAccountView: View {
     @StateObject var viewmodel = DeleteAccountViewModel()
-    @EnvironmentObject var coordinator: Coordinator
+    @EnvironmentObject var settingCoordinator: SettingCoordinator
     @EnvironmentObject var userSession: UserSession
     
     var body: some View {
@@ -34,7 +34,7 @@ struct DeleteAccountView: View {
                 Spacer()
                 HStack {
                     BasicButton(title: "_DELETE_ACCOUNT", style: .destructive, isEnabled: .constant(true)) {
-                        coordinator.presentDesctructiveAlert(title: "_DELETE_ACCOUNT_BUTTON_TITLE", message: "_DELETE_ACCOUNT_BUTTON_MESSAGE") {
+                        settingCoordinator.presentDesctructiveAlert(title: "_DELETE_ACCOUNT_BUTTON_TITLE", message: "_DELETE_ACCOUNT_BUTTON_MESSAGE") {
                             deleteAccount()
                         } secondaryTapped: { }
                     }
@@ -44,7 +44,7 @@ struct DeleteAccountView: View {
         }
         .onReceive(viewmodel.$deleteResult, perform: { response in
             if response != nil {
-                coordinator.path = NavigationPath()
+                settingCoordinator.path.removeAll()
                 NotificationCenter.default.post(Notification(name: .MustLogin))
             }
         })
@@ -58,7 +58,7 @@ struct DeleteAccountView: View {
             
             ToolbarItem(placement: .navigationBarLeading) {
                 Button("_ALERT_CANCEL") {
-                    coordinator.path.removeLast()
+                    settingCoordinator.path.removeLast()
                 }.disabled(false)
                     .foregroundColor(Color.Red.tone100)
             }

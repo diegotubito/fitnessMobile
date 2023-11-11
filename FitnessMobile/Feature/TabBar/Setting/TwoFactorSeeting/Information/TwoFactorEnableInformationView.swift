@@ -40,7 +40,7 @@ struct TwoFactorEnableInformationView: View {
     @StateObject var viewmodel = TwoFactorEnableInformationViewModel()
     @EnvironmentObject var userSession: UserSession
     @State var otpResult: OTPView.OPTResult = .none
-    @EnvironmentObject var coordinator: Coordinator
+    @EnvironmentObject var settingCoordinator: SettingCoordinator
     @State var shouldGoToOTP = false
     @State var shouldGoToRoor = false
     
@@ -133,7 +133,7 @@ struct TwoFactorEnableInformationView: View {
         .onReceive(viewmodel.$twoFactorConfirmed, perform: { response in
             if response != nil {
                 otpResult = .enableConfirmed
-                coordinator.path.removeLast()
+                settingCoordinator.path.removeLast()
             }
         })
         .overlay(
@@ -160,7 +160,7 @@ struct TwoFactorEnableInformationView: View {
                     .multilineTextAlignment(.center)
                 
                 Button("Go to Home") {
-                    coordinator.root()
+                    settingCoordinator.path.removeAll()
                 }
                 .padding()
                 .background(Color.blue)

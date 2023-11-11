@@ -10,8 +10,7 @@ import SwiftUI
 struct LoginView: View {
     @StateObject var viewmodel = LoginViewModel()
     @State var showAlert = false
-    @EnvironmentObject var coordinator: Coordinator
-    
+    @EnvironmentObject var mainModalCoordinator: MainModalCoordinator
     @State var shouldGoToOTP = false
     @State var otpResult: OTPView.OPTResult = .none
     
@@ -124,7 +123,7 @@ struct LoginView: View {
             case .otpBackButton:
                 break
             case .otpSuccess:
-                closeLoginView()
+                loginSuccessful()
             case .otpBackButtonWithFailure:
                 break
             }
@@ -145,7 +144,7 @@ struct LoginView: View {
                     shouldGoToOTP = true
                     return
                 }
-                closeLoginView()
+                loginSuccessful()
             }
         }
         .overlay(
@@ -161,13 +160,13 @@ struct LoginView: View {
         viewmodel.doLogin()
     }
     
-    func closeLoginView() {
-        coordinator.closeModal()
+    func loginSuccessful() {
+        mainModalCoordinator.modal = MainModalView(screen: .tabbar)
     }
 }
 
 struct LoginView_Previews: PreviewProvider {
-    @State static var coordinator = Coordinator()
+    @State static var coordinator = CoordinatorLegacy()
     static var previews: some View {
         NavigationStack {
             LoginView(allowSighUp: true)

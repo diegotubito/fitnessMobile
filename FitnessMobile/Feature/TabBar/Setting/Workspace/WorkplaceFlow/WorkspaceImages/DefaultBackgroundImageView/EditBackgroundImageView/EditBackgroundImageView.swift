@@ -12,7 +12,7 @@ struct EditBackgroundImageView: View {
     @Environment(\.dismiss) var dismiss
     @StateObject var viewmodel: DefaultBackgroundImageViewModel
     @State private var selectedItem: PhotosPickerItem?
-    @EnvironmentObject var coordinator: Coordinator
+    @EnvironmentObject var settingCoordinator: SettingCoordinator
     
     @State private var isCameraPresented = false
     @State private var imageFromCamera: UIImage?
@@ -33,7 +33,7 @@ struct EditBackgroundImageView: View {
             }
             .navigationBarBackButtonHidden()
             .navigationBarItems(leading: CustomNavigationBackButton(action: {
-                coordinator.path.removeLast()
+                settingCoordinator.path.removeLast()
             }))
             .navigationBarItems(trailing: CustomNavigationButton(action: {
                 if viewmodel.imageData != nil {

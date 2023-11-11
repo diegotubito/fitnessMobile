@@ -9,11 +9,11 @@ import SwiftUI
 
 struct InvitationView: View {
     @StateObject var viewmodel = InvitationViewModel()
-    @EnvironmentObject var coordinator: Coordinator
     
     func invitationEmptyView() -> some View {
         return VStack {
             Text("_INVITATION_VIEW_EMPTY_LIST")
+                .foregroundColor(Color.Neutral.tone80)
         }
     }
     

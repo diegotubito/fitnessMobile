@@ -9,7 +9,7 @@ import SwiftUI
 
 struct PickRoleView: View {
     @StateObject var viewmodel: PickRoleViewModel
-    @EnvironmentObject var coordinator: Coordinator
+    @EnvironmentObject var settingCoordinator: SettingCoordinator
     
     var body: some View {
         ZStack {
@@ -56,7 +56,7 @@ struct PickRoleView: View {
         }
         .onReceive(viewmodel.$sendInvitationSuccess, perform: { success in
             if success {
-                coordinator.path.removeLast(2)
+                settingCoordinator.path.removeLast(2)
             }
         })
         .overlay(

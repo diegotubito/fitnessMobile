@@ -9,48 +9,6 @@ import SwiftUI
 class SettingCoordinator: ObservableObject {
     @Published var path: [Screen] = []
     
-    @Published var showAlert: Bool = false
-    @Published var showSecondaryAlert: Bool = false
-    var alertDetail: AlertDetail?
-    var completion: (() -> Void)?
-    var primaryTapped: (() -> Void)?
-    var secondaryTapped: (() -> Void)?
-    
-    func presentSecondaryAlert(title: LocalizedStringKey, message: LocalizedStringKey, primaryButtonTitle: LocalizedStringKey? = nil, secondaryButtonTitle: LocalizedStringKey? = nil, primaryTapped: @escaping (() -> Void), secondaryTapped: @escaping (() -> Void)) {
-        alertDetail = AlertDetail(title: title, message: message, alertStyle: .secondary, primaryButtonTitle: primaryButtonTitle, secondaryButtonTitle: secondaryButtonTitle)
-        self.primaryTapped = primaryTapped
-        self.secondaryTapped = secondaryTapped
-        showAlert = true
-    }
-    
-    func presentDesctructiveAlert(title: String, message: String, primaryButtonTitle: LocalizedStringKey? = nil, secondaryButtonTitle: LocalizedStringKey? = nil, primaryTapped: @escaping (() -> Void), secondaryTapped: @escaping (() -> Void)) {
-        alertDetail = AlertDetail(title: LocalizedStringKey(title), message: LocalizedStringKey(message), alertStyle: .destructive, primaryButtonTitle: primaryButtonTitle, secondaryButtonTitle: secondaryButtonTitle)
-        self.primaryTapped = primaryTapped
-        self.secondaryTapped = secondaryTapped
-        showAlert = true
-    }
-    
-    struct AlertDetail: Identifiable {
-        let id = UUID()
-        var title: LocalizedStringKey
-        var message: LocalizedStringKey
-        var alertStyle: AlertStyle?
-        var primaryButtonTitle: LocalizedStringKey?
-        var secondaryButtonTitle: LocalizedStringKey?
-    }
-    
-    enum AlertStyle: Identifiable {
-        case secondary
-        case destructive
-        
-        var id: UUID {
-            switch self {
-            case .secondary, .destructive:
-                return UUID()
-            }
-        }
-    }
-    
     enum Screen: Hashable {
         case deleteAccount
         case settingTwoFactor

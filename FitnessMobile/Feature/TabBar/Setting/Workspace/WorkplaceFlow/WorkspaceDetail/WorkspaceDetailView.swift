@@ -11,6 +11,8 @@ struct WorkspaceDetailView: View {
     @EnvironmentObject var settingCoordinator: SettingCoordinator
     @State private var selectedItem: SheetItem? = nil
     
+    @State private var showAlertDeleteWorkspace = false
+    
     struct SheetItem: Identifiable {
         let id: UUID? = UUID()
         let sheetView: Sheets
@@ -273,9 +275,15 @@ struct WorkspaceDetailView: View {
                     
                     HStack {
                         BasicButton(title: "_WORKSPACE_DETAIL_DELETE_BUTTON_TITLE", style: .destructive, isEnabled: .constant(true)) {
-                            settingCoordinator.presentDesctructiveAlert(title: "_WORKSPACE_DETAIL_DELETE_WARNING_TITLE", message: "_WORKSPACE_DETAIL_DELETE_WARNING_MESSAGE") {
+                            showAlertDeleteWorkspace = true
+                        }
+                        .alert(isPresented: $showAlertDeleteWorkspace) {
+                            Alert(title: Text("_WORKSPACE_DETAIL_DELETE_WARNING_TITLE"),
+                                  message: Text("_WORKSPACE_DETAIL_DELETE_WARNING_MESSAGE"),
+                                  primaryButton: .destructive(Text("_WORKSPACE_DETAIL_DELETE_BUTTON_TITLE"), action: {
                                 viewmodel.removeWorkspace()
-                            } secondaryTapped: { }
+                            }), secondaryButton: .cancel()
+                            )
                         }
                     }
                     

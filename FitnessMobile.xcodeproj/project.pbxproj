@@ -23,6 +23,7 @@
 		F138EEBA2AE5C34D007913A1 /* UploadFileSheetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F138EEB92AE5C34D007913A1 /* UploadFileSheetView.swift */; };
 		F1542FAA2AFF133A0008C483 /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1542FA92AFF133A0008C483 /* MainView.swift */; };
 		F1542FAC2AFF2B110008C483 /* SettingCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1542FAB2AFF2B110008C483 /* SettingCoordinator.swift */; };
+		F1542FAF2AFFE5570008C483 /* AlertType.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1542FAE2AFFE5570008C483 /* AlertType.swift */; };
 		F159C3D42A99AC1E00CDAF20 /* DataCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = F159C3D32A99AC1E00CDAF20 /* DataCache.swift */; };
 		F159C3D62A99AE8700CDAF20 /* DataDisk.swift in Sources */ = {isa = PBXBuildFile; fileRef = F159C3D52A99AE8700CDAF20 /* DataDisk.swift */; };
 		F159C3DA2A9A533C00CDAF20 /* ApplicationVersion.swift in Sources */ = {isa = PBXBuildFile; fileRef = F159C3D92A9A533C00CDAF20 /* ApplicationVersion.swift */; };
@@ -187,6 +188,7 @@
 		F138EEB92AE5C34D007913A1 /* UploadFileSheetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UploadFileSheetView.swift; sourceTree = "<group>"; };
 		F1542FA92AFF133A0008C483 /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
 		F1542FAB2AFF2B110008C483 /* SettingCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingCoordinator.swift; sourceTree = "<group>"; };
+		F1542FAE2AFFE5570008C483 /* AlertType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertType.swift; sourceTree = "<group>"; };
 		F159C3D32A99AC1E00CDAF20 /* DataCache.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataCache.swift; sourceTree = "<group>"; };
 		F159C3D52A99AE8700CDAF20 /* DataDisk.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataDisk.swift; sourceTree = "<group>"; };
 		F159C3D92A9A533C00CDAF20 /* ApplicationVersion.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApplicationVersion.swift; sourceTree = "<group>"; };
@@ -442,6 +444,14 @@
 				F138EEB92AE5C34D007913A1 /* UploadFileSheetView.swift */,
 			);
 			path = UploadFileSheetView;
+			sourceTree = "<group>";
+		};
+		F1542FAD2AFFE54D0008C483 /* AlertType */ = {
+			isa = PBXGroup;
+			children = (
+				F1542FAE2AFFE5570008C483 /* AlertType.swift */,
+			);
+			path = AlertType;
 			sourceTree = "<group>";
 		};
 		F159C3D22A99AC0C00CDAF20 /* DataCache */ = {
@@ -747,6 +757,7 @@
 		F1AD87862A788BC700A39752 /* Common */ = {
 			isa = PBXGroup;
 			children = (
+				F1542FAD2AFFE54D0008C483 /* AlertType */,
 				F1F8595F2AEC47F100D5E7DF /* Mock */,
 				F159C3DE2A9A6D7900CDAF20 /* Managers */,
 				F159C3D72A9A531700CDAF20 /* Singleton */,
@@ -1326,6 +1337,7 @@
 				F1D372F82AA5605600846DC6 /* InvitationEntity.swift in Sources */,
 				F1AD87992A788D2D00A39752 /* ApiNetwork.swift in Sources */,
 				F1AD879D2A788D2D00A39752 /* ApiNetworkMockAsync.swift in Sources */,
+				F1542FAF2AFFE5570008C483 /* AlertType.swift in Sources */,
 				F16CCD482AB7DB020037DCC6 /* MemberListView.swift in Sources */,
 				F136CE6E2A8432F200326730 /* CountryPickerViewModel.swift in Sources */,
 				F136CE732A85B62D00326730 /* OTPView.swift in Sources */,

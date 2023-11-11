@@ -12,7 +12,9 @@ struct TwoFactorSettingView: View {
     @EnvironmentObject var settingCoordinator: SettingCoordinator
     
     @State var toggleIsEnabled: Bool = true
-    
+    @State var showAlertEnableAccount = false
+    @State var showAlertDisableAccount = false
+
     var body: some View {
         ZStack {
             LinearGradient(gradient: Gradient(colors: [Color.black, Color.Blue.midnight]), startPoint: .top, endPoint: .bottom)
@@ -35,11 +37,17 @@ struct TwoFactorSettingView: View {
                     Spacer()
                     HStack {
                         BasicButton(title: "Secure Your Account", style: .primary, isEnabled: .constant(true)) {
-                            settingCoordinator.presentSecondaryAlert(title: "Enable 2FA", message: "You are going to enable two factor auth.") {
-                                
-                            } secondaryTapped: {
-                                enable2FA()
-                            }
+                            showAlertEnableAccount = true
+                        }
+                        .alert(isPresented: $showAlertEnableAccount) {
+                            Alert(
+                                title: Text("Enable 2FA"),
+                                message: Text("You are going to enable two factor auth."),
+                                primaryButton: .default(Text("Enable"), action: {
+                                    enable2FA()
+                                }),
+                                secondaryButton: .cancel()
+                            )
                         }
                     }
                 }
@@ -84,13 +92,21 @@ struct TwoFactorSettingView: View {
                         .padding()
                         .onChange(of: toggleIsEnabled, perform: { newValue in
                             if !newValue {
-                                settingCoordinator.presentSecondaryAlert(title: "Disablle 2FA", message: "Disabling this security layer is not recomended.") {
-                                    toggleIsEnabled.toggle()
-                                } secondaryTapped: {
-                                    disable2FA()
-                                }
+                                showAlertDisableAccount = true
                             }
                         })
+                        .alert(isPresented: $showAlertDisableAccount) {
+                            Alert(
+                                title: Text("Disablle 2FA"),
+                                message: Text("Disabling this security layer is not recomended."),
+                                primaryButton: .default(Text("Disable"), action: {
+                                    disable2FA()
+                                }),
+                                secondaryButton: .cancel(Text("Cancel"), action: {
+                                    toggleIsEnabled.toggle()
+                                })
+                            )
+                        }
                         
                     Spacer()
                 }

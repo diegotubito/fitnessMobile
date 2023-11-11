@@ -12,11 +12,12 @@ struct DeleteAccountView: View {
     @EnvironmentObject var settingCoordinator: SettingCoordinator
     @EnvironmentObject var mainModalCoordinator: MainModalCoordinator
     @EnvironmentObject var userSession: UserSession
+    @State var showAlertDeleteAccount = false
     
     var body: some View {
         ZStack {
             LinearGradient(gradient: Gradient(colors: [Color.Red.midnight, Color.black]), startPoint: .top, endPoint: .bottom)
-            .ignoresSafeArea()
+                .ignoresSafeArea()
             
             VStack {
                 HStack {
@@ -35,9 +36,16 @@ struct DeleteAccountView: View {
                 Spacer()
                 HStack {
                     BasicButton(title: "_DELETE_ACCOUNT", style: .destructive, isEnabled: .constant(true)) {
-                        settingCoordinator.presentDesctructiveAlert(title: "_DELETE_ACCOUNT_BUTTON_TITLE", message: "_DELETE_ACCOUNT_BUTTON_MESSAGE") {
+                        showAlertDeleteAccount = true
+                    }
+                    .alert(isPresented: $showAlertDeleteAccount) {
+                        Alert(title: Text("_DELETE_ACCOUNT_BUTTON_TITLE"),
+                              message: Text("_DELETE_ACCOUNT_BUTTON_MESSAGE"),
+                              primaryButton: .destructive(Text("_DELETE_ACCOUNT"), action: {
                             deleteAccount()
-                        } secondaryTapped: { }
+                        }),
+                              secondaryButton: .cancel()
+                        )
                     }
                 }
             }

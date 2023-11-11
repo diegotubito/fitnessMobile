@@ -11,30 +11,13 @@ import SwiftUI
 struct SettingView: View {
     @StateObject var settingCoordinator = SettingCoordinator()
     @EnvironmentObject var mainModalCoordinator: MainModalCoordinator
-    
+    @State private var showAlerLogOut = false
+
     var body: some View {
         NavigationStack(path: $settingCoordinator.path) {
             contentView()
                 .navigationDestination(for: SettingCoordinator.Screen.self) { value in
                     settingCoordinator.getPage(value)
-                }
-                .alert(isPresented: $settingCoordinator.showAlert) {
-                    switch settingCoordinator.alertDetail?.alertStyle ?? .secondary {
-                    case .secondary:
-                        return Alert(
-                            title: Text(settingCoordinator.alertDetail?.title ?? ""),
-                            message: Text(settingCoordinator.alertDetail?.message ?? ""),
-                            primaryButton: .cancel(Text(settingCoordinator.alertDetail?.primaryButtonTitle ?? "_ALERT_CANCEL"), action: settingCoordinator.primaryTapped),
-                            secondaryButton: .default(Text(settingCoordinator.alertDetail?.secondaryButtonTitle ?? "_ALERT_ACCEPT"), action: settingCoordinator.secondaryTapped)
-                        )
-                    case .destructive:
-                        return Alert(
-                            title: Text(settingCoordinator.alertDetail?.title ?? ""),
-                            message: Text(settingCoordinator.alertDetail?.message ?? ""),
-                            primaryButton: .destructive(Text(settingCoordinator.alertDetail?.primaryButtonTitle ?? "_ALERT_REMOVE"), action: settingCoordinator.primaryTapped),
-                            secondaryButton: .cancel(Text(settingCoordinator.alertDetail?.secondaryButtonTitle ?? "_ALERT_CANCEL"), action: settingCoordinator.secondaryTapped)
-                        )
-                    }
                 }
         }
         .environmentObject(settingCoordinator)
@@ -96,10 +79,18 @@ struct SettingView: View {
                         HStack {
                             Image("log-out")
                             Button("_LOGOUT", action: {
-                                settingCoordinator.presentSecondaryAlert(title: "_LOGOUT_ALERT_WARNING_TITLE", message: "_LOGOUT_ALERT_WARNING_MESSAGE") { } secondaryTapped: {
-                                    closeSession()
-                                }
+                                showAlerLogOut = true
                             })
+                            .alert(isPresented: $showAlerLogOut) {
+                                Alert(
+                                    title: Text("_LOGOUT_ALERT_WARNING_TITLE"),
+                                    message: Text("_LOGOUT_ALERT_WARNING_MESSAGE"),
+                                    primaryButton: .default(Text("_LOGOUT"), action: {
+                                        closeSession()
+                                    }),
+                                    secondaryButton: .cancel()
+                                )
+                            }
                         }
                         .foregroundColor(Color.Dark.tone90)
                         

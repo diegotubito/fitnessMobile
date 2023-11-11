@@ -22,6 +22,7 @@ struct InvitationView: View {
             HStack {
                 Text("_INVITATION_VIEW_FULL_LIST_TITLE")
                     .font(.title)
+                    .foregroundColor(Color.Neutral.tone80)
                 Spacer()
             }
             .padding(.bottom, 8)
@@ -32,6 +33,7 @@ struct InvitationView: View {
                     HStack {
                         Text(invitation.workspace.title)
                             .font(.title3)
+                            .foregroundColor(Color.Neutral.tone80)
                         Spacer()
                     }
                     .padding()
@@ -40,6 +42,7 @@ struct InvitationView: View {
                         HStack {
                             Text(formattedAddress)
                                 .font(.subheadline)
+                                .foregroundColor(Color.Neutral.tone80)
                             Spacer()
                         }
                         .padding([.horizontal, .bottom])
@@ -59,6 +62,7 @@ struct InvitationView: View {
                         HStack {
                             Text(invitation.status.rawValue)
                                 .font(.subheadline)
+                                .foregroundColor(Color.Neutral.tone80)
                             Spacer()
                         }
                         .padding([.horizontal, .bottom])

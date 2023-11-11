@@ -10,6 +10,7 @@ import SwiftUI
 struct TwoFactorSettingView: View {
     @StateObject var viewmodel = TwoFactorSettingViewModel()
     @EnvironmentObject var settingCoordinator: SettingCoordinator
+    @EnvironmentObject var mainModalCoordinator: MainModalCoordinator
     
     @State var toggleIsEnabled: Bool = true
     @State var showAlertEnableAccount = false
@@ -89,6 +90,7 @@ struct TwoFactorSettingView: View {
             } else {
                 VStack {
                     Toggle("Two Factor Authentication", isOn: $toggleIsEnabled)
+                        .foregroundColor(Color.Neutral.tone80)
                         .padding()
                         .onChange(of: toggleIsEnabled, perform: { newValue in
                             if !newValue {
@@ -112,7 +114,7 @@ struct TwoFactorSettingView: View {
                 }
                 .onReceive(viewmodel.$twoFactorDisabled) { response in
                     if response != nil {
-                        settingCoordinator.path.removeLast()
+                        mainModalCoordinator.modal = MainModalView(screen: .login)
                     } else {
                         toggleIsEnabled = true
                     }

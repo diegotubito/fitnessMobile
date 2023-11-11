@@ -28,6 +28,7 @@ class MainModalView: Identifiable {
 
 struct MainView: View {
     @StateObject var mainModalCoordinator = MainModalCoordinator()
+    @Environment(\.scenePhase) var scenePhase
     
     var body: some View {
         VStack {
@@ -45,6 +46,19 @@ struct MainView: View {
         }
         .onAppear {
             mainModalCoordinator.modal = MainModalView(screen: .splash)
+        }
+        .onChange(of: scenePhase) { newPhase in
+            if newPhase == .active {
+                print(UserSession.getRefreshTokenExpirationDate())
+                if UserSession.isRefreshTokenExpired {
+                    mainModalCoordinator.modal = MainModalView(screen: .login)
+                }
+                print("Active")
+            } else if newPhase == .inactive {
+                print("Inactive")
+            } else if newPhase == .background {
+                print("Background")
+            }
         }
         .environmentObject(mainModalCoordinator)
     }

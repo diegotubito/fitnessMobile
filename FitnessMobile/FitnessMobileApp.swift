@@ -13,8 +13,7 @@ struct FitnessMobileApp: App {
     @StateObject var networkMonitor = NetworkMonitor()
     @StateObject var socketIOManager = SocketIOManager()
     @StateObject var userSession = UserSession()
-    @Environment(\.scenePhase) var scenePhase
-    
+   
     @UIApplicationDelegateAdaptor(AppDelegate.self) var appDelegate
     
     var body: some Scene {
@@ -23,15 +22,7 @@ struct FitnessMobileApp: App {
                 .environmentObject(socketIOManager)
                 .environmentObject(networkMonitor)
                 .environmentObject(userSession)
-                .onChange(of: scenePhase) { newPhase in
-                    if newPhase == .active {
-                        print("Active")
-                    } else if newPhase == .inactive {
-                        print("Inactive")
-                    } else if newPhase == .background {
-                        print("Background")
-                    }
-                }
+                
                 .onAppear {
                     UNUserNotificationCenter.current().requestAuthorization(options: [.alert, .badge, .sound]) { (granted, error) in
                         if granted {

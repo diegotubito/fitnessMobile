@@ -15,8 +15,12 @@ struct SplashView: View {
             Text("Splash View")
         }
         .onAppear {
-            DispatchQueue.main.asyncAfter(deadline: .now() + 3, execute: {
-                mainModalCoordinator.modal = MainModalView(screen: .login)
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0, execute: {
+                if UserSession.isRefreshTokenExpired {
+                    mainModalCoordinator.modal = MainModalView(screen: .login)
+                } else {
+                    mainModalCoordinator.modal = MainModalView(screen: .tabbar)
+                }
             })
         }
     }

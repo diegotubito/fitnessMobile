@@ -37,6 +37,7 @@ struct WebView: UIViewRepresentable {
 }
 
 struct TwoFactorEnableInformationView: View {
+    @EnvironmentObject var mainModalCoordinator: MainModalCoordinator
     @StateObject var viewmodel = TwoFactorEnableInformationViewModel()
     @EnvironmentObject var userSession: UserSession
     @State var otpResult: OTPView.OPTResult = .none
@@ -133,7 +134,7 @@ struct TwoFactorEnableInformationView: View {
         .onReceive(viewmodel.$twoFactorConfirmed, perform: { response in
             if response != nil {
                 otpResult = .enableConfirmed
-                settingCoordinator.path.removeLast()
+                mainModalCoordinator.modal = MainModalView(screen: .login)
             }
         })
         .overlay(

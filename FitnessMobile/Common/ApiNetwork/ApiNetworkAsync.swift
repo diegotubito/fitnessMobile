@@ -34,7 +34,7 @@ open class ApiNetworkAsync {
         } catch {
             print(error.localizedDescription)
             print(error)
-            throw error
+            throw APIError.serverError(title: "Server Error", message: error.localizedDescription)
         }
         
     }

@@ -139,7 +139,7 @@ struct LoginView: View {
                 UserSession.saveRefreshToken(value: response.refreshToken)
                 UserSession.saveAccessTokenExpirationDate(value: response.accessTokenExpirationDateString)
                 UserSession.saveRefreshTokenExpirationDate(value: response.refreshTokenExpirationDateString)
-                
+                UserSession.saveTempToken(value: response.tempToken)
                 if response.user.twoFactorEnabled {
                     shouldGoToOTP = true
                     return

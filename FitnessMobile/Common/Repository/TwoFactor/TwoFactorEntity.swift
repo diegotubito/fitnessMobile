@@ -33,7 +33,7 @@ struct TwoFactorEntity {
         struct Response: Decodable {
             let user: User
             let accessToken: String
-            let accessTokenExpirationDate: String
+            let accessTokenExpirationDateString: String
             let tempToken: String
         }
     }

@@ -27,6 +27,7 @@ class TwoFactorRepository: ApiNetworkAsync {
     }
 
     func verify2FA(request: TwoFactorEntity.Verify.Request) async throws -> ResultTwoFactorVerify {
+        config.noTokenNeeded = true
         config.path = "/api/v1/verify2FA"
         config.method = .post
         config.addRequestBody(request)

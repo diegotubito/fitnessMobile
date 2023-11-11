@@ -233,7 +233,7 @@ struct OTPView: View {
             if let result = result {
                 UserSession.saveUser(user: result.user)
                 UserSession.saveAccessToken(value: result.accessToken)
-                UserSession.saveAccessTokenExpirationDate(value: result.accessTokenExpirationDate)
+                UserSession.saveAccessTokenExpirationDate(value: result.accessTokenExpirationDateString)
                 optResult = .otpSuccess
                 dismiss()
             } else {

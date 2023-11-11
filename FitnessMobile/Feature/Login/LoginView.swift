@@ -166,10 +166,7 @@ struct LoginView: View {
 }
 
 struct LoginView_Previews: PreviewProvider {
-    @State static var coordinator = CoordinatorLegacy()
     static var previews: some View {
-        NavigationStack {
-            LoginView(allowSighUp: true)
-        }.environmentObject(coordinator)
+        LoginView(allowSighUp: true)
     }
 }

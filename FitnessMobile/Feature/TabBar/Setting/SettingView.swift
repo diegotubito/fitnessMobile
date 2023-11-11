@@ -152,11 +152,7 @@ struct SettingView: View {
 }
 
 struct SettingView_Previews: PreviewProvider {
-    @State static var coordinator = CoordinatorLegacy()
     static var previews: some View {
-        NavigationStack {
-            SettingView()
-        }
-        .environmentObject(coordinator)
+        SettingView()
     }
 }

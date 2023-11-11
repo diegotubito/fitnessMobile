@@ -32,7 +32,7 @@ class BaseViewModel: ObservableObject {
                 errorTitle = LocalizedStringKey("_401_TITLE")
                 errorMessage = LocalizedStringKey("_401_MESSAGE")
                 DispatchQueue.main.async {
-                    NotificationCenter.default.post(Notification(name: .MustLogin))
+                    //NotificationCenter.default.post(Notification(name: .MustLogin))
                 }
                 break
             case .userSessionNotFound:

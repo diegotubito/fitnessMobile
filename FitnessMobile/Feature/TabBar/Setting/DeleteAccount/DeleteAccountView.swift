@@ -10,6 +10,7 @@ import SwiftUI
 struct DeleteAccountView: View {
     @StateObject var viewmodel = DeleteAccountViewModel()
     @EnvironmentObject var settingCoordinator: SettingCoordinator
+    @EnvironmentObject var mainModalCoordinator: MainModalCoordinator
     @EnvironmentObject var userSession: UserSession
     
     var body: some View {
@@ -44,8 +45,7 @@ struct DeleteAccountView: View {
         }
         .onReceive(viewmodel.$deleteResult, perform: { response in
             if response != nil {
-                settingCoordinator.path.removeAll()
-                NotificationCenter.default.post(Notification(name: .MustLogin))
+                mainModalCoordinator.modal = MainModalView(screen: .login)
             }
         })
         .overlay {

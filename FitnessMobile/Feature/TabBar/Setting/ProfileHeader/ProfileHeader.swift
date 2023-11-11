@@ -76,7 +76,7 @@ struct ProfileHeader: View {
         }
         .padding()
         .background(Color.Neutral.tone90.opacity(0.3))
-        .onReceive(NotificationCenter.default.publisher(for: .UserSessionDidChanged)) { value in
+        .onReceive(NotificationCenter.default.publisher(for: .userSessionDidChanged)) { value in
             photoPickerManager.fetchProfileImage()
         }
         .onAppear {

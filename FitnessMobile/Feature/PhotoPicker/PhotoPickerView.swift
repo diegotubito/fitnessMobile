@@ -12,7 +12,6 @@ struct PhotoPickerView: View {
     @Environment(\.dismiss) var dismiss
     @StateObject var viewmodel = PhotoPickerManager()
     @State private var selectedItem: PhotosPickerItem?
-    @EnvironmentObject var coordinator: CoordinatorLegacy
     
     @State private var isCameraPresented = false
     @State private var imageFromCamera: UIImage?

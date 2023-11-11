@@ -8,7 +8,6 @@
 import SwiftUI
 
 struct HomeView: View {
-    @EnvironmentObject var coordinator: CoordinatorLegacy
     @EnvironmentObject var socketManager: SocketIOManager
     
     @State var receivedMessage = ""

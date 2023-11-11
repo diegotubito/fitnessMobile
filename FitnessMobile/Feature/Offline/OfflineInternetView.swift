@@ -9,7 +9,7 @@ import SwiftUI
 
 struct OfflineInternetView: View {
     @EnvironmentObject var networkMonitor: NetworkMonitor
-    @EnvironmentObject var coordinator: CoordinatorLegacy
+    @EnvironmentObject var mainModalCoordinator: MainModalCoordinator
     
     var body: some View {
         VStack {
@@ -20,18 +20,14 @@ struct OfflineInternetView: View {
             Text("Not Connected")
         }.onChange(of: networkMonitor.isConnected, perform: { isConnected in
             if isConnected {
-                coordinator.closeModal()
+                mainModalCoordinator.modal = MainModalView(screen: .tabbar)
             }
         })
     }
 }
 
 struct OfflineView_Previews: PreviewProvider {
-    @State static var coordinator = CoordinatorLegacy()
     static var previews: some View {
-        NavigationStack {
-            OfflineInternetView()
-        }
-        .environmentObject(coordinator)
+        OfflineInternetView()
     }
 }

@@ -49,8 +49,6 @@
 		F17F49CB2A7ABC120086DDCB /* ServerConnectionUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = F17F49CA2A7ABC120086DDCB /* ServerConnectionUseCase.swift */; };
 		F17F49CE2A7AC72C0086DDCB /* OfflineInternetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F17F49CD2A7AC72C0086DDCB /* OfflineInternetView.swift */; };
 		F17F49D92A7C55870086DDCB /* TabBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = F17F49D82A7C55870086DDCB /* TabBar.swift */; };
-		F17F4A462A7F00E90086DDCB /* CoordinatorLegacy.swift in Sources */ = {isa = PBXBuildFile; fileRef = F17F4A452A7F00E90086DDCB /* CoordinatorLegacy.swift */; };
-		F17F4A482A7F01350086DDCB /* CoordinatorMainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F17F4A472A7F01350086DDCB /* CoordinatorMainView.swift */; };
 		F17F4A592A7F59200086DDCB /* SplashViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F17F4A582A7F59200086DDCB /* SplashViewModel.swift */; };
 		F17F4A5C2A7F5BB10086DDCB /* NetworkMonitor.swift in Sources */ = {isa = PBXBuildFile; fileRef = F17F4A5B2A7F5BB10086DDCB /* NetworkMonitor.swift */; };
 		F17F4A622A7FED250086DDCB /* BaseViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F17F4A612A7FED250086DDCB /* BaseViewModel.swift */; };
@@ -216,8 +214,6 @@
 		F17F49CA2A7ABC120086DDCB /* ServerConnectionUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServerConnectionUseCase.swift; sourceTree = "<group>"; };
 		F17F49CD2A7AC72C0086DDCB /* OfflineInternetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OfflineInternetView.swift; sourceTree = "<group>"; };
 		F17F49D82A7C55870086DDCB /* TabBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBar.swift; sourceTree = "<group>"; };
-		F17F4A452A7F00E90086DDCB /* CoordinatorLegacy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoordinatorLegacy.swift; sourceTree = "<group>"; };
-		F17F4A472A7F01350086DDCB /* CoordinatorMainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoordinatorMainView.swift; sourceTree = "<group>"; };
 		F17F4A582A7F59200086DDCB /* SplashViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashViewModel.swift; sourceTree = "<group>"; };
 		F17F4A5B2A7F5BB10086DDCB /* NetworkMonitor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkMonitor.swift; sourceTree = "<group>"; };
 		F17F4A612A7FED250086DDCB /* BaseViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseViewModel.swift; sourceTree = "<group>"; };
@@ -616,15 +612,6 @@
 			path = TabBar;
 			sourceTree = "<group>";
 		};
-		F17F4A4D2A7F39530086DDCB /* CoordinatorLegacy */ = {
-			isa = PBXGroup;
-			children = (
-				F17F4A472A7F01350086DDCB /* CoordinatorMainView.swift */,
-				F17F4A452A7F00E90086DDCB /* CoordinatorLegacy.swift */,
-			);
-			path = CoordinatorLegacy;
-			sourceTree = "<group>";
-		};
 		F17F4A5A2A7F5BA60086DDCB /* NetworkMonitor */ = {
 			isa = PBXGroup;
 			children = (
@@ -765,7 +752,6 @@
 				F159C3D72A9A531700CDAF20 /* Singleton */,
 				F17F4A602A7FED1E0086DDCB /* Base */,
 				F17F4A5A2A7F5BA60086DDCB /* NetworkMonitor */,
-				F17F4A4D2A7F39530086DDCB /* CoordinatorLegacy */,
 				F1AD87D42A7A1EE100A39752 /* Components */,
 				F1AD87B12A788DD000A39752 /* Color */,
 				F1AD879F2A788D5B00A39752 /* Extensions */,
@@ -1313,7 +1299,6 @@
 				F1F859652AEC69D700D5E7DF /* WorkspaceUseCaseSync.swift in Sources */,
 				F1AD87B52A788E2100A39752 /* Keychain.swift in Sources */,
 				F1028D252AAD710D005C8F5B /* WorkspaceAddressViewModel.swift in Sources */,
-				F17F4A462A7F00E90086DDCB /* CoordinatorLegacy.swift in Sources */,
 				F16CCD4E2AB928340037DCC6 /* InvitationListView.swift in Sources */,
 				F17F4A7E2A8145C10086DDCB /* ProfileView.swift in Sources */,
 				F17F4A592A7F59200086DDCB /* SplashViewModel.swift in Sources */,
@@ -1387,7 +1372,6 @@
 				F1D372E32AA4E17E00846DC6 /* WorkspaceSettingViewModel.swift in Sources */,
 				F1AD875A2A788B4B00A39752 /* FitnessMobileApp.swift in Sources */,
 				F17F49D92A7C55870086DDCB /* TabBar.swift in Sources */,
-				F17F4A482A7F01350086DDCB /* CoordinatorMainView.swift in Sources */,
 				F17F4A5C2A7F5BB10086DDCB /* NetworkMonitor.swift in Sources */,
 				F17F49C92A7ABC080086DDCB /* ServerConnectionRepostory.swift in Sources */,
 				F1B48D5F2AEEC05800EE732E /* DefaultBackgroundImageView.swift in Sources */,

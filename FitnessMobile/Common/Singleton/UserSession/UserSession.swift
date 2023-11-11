@@ -7,6 +7,10 @@
 
 import SwiftUI
 
+extension Notification.Name {
+    static let userSessionDidChanged = Notification.Name("UserSessionDidChanged")
+}
+
 class UserSession: ObservableObject {
     
     static let shared = UserSession()
@@ -23,7 +27,7 @@ class UserSession: ObservableObject {
         do {
             let data = try JSONEncoder().encode(user)
             _ = KeychainManager.save(key: userSessionKey, data: data)
-            NotificationCenter.default.post(Notification(name: .UserSessionDidChanged))
+            NotificationCenter.default.post(Notification(name: .userSessionDidChanged))
         } catch {
             print("Error encoding person: \(error)")
         }

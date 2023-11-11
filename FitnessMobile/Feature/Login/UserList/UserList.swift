@@ -8,7 +8,6 @@
 import SwiftUI
 
 struct UserList: View {
-    @EnvironmentObject var coordinator: CoordinatorLegacy
     @State var users: [User]
     
     var body: some View {

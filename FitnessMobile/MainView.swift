@@ -21,7 +21,7 @@ class MainModalView: Identifiable {
 
     enum Screen {
         case splash
-        case tabbar(bar: TabBarView.Tab)
+        case tabbar(bar: TabBarManager.Tab)
         case login
     }
 }
@@ -41,7 +41,7 @@ struct MainView: View {
             case .splash:
                 SplashView()
             case .tabbar(bar: let bar):
-                TabBarView(selectedTab: .constant(bar))
+                TabBarView(tabBarManager: TabBarManager(selectedTab: bar))
             case .login:
                 LoginView(allowSighUp: true)
             }
@@ -74,9 +74,6 @@ struct MainView: View {
         }
         .onOpenURL { url in
             deepLink.parseURL(url)
-            if !UserSession.isRefreshTokenExpired {
-               // setMainModalView()
-            }
         }
         .environmentObject(mainModalCoordinator)
         .environmentObject(deepLink)

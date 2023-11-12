@@ -161,7 +161,7 @@ struct LoginView: View {
     }
     
     func loginSuccessful() {
-        mainModalCoordinator.modal = MainModalView(screen: .tabbar)
+        mainModalCoordinator.modal = MainModalView(screen: .tabbar(bar: .home))
     }
 }
 

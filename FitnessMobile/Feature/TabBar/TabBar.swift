@@ -8,19 +8,28 @@
 import SwiftUI
 
 struct TabBarView: View {
-    init() {
-        UITabBar.appearance().backgroundColor = UIColor(Color.Blue.midnight)
+    @Binding var selectedTab: Tab
+    
+    enum Tab {
+        case home
+        case settings
     }
+   
+//    init(selectedTab: Tab) {
+//        self.selectedTab = selectedTab
+//        UITabBar.appearance().backgroundColor = UIColor(Color.Blue.midnight)
+//    }
     
     var body: some View {
         VStack {
-            TabView {
+            TabView(selection: $selectedTab) {
                 HomeView()
                     .frame(maxHeight: .infinity)
                     .tabItem {
                         Image(systemName: "house")
                         Text("_TAB_BAR_HOME")
                     }
+                    .tag(Tab.home)
                 
                 SettingView()
                     .frame(maxHeight: .infinity)
@@ -28,6 +37,7 @@ struct TabBarView: View {
                         Image(systemName: "gearshape")
                         Text("_TAB_BAR_SETTING")
                     }
+                    .tag(Tab.settings)
             }
         }
     }
@@ -35,6 +45,6 @@ struct TabBarView: View {
 
 struct TabView_Previews: PreviewProvider {
     static var previews: some View {
-        TabBarView()
+        TabBarView(selectedTab: .constant(.home))
     }
 }

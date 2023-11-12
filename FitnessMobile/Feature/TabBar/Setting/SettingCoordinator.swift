@@ -72,5 +72,31 @@ class SettingCoordinator: ObservableObject {
             EditBackgroundImageView(viewmodel: DefaultBackgroundImageViewModel(workspace: workspace))
         }
     }
+    
+    
+    func handleDeepLink(values: [String], queryParams: [String: Any]) {
+        if !values.isEmpty {
+            for screen in values {
+                switch screen {
+                case "workspace":
+                    push(.workspaceSetting)
+                case "invitation":
+                    push(.invitationSetting)
+                case "detail":
+                    if let itemId = queryParams["_id"] as? String {
+                    
+                    //    push(.workspaceDetail(workspace: <#T##WorkspaceModel#>))
+                    } else {
+                        // Handle the case where the ID is missing or not a string
+                        // For example, you might log an error, or push a default detail view
+                    }
+                default:
+                    // Handle unknown screen types
+                    // You might log an error or ignore the unknown screen type
+                    break
+                }
+            }
+        }
+    }
 }
 

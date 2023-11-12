@@ -12,6 +12,7 @@ struct SettingView: View {
     @StateObject var settingCoordinator = SettingCoordinator()
     @EnvironmentObject var mainModalCoordinator: MainModalCoordinator
     @State private var showAlerLogOut = false
+    @EnvironmentObject var deepLink: DeepLink
 
     var body: some View {
         NavigationStack(path: $settingCoordinator.path) {
@@ -21,6 +22,14 @@ struct SettingView: View {
                 }
         }
         .environmentObject(settingCoordinator)
+        .onReceive(deepLink.$deepLinkPath, perform: { values in
+            if values.isEmpty { return }
+            
+            DispatchQueue.main.async {
+                settingCoordinator.handleDeepLink(values: values, queryParams: deepLink.queryParams)
+                deepLink.deepLinkPath.removeAll()
+            }
+        })
     }
     
     func contentView() -> some View {

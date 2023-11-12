@@ -19,7 +19,7 @@ struct SplashView: View {
                 if UserSession.isRefreshTokenExpired {
                     mainModalCoordinator.modal = MainModalView(screen: .login)
                 } else {
-                    mainModalCoordinator.modal = MainModalView(screen: .tabbar)
+                    mainModalCoordinator.modal = MainModalView(screen: .tabbar(bar: .home))
                 }
             })
         }

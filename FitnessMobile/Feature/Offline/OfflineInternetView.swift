@@ -20,7 +20,7 @@ struct OfflineInternetView: View {
             Text("Not Connected")
         }.onChange(of: networkMonitor.isConnected, perform: { isConnected in
             if isConnected {
-                mainModalCoordinator.modal = MainModalView(screen: .tabbar)
+                mainModalCoordinator.modal = MainModalView(screen: .tabbar(bar: .home))
             }
         })
     }

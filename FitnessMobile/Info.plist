@@ -3,10 +3,21 @@
 <plist version="1.0">
 <dict>
 	<key>NSCameraUsageDescription</key>
-	<string>We need to use your camera for profile pictures.</string>
+	<string>We need to use your camera for profile pictures, add photos to workspace gallery.</string>
 	<key>UIBackgroundModes</key>
 	<array>
 		<string>remote-notification</string>
+	</array>
+	<key>CFBundleURLTypes</key>
+	<array>
+		<dict>
+			<key>CFBundleURLSchemes</key>
+			<array>
+				<string>fitness</string>
+			</array>
+			<key>CFBundleURLName</key>
+			<string>com.example.myapp</string>
+		</dict>
 	</array>
 </dict>
 </plist>

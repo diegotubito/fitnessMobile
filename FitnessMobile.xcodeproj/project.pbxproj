@@ -25,6 +25,8 @@
 		F1542FAC2AFF2B110008C483 /* SettingCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1542FAB2AFF2B110008C483 /* SettingCoordinator.swift */; };
 		F1542FAF2AFFE5570008C483 /* AlertType.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1542FAE2AFFE5570008C483 /* AlertType.swift */; };
 		F1542FB12B0148AB0008C483 /* TabBarManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1542FB02B0148AB0008C483 /* TabBarManager.swift */; };
+		F1542FB32B016F970008C483 /* ModalCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1542FB22B016F970008C483 /* ModalCoordinator.swift */; };
+		F1542FB52B016FD60008C483 /* DeepLinkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1542FB42B016FD60008C483 /* DeepLinkManager.swift */; };
 		F159C3D42A99AC1E00CDAF20 /* DataCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = F159C3D32A99AC1E00CDAF20 /* DataCache.swift */; };
 		F159C3D62A99AE8700CDAF20 /* DataDisk.swift in Sources */ = {isa = PBXBuildFile; fileRef = F159C3D52A99AE8700CDAF20 /* DataDisk.swift */; };
 		F159C3DA2A9A533C00CDAF20 /* ApplicationVersion.swift in Sources */ = {isa = PBXBuildFile; fileRef = F159C3D92A9A533C00CDAF20 /* ApplicationVersion.swift */; };
@@ -190,6 +192,8 @@
 		F1542FAB2AFF2B110008C483 /* SettingCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingCoordinator.swift; sourceTree = "<group>"; };
 		F1542FAE2AFFE5570008C483 /* AlertType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertType.swift; sourceTree = "<group>"; };
 		F1542FB02B0148AB0008C483 /* TabBarManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarManager.swift; sourceTree = "<group>"; };
+		F1542FB22B016F970008C483 /* ModalCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModalCoordinator.swift; sourceTree = "<group>"; };
+		F1542FB42B016FD60008C483 /* DeepLinkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeepLinkManager.swift; sourceTree = "<group>"; };
 		F159C3D32A99AC1E00CDAF20 /* DataCache.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataCache.swift; sourceTree = "<group>"; };
 		F159C3D52A99AE8700CDAF20 /* DataDisk.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataDisk.swift; sourceTree = "<group>"; };
 		F159C3D92A9A533C00CDAF20 /* ApplicationVersion.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApplicationVersion.swift; sourceTree = "<group>"; };
@@ -707,6 +711,8 @@
 				F15CDE7B2A9269BC003DCB14 /* AppDelegate.swift */,
 				F1AD87592A788B4B00A39752 /* FitnessMobileApp.swift */,
 				F1542FA92AFF133A0008C483 /* MainView.swift */,
+				F1542FB22B016F970008C483 /* ModalCoordinator.swift */,
+				F1542FB42B016FD60008C483 /* DeepLinkManager.swift */,
 				F1AD87862A788BC700A39752 /* Common */,
 				F1AD87842A788BB700A39752 /* Feature */,
 				F1AD87892A788BFE00A39752 /* Resources */,
@@ -1393,6 +1399,7 @@
 				F17F4A6C2A803DB60086DDCB /* SignUpViewModel.swift in Sources */,
 				F159C3EB2A9B990100CDAF20 /* CustomProgressView.swift in Sources */,
 				F16CCD552ABA6D9B0037DCC6 /* SearchUserForInvitationViewModel.swift in Sources */,
+				F1542FB32B016F970008C483 /* ModalCoordinator.swift in Sources */,
 				F1F637BC2A88798F00FC3A31 /* TwoFactorEnableInformationView.swift in Sources */,
 				F1AD87E42A7A1EE200A39752 /* SingleSelector.swift in Sources */,
 				F138EEBA2AE5C34D007913A1 /* UploadFileSheetView.swift in Sources */,
@@ -1433,6 +1440,7 @@
 				F159C3DD2A9A61CA00CDAF20 /* PhotoPickerView.swift in Sources */,
 				F1F637C12A89229B00FC3A31 /* TwoFactorUseCase.swift in Sources */,
 				F1D372E62AA4E87D00846DC6 /* WorkspaceEntity.swift in Sources */,
+				F1542FB52B016FD60008C483 /* DeepLinkManager.swift in Sources */,
 				F136CE6B2A84326100326730 /* CountryPickerView.swift in Sources */,
 				F1F637B72A886C6200FC3A31 /* TwoFactorSettingView.swift in Sources */,
 				F1B48D592AEE098900EE732E /* ImageListViewModel.swift in Sources */,

@@ -8,17 +8,12 @@
 import SwiftUI
 
 struct TabBarView: View {
-    @Binding var selectedTab: Tab
+    @Binding var selectedTab: TabBarView.Tab
     
     enum Tab {
         case home
         case settings
     }
-   
-//    init(selectedTab: Tab) {
-//        self.selectedTab = selectedTab
-//        UITabBar.appearance().backgroundColor = UIColor(Color.Blue.midnight)
-//    }
     
     var body: some View {
         VStack {
@@ -40,6 +35,14 @@ struct TabBarView: View {
                     .tag(Tab.settings)
             }
         }
+        .onAppear {
+            setupTabBar()
+        }
+    }
+    
+    func setupTabBar() {
+        UITabBar.appearance().backgroundColor = UIColor(Color.Blue.midnight)
+        UITabBar.appearance().backgroundImage = UIImage()
     }
 }
 

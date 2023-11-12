@@ -10,7 +10,6 @@ struct WorkspaceDetailView: View {
     @StateObject var viewmodel: WorkspaceDetailViewModel
     @EnvironmentObject var settingCoordinator: SettingCoordinator
     @State private var selectedItem: SheetItem? = nil
-    
     @State private var showAlertDeleteWorkspace = false
     
     struct SheetItem: Identifiable {
@@ -23,7 +22,7 @@ struct WorkspaceDetailView: View {
             case invitation
         }
     }
-    
+
     func headerView() -> some View {
         HStack {
             DefaultImageView(defaultIamgeViewModel: DefaultImageViewModel(workspace: viewmodel.workspace), size: 100)
@@ -328,6 +327,9 @@ struct WorkspaceDetailView: View {
                 settingCoordinator.path.removeLast()
             }
         }
+        //.toolbarColorScheme(.dark, for: .navigationBar)
+        .toolbarBackground(Color.Blue.midnight, for: .navigationBar)
+        .toolbarBackground(.visible, for: .navigationBar)
     }
 }
 

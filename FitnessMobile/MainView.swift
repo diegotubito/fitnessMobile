@@ -47,9 +47,10 @@ struct MainView: View {
         }
         .onChange(of: scenePhase) { newPhase in
             if newPhase == .active {
-                print(UserSession.getRefreshTokenExpirationDate())
                 if UserSession.isRefreshTokenExpired {
                     mainModalCoordinator.modal = MainModalView(screen: .login)
+                } else if deepLink.host.isEmpty { // if there is no deep link, default flow.
+                    mainModalCoordinator.modal = MainModalView(screen: .splash)
                 }
                 print("Active")
             } else if newPhase == .inactive {
@@ -58,22 +59,16 @@ struct MainView: View {
                 print("Background")
             }
         }
-        .onAppear {
-            mainModalCoordinator.modal = MainModalView(screen: .splash)
-        }
         .onOpenURL { url in
-            let host = url.host() // represent the main modal view
-            if let host = host {
-                setMainModalView(modal: host)
-                deepLink.parseURL(url)
-            }
+            deepLink.parseURL(url)
+            setMainModalView()
         }
         .environmentObject(mainModalCoordinator)
         .environmentObject(deepLink)
     }
     
-    func setMainModalView(modal: String) {
-        switch modal {
+    func setMainModalView() {
+        switch deepLink.host {
         case "tabbar-home":
             mainModalCoordinator.modal = MainModalView(screen: .tabbar(bar: .home))
         case "tabbar-setting":
@@ -92,7 +87,8 @@ struct MainView: View {
 class DeepLink: ObservableObject {
     @Published var deepLinkPath: [String] = []
     var queryParams: [String: Any] = [:]
-
+    var host: String = ""
+    
     func parsePath(path: String) {
         if path.isEmpty { return }
         deepLinkPath = path.components(separatedBy: "/")
@@ -115,7 +111,7 @@ class DeepLink: ObservableObject {
                 queryItemsDict[item.name] = item.value
             }
         }
-
+        host = url.host() ?? ""
         deepLinkPath = pathComponents
         queryParams = queryItemsDict
     }

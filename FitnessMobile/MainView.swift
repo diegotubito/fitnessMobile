@@ -30,6 +30,7 @@ struct MainView: View {
     @StateObject var mainModalCoordinator = MainModalCoordinator()
     @Environment(\.scenePhase) var scenePhase
     @StateObject var deepLink = DeepLink()
+    @State var firstTime = true
     
     var body: some View {
         VStack {
@@ -49,19 +50,33 @@ struct MainView: View {
             if newPhase == .active {
                 if UserSession.isRefreshTokenExpired {
                     mainModalCoordinator.modal = MainModalView(screen: .login)
-                } else if deepLink.host.isEmpty { // if there is no deep link, default flow.
-                    mainModalCoordinator.modal = MainModalView(screen: .splash)
                 }
                 print("Active")
+               
             } else if newPhase == .inactive {
                 print("Inactive")
             } else if newPhase == .background {
                 print("Background")
             }
         }
+        .onAppear {
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.1, execute: {
+                if UserSession.isRefreshTokenExpired {
+                    mainModalCoordinator.modal = MainModalView(screen: .login)
+                } else {
+                    if deepLink.deepLinkPath.isEmpty {
+                        mainModalCoordinator.modal = MainModalView(screen: .splash)
+                    } else {
+                        setMainModalView()
+                    }
+                }
+            })
+        }
         .onOpenURL { url in
             deepLink.parseURL(url)
-            setMainModalView()
+            if !UserSession.isRefreshTokenExpired {
+               // setMainModalView()
+            }
         }
         .environmentObject(mainModalCoordinator)
         .environmentObject(deepLink)

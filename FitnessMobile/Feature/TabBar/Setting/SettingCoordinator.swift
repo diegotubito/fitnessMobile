@@ -82,10 +82,24 @@ class SettingCoordinator: ObservableObject {
                     push(.workspaceSetting)
                 case "invitation":
                     push(.invitationSetting)
-                case "detail":
-                    if let itemId = queryParams["_id"] as? String {
-                    
-                    //    push(.workspaceDetail(workspace: <#T##WorkspaceModel#>))
+                case "workspaceDetail":
+                    if let _id = queryParams["_id"] as? String {
+                        
+                        let viewmodel = WorkspaceModel(_id: _id,
+                                                       title: "",
+                                                       subtitle: "",
+                                                       isEnabled: true,
+                                                       owner: "",
+                                                       createdAt: "",
+                                                       updatedAt: "",
+                                                       members: [],
+                                                       location: nil,
+                                                       locationVerificationStatus: nil,
+                                                       documentImages: [],
+                                                       defaultImage: nil,
+                                                       defaultBackgroundImage: nil,
+                                                       images: nil)
+                        push(.workspaceDetail(workspace: viewmodel))
                     } else {
                         // Handle the case where the ID is missing or not a string
                         // For example, you might log an error, or push a default detail view

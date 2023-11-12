@@ -23,11 +23,8 @@ struct SettingView: View {
         }
         .environmentObject(settingCoordinator)
         .onReceive(deepLink.$deepLinkPath, perform: { values in
-            if values.isEmpty { return }
-            
             DispatchQueue.main.async {
                 settingCoordinator.handleDeepLink(values: values, queryParams: deepLink.queryParams)
-                deepLink.deepLinkPath.removeAll()
             }
         })
     }

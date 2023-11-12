@@ -34,27 +34,14 @@ struct TabBarView: View {
         }
         .onAppear {
             setupTabBar()
-            
         }
-        .onChange(of: scenePhase) { newPhase in
-            if newPhase == .active {
-                DispatchQueue.main.asyncAfter(deadline: .now() + 0.1, execute: {
-                    setMainModalView()
-                })
-                print("Active")
-               
-            } else if newPhase == .inactive {
-                print("Inactive")
-            } else if newPhase == .background {
-                print("Background")
-            }
-        }
-        
-       
+        .onReceive(deepLink.$deepLinkPath, perform: { values in
+            setMainModalView()
+        })
     }
     
     func setMainModalView() {
-        switch deepLink.host {
+        switch deepLink.modal {
         case "tabbar-home":
             tabBarManager.selectedTab = .home
         case "tabbar-setting":

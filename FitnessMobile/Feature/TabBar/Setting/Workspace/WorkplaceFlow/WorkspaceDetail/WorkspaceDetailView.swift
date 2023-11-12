@@ -25,10 +25,12 @@ struct WorkspaceDetailView: View {
 
     func headerView() -> some View {
         HStack {
-            DefaultImageView(defaultIamgeViewModel: DefaultImageViewModel(workspace: viewmodel.workspace), size: 100)
-                .onTapGesture {
-                    settingCoordinator.push(.workspaceImagesView(workspace: viewmodel.workspace))
-                }
+            if ((viewmodel.workspace.defaultImage?.thumbnailImage) != nil) {
+                DefaultImageView(defaultIamgeViewModel: DefaultImageViewModel(workspace: viewmodel.workspace), size: 100)
+                    .onTapGesture {
+                        settingCoordinator.push(.workspaceImagesView(workspace: viewmodel.workspace))
+                    }
+            }
             
             VStack {
                 HStack {

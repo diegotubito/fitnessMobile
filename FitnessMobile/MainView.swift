@@ -60,34 +60,17 @@ struct MainView: View {
             }
         }
         .onAppear {
-            DispatchQueue.main.asyncAfter(deadline: .now() + 0.1, execute: {
-                if UserSession.isRefreshTokenExpired {
-                    mainModalCoordinator.modal = MainModalView(screen: .login)
-                } else {
-                    if deepLink.deepLinkPath.isEmpty {
-                        mainModalCoordinator.modal = MainModalView(screen: .splash)
-                    } else {
-                        setMainModalView()
-                    }
-                }
-            })
+            if UserSession.isRefreshTokenExpired {
+                mainModalCoordinator.modal = MainModalView(screen: .login)
+            } else {
+                mainModalCoordinator.modal = MainModalView(screen: .splash)
+            }
         }
         .onOpenURL { url in
             deepLink.parseURL(url)
         }
         .environmentObject(mainModalCoordinator)
         .environmentObject(deepLink)
-    }
-    
-    func setMainModalView() {
-        switch deepLink.host {
-        case "tabbar-home":
-            mainModalCoordinator.modal = MainModalView(screen: .tabbar(bar: .home))
-        case "tabbar-setting":
-            mainModalCoordinator.modal = MainModalView(screen: .tabbar(bar: .settings))
-        default:
-            break
-        }
     }
 }
 
@@ -99,7 +82,7 @@ struct MainView: View {
 class DeepLink: ObservableObject {
     @Published var deepLinkPath: [String] = []
     var queryParams: [String: Any] = [:]
-    var host: String = ""
+    var modal: String = ""
     
     func parsePath(path: String) {
         if path.isEmpty { return }
@@ -123,7 +106,7 @@ class DeepLink: ObservableObject {
                 queryItemsDict[item.name] = item.value
             }
         }
-        host = url.host() ?? ""
+        modal = url.host() ?? ""
         deepLinkPath = pathComponents
         queryParams = queryItemsDict
     }

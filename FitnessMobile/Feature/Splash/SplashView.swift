@@ -9,15 +9,17 @@ import SwiftUI
 
 struct SplashView: View {
     @EnvironmentObject var mainModalCoordinator: MainModalCoordinator
-   
+    @StateObject var viewmodel = SplashViewModel()
+    
     var body: some View {
         VStack {
             Text("Splash View")
         }
         .onAppear {
-            DispatchQueue.main.asyncAfter(deadline: .now() + 2, execute: {
-                    mainModalCoordinator.modal = MainModalView(screen: .tabbar(bar: .home))
-            })
+            viewmodel.loadWorkspaces()
+        }
+        .onChange(of: viewmodel.workspaces) { oldValue, newValue in
+            mainModalCoordinator.modal = MainModalView(screen: .tabbar(bar: .home))
         }
     }
     

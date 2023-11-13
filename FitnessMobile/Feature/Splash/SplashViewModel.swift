@@ -7,6 +7,30 @@
 
 import SwiftUI
 
-class SplashViewModel: ObservableObject {
-   
+class SplashViewModel: BaseViewModel {
+    @Published var workspaces: [WorkspaceModel] = []
+    
+    @MainActor
+    func loadWorkspaces() {
+        Task {
+            let usecase = WorkspaceUseCase()
+            
+            do {
+                let response = try await usecase.getWorkspacesBuUserId()
+                workspaces = response.workspaces
+                saveWorkspacesToKeychain(workspaces: response.workspaces)
+            } catch {
+                handleError(error: error)
+            }
+        }
+    }
+    
+    func saveWorkspacesToKeychain(workspaces: [WorkspaceModel]) {
+        DefaultWorkspace.saveWorkspaces(workspaces: workspaces)
+        let defaultWorkspace = DefaultWorkspace.getDefaultWorkspace()
+        if  defaultWorkspace == nil,
+           let workspace = workspaces.first {
+            DefaultWorkspace.saveDefaultWorkspace(workspace: workspace)
+        }
+    }
 }

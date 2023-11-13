@@ -23,6 +23,16 @@ struct TabBarView: View {
                     }
                     .tag(TabBarManager.Tab.home)
                 
+                if tabBarManager.shouldShowBusinness {
+                    Text("Tengo Un Default Workspace")
+                        .frame(maxHeight: .infinity)
+                        .tabItem {
+                            Image(systemName: "case.fill")
+                            Text("Bussiness")
+                        }
+                        .tag(TabBarManager.Tab.bussiness)
+                }
+                
                 SettingView()
                     .frame(maxHeight: .infinity)
                     .tabItem {
@@ -34,6 +44,7 @@ struct TabBarView: View {
         }
         .onAppear {
             setupTabBar()
+            tabBarManager.doesHaveDefaultWorkspace()
         }
         .onReceive(deepLink.$deepLinkPath, perform: { values in
             setMainModalView()

@@ -1,99 +1,135 @@
 {
     "workspaces": [
         {
-            "_id": "6529c19b840190f73769794d",
-            "title": "Body shaping",
+            "_id": "653ed22e11fd629b249775e9",
+            "title": "Body Shaping",
             "subtitle": "Lanus",
             "isEnabled": true,
-            "owner": "6510c9e1c41220abb9b02401",
-            "locationVerificationStatus": "ADDRESS_PENDING",
-            "locationVerifiedDocuments": [],
-            "images": [
-                {
-                    "highResImage": {
-                        "url": "https://storage.googleapis.com/fitnessapp-3b183.appspot.com/images/6510c9e1c41220abb9b02401/653dd775b65f55708df230e5.png?GoogleAccessId=firebase-adminsdk-703jw%40fitnessapp-3b183.iam.gserviceaccount.com&Expires=3408145200&Signature=v%2Fc2dwv1qmnzreSP06PF9FrPoIXJekC6fzPtrokk3bBlGYQtd%2B4pgZRMezm1dPaXLX6mGV7xsnrnHm2HAzNrQ%2FDFEbZSHfxDX2Lz4hc6Dx4He8WHFirur68qgp%2FS%2BXZgy2cXmyndVLpjqqv4FfuCl82KAp8HrlkFHsMVOV0gpqK01hnNrIPgcrhlOw8AmWf1f3%2F%2BXY8QssCr3mN34vYfP%2BhueqAaXnD6TD7eGWB0f0l%2FaFSRggxUXv00%2FRVNK96eDOQFDm3T8OKa0K0rNi7sGFWvpx4%2FT%2B5WIntsKWsVIr0vbLPo%2Btg2%2F2ZNG7Jmtm%2FznufMIyv2%2BWJW1w0kKAWd%2FQ%3D%3D",
-                        "size": 1484524,
-                        "fileType": "PNG"
-                    },
-                    "thumbnailImage": {
-                        "url": "https://storage.googleapis.com/fitnessapp-3b183.appspot.com/images/6510c9e1c41220abb9b02401/653dd775b65f55708df230e5_thumbnail.png?GoogleAccessId=firebase-adminsdk-703jw%40fitnessapp-3b183.iam.gserviceaccount.com&Expires=3408145200&Signature=ZlEV4MUPVba%2Fi0sWWM5HjpA3eim8gUdbSIh%2FEIAj2IzJJSLICxZpG%2BL7A56vwL2CKnQgJM8Wxqdy7UyT2yqAomrp%2FewLJFAR9Agyelwa6oJYP%2BJhkfuvkCi1mtRdJd9xaqagJyZN4FiSFw6pcY57Hb4wUybxFEeXpY1GPkTHesdzxCiyzzoOcl4t3I9aj2mJ%2BtlrKy8zTZXWtPfQBqZXikHTOT4YzsuNBEEyjncShq92glEsO2tISFVBcdOK%2FuzncYdGSR4EiG%2BzbtH%2FCN%2FWE9zi%2FEcDBqeMGEGeDQ1GwiH4eYVOiZzrLBmktwh46otRH%2BsyynwOxMhgpfD1wkEwIQ%3D%3D",
-                        "size": 35872,
-                        "fileType": "PNG"
-                    },
-                    "creator": "6510c9e1c41220abb9b02401",
-                    "_id": "653dd775b65f55708df230e5",
-                    "createdAt": "2023-10-29T03:54:33.892Z",
-                    "updatedAt": "2023-10-29T03:54:33.892Z"
-                }
-            ],
+            "owner": "653ed21a11fd629b249775e3",
+            "locationVerificationStatus": "ADDRESS_NOT_VERIFIED",
             "members": [
                 {
                     "user": {
-                        "_id": "6510c9b4c41220abb9b023ed",
+                        "_id": "65500b2a2f9720a828e5ac67",
                         "username": "user1",
-                        "email": "email1",
-                        "firstName": "David Diego",
-                        "lastName": "Gomez",
-                        "profileImage": {
-                            "url": "https://storage.googleapis.com/fitnessapp-3b183.appspot.com/profile_pictures/6510c9b4c41220abb9b023ed/profile.png?GoogleAccessId=firebase-adminsdk-703jw%40fitnessapp-3b183.iam.gserviceaccount.com&Expires=3408134400&Signature=eFBOHyX9%2BHCJzkON3Nap0F6DUlWctkjfR4ba99WAM64dxzkQyGEH36pImDoAT%2BI1zsqwO09IQwR0YZ67ddC9n3%2FBBJCkdt94RZTv%2B7juZ7KVpi2vYFo1yJjmv1hf%2FnJY4dDEO%2B3HGw00g%2FDmIGGR%2B2Gd6dUQu16JmEsHwmm%2BQPX2UJdpaTc3GDCOPzdRHrw6z0mw44UqBTaGtAjW7UC3%2BwZKGX9wDqHoZKq3GoyYR3WkeVQkGRBCVSk7LXTDNKy6jNovwvw7c1D2Q1PjDfIVgnwKYrxHQd7rk2B6hPUYTWwfZ%2FWgfDOapwQK3%2Bo1BLGrJ114QF0NWKpscsBarM6jrQ%3D%3D",
-                            "_id": "652757dae4698fcd01c74ac2",
-                            "createdAt": "2023-10-12T02:20:10.423Z",
-                            "updatedAt": "2023-10-12T02:20:10.423Z"
-                        },
+                        "email": "user1",
+                        "firstName": "User 1",
+                        "lastName": "Testing",
                         "isEnabled": true,
                         "phone": {
                             "countryName": "Argentina",
                             "number": "1135937260",
                             "phoneCode": "54",
                             "countryCode": "AR",
-                            "_id": "6510c9b4c41220abb9b023ef"
+                            "_id": "65500b2a2f9720a828e5ac68"
                         },
                         "emailVerified": true,
                         "twoFactorEnabled": false,
                         "twoFactorSecret": "",
                         "deviceTokens": [],
-                        "createdAt": "2023-09-24T23:43:48.317Z",
-                        "updatedAt": "2023-10-12T02:20:10.423Z"
+                        "createdAt": "2023-11-11T23:15:54.473Z",
+                        "updatedAt": "2023-11-11T23:15:54.473Z"
                     },
                     "role": "USER_READ_ONLY_ROLE",
                     "host": {
-                        "_id": "6510c9e1c41220abb9b02401",
+                        "_id": "653ed21a11fd629b249775e3",
                         "username": "owner",
-                        "email": "owner",
+                        "email": "owner@email",
                         "firstName": "David Diego",
                         "lastName": "Gomez",
-                        "profileImage": {
-                            "url": "https://storage.googleapis.com/fitnessapp-3b183.appspot.com/profile_pictures/6510c9e1c41220abb9b02401/profile.png?GoogleAccessId=firebase-adminsdk-703jw%40fitnessapp-3b183.iam.gserviceaccount.com&Expires=3408134400&Signature=n234YEcejfTNMcpCskd2Jm2g3KkNW606XvoNDWGK%2BEOZ6VmyZU5PGUADsIqOZjhli0GFEGrFjfCiG5qzWmjOoT1oCtsz0ygTYDdJOw%2BmndnreDlFrPHShvyybfoPupi88Nxm6tYZAsdUj8kf8n3TZpknc6EfCjAW4HRmafd%2F5IOwj4dhvQ6YYcRH6FwvW2JkG%2FOK0es%2B0%2ByrvCjXb%2Bps3k127Ke%2F8rHSTqQVm3xBB6MmJOY9QQkoeb6iKp1TD%2BfDEwPJFl5DuFlJwDUXJqMyNaWRz4GtjoRSYxWPxMI57ysQcrWhEyKr6F9kAeexdO2Fgzt1iD0jtmp3hp4jnrj5zw%3D%3D",
-                            "_id": "6511e65412349e66bb0ec317",
-                            "createdAt": "2023-09-25T19:58:12.270Z",
-                            "updatedAt": "2023-09-25T19:58:12.270Z"
-                        },
                         "isEnabled": true,
                         "phone": {
-                            "countryName": "Argentina",
-                            "number": "1135937260",
-                            "phoneCode": "54",
-                            "countryCode": "AR",
-                            "_id": "6510c9e1c41220abb9b02403"
+                            "countryName": "",
+                            "number": "",
+                            "phoneCode": "",
+                            "countryCode": "",
+                            "_id": "654fed2b5c23db652e7be37e"
                         },
-                        "emailVerified": true,
+                        "emailVerified": false,
                         "twoFactorEnabled": false,
-                        "twoFactorSecret": "",
+                        "twoFactorSecret": null,
                         "deviceTokens": [],
-                        "createdAt": "2023-09-24T23:44:33.666Z",
-                        "updatedAt": "2023-09-25T19:58:12.270Z"
+                        "createdAt": "2023-10-29T21:43:54.162Z",
+                        "updatedAt": "2023-11-11T21:09:15.224Z",
+                        "profileImage": {
+                            "highResImage": {
+                                "url": "https://storage.googleapis.com/fitnessapp-3b183.appspot.com/profile_image/653ed21a11fd629b249775e3/profile_image.png?GoogleAccessId=firebase-adminsdk-703jw%40fitnessapp-3b183.iam.gserviceaccount.com&Expires=3408134400&Signature=wlwi%2FwyywlZUdVOI1h90zS7eHmgYwVfRNty7jxuDp8cbY%2BvGX%2BXud47CeQFR0w4YwqyPocJau7GdT1xkQzcvahtBZkO0mF2Ac2%2BuO1V1NJb1MPqC%2BlTl1W5b8xAqebrPQVhABdX9%2F6i1n3YxY8o0i2ilegy2VGKEfa9WsrLfQ5xh%2B%2F6zYewP02AIobxmE9UgOEHGitTL1jzBeuRJkpDwcwUlcT1BAWdIuGXB0uqSyZ4%2Bda9ScA9DU6WhpYfmRgdlGMVY%2BN9deLhaeTb6lyZxgK4YKKoKuLqTr6zIQRx54EWNkFOSNuIaijrdLnOhVPpT4yb57Fe7l3UNbfftaC95PA%3D%3D",
+                                "size": 1552607,
+                                "fileType": "PNG"
+                            },
+                            "thumbnailImage": {
+                                "url": "https://storage.googleapis.com/fitnessapp-3b183.appspot.com/profile_image/653ed21a11fd629b249775e3/profile_image_thumbnail.png?GoogleAccessId=firebase-adminsdk-703jw%40fitnessapp-3b183.iam.gserviceaccount.com&Expires=3408134400&Signature=fYB37hg%2FgaHKPfZbvBur0rYmPYhBtbuDpfLycOsCfZDzeT0xffFrIfUn%2FW9aP4yUrTPznjBtjD7J9i2cKD8sYug4zUFD%2Fc4onIXY%2BJ7W3q5w8ez9glRLTZuemhtUFq0H5VWZRKaFEbXhCPftEwhqMIE8oXJTVCKaKOETr%2BW4SEdhNZd3A4kOH%2FUSvYe%2Bmz7KQH%2FGde%2BCXY%2FMa8y6p0aVMXJEONWlSl7T3J%2BBRGlzeKHrqV3jgshLx%2B%2BDyeko4gdPKwB1DabuFB3UpPP98mQKMrHQoZ9mHAkXfXOiixBULt31IkR1d7Rtczn7FRm%2BF3ZyMfYqKuPnrfMAtHvzYXHApA%3D%3D",
+                                "size": 8608,
+                                "fileType": "PNG"
+                            },
+                            "creator": "653ed21a11fd629b249775e3",
+                            "_id": "654fed76f401a9f62751441d",
+                            "createdAt": "2023-11-11T21:09:15.224Z",
+                            "updatedAt": "2023-11-11T21:09:15.224Z"
+                        }
                     },
-                    "createdAt": "2023-10-13T22:14:03.746Z",
-                    "_id": "6529c1b4840190f73769796d"
+                    "createdAt": "2023-11-11T20:37:44.640Z",
+                    "_id": "65500be22f9720a828e5acc2"
                 }
             ],
-            "createdAt": "2023-10-13T22:15:55.692Z",
-            "updatedAt": "2023-10-29T03:54:33.893Z",
-            "__v": 201,
+            "documentImages": [],
+            "images": [
+                {
+                    "highResImage": {
+                        "url": "https://storage.googleapis.com/fitnessapp-3b183.appspot.com/images/653ed22e11fd629b249775e9/6550038f7b332a59dbb54253.png?GoogleAccessId=firebase-adminsdk-703jw%40fitnessapp-3b183.iam.gserviceaccount.com&Expires=3408134400&Signature=YXG6E7MbRCxjDmogguGrtcUG2%2Btu1bVoCbZDjAnfzqYAPPATZuRtwHvQCyJ8xuofhSQjas4FeXTJHhsfcwLMJlL3G6tlJFBgXOtWLnRnvsKUaBwhKCdqST3TXbmESXtOxHWoc7emat4rXsOcO%2BOFBc%2B2FKwfv2AhR%2Fkh9PEyefTdjyCqBXu0I7mvugwZU%2FKFS%2BoMo8uWAAZJKu5%2BrdUhcWT2klRkOMeTzwPAZvSxkA1Pr1AhDIAGo7UlW1ToYoXaYIU9GiHO0xKHFvUVSs%2BH3pbBvgeS0O9%2Fg4SRJlzIamv6XlN21ALCgT0bLFqc4AICqiGR2hjDVfmCT%2FJejn1c0A%3D%3D",
+                        "size": 3890390,
+                        "fileType": "PNG"
+                    },
+                    "thumbnailImage": {
+                        "url": "https://storage.googleapis.com/fitnessapp-3b183.appspot.com/images/653ed22e11fd629b249775e9/6550038f7b332a59dbb54253_thumbnail.png?GoogleAccessId=firebase-adminsdk-703jw%40fitnessapp-3b183.iam.gserviceaccount.com&Expires=3408134400&Signature=OXI5V9fnXwDjw8Nl1e9JoR54NzL1832tugY6weFaggQC20JNDM7j04kooyWceSqoZXx138jBU%2Fslh94mFPLHeRTOMWHJHqlmBUpIXZgwtFkd060Px4k%2Bo3l6tozkjuaQgp5bP3lenox2%2FkpOiHW6R1x0WHwxR%2FAgDZeEI1WjxL9w6rC1Y%2F18N2PHnJnmxlIoj7Lsp6r9%2BN%2FK2W3NdeBBZbMSsGLQRdzMAJAt8C7POfVsRRszAGhjagVKgGl9Tko4DZG8pHxmIFVUb7OQLUHJxbW8dPFMKqlcavznTkGe%2Fwa%2F2VpSX3GOXEqgFC1egZpuLSqXZFzU2GVeIqk8PZbWZg%3D%3D",
+                        "size": 39316,
+                        "fileType": "PNG"
+                    },
+                    "creator": "653ed21a11fd629b249775e3",
+                    "_id": "6550038f7b332a59dbb54253",
+                    "createdAt": "2023-11-11T22:43:33.293Z",
+                    "updatedAt": "2023-11-11T22:43:33.293Z"
+                }
+            ],
+            "createdAt": "2023-10-29T21:44:14.677Z",
+            "updatedAt": "2023-11-11T23:18:58.881Z",
+            "__v": 2,
+            "defaultImage": {
+                "highResImage": {
+                    "url": "https://storage.googleapis.com/fitnessapp-3b183.appspot.com/default_image/653ed22e11fd629b249775e9/default_image.png?GoogleAccessId=firebase-adminsdk-703jw%40fitnessapp-3b183.iam.gserviceaccount.com&Expires=3408134400&Signature=b6kTUlniNsZHOMzPec3Y%2FNETItgid7fdJ1mG2ReF5BzeNZyZ4gX3ExBtpyokDfA%2BDNUxzoG2EG%2Fc13Ya%2FZn8jzFLEvk3E8wFl5ZcA6XwCOFJ2JjZpy3IWnEcUctjld649TAY2c9pqN%2BrpXNCbDkrcx0ZI7EQxM%2Finp4v5peI%2BEVVNhWGneSrfFf6aGmFbPkdU9jSUxCyHg1DFt%2FDIGG8HcoigyNaQmA3LVr926IkmkUCWd2QG%2B3o%2Bq3R%2F10NqZD0ltOL9TQzb7pMqwR8vqX1wPU5atJ3v50mzhLu1lBhCi4BDGxeq6PFRdBYdVSSETvi%2Benymqe5kkSvzBmjRCceDQ%3D%3D",
+                    "size": 3890390,
+                    "fileType": "PNG"
+                },
+                "thumbnailImage": {
+                    "url": "https://storage.googleapis.com/fitnessapp-3b183.appspot.com/default_image/653ed22e11fd629b249775e9/default_image_thumbnail.png?GoogleAccessId=firebase-adminsdk-703jw%40fitnessapp-3b183.iam.gserviceaccount.com&Expires=3408134400&Signature=otrbb%2FQT%2FPw8z6CkVQCuXMKeoKOE%2BRDiNMgWPhfuEpt5WuW89nh6VqrCzp6zXBXZsWpGYrHqTwcHoI9zjFWioEfAwAFIwB8JUDi6XcDwcq3%2FrIl%2BXyq%2BMbOrELh3a%2B8cADwo%2BKpDPHy8PmKZEkZKU2rKHg22x60HQkzwalkDAJf%2FLDaqi%2BknlrGmkf4U3FsSqiSTkFXHXp0xhQFeWOZVDUkUlgvr3yXd7xCma6giPhkGTdzsewY6VIG74wGMpNh1%2BT5zWP8MkCe3RHyjmbMyr9T9u5vWqKpQDyIWO6IVpQDpoMg1pphL0V1rJfdzMIpizACCZic5DWAYq28gaBcPOw%3D%3D",
+                    "size": 39316,
+                    "fileType": "PNG"
+                },
+                "creator": "653ed21a11fd629b249775e3",
+                "_id": "654fed545c23db652e7be386",
+                "createdAt": "2023-11-11T21:08:36.745Z",
+                "updatedAt": "2023-11-11T21:08:36.745Z"
+            },
+            "defaultBackgroundImage": {
+                "highResImage": {
+                    "url": "https://storage.googleapis.com/fitnessapp-3b183.appspot.com/default_background_image/653ed22e11fd629b249775e9/default_background_image.png?GoogleAccessId=firebase-adminsdk-703jw%40fitnessapp-3b183.iam.gserviceaccount.com&Expires=3408134400&Signature=YR6%2BO6mn%2FHwq0WeweTVoUICJABH%2FwMAdI9VkBKo1rOKf293GP3oQTAe%2BHWufPBtEOqgZ3rD4OecRRPIkTrmJwNMG%2F97tQKk0CLc7BkJ3yH2%2FLP4KnDc0plx3a%2BMTBDHB%2FtDLPaUtRKKGjYgtVJ%2BEAk5Nm7xiMnUA0GDTX030yE2c5dXqsNtJw13RhLHs%2BC0xzfMQ%2Bza%2FjpQnwVUxEVgD870kqjl1dI09CH4eXWqKgD%2FcF%2Fpv435OlwhNZUi0M3zYEa7kYfjYsgmDHtiJiJ46nVt2mwD519TLYwSP%2Ba8MTM97IDfE4uPYaX6v555Fod4uTH213F%2F%2FEC6vRUiOny%2FELg%3D%3D",
+                    "size": 2409732,
+                    "fileType": "PNG"
+                },
+                "thumbnailImage": {
+                    "url": "https://storage.googleapis.com/fitnessapp-3b183.appspot.com/default_background_image/653ed22e11fd629b249775e9/default_background_image_thumbnail.png?GoogleAccessId=firebase-adminsdk-703jw%40fitnessapp-3b183.iam.gserviceaccount.com&Expires=3408134400&Signature=vC0XEkvE2dG3BM7UqXbAzQqxHrOZPjj0OqSwRVBeFRaYa%2BxfXYU73acw2Kjn%2FkVQiJOCmT0%2F0Ceq7D5xIU7v3zx6CgH5bwJyJ2qevU66mjB4hyVlPs8y0LmybH9I0F89gRHYYOweK9CeLqVtqmqcWLDJv9oka0byhOOKm0Qpe%2FDTJFHdetCt3c2sC%2FsE7i%2FUKGLVhVoHL2jS%2BwwRwX9z6UD%2BqY0NJeGoHGN0P5S7h64oWG7hmlgkwHt%2BYZctPU3kOTf9CMILX6iRIxbYqrR87FugxDrUi1dvX1GydoWwYSNarfKOvehkNL3lwMee1peJYPmP8yDpl%2Fq92VQ54Aacxg%3D%3D",
+                    "size": 75035,
+                    "fileType": "PNG"
+                },
+                "creator": "653ed21a11fd629b249775e3",
+                "_id": "653f669efc2adff0d621a77d",
+                "createdAt": "2023-10-30T08:17:34.771Z",
+                "updatedAt": "2023-10-30T08:17:34.771Z"
+            },
             "location": {
                 "coordinates": [
-                    -58.4390991,
-                    -34.7281691
+                    -58.4391076,
+                    -34.7281735
                 ],
                 "googleGeocode": {
                     "address_components": [
@@ -161,8 +197,8 @@
                     "formatted_address": "C. Fallieres 661, B1821EZM Villa Centenario, Provincia de Buenos Aires, Argentina",
                     "geometry": {
                         "location": {
-                            "lat": -34.7281691,
-                            "lng": -58.4390991
+                            "lat": -34.7281735,
+                            "lng": -58.4391076
                         },
                         "location_type": "RANGE_INTERPOLATED"
                     },
@@ -171,137 +207,21 @@
                         "street_address"
                     ]
                 }
-            },
-            "documentImages": [
-                {
-                    "highResImage": {
-                        "url": "https://storage.googleapis.com/fitnessapp-3b183.appspot.com/address_documents/6510c9e1c41220abb9b02401/6539f79e98e85be8afa58a77.png?GoogleAccessId=firebase-adminsdk-703jw%40fitnessapp-3b183.iam.gserviceaccount.com&Expires=3408134400&Signature=w%2Fnu24hR5mTRPShMWnCnnpx6oAxr8ZpKFzgzcOdVvCQNJeBJm2d42SJOsDI%2B6wh3mJegwCScrTNpUvVWhgaBYjpLuAfP8orulmphDkrNFPGVNxT1zCvrcA5ESLrxTUo0g0knmGmRDWnfAH%2FvBFeznZEg7%2F6BV6SN349NUg2D7zoBqRt8K95oSAbg2OAICXbHAV9JvNHZAliM09AN%2FevswYjFPFsOaLjr%2F4LQunTrDVjsivkg%2FdrRhUeYzeGg9a6%2BIUzojPXh%2B3NzG4MoePsL6JZ05VRIrV4ZIWjc9%2BKk%2FR3yy5tXsOauHf%2F9i5HYM5v8u%2B4WIP73UZ3WATbFxXCciA%3D%3D",
-                        "size": 3358479,
-                        "fileType": "PNG"
-                    },
-                    "thumbnailImage": {
-                        "url": "https://storage.googleapis.com/fitnessapp-3b183.appspot.com/address_documents/6510c9e1c41220abb9b02401/6539f79e98e85be8afa58a77_thumbnail.png?GoogleAccessId=firebase-adminsdk-703jw%40fitnessapp-3b183.iam.gserviceaccount.com&Expires=3408134400&Signature=PzqglclPp9NcGILFZrxYgzXrd3bNgHF9XHV6zkbngY2hgR17NwSzjIUTZcpiiFu4yeBjADo4cpOClraH%2FNDCmaYBJeaenF4lgKM1iuX3SINKcIpuRt2ePo8xaB%2BS16U3Vxzf4AGual58A89E%2Bnsr47Hj6fN7EuANL7Ra36Cp1ZT1WP6ltNS4OvidfkR%2Bk5bJA9gHeQ%2Ftagm0ySmvNID9BzQ7JWm71tr%2FU7%2FoVmd9%2FU5Y%2BB1W3mQmfa2ZSBhAQ0UciIj8sn1CYVk45%2B9nZ2uVC0%2F1Ur3mqCA8FnZVyrm2SF1etSmWw5LshrW9utL2yGs6N6eagu%2FCxt8vJ5p6JziQ3g%3D%3D",
-                        "size": 27950,
-                        "fileType": "PNG"
-                    },
-                    "creator": "6510c9e1c41220abb9b02401",
-                    "_id": "6539f79e98e85be8afa58a77",
-                    "createdAt": "2023-10-26T05:22:43.904Z",
-                    "updatedAt": "2023-10-26T05:22:43.904Z"
-                },
-                {
-                    "highResImage": {
-                        "url": "https://storage.googleapis.com/fitnessapp-3b183.appspot.com/address_documents/6510c9e1c41220abb9b02401/6539f7b54916c08c38818e5c.png?GoogleAccessId=firebase-adminsdk-703jw%40fitnessapp-3b183.iam.gserviceaccount.com&Expires=3408134400&Signature=nG%2FyEZwNagJvo2T9TnKpfrUBliXa7WRZYuyu4tPM3GjmB%2B%2BImgg%2BTGwcbQA4LT7RuZjTK%2B3hBosq21q8EObaUSPOuCHTBnkUJ%2FESWAFnSxfWDMca0MLMJRXTczyacKCjgaMIHbLJsQf1vcXlcMboUA1CVC122QHkpDDMzqFNzwAEq72ry5oLfMQI%2FLnxokmw3KXS9seh4BW7DPLKz5JcCTIhr675hS3%2Fy7CEuxln5FjJUhFubcikSZbUeVqVq%2FE4JP1p2siY42Rr3jeqjGa3wMXG%2Bavg1bKyTcdMs5T3yQwj9yT1ytLrIfKPT8E%2FiW9r88UKYqjN9jLRIhhrC%2BWRfw%3D%3D",
-                        "size": 3649416,
-                        "fileType": "PNG"
-                    },
-                    "thumbnailImage": {
-                        "url": "https://storage.googleapis.com/fitnessapp-3b183.appspot.com/address_documents/6510c9e1c41220abb9b02401/6539f7b54916c08c38818e5c_thumbnail.png?GoogleAccessId=firebase-adminsdk-703jw%40fitnessapp-3b183.iam.gserviceaccount.com&Expires=3408134400&Signature=tAW1aybtWPysm7pAJ%2FkrG%2BdDFzRWucF6q6RJK8eAPe3uv0OWh7mja%2BXJ7Xek5IMEQVz%2BN5cnrp9wozQba7zvAUa%2FrlZNXQR%2Fn4XU9g9OOYNRthThMGGfaQlN7SHTwr8l%2B25Wux9epk4ZS6r8lZUjiIQOwDl7TZC6zbqsBvuPwFiBKRbj%2B%2BNuZQvkRjMziL%2F5qkFZFAbtnm8tKURJTd40pAU3bxhspNBO0RtOkRZ5YHSJyXu4fCziA3G2RYrIAIPTcRIV%2FKQzLsDWwj07k3qbR9BDUq89cwcWleyCVcigj7Jhz%2B%2FFCmIp1YKECy2gmI9a0tZ%2BxUaEXWMR2bCahTb7yg%3D%3D",
-                        "size": 49700,
-                        "fileType": "PNG"
-                    },
-                    "creator": "6510c9e1c41220abb9b02401",
-                    "_id": "6539f7b54916c08c38818e5c",
-                    "createdAt": "2023-10-26T05:23:07.131Z",
-                    "updatedAt": "2023-10-26T05:23:07.131Z"
-                },
-                {
-                    "highResImage": {
-                        "url": "https://storage.googleapis.com/fitnessapp-3b183.appspot.com/address_documents/6510c9e1c41220abb9b02401/6539f7e2ddd5a6c582128763.png?GoogleAccessId=firebase-adminsdk-703jw%40fitnessapp-3b183.iam.gserviceaccount.com&Expires=3408134400&Signature=hOCSWA6scIB5MYbd3PlcB8i2NqZnCWmTBgqCoOS5KzljgTSfiaXKxKNo3TR69LB501k4KuJ7DYUD%2FvSU0QGnDMqSAX9ciOMULo%2FdKMpS2B1se2bRf58pT7M26YFByCtXvUDYNGWPJ%2B4gqK93KIlw9G1L23Kaa6hf8tAAA5xS9Q9%2BtacK1fuCahn5N8BLbXnN2DUCQlC9vDYZzO3zZTtdgNnazLf5DY%2F6BBWeRI7oqgnunV0KI%2BkFYUCoTOZq32vIqcTnvZpORpd2XfnRv2nXl9lm2fBVMTOBkFaMd4eoMEaqF%2F0PtSXuCioZbVwXj5EdcauDRE76THHr6ra5yi6sPg%3D%3D",
-                        "size": 3320252,
-                        "fileType": "PNG"
-                    },
-                    "thumbnailImage": {
-                        "url": "https://storage.googleapis.com/fitnessapp-3b183.appspot.com/address_documents/6510c9e1c41220abb9b02401/6539f7e2ddd5a6c582128763_thumbnail.png?GoogleAccessId=firebase-adminsdk-703jw%40fitnessapp-3b183.iam.gserviceaccount.com&Expires=3408134400&Signature=XHVAumSioezILaeoYKWw7ydd0k7QxhvKnXHPiCm9TyUzBRwzzldaK5eK8ZyT21k5GStIfoVFEp%2Bs6akcVhswIJAS9grQPdVHNHIHXOT2u8JAVm5ClkT7z4V8dK0w4XGEtxqat%2Fpaz5KKK%2BxuuMj3avKiJMUqkB%2By0TY%2FdPeeEzr4Nqy6XG%2BOJ0Sjd13aXOiBX3%2BgBkTldjens8bdqh%2FEz7O2ZCiusX0lMNT6Dm%2BTXRAZ1euhJSRvPj3K%2B4Slc6wKPZ08vRfzbUg8HOYA5QPvlKmoltndj8H03fIqRUFmkxdWko2Bu6LHOcdXigECyFGJTzR2H1ekIfgjuUu7Rr8vGw%3D%3D",
-                        "size": 36018,
-                        "fileType": "PNG"
-                    },
-                    "creator": "6510c9e1c41220abb9b02401",
-                    "_id": "6539f7e2ddd5a6c582128763",
-                    "createdAt": "2023-10-26T05:23:51.098Z",
-                    "updatedAt": "2023-10-26T05:23:51.098Z"
-                },
-                {
-                    "highResImage": {
-                        "url": "https://storage.googleapis.com/fitnessapp-3b183.appspot.com/address_documents/6510c9e1c41220abb9b02401/6539f7f188d463bad91fb079.png?GoogleAccessId=firebase-adminsdk-703jw%40fitnessapp-3b183.iam.gserviceaccount.com&Expires=3408134400&Signature=TZFDfsZWgSrflpaIZCtkzE%2FvFMcL2N2ClWbNllzZetEXHoBXk7T785K1vPfT4dEuL7I5s7NDzODcgdmjBtl8hBTFsiRqveMqJGWBfFV%2BKvPd4HMff77dOdRD6pZPXo5RyGtuK6aprbzT7LC3O0aNbtPaASu%2BunB1J9Pwt7CSlzgBRk1uySwOI3XO3EhX8jo7GTkukxgZMZnD9NR4VoBzrzrNiuIyzw65%2BduYiJfmTKMAG8%2Fa0AJPsfWvvBO0v9yGfdRn70o0WMgUvbWuyoOgM4WK2NIpljpj1zpQ%2FsffFLClujsiSxigifuQB9Ryq2SDanKDCd48YJoBguZofHVdEA%3D%3D",
-                        "size": 7010502,
-                        "fileType": "PNG"
-                    },
-                    "thumbnailImage": {
-                        "url": "https://storage.googleapis.com/fitnessapp-3b183.appspot.com/address_documents/6510c9e1c41220abb9b02401/6539f7f188d463bad91fb079_thumbnail.png?GoogleAccessId=firebase-adminsdk-703jw%40fitnessapp-3b183.iam.gserviceaccount.com&Expires=3408134400&Signature=gPb4BCR0qMTM0KGZL%2B8VAejLWKFT8oVjD9MThhrS7mUkeI4VHRUxG5JgYQXx05xx76xpy206g7r9yu%2BJ7OSPb5vT7gp9x6WSY2kvLYiuTP54EFQXm6XgUxIkVLvqVxf1wPBMYVPx%2B6K05v%2B7FkWeII9zeMCAaM3ybHDFiB1bWTWKDAFhdpdS0dQBvOrIJxeEUXnhCoq4xD2y8IfRvoypp4p9A%2F%2BPUjjeAGUnhliKe%2BcgnqmOs3DtRdODaJHN4gIGpOHXLqJ91r1bSDuSIO%2FauAXB1usv73X%2BMu7DlKjwc7WyV%2BE4OR7K3IsyNHD6%2FMzfZXsudCaLXf4rqcD9gH7VJw%3D%3D",
-                        "size": 51434,
-                        "fileType": "PNG"
-                    },
-                    "creator": "6510c9e1c41220abb9b02401",
-                    "_id": "6539f7f188d463bad91fb079",
-                    "createdAt": "2023-10-26T05:24:07.397Z",
-                    "updatedAt": "2023-10-26T05:24:07.397Z"
-                },
-                {
-                    "highResImage": {
-                        "url": "https://storage.googleapis.com/fitnessapp-3b183.appspot.com/address_documents/6510c9e1c41220abb9b02401/6539f8174d78eeaa6e7cfbc4.png?GoogleAccessId=firebase-adminsdk-703jw%40fitnessapp-3b183.iam.gserviceaccount.com&Expires=3408134400&Signature=KsHWTbDPrFg%2Fu5WYqu5DQkhnJaMvhsCMg6x%2Ff85s2tCLPwWGm6MA4jJUOlOiN60ogNIP9jg1o7l%2Bfi9A0EMUbIE61Ony3nhXblbb8Po0XOSM0CLKc%2BaLF%2FZ%2BtXVv9HlZhUPbdYKiVxovFjSWMlkcMhQcql1KcRIHbMA%2B6d0NM6c0KPL%2BlmWnnKoz4VFQuzOQtX0qq%2Bnu%2F8cQGOZ2qBt4VMcYTdIc8P%2Brq6BErKDaDptqQ1h3jtK906wEkRHr91hoEE2%2BgQhpVDFHss93XqwxZyNg0uwiDswQz8pSP372NnOwIiePbxeGAEECND1kHYy6h8I0qAifN0D31w86y5tPKA%3D%3D",
-                        "size": 4159338,
-                        "fileType": "PNG"
-                    },
-                    "thumbnailImage": {
-                        "url": "https://storage.googleapis.com/fitnessapp-3b183.appspot.com/address_documents/6510c9e1c41220abb9b02401/6539f8174d78eeaa6e7cfbc4_thumbnail.png?GoogleAccessId=firebase-adminsdk-703jw%40fitnessapp-3b183.iam.gserviceaccount.com&Expires=3408134400&Signature=mnSEYU2iYB28x5B6zCq4STK8k8uX%2FYYYbPbkcSgfD7opkFDi1Oh05CeMFk%2FoEWfEhjouya%2FwbA6Bicp0u%2FgiAp53NQCLJY9skLebI%2BxK9lMOEkqqwb5AHSmjY8YE88zR5e9ZH4RCjBJn6dCQBSdxj71XIlFVeY2Ulw1czlnKTVL5k3xco3c19CnQnWr5WQy3WpDZoot1hYXv%2FiROnNZNw4RksGFC27YETf6gdsKD7yn9Pqh6EBJpQwy%2BddFcUAYgkDFsbpnUajfZZ2KeBtPBWlJMVXiZjEtJs1Lg7jodgnHmerVYIatQlPBhQv09TSFz512qB5zoIc3U8XBC6gPOfQ%3D%3D",
-                        "size": 37184,
-                        "fileType": "PNG"
-                    },
-                    "creator": "6510c9e1c41220abb9b02401",
-                    "_id": "6539f8174d78eeaa6e7cfbc4",
-                    "createdAt": "2023-10-26T05:24:44.409Z",
-                    "updatedAt": "2023-10-26T05:24:44.409Z"
-                },
-                {
-                    "highResImage": {
-                        "url": "https://storage.googleapis.com/fitnessapp-3b183.appspot.com/address_documents/6510c9e1c41220abb9b02401/653aabe2a8d12dcea34710d5.png?GoogleAccessId=firebase-adminsdk-703jw%40fitnessapp-3b183.iam.gserviceaccount.com&Expires=3408134400&Signature=WnPXGLQJ%2BPDrUtsfOPK9cCYVGTwvSvOVx%2F9gZQ5g1ph0ODyezd8PW4SzZMx2y1waciAfsjZJTGpSJjJiZPauoLzMhTr59AIbPXXPtMMgIx31uc7iXU70TLlH%2FxtjeVd9NIW1itF4G0rIn3mwevWf9448ueaznBNR0vvPanS1ztKD04BXyGQqQax%2FIwfzXcOmFUnBuVlKpIumNo8cZdRqJuet1%2B1KZbfZnvRJw91XTRgOpX2II9V0pMXzDb20hZ7HY5VhTxVq%2FuMaHgOLFkX20f%2BxXIx2uL%2Fh45Tui3alOh1cs%2BiDTzjKGJxbyvpmkrAHZcJQQP545C3mEMm5kSncEg%3D%3D",
-                        "size": 1811165,
-                        "fileType": "PNG"
-                    },
-                    "thumbnailImage": {
-                        "url": "https://storage.googleapis.com/fitnessapp-3b183.appspot.com/address_documents/6510c9e1c41220abb9b02401/653aabe2a8d12dcea34710d5_thumbnail.png?GoogleAccessId=firebase-adminsdk-703jw%40fitnessapp-3b183.iam.gserviceaccount.com&Expires=3408134400&Signature=RSyRlWvDbM%2F%2B8lDjmdqwooyVQRklhkdt56PuCkIMRP6FzjUQHn7q2DgU3zwMoS9Drev5K5Cuf0XgNZZAnBV%2FnuB2gEhXDT%2BvwmViGil%2F0cWPpsuBZ%2Bm68Aqkc3FiCYRh6Qbsub6YHeVMMEVzMmgqlTUs5RXWojRvnVYVh%2BAhNlg%2Bc%2Bsi7pKHO3DDCB7jD6voI1LwF%2BuSsvNydGyZWUnyI%2FOA22K1%2BTkjTCHkMMmRux8z8L8UdxvCF6bdvxpnWgA2iegjljNnq7yNdF4UO0khLP7n6n3ksfjP8WgZMcjA%2Boo%2FgmYc%2F9AqvkWzojuVaOqIS8ukwML%2FvPSnmGF8YuwwhA%3D%3D",
-                        "size": 35195,
-                        "fileType": "PNG"
-                    },
-                    "creator": "6510c9e1c41220abb9b02401",
-                    "_id": "653aabe2a8d12dcea34710d5",
-                    "createdAt": "2023-10-26T18:11:51.500Z",
-                    "updatedAt": "2023-10-26T18:11:51.500Z"
-                }
-            ],
-            "defaultImage": {
-                "highResImage": {
-                    "url": "https://storage.googleapis.com/fitnessapp-3b183.appspot.com/default_image/6510c9e1c41220abb9b02401/default_image.png?GoogleAccessId=firebase-adminsdk-703jw%40fitnessapp-3b183.iam.gserviceaccount.com&Expires=3408134400&Signature=ESkDmeXFsqA39cukKEuXxd3LVzBThX%2FBFeAMSCHDroNCwvt9DpApTqi4oVzQzYnmE4LvchR9nqNmEOktglc62ubLyi18q%2BV2PRwAbeIxfTXtFGdVXKNv8zcdxOe8QWm2zQ43ha%2BXJ4zEWl1g9EtKFcr2HPsPWR0%2BUWoCvubww7jiCizi5c8W8Sy86%2BxKBWiYbMk1318eYqsVE5EEKI%2BjiKmqbk0fUFaC%2FqP4QB6p8ciX%2FZ7TKEUheW4D%2Fa5OTROTUSusqKNqeSFcjoyp7Mz5sDdqC49ASTJmRAayw%2FBPcmo70XlTZcJ%2FmrK7hyIhmtSOXnDrB1Iw1dp4bhlOgOnOiQ%3D%3D",
-                    "size": 570549,
-                    "fileType": "PNG"
-                },
-                "thumbnailImage": {
-                    "url": "https://storage.googleapis.com/fitnessapp-3b183.appspot.com/default_image/6510c9e1c41220abb9b02401/default_image_thumbnail.png?GoogleAccessId=firebase-adminsdk-703jw%40fitnessapp-3b183.iam.gserviceaccount.com&Expires=3408134400&Signature=oNWA6osMfO48RU2CSEzI8zyAYRYC5lf8yLg98uoOAw4IulrMCttQ41wVkvFtUn4Cx11BtoyYb9o2LPCqTq3%2B4vppgW69LL37v8tZJgjb6Kq4qvFaborGFAms5%2BNoT3u4Bs32fohYjDGldLNqVmqYKsCZ%2BIooVFtjjIpUxgFB39yiroO1SLa%2FmzmtsSzQne75rVFGV8uWHw2YBjzYN9zB0tSrUVcJBuqtzxveg%2BFMAIYEDT%2FmaZxYLSh%2FwsbaUPz07p4SR9W9M7cRfg9%2Buq7%2F1zFow3hPSTuJjYRB8oXC9SbMD6UXxemYJgPXVPsOERTakr4cJyGc9BB2th4AUVUJqQ%3D%3D",
-                    "size": 35615,
-                    "fileType": "PNG"
-                },
-                "creator": "6510c9e1c41220abb9b02401",
-                "_id": "653dce350e7204e80fee1379",
-                "createdAt": "2023-10-29T03:15:01.424Z",
-                "updatedAt": "2023-10-29T03:15:01.424Z"
-            },
-            "defaultBackgroundImage": {
-                "highResImage": {
-                    "url": "https://storage.googleapis.com/fitnessapp-3b183.appspot.com/default_background_image/6510c9e1c41220abb9b02401/default_background_image.png?GoogleAccessId=firebase-adminsdk-703jw%40fitnessapp-3b183.iam.gserviceaccount.com&Expires=3408134400&Signature=EzSHDMuq5O3kAvp%2BsrDiHUY9NsiNJpUAK0xQg1i%2BATgBtUgiAWWDsYMNZZzzwzW7iQjZUv8Xx2qt2gWG%2FCbrYsX9rJrVsXUr8HScT%2B1DA8nMHIKf%2BlPa3F5j2%2BoruLs0gpy%2Fa2prR6U3QJcE0DxnbDMQi2VDtUWJiUiJs7utkJ511yGuOcCFbbaZGo9osf2kO1up6vn%2BP2CmzwQu3eNsw2%2FUURmByMrJ2AEvEjngy%2BV9VfZuiERtXkF2uN3ZN8%2BJNYteCu2LFZ96O3UYFlplXmRyra5fnK9fb1fig8GWAFdEZB4li81HZkSfnPKL4UyZ6ryjXxMI2fgELH8MPneUiw%3D%3D",
-                    "size": 390216,
-                    "fileType": "PNG"
-                },
-                "thumbnailImage": {
-                    "url": "https://storage.googleapis.com/fitnessapp-3b183.appspot.com/default_background_image/6510c9e1c41220abb9b02401/default_background_image_thumbnail.png?GoogleAccessId=firebase-adminsdk-703jw%40fitnessapp-3b183.iam.gserviceaccount.com&Expires=3408134400&Signature=c1qkqmOYcjseRcnOmNJ%2F3D7LOhlQmB2n6FxV2FSOIJj49lz1V1xkFyAEmu5DTJkqBcgdRT0J87%2ByyAF%2F8IGBfHgQY%2F%2BZ8oUi8rUHwSiPcEyjXLCMREpcOwJZstP14%2BSgGHra20MIFTvDyR6Ju7B0bNDuA8ExjUmvcu1dsZVgOueMob%2F3Ip6qkcr%2BMh76Z4YZdgwufhKmLpTYj9RMITLxjWuL6ZAaiqc7xvvVVeXkMW%2BkEgqvl9o73m32qWYvWH0QXTum7zFm7pEanKLzIRKM2AbAdxnVvlM7Rq%2BhWu%2FFcg5PFakmn0pM6CHYndzn5AvFw90wxN73oHUcTIFlih8SjQ%3D%3D",
-                    "size": 42102,
-                    "fileType": "PNG"
-                },
-                "creator": "6510c9e1c41220abb9b02401",
-                "_id": "653da6466ca4f718deb17e95",
-                "createdAt": "2023-10-29T00:24:38.214Z",
-                "updatedAt": "2023-10-29T00:24:38.214Z"
             }
+        },
+        {
+            "_id": "65500c302f9720a828e5ad16",
+            "title": "Uñas",
+            "subtitle": "Banfield",
+            "isEnabled": true,
+            "owner": "65500b2a2f9720a828e5ac67",
+            "locationVerificationStatus": "ADDRESS_NOT_VERIFIED",
+            "members": [],
+            "documentImages": [],
+            "images": [],
+            "createdAt": "2023-11-11T23:20:16.982Z",
+            "updatedAt": "2023-11-11T23:20:16.982Z",
+            "__v": 0
         }
     ]
 }

@@ -11,6 +11,7 @@ struct DefaultImageView: View {
     @StateObject var defaultIamgeViewModel: DefaultImageViewModel
     
     var size: CGFloat
+    var isEditable: Bool = true
     
     var body: some View {
         VStack {
@@ -32,15 +33,17 @@ struct DefaultImageView: View {
                     } else {
                         Circle()
                             .stroke(Color.Dark.tone20, lineWidth: 2)
-                        Text("_EDIT_BUTTON")
-                            .padding(3)
-                            .padding(.horizontal, 2)
-                            .font(.caption)
-                            .foregroundColor(Color.Blue.truly)
-                            .background(Color.Dark.tone20)
-                            .cornerRadius(5)
-                            .offset(CGSize(width: 0, height: size / 2))
-                            .shadow(radius: 5)
+                        if isEditable {
+                            Text("_EDIT_BUTTON")
+                                .padding(3)
+                                .padding(.horizontal, 2)
+                                .font(.caption)
+                                .foregroundColor(Color.Blue.truly)
+                                .background(Color.Dark.tone20)
+                                .cornerRadius(5)
+                                .offset(CGSize(width: 0, height: size / 2))
+                                .shadow(radius: 5)
+                        }
                     }
                 }
                 .shadow(radius: 10)

@@ -24,7 +24,7 @@ struct TabBarView: View {
                     .tag(TabBarManager.Tab.home)
                 
                 if tabBarManager.shouldShowBusinness {
-                    Text("Tengo Un Default Workspace")
+                    BusinessView()
                         .frame(maxHeight: .infinity)
                         .tabItem {
                             Image(systemName: "case.fill")

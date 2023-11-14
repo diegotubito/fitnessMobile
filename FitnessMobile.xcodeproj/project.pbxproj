@@ -140,6 +140,7 @@
 		F1D372FD2AA5648100846DC6 /* invitation_mock_empty_response.json in Resources */ = {isa = PBXBuildFile; fileRef = F1D372F92AA5607200846DC6 /* invitation_mock_empty_response.json */; };
 		F1D372FE2AA5648400846DC6 /* invitation_mock_success_response.json in Resources */ = {isa = PBXBuildFile; fileRef = F1D372FA2AA5613D00846DC6 /* invitation_mock_success_response.json */; };
 		F1D373002AA5648F00846DC6 /* InvitationUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1D372FF2AA5648F00846DC6 /* InvitationUseCase.swift */; };
+		F1DC7BEE2B02F3340014E554 /* WorkspaceRepositoryTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1DC7BED2B02F3340014E554 /* WorkspaceRepositoryTests.swift */; };
 		F1E01EE12A93D01700991010 /* StorageUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1E01EE02A93D01700991010 /* StorageUseCase.swift */; };
 		F1E01EE32A93D02300991010 /* StorageRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1E01EE22A93D02300991010 /* StorageRepository.swift */; };
 		F1E01EE52A93D02900991010 /* StorageEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1E01EE42A93D02900991010 /* StorageEntity.swift */; };
@@ -317,6 +318,7 @@
 		F1D372FA2AA5613D00846DC6 /* invitation_mock_success_response.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = invitation_mock_success_response.json; sourceTree = "<group>"; };
 		F1D372FB2AA5647E00846DC6 /* InvitationRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InvitationRepository.swift; sourceTree = "<group>"; };
 		F1D372FF2AA5648F00846DC6 /* InvitationUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InvitationUseCase.swift; sourceTree = "<group>"; };
+		F1DC7BED2B02F3340014E554 /* WorkspaceRepositoryTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkspaceRepositoryTests.swift; sourceTree = "<group>"; };
 		F1E01EE02A93D01700991010 /* StorageUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StorageUseCase.swift; sourceTree = "<group>"; };
 		F1E01EE22A93D02300991010 /* StorageRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StorageRepository.swift; sourceTree = "<group>"; };
 		F1E01EE42A93D02900991010 /* StorageEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StorageEntity.swift; sourceTree = "<group>"; };
@@ -774,6 +776,7 @@
 			isa = PBXGroup;
 			children = (
 				F1AD876B2A788B4C00A39752 /* FitnessMobileTests.swift */,
+				F1DC7BED2B02F3340014E554 /* WorkspaceRepositoryTests.swift */,
 			);
 			path = FitnessMobileTests;
 			sourceTree = "<group>";
@@ -1497,6 +1500,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				F1AD876C2A788B4C00A39752 /* FitnessMobileTests.swift in Sources */,
+				F1DC7BEE2B02F3340014E554 /* WorkspaceRepositoryTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1737,8 +1741,8 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = S2BEC8V882;
 				GENERATE_INFOPLIST_FILE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 16.4;
-				MACOSX_DEPLOYMENT_TARGET = 13.3;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				MACOSX_DEPLOYMENT_TARGET = 14.0;
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = ddg.FitnessMobileTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -1760,8 +1764,8 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = S2BEC8V882;
 				GENERATE_INFOPLIST_FILE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 16.4;
-				MACOSX_DEPLOYMENT_TARGET = 13.3;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				MACOSX_DEPLOYMENT_TARGET = 14.0;
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = ddg.FitnessMobileTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -1782,8 +1786,8 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = S2BEC8V882;
 				GENERATE_INFOPLIST_FILE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 16.4;
-				MACOSX_DEPLOYMENT_TARGET = 13.3;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				MACOSX_DEPLOYMENT_TARGET = 14.0;
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = ddg.FitnessMobileUITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -1804,8 +1808,8 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = S2BEC8V882;
 				GENERATE_INFOPLIST_FILE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 16.4;
-				MACOSX_DEPLOYMENT_TARGET = 13.3;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				MACOSX_DEPLOYMENT_TARGET = 14.0;
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = ddg.FitnessMobileUITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";

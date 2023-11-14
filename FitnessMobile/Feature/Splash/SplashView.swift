@@ -18,7 +18,7 @@ struct SplashView: View {
         .onAppear {
             viewmodel.loadWorkspaces()
         }
-        .onChange(of: viewmodel.workspaces) { oldValue, newValue in
+        .onChange(of: viewmodel.onWorkspacesDidLoad) { oldValue, newValue in
             mainModalCoordinator.modal = MainModalView(screen: .tabbar(bar: .home))
         }
     }

@@ -56,6 +56,7 @@ class UserSession: ObservableObject {
         _ = KeychainManager.delete(key: tempTokenKey)
         DataCache.removeData(identifier: UserSession._id)
         DataDisk.removeData(identifier: UserSession._id)
+        DefaultWorkspace.removeDefaultWorkspace()
     }
     
     static func saveDeviceToken(data: Data) {

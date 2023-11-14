@@ -8,16 +8,27 @@
 import SwiftUI
 
 class BusinessViewModel: BaseViewModel {
-    @Published var workspaces: [WorkspaceModel] = []
     @Published var defaultWorkspace: WorkspaceModel?
+    @Published var onWorkspacesDidLoad = false
     
-    func getWorkspacesFromLocal() {
-        let workspaces = DefaultWorkspace.getWorkspaces()
-        self.workspaces = workspaces
+    var defaultWorkspaceId: String
+    
+    override init() {
+        self.defaultWorkspaceId = DefaultWorkspace.getDefaultWorkspaceId()
     }
     
-    func getDefaultWorkspace() {
-        let defaultWorkspace = DefaultWorkspace.getDefaultWorkspace()
-        self.defaultWorkspace = defaultWorkspace
+    @MainActor
+    func loadWorkspace() {
+        Task {
+            let usecase = WorkspaceUseCase()
+            
+            do {
+                let response = try await usecase.getWorkspace(_id: defaultWorkspaceId)
+                defaultWorkspace = response.workspace
+                onWorkspacesDidLoad = true
+            } catch {
+                handleError(error: error)
+            }
+        }
     }
 }

@@ -26,10 +26,19 @@ struct WorkspaceSettingView: View {
                 .padding()
                 
                 List(viewmodel.ownWorkspaces, id: \.self) { own in
-                    Text("\(own.title), \(own.subtitle).")
-                        .onTapGesture {
-                            settingCoordinator.push(.workspaceDetail(workspace: own))
+                    HStack {
+                        Text("\(own.title), \(own.subtitle).")
+                        Spacer()
+                        if own._id == DefaultWorkspace.getDefaultWorkspaceId() {
+                            Text("default")
+                                .font(.callout)
+                                .foregroundColor(Color.Neutral.placeholder)
                         }
+                    }
+                    .contentShape(Rectangle()) // Makes the entire view tappable
+                    .onTapGesture {
+                        settingCoordinator.push(.workspaceDetail(workspace: own))
+                    }
                 }
                 .scrollContentBackground(.hidden)
             }
@@ -51,7 +60,15 @@ struct WorkspaceSettingView: View {
                 .padding()
                 
                 List(viewmodel.invitedWorkspaces, id: \.self) { invited in
-                    Text("\(invited.title), \(invited.subtitle).")
+                    HStack {
+                        Text("\(invited.title), \(invited.subtitle).")
+                        Spacer()
+                        if invited._id == DefaultWorkspace.getDefaultWorkspaceId() {
+                            Text("default")
+                                .font(.callout)
+                                .foregroundColor(Color.Neutral.placeholder)
+                        }
+                    }
                 }
                 .scrollContentBackground(.hidden)
             }
@@ -67,6 +84,7 @@ struct WorkspaceSettingView: View {
             VStack {
                 ownerWorkspaceView()
                 invitedWorkspaceView()
+                Spacer()
             }
             
         }

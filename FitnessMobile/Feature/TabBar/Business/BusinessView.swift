@@ -17,9 +17,9 @@ struct BusinessView: View {
                     .ignoresSafeArea()
 
                 VStack {
-                    if let defaultWorkspace = viewmodel.defaultWorkspace {
-                        VStack {
-                            WorkspaceHeaderView(viewmodel: WorkspaceHeaderViewModel(workspace: defaultWorkspace))
+                    VStack {
+                        if let workspace = viewmodel.defaultWorkspace {
+                            WorkspaceHeaderView(viewmodel: WorkspaceHeaderViewModel(workspace: workspace))
                         }
                     }
                     Spacer()
@@ -28,8 +28,7 @@ struct BusinessView: View {
             }
         }
         .onAppear {
-            viewmodel.getWorkspacesFromLocal()
-            viewmodel.getDefaultWorkspace()
+            viewmodel.loadWorkspace()
         }
     }
 }

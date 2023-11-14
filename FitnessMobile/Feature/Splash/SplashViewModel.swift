@@ -9,6 +9,7 @@ import SwiftUI
 
 class SplashViewModel: BaseViewModel {
     @Published var workspaces: [WorkspaceModel] = []
+    @Published var onWorkspacesDidLoad = false
     
     @MainActor
     func loadWorkspaces() {
@@ -18,19 +19,19 @@ class SplashViewModel: BaseViewModel {
             do {
                 let response = try await usecase.getWorkspacesBuUserId(_id: UserSession._id)
                 workspaces = response.workspaces
-                saveWorkspacesToKeychain(workspaces: response.workspaces)
+                onWorkspacesDidLoad = true
+                configureDefaultWorkspaceIfNeccesary()
             } catch {
                 handleError(error: error)
             }
         }
     }
     
-    func saveWorkspacesToKeychain(workspaces: [WorkspaceModel]) {
-        DefaultWorkspace.saveWorkspaces(workspaces: workspaces)
-        let defaultWorkspace = DefaultWorkspace.getDefaultWorkspace()
-        if  defaultWorkspace == nil,
-           let workspace = workspaces.first {
-            DefaultWorkspace.saveDefaultWorkspace(workspace: workspace)
+    func configureDefaultWorkspaceIfNeccesary() {
+        if workspaces.isEmpty {
+            DefaultWorkspace.removeDefaultWorkspace()
+        } else if !DefaultWorkspace.hasDefaultWorkspace() {
+            DefaultWorkspace.setDefaultWorkspace(id: workspaces.first?._id ?? "")
         }
     }
 }

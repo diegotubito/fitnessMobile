@@ -23,11 +23,6 @@ class TabBarManager: ObservableObject {
     }
     
     func doesHaveDefaultWorkspace() {
-        let defaultWorkspace = DefaultWorkspace.getDefaultWorkspace()
-        if defaultWorkspace != nil {
-            shouldShowBusinness = true
-        } else {
-            shouldShowBusinness = false
-        }
+        shouldShowBusinness = DefaultWorkspace.hasDefaultWorkspace()
     }
 }

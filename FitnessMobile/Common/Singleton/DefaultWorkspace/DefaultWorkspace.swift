@@ -10,49 +10,36 @@ import Foundation
 class DefaultWorkspace {
     static let shared = DefaultWorkspace()
     
-    static private let workspacesKey = "workspacesKey"
     static private let defaultWorkspaceKey = "defaultWorkspaceKey"
-
-    static func saveWorkspaces(workspaces: [WorkspaceModel]) {
-        do {
-            let data = try JSONEncoder().encode(workspaces)
-            _ = KeychainManager.save(key: workspacesKey, data: data)
-        } catch {
-            print("Error encoding workspaces: \(error.localizedDescription)")
-        }
-    }
     
-    static func getWorkspaces() -> [WorkspaceModel] {
+    static func setDefaultWorkspace(id: String) {
         do {
-            if let data = KeychainManager.load(key: workspacesKey) {
-                let workspaces = try JSONDecoder().decode([WorkspaceModel].self, from: data)
-                return workspaces
-            }
-            return []
-        } catch {
-            return []
-        }
-    }
-    
-    static func saveDefaultWorkspace(workspace: WorkspaceModel) {
-        do {
-            let data = try JSONEncoder().encode(workspace)
+            let data = try JSONEncoder().encode(id)
             _ = KeychainManager.save(key: defaultWorkspaceKey, data: data)
         } catch {
-            print("Error encoding workspace: \(error.localizedDescription)")
+            print("could not encode value")
         }
     }
     
-    static func getDefaultWorkspace() -> WorkspaceModel? {
+    static func getDefaultWorkspaceId() -> String {
+        guard let data = KeychainManager.load(key: defaultWorkspaceKey) else {
+            return ""
+        }
+        
         do {
-            if let data = KeychainManager.load(key: defaultWorkspaceKey) {
-                let workspace = try JSONDecoder().decode(WorkspaceModel.self, from: data)
-                return workspace
-            }
-            return nil
+            let _id = try JSONDecoder().decode(String.self, from: data)
+            return _id
         } catch {
-            return nil
+            print("could not decode value")
+            return ""
         }
     }
     
+    static func removeDefaultWorkspace() {
+        _ = KeychainManager.delete(key: defaultWorkspaceKey)
+    }
+    
+    static func hasDefaultWorkspace() -> Bool {
+        return !getDefaultWorkspaceId().isEmpty
+    }
 }

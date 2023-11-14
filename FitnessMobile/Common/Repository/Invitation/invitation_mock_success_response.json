@@ -1,51 +1,571 @@
 {
     "invitations": [
         {
-            "_id": "64f52a8d7019133e6d2dcfda",
-            "user": "64ebe9d209a3827894237f7a",
-            "workspace": {
-                "_id": "64f3c9cf2945adf7b3d0aac0",
-                "title": "POLIDEPORTIVO ADILAS",
-                "subtitle": "",
+            "_id": "65500b712f9720a828e5ac83",
+            "user": {
+                "_id": "65500b2a2f9720a828e5ac67",
+                "username": "user1",
+                "email": "user1",
+                "firstName": "User 1",
+                "lastName": "Testing",
                 "isEnabled": true,
-                "owner": "64e96af64a2b599be61a4d96",
-                "location": {
-                    "type": "Point",
-                    "coordinates": [
-                        -34.72095934375024,
-                        -58.39028476281314
-                    ],
-                    "street": "Gral Ferré",
-                    "streetNumber": 2901,
-                    "cp": "1824",
-                    "locality": "Lanús",
-                    "state": "Buenos Aires",
-                    "country": "ARG",
-                    "_id": "64f3c9cf2945adf7b3d0aac1"
+                "phone": {
+                    "countryName": "Argentina",
+                    "number": "1135937260",
+                    "phoneCode": "54",
+                    "countryCode": "AR",
+                    "_id": "65500b2a2f9720a828e5ac68"
                 },
-                "logo": "https://placeimg.com/640/480/any",
-                "images": [
+                "emailVerified": true,
+                "twoFactorEnabled": false,
+                "twoFactorSecret": "",
+                "deviceTokens": [],
+                "createdAt": "2023-11-11T23:15:54.473Z",
+                "updatedAt": "2023-11-11T23:15:54.473Z"
+            },
+            "workspace": {
+                "_id": "653ed22e11fd629b249775e9",
+                "title": "Body Shaping",
+                "subtitle": "Lanus",
+                "isEnabled": true,
+                "owner": "653ed21a11fd629b249775e3",
+                "locationVerificationStatus": "ADDRESS_NOT_VERIFIED",
+                "members": [
                     {
-                        "url": "https://placeimg.com/640/480/any",
-                        "thumbnail": ""
-                    },
-                    {
-                        "url": "https://placeimg.com/640/480/any",
-                        "thumbnail": ""
-                    },
-                    {
-                        "url": "https://placeimg.com/640/480/any",
-                        "thumbnail": ""
+                        "user": {
+                            "_id": "65500b2a2f9720a828e5ac67",
+                            "username": "user1",
+                            "email": "user1",
+                            "firstName": "User 1",
+                            "lastName": "Testing",
+                            "isEnabled": true,
+                            "phone": {
+                                "countryName": "Argentina",
+                                "number": "1135937260",
+                                "phoneCode": "54",
+                                "countryCode": "AR",
+                                "_id": "65500b2a2f9720a828e5ac68"
+                            },
+                            "emailVerified": true,
+                            "twoFactorEnabled": false,
+                            "twoFactorSecret": "",
+                            "deviceTokens": [],
+                            "createdAt": "2023-11-11T23:15:54.473Z",
+                            "updatedAt": "2023-11-11T23:15:54.473Z"
+                        },
+                        "role": "USER_READ_ONLY_ROLE",
+                        "host": {
+                            "_id": "653ed21a11fd629b249775e3",
+                            "username": "owner",
+                            "email": "owner@email",
+                            "firstName": "David Diego",
+                            "lastName": "Gomez",
+                            "isEnabled": true,
+                            "phone": {
+                                "countryName": "",
+                                "number": "",
+                                "phoneCode": "",
+                                "countryCode": "",
+                                "_id": "654fed2b5c23db652e7be37e"
+                            },
+                            "emailVerified": false,
+                            "twoFactorEnabled": false,
+                            "twoFactorSecret": null,
+                            "deviceTokens": [],
+                            "createdAt": "2023-10-29T21:43:54.162Z",
+                            "updatedAt": "2023-11-11T21:09:15.224Z",
+                            "profileImage": {
+                                "highResImage": {
+                                    "url": "https://storage.googleapis.com/fitnessapp-3b183.appspot.com/profile_image/653ed21a11fd629b249775e3/profile_image.png?GoogleAccessId=firebase-adminsdk-703jw%40fitnessapp-3b183.iam.gserviceaccount.com&Expires=3408134400&Signature=wlwi%2FwyywlZUdVOI1h90zS7eHmgYwVfRNty7jxuDp8cbY%2BvGX%2BXud47CeQFR0w4YwqyPocJau7GdT1xkQzcvahtBZkO0mF2Ac2%2BuO1V1NJb1MPqC%2BlTl1W5b8xAqebrPQVhABdX9%2F6i1n3YxY8o0i2ilegy2VGKEfa9WsrLfQ5xh%2B%2F6zYewP02AIobxmE9UgOEHGitTL1jzBeuRJkpDwcwUlcT1BAWdIuGXB0uqSyZ4%2Bda9ScA9DU6WhpYfmRgdlGMVY%2BN9deLhaeTb6lyZxgK4YKKoKuLqTr6zIQRx54EWNkFOSNuIaijrdLnOhVPpT4yb57Fe7l3UNbfftaC95PA%3D%3D",
+                                    "size": 1552607,
+                                    "fileType": "PNG"
+                                },
+                                "thumbnailImage": {
+                                    "url": "https://storage.googleapis.com/fitnessapp-3b183.appspot.com/profile_image/653ed21a11fd629b249775e3/profile_image_thumbnail.png?GoogleAccessId=firebase-adminsdk-703jw%40fitnessapp-3b183.iam.gserviceaccount.com&Expires=3408134400&Signature=fYB37hg%2FgaHKPfZbvBur0rYmPYhBtbuDpfLycOsCfZDzeT0xffFrIfUn%2FW9aP4yUrTPznjBtjD7J9i2cKD8sYug4zUFD%2Fc4onIXY%2BJ7W3q5w8ez9glRLTZuemhtUFq0H5VWZRKaFEbXhCPftEwhqMIE8oXJTVCKaKOETr%2BW4SEdhNZd3A4kOH%2FUSvYe%2Bmz7KQH%2FGde%2BCXY%2FMa8y6p0aVMXJEONWlSl7T3J%2BBRGlzeKHrqV3jgshLx%2B%2BDyeko4gdPKwB1DabuFB3UpPP98mQKMrHQoZ9mHAkXfXOiixBULt31IkR1d7Rtczn7FRm%2BF3ZyMfYqKuPnrfMAtHvzYXHApA%3D%3D",
+                                    "size": 8608,
+                                    "fileType": "PNG"
+                                },
+                                "creator": "653ed21a11fd629b249775e3",
+                                "_id": "654fed76f401a9f62751441d",
+                                "createdAt": "2023-11-11T21:09:15.224Z",
+                                "updatedAt": "2023-11-11T21:09:15.224Z"
+                            }
+                        },
+                        "createdAt": "2023-11-11T20:37:44.640Z",
+                        "_id": "65500be22f9720a828e5acc2"
                     }
                 ],
-                "members": [],
-                "createdAt": "2023-09-02T23:48:31.029Z",
-                "updatedAt": "2023-09-02T23:48:31.029Z",
-                "__v": 0
+                "documentImages": [],
+                "images": [
+                    {
+                        "highResImage": {
+                            "url": "https://storage.googleapis.com/fitnessapp-3b183.appspot.com/images/653ed22e11fd629b249775e9/6550038f7b332a59dbb54253.png?GoogleAccessId=firebase-adminsdk-703jw%40fitnessapp-3b183.iam.gserviceaccount.com&Expires=3408134400&Signature=YXG6E7MbRCxjDmogguGrtcUG2%2Btu1bVoCbZDjAnfzqYAPPATZuRtwHvQCyJ8xuofhSQjas4FeXTJHhsfcwLMJlL3G6tlJFBgXOtWLnRnvsKUaBwhKCdqST3TXbmESXtOxHWoc7emat4rXsOcO%2BOFBc%2B2FKwfv2AhR%2Fkh9PEyefTdjyCqBXu0I7mvugwZU%2FKFS%2BoMo8uWAAZJKu5%2BrdUhcWT2klRkOMeTzwPAZvSxkA1Pr1AhDIAGo7UlW1ToYoXaYIU9GiHO0xKHFvUVSs%2BH3pbBvgeS0O9%2Fg4SRJlzIamv6XlN21ALCgT0bLFqc4AICqiGR2hjDVfmCT%2FJejn1c0A%3D%3D",
+                            "size": 3890390,
+                            "fileType": "PNG"
+                        },
+                        "thumbnailImage": {
+                            "url": "https://storage.googleapis.com/fitnessapp-3b183.appspot.com/images/653ed22e11fd629b249775e9/6550038f7b332a59dbb54253_thumbnail.png?GoogleAccessId=firebase-adminsdk-703jw%40fitnessapp-3b183.iam.gserviceaccount.com&Expires=3408134400&Signature=OXI5V9fnXwDjw8Nl1e9JoR54NzL1832tugY6weFaggQC20JNDM7j04kooyWceSqoZXx138jBU%2Fslh94mFPLHeRTOMWHJHqlmBUpIXZgwtFkd060Px4k%2Bo3l6tozkjuaQgp5bP3lenox2%2FkpOiHW6R1x0WHwxR%2FAgDZeEI1WjxL9w6rC1Y%2F18N2PHnJnmxlIoj7Lsp6r9%2BN%2FK2W3NdeBBZbMSsGLQRdzMAJAt8C7POfVsRRszAGhjagVKgGl9Tko4DZG8pHxmIFVUb7OQLUHJxbW8dPFMKqlcavznTkGe%2Fwa%2F2VpSX3GOXEqgFC1egZpuLSqXZFzU2GVeIqk8PZbWZg%3D%3D",
+                            "size": 39316,
+                            "fileType": "PNG"
+                        },
+                        "creator": "653ed21a11fd629b249775e3",
+                        "_id": "6550038f7b332a59dbb54253",
+                        "createdAt": "2023-11-11T22:43:33.293Z",
+                        "updatedAt": "2023-11-11T22:43:33.293Z"
+                    }
+                ],
+                "createdAt": "2023-10-29T21:44:14.677Z",
+                "updatedAt": "2023-11-11T23:18:58.881Z",
+                "__v": 2,
+                "defaultImage": {
+                    "highResImage": {
+                        "url": "https://storage.googleapis.com/fitnessapp-3b183.appspot.com/default_image/653ed22e11fd629b249775e9/default_image.png?GoogleAccessId=firebase-adminsdk-703jw%40fitnessapp-3b183.iam.gserviceaccount.com&Expires=3408134400&Signature=b6kTUlniNsZHOMzPec3Y%2FNETItgid7fdJ1mG2ReF5BzeNZyZ4gX3ExBtpyokDfA%2BDNUxzoG2EG%2Fc13Ya%2FZn8jzFLEvk3E8wFl5ZcA6XwCOFJ2JjZpy3IWnEcUctjld649TAY2c9pqN%2BrpXNCbDkrcx0ZI7EQxM%2Finp4v5peI%2BEVVNhWGneSrfFf6aGmFbPkdU9jSUxCyHg1DFt%2FDIGG8HcoigyNaQmA3LVr926IkmkUCWd2QG%2B3o%2Bq3R%2F10NqZD0ltOL9TQzb7pMqwR8vqX1wPU5atJ3v50mzhLu1lBhCi4BDGxeq6PFRdBYdVSSETvi%2Benymqe5kkSvzBmjRCceDQ%3D%3D",
+                        "size": 3890390,
+                        "fileType": "PNG"
+                    },
+                    "thumbnailImage": {
+                        "url": "https://storage.googleapis.com/fitnessapp-3b183.appspot.com/default_image/653ed22e11fd629b249775e9/default_image_thumbnail.png?GoogleAccessId=firebase-adminsdk-703jw%40fitnessapp-3b183.iam.gserviceaccount.com&Expires=3408134400&Signature=otrbb%2FQT%2FPw8z6CkVQCuXMKeoKOE%2BRDiNMgWPhfuEpt5WuW89nh6VqrCzp6zXBXZsWpGYrHqTwcHoI9zjFWioEfAwAFIwB8JUDi6XcDwcq3%2FrIl%2BXyq%2BMbOrELh3a%2B8cADwo%2BKpDPHy8PmKZEkZKU2rKHg22x60HQkzwalkDAJf%2FLDaqi%2BknlrGmkf4U3FsSqiSTkFXHXp0xhQFeWOZVDUkUlgvr3yXd7xCma6giPhkGTdzsewY6VIG74wGMpNh1%2BT5zWP8MkCe3RHyjmbMyr9T9u5vWqKpQDyIWO6IVpQDpoMg1pphL0V1rJfdzMIpizACCZic5DWAYq28gaBcPOw%3D%3D",
+                        "size": 39316,
+                        "fileType": "PNG"
+                    },
+                    "creator": "653ed21a11fd629b249775e3",
+                    "_id": "654fed545c23db652e7be386",
+                    "createdAt": "2023-11-11T21:08:36.745Z",
+                    "updatedAt": "2023-11-11T21:08:36.745Z"
+                },
+                "defaultBackgroundImage": {
+                    "highResImage": {
+                        "url": "https://storage.googleapis.com/fitnessapp-3b183.appspot.com/default_background_image/653ed22e11fd629b249775e9/default_background_image.png?GoogleAccessId=firebase-adminsdk-703jw%40fitnessapp-3b183.iam.gserviceaccount.com&Expires=3408134400&Signature=YR6%2BO6mn%2FHwq0WeweTVoUICJABH%2FwMAdI9VkBKo1rOKf293GP3oQTAe%2BHWufPBtEOqgZ3rD4OecRRPIkTrmJwNMG%2F97tQKk0CLc7BkJ3yH2%2FLP4KnDc0plx3a%2BMTBDHB%2FtDLPaUtRKKGjYgtVJ%2BEAk5Nm7xiMnUA0GDTX030yE2c5dXqsNtJw13RhLHs%2BC0xzfMQ%2Bza%2FjpQnwVUxEVgD870kqjl1dI09CH4eXWqKgD%2FcF%2Fpv435OlwhNZUi0M3zYEa7kYfjYsgmDHtiJiJ46nVt2mwD519TLYwSP%2Ba8MTM97IDfE4uPYaX6v555Fod4uTH213F%2F%2FEC6vRUiOny%2FELg%3D%3D",
+                        "size": 2409732,
+                        "fileType": "PNG"
+                    },
+                    "thumbnailImage": {
+                        "url": "https://storage.googleapis.com/fitnessapp-3b183.appspot.com/default_background_image/653ed22e11fd629b249775e9/default_background_image_thumbnail.png?GoogleAccessId=firebase-adminsdk-703jw%40fitnessapp-3b183.iam.gserviceaccount.com&Expires=3408134400&Signature=vC0XEkvE2dG3BM7UqXbAzQqxHrOZPjj0OqSwRVBeFRaYa%2BxfXYU73acw2Kjn%2FkVQiJOCmT0%2F0Ceq7D5xIU7v3zx6CgH5bwJyJ2qevU66mjB4hyVlPs8y0LmybH9I0F89gRHYYOweK9CeLqVtqmqcWLDJv9oka0byhOOKm0Qpe%2FDTJFHdetCt3c2sC%2FsE7i%2FUKGLVhVoHL2jS%2BwwRwX9z6UD%2BqY0NJeGoHGN0P5S7h64oWG7hmlgkwHt%2BYZctPU3kOTf9CMILX6iRIxbYqrR87FugxDrUi1dvX1GydoWwYSNarfKOvehkNL3lwMee1peJYPmP8yDpl%2Fq92VQ54Aacxg%3D%3D",
+                        "size": 75035,
+                        "fileType": "PNG"
+                    },
+                    "creator": "653ed21a11fd629b249775e3",
+                    "_id": "653f669efc2adff0d621a77d",
+                    "createdAt": "2023-10-30T08:17:34.771Z",
+                    "updatedAt": "2023-10-30T08:17:34.771Z"
+                },
+                "location": {
+                    "coordinates": [
+                        -58.4391076,
+                        -34.7281735
+                    ],
+                    "googleGeocode": {
+                        "address_components": [
+                            {
+                                "long_name": "661",
+                                "short_name": "661",
+                                "types": [
+                                    "street_number"
+                                ]
+                            },
+                            {
+                                "long_name": "Calle Fallieres",
+                                "short_name": "C. Fallieres",
+                                "types": [
+                                    "route"
+                                ]
+                            },
+                            {
+                                "long_name": "Villa Centenario",
+                                "short_name": "Villa Centenario",
+                                "types": [
+                                    "locality",
+                                    "political"
+                                ]
+                            },
+                            {
+                                "long_name": "Lomas de Zamora",
+                                "short_name": "Lomas de Zamora",
+                                "types": [
+                                    "administrative_area_level_2",
+                                    "political"
+                                ]
+                            },
+                            {
+                                "long_name": "Provincia de Buenos Aires",
+                                "short_name": "Provincia de Buenos Aires",
+                                "types": [
+                                    "administrative_area_level_1",
+                                    "political"
+                                ]
+                            },
+                            {
+                                "long_name": "Argentina",
+                                "short_name": "AR",
+                                "types": [
+                                    "country",
+                                    "political"
+                                ]
+                            },
+                            {
+                                "long_name": "B1821",
+                                "short_name": "B1821",
+                                "types": [
+                                    "postal_code"
+                                ]
+                            },
+                            {
+                                "long_name": "EZM",
+                                "short_name": "EZM",
+                                "types": [
+                                    "postal_code_suffix"
+                                ]
+                            }
+                        ],
+                        "formatted_address": "C. Fallieres 661, B1821EZM Villa Centenario, Provincia de Buenos Aires, Argentina",
+                        "geometry": {
+                            "location": {
+                                "lat": -34.7281735,
+                                "lng": -58.4391076
+                            },
+                            "location_type": "RANGE_INTERPOLATED"
+                        },
+                        "place_id": "ElFDLiBGYWxsaWVyZXMgNjYxLCBCMTgyMUVaTSBWaWxsYSBDZW50ZW5hcmlvLCBQcm92aW5jaWEgZGUgQnVlbm9zIEFpcmVzLCBBcmdlbnRpbmEiMRIvChQKEgmbwd6yuM28lREl5jnlMT68mxCVBSoUChIJs6iIpbjNvJURGjtvt2Vvim0",
+                        "types": [
+                            "street_address"
+                        ]
+                    }
+                }
             },
-            "role": "ADMIN_ROLE",
-            "status": "PENDING",
-            "expiration": "2023-09-06T00:53:33.742Z",
+            "role": "USER_READ_ONLY_ROLE",
+            "status": "INVITATION_ACCEPTED",
+            "host": {
+                "_id": "653ed21a11fd629b249775e3",
+                "username": "owner",
+                "email": "owner@email",
+                "firstName": "David Diego",
+                "lastName": "Gomez",
+                "isEnabled": true,
+                "phone": {
+                    "countryName": "",
+                    "number": "",
+                    "phoneCode": "",
+                    "countryCode": "",
+                    "_id": "654fed2b5c23db652e7be37e"
+                },
+                "emailVerified": false,
+                "twoFactorEnabled": false,
+                "twoFactorSecret": null,
+                "deviceTokens": [],
+                "createdAt": "2023-10-29T21:43:54.162Z",
+                "updatedAt": "2023-11-11T21:09:15.224Z",
+                "profileImage": {
+                    "highResImage": {
+                        "url": "https://storage.googleapis.com/fitnessapp-3b183.appspot.com/profile_image/653ed21a11fd629b249775e3/profile_image.png?GoogleAccessId=firebase-adminsdk-703jw%40fitnessapp-3b183.iam.gserviceaccount.com&Expires=3408134400&Signature=wlwi%2FwyywlZUdVOI1h90zS7eHmgYwVfRNty7jxuDp8cbY%2BvGX%2BXud47CeQFR0w4YwqyPocJau7GdT1xkQzcvahtBZkO0mF2Ac2%2BuO1V1NJb1MPqC%2BlTl1W5b8xAqebrPQVhABdX9%2F6i1n3YxY8o0i2ilegy2VGKEfa9WsrLfQ5xh%2B%2F6zYewP02AIobxmE9UgOEHGitTL1jzBeuRJkpDwcwUlcT1BAWdIuGXB0uqSyZ4%2Bda9ScA9DU6WhpYfmRgdlGMVY%2BN9deLhaeTb6lyZxgK4YKKoKuLqTr6zIQRx54EWNkFOSNuIaijrdLnOhVPpT4yb57Fe7l3UNbfftaC95PA%3D%3D",
+                        "size": 1552607,
+                        "fileType": "PNG"
+                    },
+                    "thumbnailImage": {
+                        "url": "https://storage.googleapis.com/fitnessapp-3b183.appspot.com/profile_image/653ed21a11fd629b249775e3/profile_image_thumbnail.png?GoogleAccessId=firebase-adminsdk-703jw%40fitnessapp-3b183.iam.gserviceaccount.com&Expires=3408134400&Signature=fYB37hg%2FgaHKPfZbvBur0rYmPYhBtbuDpfLycOsCfZDzeT0xffFrIfUn%2FW9aP4yUrTPznjBtjD7J9i2cKD8sYug4zUFD%2Fc4onIXY%2BJ7W3q5w8ez9glRLTZuemhtUFq0H5VWZRKaFEbXhCPftEwhqMIE8oXJTVCKaKOETr%2BW4SEdhNZd3A4kOH%2FUSvYe%2Bmz7KQH%2FGde%2BCXY%2FMa8y6p0aVMXJEONWlSl7T3J%2BBRGlzeKHrqV3jgshLx%2B%2BDyeko4gdPKwB1DabuFB3UpPP98mQKMrHQoZ9mHAkXfXOiixBULt31IkR1d7Rtczn7FRm%2BF3ZyMfYqKuPnrfMAtHvzYXHApA%3D%3D",
+                        "size": 8608,
+                        "fileType": "PNG"
+                    },
+                    "creator": "653ed21a11fd629b249775e3",
+                    "_id": "654fed76f401a9f62751441d",
+                    "createdAt": "2023-11-11T21:09:15.224Z",
+                    "updatedAt": "2023-11-11T21:09:15.224Z"
+                }
+            },
+            "expiration": "2023-11-13T23:17:05.468Z",
+            "createdAt": "2023-11-11T23:17:05.469Z",
+            "updatedAt": "2023-11-11T23:18:58.505Z",
+            "__v": 0
+        },
+        {
+            "_id": "65500b8f2f9720a828e5aca2",
+            "user": {
+                "_id": "65500b342f9720a828e5ac6a",
+                "username": "user2",
+                "email": "user2",
+                "firstName": "Diegol",
+                "lastName": "Dale!",
+                "isEnabled": true,
+                "phone": {
+                    "countryName": "Argentina",
+                    "number": "1135937260",
+                    "phoneCode": "54",
+                    "countryCode": "AR",
+                    "_id": "6551c2982dd71573e11b8bc2"
+                },
+                "emailVerified": true,
+                "twoFactorEnabled": false,
+                "twoFactorSecret": "",
+                "deviceTokens": [],
+                "createdAt": "2023-11-11T23:16:04.561Z",
+                "updatedAt": "2023-11-13T06:30:48.943Z",
+                "profileImage": {
+                    "highResImage": {
+                        "url": "https://storage.googleapis.com/fitnessapp-3b183.appspot.com/profile_image/65500b342f9720a828e5ac6a/profile_image.png?GoogleAccessId=firebase-adminsdk-703jw%40fitnessapp-3b183.iam.gserviceaccount.com&Expires=3408134400&Signature=ZvHN%2BDSxbtLaLO83YxyIFoqIVp5Tka54258fzTHQWYOXag%2BihodNVXx5khgDlFh3HgWufBrw%2FAi3KTRVv37hC4myAJAGTQDzSDkQf32Rnb0p%2FtYOGugJ%2FmoTk3YMNNMuJJqvHgmjtXTMx%2BrhpS2gNkoB%2BMjJC%2BwSpYsGzft9OIystiy2X6M1tyCGYPDOSsJMWw8B29DwjQpeo0h8eqm6ydiEkD1JzpyXCYavpiCWQRi50N%2FvTmzDuhn7krGxHXdLEzwjThZlUxrhm%2BCMBtEBv4PjhCLL9fQi9mMWOBGjPKVtqilCZ1T5KWtCN9zOIijo5X3Ve0q5cVo9IptPq6rS1A%3D%3D",
+                        "size": 87768,
+                        "fileType": "PNG"
+                    },
+                    "thumbnailImage": {
+                        "url": "https://storage.googleapis.com/fitnessapp-3b183.appspot.com/profile_image/65500b342f9720a828e5ac6a/profile_image_thumbnail.png?GoogleAccessId=firebase-adminsdk-703jw%40fitnessapp-3b183.iam.gserviceaccount.com&Expires=3408134400&Signature=Z6uQXCenuKfjqnLdIpGWda5%2B12pTeYLP%2FUjKUl3O3Rdr53ayocn4sq4XFdSTA6cBVtkQi64wGvjSOcPSfl79dlcC0Z89vmB3q0E10eeRGopROdccMjK4MojcsN7X85eq5PgcvmwKtpc1kNTotH5H7MUgQtILajwASi%2BgGTCnvexdC3IMpOotGUCx7ccFizTj0WJV28MH3p%2BaewJHvIEJs4HluFV9R6oF8xT8yZL14YX35xDzRkoylhr7cCvy%2BgM6Tp5zj%2BTcXOoqkeXlvMoGm6sXjv%2FqacRJOnph15956qHJ6aSvKuTSTU6F8jNQOMAN6%2FAtZmHhRaWlpeqJiUmYpw%3D%3D",
+                        "size": 7424,
+                        "fileType": "PNG"
+                    },
+                    "creator": "65500b342f9720a828e5ac6a",
+                    "_id": "6551c26876749b2636b7dac5",
+                    "createdAt": "2023-11-13T06:30:03.635Z",
+                    "updatedAt": "2023-11-13T06:30:03.635Z"
+                }
+            },
+            "workspace": {
+                "_id": "653ed22e11fd629b249775e9",
+                "title": "Body Shaping",
+                "subtitle": "Lanus",
+                "isEnabled": true,
+                "owner": "653ed21a11fd629b249775e3",
+                "locationVerificationStatus": "ADDRESS_NOT_VERIFIED",
+                "members": [
+                    {
+                        "user": {
+                            "_id": "65500b2a2f9720a828e5ac67",
+                            "username": "user1",
+                            "email": "user1",
+                            "firstName": "User 1",
+                            "lastName": "Testing",
+                            "isEnabled": true,
+                            "phone": {
+                                "countryName": "Argentina",
+                                "number": "1135937260",
+                                "phoneCode": "54",
+                                "countryCode": "AR",
+                                "_id": "65500b2a2f9720a828e5ac68"
+                            },
+                            "emailVerified": true,
+                            "twoFactorEnabled": false,
+                            "twoFactorSecret": "",
+                            "deviceTokens": [],
+                            "createdAt": "2023-11-11T23:15:54.473Z",
+                            "updatedAt": "2023-11-11T23:15:54.473Z"
+                        },
+                        "role": "USER_READ_ONLY_ROLE",
+                        "host": {
+                            "_id": "653ed21a11fd629b249775e3",
+                            "username": "owner",
+                            "email": "owner@email",
+                            "firstName": "David Diego",
+                            "lastName": "Gomez",
+                            "isEnabled": true,
+                            "phone": {
+                                "countryName": "",
+                                "number": "",
+                                "phoneCode": "",
+                                "countryCode": "",
+                                "_id": "654fed2b5c23db652e7be37e"
+                            },
+                            "emailVerified": false,
+                            "twoFactorEnabled": false,
+                            "twoFactorSecret": null,
+                            "deviceTokens": [],
+                            "createdAt": "2023-10-29T21:43:54.162Z",
+                            "updatedAt": "2023-11-11T21:09:15.224Z",
+                            "profileImage": {
+                                "highResImage": {
+                                    "url": "https://storage.googleapis.com/fitnessapp-3b183.appspot.com/profile_image/653ed21a11fd629b249775e3/profile_image.png?GoogleAccessId=firebase-adminsdk-703jw%40fitnessapp-3b183.iam.gserviceaccount.com&Expires=3408134400&Signature=wlwi%2FwyywlZUdVOI1h90zS7eHmgYwVfRNty7jxuDp8cbY%2BvGX%2BXud47CeQFR0w4YwqyPocJau7GdT1xkQzcvahtBZkO0mF2Ac2%2BuO1V1NJb1MPqC%2BlTl1W5b8xAqebrPQVhABdX9%2F6i1n3YxY8o0i2ilegy2VGKEfa9WsrLfQ5xh%2B%2F6zYewP02AIobxmE9UgOEHGitTL1jzBeuRJkpDwcwUlcT1BAWdIuGXB0uqSyZ4%2Bda9ScA9DU6WhpYfmRgdlGMVY%2BN9deLhaeTb6lyZxgK4YKKoKuLqTr6zIQRx54EWNkFOSNuIaijrdLnOhVPpT4yb57Fe7l3UNbfftaC95PA%3D%3D",
+                                    "size": 1552607,
+                                    "fileType": "PNG"
+                                },
+                                "thumbnailImage": {
+                                    "url": "https://storage.googleapis.com/fitnessapp-3b183.appspot.com/profile_image/653ed21a11fd629b249775e3/profile_image_thumbnail.png?GoogleAccessId=firebase-adminsdk-703jw%40fitnessapp-3b183.iam.gserviceaccount.com&Expires=3408134400&Signature=fYB37hg%2FgaHKPfZbvBur0rYmPYhBtbuDpfLycOsCfZDzeT0xffFrIfUn%2FW9aP4yUrTPznjBtjD7J9i2cKD8sYug4zUFD%2Fc4onIXY%2BJ7W3q5w8ez9glRLTZuemhtUFq0H5VWZRKaFEbXhCPftEwhqMIE8oXJTVCKaKOETr%2BW4SEdhNZd3A4kOH%2FUSvYe%2Bmz7KQH%2FGde%2BCXY%2FMa8y6p0aVMXJEONWlSl7T3J%2BBRGlzeKHrqV3jgshLx%2B%2BDyeko4gdPKwB1DabuFB3UpPP98mQKMrHQoZ9mHAkXfXOiixBULt31IkR1d7Rtczn7FRm%2BF3ZyMfYqKuPnrfMAtHvzYXHApA%3D%3D",
+                                    "size": 8608,
+                                    "fileType": "PNG"
+                                },
+                                "creator": "653ed21a11fd629b249775e3",
+                                "_id": "654fed76f401a9f62751441d",
+                                "createdAt": "2023-11-11T21:09:15.224Z",
+                                "updatedAt": "2023-11-11T21:09:15.224Z"
+                            }
+                        },
+                        "createdAt": "2023-11-11T20:37:44.640Z",
+                        "_id": "65500be22f9720a828e5acc2"
+                    }
+                ],
+                "documentImages": [],
+                "images": [
+                    {
+                        "highResImage": {
+                            "url": "https://storage.googleapis.com/fitnessapp-3b183.appspot.com/images/653ed22e11fd629b249775e9/6550038f7b332a59dbb54253.png?GoogleAccessId=firebase-adminsdk-703jw%40fitnessapp-3b183.iam.gserviceaccount.com&Expires=3408134400&Signature=YXG6E7MbRCxjDmogguGrtcUG2%2Btu1bVoCbZDjAnfzqYAPPATZuRtwHvQCyJ8xuofhSQjas4FeXTJHhsfcwLMJlL3G6tlJFBgXOtWLnRnvsKUaBwhKCdqST3TXbmESXtOxHWoc7emat4rXsOcO%2BOFBc%2B2FKwfv2AhR%2Fkh9PEyefTdjyCqBXu0I7mvugwZU%2FKFS%2BoMo8uWAAZJKu5%2BrdUhcWT2klRkOMeTzwPAZvSxkA1Pr1AhDIAGo7UlW1ToYoXaYIU9GiHO0xKHFvUVSs%2BH3pbBvgeS0O9%2Fg4SRJlzIamv6XlN21ALCgT0bLFqc4AICqiGR2hjDVfmCT%2FJejn1c0A%3D%3D",
+                            "size": 3890390,
+                            "fileType": "PNG"
+                        },
+                        "thumbnailImage": {
+                            "url": "https://storage.googleapis.com/fitnessapp-3b183.appspot.com/images/653ed22e11fd629b249775e9/6550038f7b332a59dbb54253_thumbnail.png?GoogleAccessId=firebase-adminsdk-703jw%40fitnessapp-3b183.iam.gserviceaccount.com&Expires=3408134400&Signature=OXI5V9fnXwDjw8Nl1e9JoR54NzL1832tugY6weFaggQC20JNDM7j04kooyWceSqoZXx138jBU%2Fslh94mFPLHeRTOMWHJHqlmBUpIXZgwtFkd060Px4k%2Bo3l6tozkjuaQgp5bP3lenox2%2FkpOiHW6R1x0WHwxR%2FAgDZeEI1WjxL9w6rC1Y%2F18N2PHnJnmxlIoj7Lsp6r9%2BN%2FK2W3NdeBBZbMSsGLQRdzMAJAt8C7POfVsRRszAGhjagVKgGl9Tko4DZG8pHxmIFVUb7OQLUHJxbW8dPFMKqlcavznTkGe%2Fwa%2F2VpSX3GOXEqgFC1egZpuLSqXZFzU2GVeIqk8PZbWZg%3D%3D",
+                            "size": 39316,
+                            "fileType": "PNG"
+                        },
+                        "creator": "653ed21a11fd629b249775e3",
+                        "_id": "6550038f7b332a59dbb54253",
+                        "createdAt": "2023-11-11T22:43:33.293Z",
+                        "updatedAt": "2023-11-11T22:43:33.293Z"
+                    }
+                ],
+                "createdAt": "2023-10-29T21:44:14.677Z",
+                "updatedAt": "2023-11-11T23:18:58.881Z",
+                "__v": 2,
+                "defaultImage": {
+                    "highResImage": {
+                        "url": "https://storage.googleapis.com/fitnessapp-3b183.appspot.com/default_image/653ed22e11fd629b249775e9/default_image.png?GoogleAccessId=firebase-adminsdk-703jw%40fitnessapp-3b183.iam.gserviceaccount.com&Expires=3408134400&Signature=b6kTUlniNsZHOMzPec3Y%2FNETItgid7fdJ1mG2ReF5BzeNZyZ4gX3ExBtpyokDfA%2BDNUxzoG2EG%2Fc13Ya%2FZn8jzFLEvk3E8wFl5ZcA6XwCOFJ2JjZpy3IWnEcUctjld649TAY2c9pqN%2BrpXNCbDkrcx0ZI7EQxM%2Finp4v5peI%2BEVVNhWGneSrfFf6aGmFbPkdU9jSUxCyHg1DFt%2FDIGG8HcoigyNaQmA3LVr926IkmkUCWd2QG%2B3o%2Bq3R%2F10NqZD0ltOL9TQzb7pMqwR8vqX1wPU5atJ3v50mzhLu1lBhCi4BDGxeq6PFRdBYdVSSETvi%2Benymqe5kkSvzBmjRCceDQ%3D%3D",
+                        "size": 3890390,
+                        "fileType": "PNG"
+                    },
+                    "thumbnailImage": {
+                        "url": "https://storage.googleapis.com/fitnessapp-3b183.appspot.com/default_image/653ed22e11fd629b249775e9/default_image_thumbnail.png?GoogleAccessId=firebase-adminsdk-703jw%40fitnessapp-3b183.iam.gserviceaccount.com&Expires=3408134400&Signature=otrbb%2FQT%2FPw8z6CkVQCuXMKeoKOE%2BRDiNMgWPhfuEpt5WuW89nh6VqrCzp6zXBXZsWpGYrHqTwcHoI9zjFWioEfAwAFIwB8JUDi6XcDwcq3%2FrIl%2BXyq%2BMbOrELh3a%2B8cADwo%2BKpDPHy8PmKZEkZKU2rKHg22x60HQkzwalkDAJf%2FLDaqi%2BknlrGmkf4U3FsSqiSTkFXHXp0xhQFeWOZVDUkUlgvr3yXd7xCma6giPhkGTdzsewY6VIG74wGMpNh1%2BT5zWP8MkCe3RHyjmbMyr9T9u5vWqKpQDyIWO6IVpQDpoMg1pphL0V1rJfdzMIpizACCZic5DWAYq28gaBcPOw%3D%3D",
+                        "size": 39316,
+                        "fileType": "PNG"
+                    },
+                    "creator": "653ed21a11fd629b249775e3",
+                    "_id": "654fed545c23db652e7be386",
+                    "createdAt": "2023-11-11T21:08:36.745Z",
+                    "updatedAt": "2023-11-11T21:08:36.745Z"
+                },
+                "defaultBackgroundImage": {
+                    "highResImage": {
+                        "url": "https://storage.googleapis.com/fitnessapp-3b183.appspot.com/default_background_image/653ed22e11fd629b249775e9/default_background_image.png?GoogleAccessId=firebase-adminsdk-703jw%40fitnessapp-3b183.iam.gserviceaccount.com&Expires=3408134400&Signature=YR6%2BO6mn%2FHwq0WeweTVoUICJABH%2FwMAdI9VkBKo1rOKf293GP3oQTAe%2BHWufPBtEOqgZ3rD4OecRRPIkTrmJwNMG%2F97tQKk0CLc7BkJ3yH2%2FLP4KnDc0plx3a%2BMTBDHB%2FtDLPaUtRKKGjYgtVJ%2BEAk5Nm7xiMnUA0GDTX030yE2c5dXqsNtJw13RhLHs%2BC0xzfMQ%2Bza%2FjpQnwVUxEVgD870kqjl1dI09CH4eXWqKgD%2FcF%2Fpv435OlwhNZUi0M3zYEa7kYfjYsgmDHtiJiJ46nVt2mwD519TLYwSP%2Ba8MTM97IDfE4uPYaX6v555Fod4uTH213F%2F%2FEC6vRUiOny%2FELg%3D%3D",
+                        "size": 2409732,
+                        "fileType": "PNG"
+                    },
+                    "thumbnailImage": {
+                        "url": "https://storage.googleapis.com/fitnessapp-3b183.appspot.com/default_background_image/653ed22e11fd629b249775e9/default_background_image_thumbnail.png?GoogleAccessId=firebase-adminsdk-703jw%40fitnessapp-3b183.iam.gserviceaccount.com&Expires=3408134400&Signature=vC0XEkvE2dG3BM7UqXbAzQqxHrOZPjj0OqSwRVBeFRaYa%2BxfXYU73acw2Kjn%2FkVQiJOCmT0%2F0Ceq7D5xIU7v3zx6CgH5bwJyJ2qevU66mjB4hyVlPs8y0LmybH9I0F89gRHYYOweK9CeLqVtqmqcWLDJv9oka0byhOOKm0Qpe%2FDTJFHdetCt3c2sC%2FsE7i%2FUKGLVhVoHL2jS%2BwwRwX9z6UD%2BqY0NJeGoHGN0P5S7h64oWG7hmlgkwHt%2BYZctPU3kOTf9CMILX6iRIxbYqrR87FugxDrUi1dvX1GydoWwYSNarfKOvehkNL3lwMee1peJYPmP8yDpl%2Fq92VQ54Aacxg%3D%3D",
+                        "size": 75035,
+                        "fileType": "PNG"
+                    },
+                    "creator": "653ed21a11fd629b249775e3",
+                    "_id": "653f669efc2adff0d621a77d",
+                    "createdAt": "2023-10-30T08:17:34.771Z",
+                    "updatedAt": "2023-10-30T08:17:34.771Z"
+                },
+                "location": {
+                    "coordinates": [
+                        -58.4391076,
+                        -34.7281735
+                    ],
+                    "googleGeocode": {
+                        "address_components": [
+                            {
+                                "long_name": "661",
+                                "short_name": "661",
+                                "types": [
+                                    "street_number"
+                                ]
+                            },
+                            {
+                                "long_name": "Calle Fallieres",
+                                "short_name": "C. Fallieres",
+                                "types": [
+                                    "route"
+                                ]
+                            },
+                            {
+                                "long_name": "Villa Centenario",
+                                "short_name": "Villa Centenario",
+                                "types": [
+                                    "locality",
+                                    "political"
+                                ]
+                            },
+                            {
+                                "long_name": "Lomas de Zamora",
+                                "short_name": "Lomas de Zamora",
+                                "types": [
+                                    "administrative_area_level_2",
+                                    "political"
+                                ]
+                            },
+                            {
+                                "long_name": "Provincia de Buenos Aires",
+                                "short_name": "Provincia de Buenos Aires",
+                                "types": [
+                                    "administrative_area_level_1",
+                                    "political"
+                                ]
+                            },
+                            {
+                                "long_name": "Argentina",
+                                "short_name": "AR",
+                                "types": [
+                                    "country",
+                                    "political"
+                                ]
+                            },
+                            {
+                                "long_name": "B1821",
+                                "short_name": "B1821",
+                                "types": [
+                                    "postal_code"
+                                ]
+                            },
+                            {
+                                "long_name": "EZM",
+                                "short_name": "EZM",
+                                "types": [
+                                    "postal_code_suffix"
+                                ]
+                            }
+                        ],
+                        "formatted_address": "C. Fallieres 661, B1821EZM Villa Centenario, Provincia de Buenos Aires, Argentina",
+                        "geometry": {
+                            "location": {
+                                "lat": -34.7281735,
+                                "lng": -58.4391076
+                            },
+                            "location_type": "RANGE_INTERPOLATED"
+                        },
+                        "place_id": "ElFDLiBGYWxsaWVyZXMgNjYxLCBCMTgyMUVaTSBWaWxsYSBDZW50ZW5hcmlvLCBQcm92aW5jaWEgZGUgQnVlbm9zIEFpcmVzLCBBcmdlbnRpbmEiMRIvChQKEgmbwd6yuM28lREl5jnlMT68mxCVBSoUChIJs6iIpbjNvJURGjtvt2Vvim0",
+                        "types": [
+                            "street_address"
+                        ]
+                    }
+                }
+            },
+            "role": "USER_READ_ONLY_ROLE",
+            "status": "INVITATION_PENDING",
+            "host": {
+                "_id": "653ed21a11fd629b249775e3",
+                "username": "owner",
+                "email": "owner@email",
+                "firstName": "David Diego",
+                "lastName": "Gomez",
+                "isEnabled": true,
+                "phone": {
+                    "countryName": "",
+                    "number": "",
+                    "phoneCode": "",
+                    "countryCode": "",
+                    "_id": "654fed2b5c23db652e7be37e"
+                },
+                "emailVerified": false,
+                "twoFactorEnabled": false,
+                "twoFactorSecret": null,
+                "deviceTokens": [],
+                "createdAt": "2023-10-29T21:43:54.162Z",
+                "updatedAt": "2023-11-11T21:09:15.224Z",
+                "profileImage": {
+                    "highResImage": {
+                        "url": "https://storage.googleapis.com/fitnessapp-3b183.appspot.com/profile_image/653ed21a11fd629b249775e3/profile_image.png?GoogleAccessId=firebase-adminsdk-703jw%40fitnessapp-3b183.iam.gserviceaccount.com&Expires=3408134400&Signature=wlwi%2FwyywlZUdVOI1h90zS7eHmgYwVfRNty7jxuDp8cbY%2BvGX%2BXud47CeQFR0w4YwqyPocJau7GdT1xkQzcvahtBZkO0mF2Ac2%2BuO1V1NJb1MPqC%2BlTl1W5b8xAqebrPQVhABdX9%2F6i1n3YxY8o0i2ilegy2VGKEfa9WsrLfQ5xh%2B%2F6zYewP02AIobxmE9UgOEHGitTL1jzBeuRJkpDwcwUlcT1BAWdIuGXB0uqSyZ4%2Bda9ScA9DU6WhpYfmRgdlGMVY%2BN9deLhaeTb6lyZxgK4YKKoKuLqTr6zIQRx54EWNkFOSNuIaijrdLnOhVPpT4yb57Fe7l3UNbfftaC95PA%3D%3D",
+                        "size": 1552607,
+                        "fileType": "PNG"
+                    },
+                    "thumbnailImage": {
+                        "url": "https://storage.googleapis.com/fitnessapp-3b183.appspot.com/profile_image/653ed21a11fd629b249775e3/profile_image_thumbnail.png?GoogleAccessId=firebase-adminsdk-703jw%40fitnessapp-3b183.iam.gserviceaccount.com&Expires=3408134400&Signature=fYB37hg%2FgaHKPfZbvBur0rYmPYhBtbuDpfLycOsCfZDzeT0xffFrIfUn%2FW9aP4yUrTPznjBtjD7J9i2cKD8sYug4zUFD%2Fc4onIXY%2BJ7W3q5w8ez9glRLTZuemhtUFq0H5VWZRKaFEbXhCPftEwhqMIE8oXJTVCKaKOETr%2BW4SEdhNZd3A4kOH%2FUSvYe%2Bmz7KQH%2FGde%2BCXY%2FMa8y6p0aVMXJEONWlSl7T3J%2BBRGlzeKHrqV3jgshLx%2B%2BDyeko4gdPKwB1DabuFB3UpPP98mQKMrHQoZ9mHAkXfXOiixBULt31IkR1d7Rtczn7FRm%2BF3ZyMfYqKuPnrfMAtHvzYXHApA%3D%3D",
+                        "size": 8608,
+                        "fileType": "PNG"
+                    },
+                    "creator": "653ed21a11fd629b249775e3",
+                    "_id": "654fed76f401a9f62751441d",
+                    "createdAt": "2023-11-11T21:09:15.224Z",
+                    "updatedAt": "2023-11-11T21:09:15.224Z"
+                }
+            },
+            "expiration": "2023-11-13T23:17:35.921Z",
+            "createdAt": "2023-11-11T23:17:35.921Z",
+            "updatedAt": "2023-11-11T23:17:35.921Z",
             "__v": 0
         }
     ]

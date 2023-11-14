@@ -11,11 +11,16 @@ class InvitationViewModel: BaseViewModel {
     @Published var invitations: [InvitationModel] = []
     @Published var onAcceptedInvitation: Bool = false
     @Published var onRejectedInvitation: Bool = false
+    
+    let invitationUseCase: InvitationUseCaseProtocol
+    
+    init(invitationUseCase: InvitationUseCaseProtocol = InvitationUseCase()) {
+        self.invitationUseCase = invitationUseCase
+    }
 
     @MainActor
     func loadInvitationsByUserId() {
         Task {
-            let invitationUseCase = InvitationUseCase()
             isLoading = true
             do {
                 let response = try await invitationUseCase.getInvitationsByUserId()
@@ -37,12 +42,9 @@ class InvitationViewModel: BaseViewModel {
     @MainActor
     func acceptInvitation(invitation: InvitationModel) {
         Task {
-            let usecase = InvitationUseCase()
-            
             isLoading = true
-            
             do {
-                let response = try await usecase.acceptInvitation(_id: invitation._id)
+                let response = try await invitationUseCase.acceptInvitation(_id: invitation._id)
                 isLoading = false
                 onAcceptedInvitation = true
             } catch {
@@ -56,12 +58,9 @@ class InvitationViewModel: BaseViewModel {
     @MainActor
     func rejectInvitation(invitation: InvitationModel) {
         Task {
-            let usecase = InvitationUseCase()
-            
             isLoading = true
-            
             do {
-                let response = try await usecase.rejectInvitation(_id: invitation._id)
+                let response = try await invitationUseCase.rejectInvitation(_id: invitation._id)
                 isLoading = false
                 onRejectedInvitation = true
             } catch {

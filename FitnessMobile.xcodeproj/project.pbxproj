@@ -140,7 +140,9 @@
 		F1D372FD2AA5648100846DC6 /* invitation_mock_empty_response.json in Resources */ = {isa = PBXBuildFile; fileRef = F1D372F92AA5607200846DC6 /* invitation_mock_empty_response.json */; };
 		F1D372FE2AA5648400846DC6 /* invitation_mock_success_response.json in Resources */ = {isa = PBXBuildFile; fileRef = F1D372FA2AA5613D00846DC6 /* invitation_mock_success_response.json */; };
 		F1D373002AA5648F00846DC6 /* InvitationUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1D372FF2AA5648F00846DC6 /* InvitationUseCase.swift */; };
-		F1DC7BEE2B02F3340014E554 /* WorkspaceRepositoryTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1DC7BED2B02F3340014E554 /* WorkspaceRepositoryTests.swift */; };
+		F1DC7BEE2B02F3340014E554 /* WorkspaceSettingViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1DC7BED2B02F3340014E554 /* WorkspaceSettingViewModelTests.swift */; };
+		F1DC7BF02B0334260014E554 /* Invitation_mock_has_expired.json in Resources */ = {isa = PBXBuildFile; fileRef = F1DC7BEF2B0334260014E554 /* Invitation_mock_has_expired.json */; };
+		F1DC7BF22B0334E50014E554 /* InvitationViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1DC7BF12B0334E50014E554 /* InvitationViewModelTests.swift */; };
 		F1E01EE12A93D01700991010 /* StorageUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1E01EE02A93D01700991010 /* StorageUseCase.swift */; };
 		F1E01EE32A93D02300991010 /* StorageRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1E01EE22A93D02300991010 /* StorageRepository.swift */; };
 		F1E01EE52A93D02900991010 /* StorageEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1E01EE42A93D02900991010 /* StorageEntity.swift */; };
@@ -318,7 +320,9 @@
 		F1D372FA2AA5613D00846DC6 /* invitation_mock_success_response.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = invitation_mock_success_response.json; sourceTree = "<group>"; };
 		F1D372FB2AA5647E00846DC6 /* InvitationRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InvitationRepository.swift; sourceTree = "<group>"; };
 		F1D372FF2AA5648F00846DC6 /* InvitationUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InvitationUseCase.swift; sourceTree = "<group>"; };
-		F1DC7BED2B02F3340014E554 /* WorkspaceRepositoryTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkspaceRepositoryTests.swift; sourceTree = "<group>"; };
+		F1DC7BED2B02F3340014E554 /* WorkspaceSettingViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkspaceSettingViewModelTests.swift; sourceTree = "<group>"; };
+		F1DC7BEF2B0334260014E554 /* Invitation_mock_has_expired.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = Invitation_mock_has_expired.json; sourceTree = "<group>"; };
+		F1DC7BF12B0334E50014E554 /* InvitationViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InvitationViewModelTests.swift; sourceTree = "<group>"; };
 		F1E01EE02A93D01700991010 /* StorageUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StorageUseCase.swift; sourceTree = "<group>"; };
 		F1E01EE22A93D02300991010 /* StorageRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StorageRepository.swift; sourceTree = "<group>"; };
 		F1E01EE42A93D02900991010 /* StorageEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StorageEntity.swift; sourceTree = "<group>"; };
@@ -776,7 +780,8 @@
 			isa = PBXGroup;
 			children = (
 				F1AD876B2A788B4C00A39752 /* FitnessMobileTests.swift */,
-				F1DC7BED2B02F3340014E554 /* WorkspaceRepositoryTests.swift */,
+				F1DC7BED2B02F3340014E554 /* WorkspaceSettingViewModelTests.swift */,
+				F1DC7BF12B0334E50014E554 /* InvitationViewModelTests.swift */,
 			);
 			path = FitnessMobileTests;
 			sourceTree = "<group>";
@@ -1129,6 +1134,7 @@
 				F1D372F72AA5605600846DC6 /* InvitationEntity.swift */,
 				F1D372F92AA5607200846DC6 /* invitation_mock_empty_response.json */,
 				F1D372FA2AA5613D00846DC6 /* invitation_mock_success_response.json */,
+				F1DC7BEF2B0334260014E554 /* Invitation_mock_has_expired.json */,
 			);
 			path = Invitation;
 			sourceTree = "<group>";
@@ -1327,6 +1333,7 @@
 				F1D372FE2AA5648400846DC6 /* invitation_mock_success_response.json in Resources */,
 				F1AD87C82A788FE000A39752 /* login_mock_response.json in Resources */,
 				F1D372FD2AA5648100846DC6 /* invitation_mock_empty_response.json in Resources */,
+				F1DC7BF02B0334260014E554 /* Invitation_mock_has_expired.json in Resources */,
 				F17F4A752A80570D0086DDCB /* Localizable.strings in Resources */,
 				F1AD875E2A788B4C00A39752 /* Assets.xcassets in Resources */,
 			);
@@ -1500,7 +1507,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				F1AD876C2A788B4C00A39752 /* FitnessMobileTests.swift in Sources */,
-				F1DC7BEE2B02F3340014E554 /* WorkspaceRepositoryTests.swift in Sources */,
+				F1DC7BF22B0334E50014E554 /* InvitationViewModelTests.swift in Sources */,
+				F1DC7BEE2B02F3340014E554 /* WorkspaceSettingViewModelTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

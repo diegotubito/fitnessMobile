@@ -88,7 +88,6 @@ class InvitationRepositoryMock: ApiNetworkMockAsync ,InvitationRepositoryProtoco
     }
     
     func getInvitationsByUserId(request: InvitationEntity.GetByUserId.Request) async throws -> InvitationResult.ByUserId {
-        mockFileName = "invitation_mock_success_response"
         return try await apiCallMocked(bundle: .main)
     }
     

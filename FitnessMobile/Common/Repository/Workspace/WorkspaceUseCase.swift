@@ -10,7 +10,7 @@ import Foundation
 protocol WorkspaceUseCaseProtocol {
     init(repository: WorkspaceRepositoryProtocol)
     func getWorkspace(_id: String) async throws -> WorkspaceResults.Find
-    func getWorkspacesBuUserId() async throws -> WorkspaceResults.FindById
+    func getWorkspacesBuUserId(_id: String) async throws -> WorkspaceResults.FindById
     func createWorkspace(ownerId: String, title: String, subtitle: String) async throws -> WorkspaceResults.Create
     func updateWorkspace(workspaceId: String, title: String, subtitle: String) async throws -> WorkspaceResults.Update
     func updateWorkspaceAddress(workspaceId: String, location: WorkspaceModel.Location) async throws -> WorkspaceResults.UpdateAddress
@@ -36,8 +36,8 @@ class WorkspaceUseCase: WorkspaceUseCaseProtocol {
         return try await repository.getWorkspace(request: request)
     }
     
-    func getWorkspacesBuUserId() async throws -> WorkspaceResults.FindById {
-        let request = WorkspaceEntity.FindByUserId.Request(userId: UserSession._id)
+    func getWorkspacesBuUserId(_id: String) async throws -> WorkspaceResults.FindById {
+        let request = WorkspaceEntity.FindByUserId.Request(userId: _id)
         return try await repository.getWorkspacesByUserId(request: request)
     }
 

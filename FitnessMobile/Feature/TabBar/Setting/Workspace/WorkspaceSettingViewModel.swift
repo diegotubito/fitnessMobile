@@ -11,14 +11,19 @@ class WorkspaceSettingViewModel: BaseViewModel {
     var workspaces: [WorkspaceModel] = []
     @Published var ownWorkspaces: [WorkspaceModel] = []
     @Published var invitedWorkspaces: [WorkspaceModel] = []
+    
+    let workspaceUseCase: WorkspaceUseCaseProtocol
+    
+    init(usecase: WorkspaceUseCaseProtocol = WorkspaceUseCase()) {
+        self.workspaceUseCase = usecase
+    }
 
     @MainActor
     func loadWorkspacesById() {
         Task {
-            let workspaceUseCase = WorkspaceUseCase()
             isLoading = true
             do {
-                let response = try await workspaceUseCase.getWorkspacesBuUserId()
+                let response = try await workspaceUseCase.getWorkspacesBuUserId(_id: UserSession._id)
 
                 DispatchQueue.main.async {
                     self.workspaces = response.workspaces

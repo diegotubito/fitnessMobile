@@ -16,7 +16,7 @@ class SplashViewModel: BaseViewModel {
             let usecase = WorkspaceUseCase()
             
             do {
-                let response = try await usecase.getWorkspacesBuUserId()
+                let response = try await usecase.getWorkspacesBuUserId(_id: UserSession._id)
                 workspaces = response.workspaces
                 saveWorkspacesToKeychain(workspaces: response.workspaces)
             } catch {

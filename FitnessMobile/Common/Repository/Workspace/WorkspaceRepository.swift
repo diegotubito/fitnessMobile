@@ -154,73 +154,70 @@ class WorkspaceRepository: ApiNetworkAsync, WorkspaceRepositoryProtocol {
 }
 
 class WorkspaceRepositoryMock: ApiNetworkMockAsync, WorkspaceRepositoryProtocol {
+    var fileName: String
+    var isSuccess: Bool
+    
+    init(fileName: String, isSuccess: Bool) {
+        self.fileName = fileName
+        self.isSuccess = isSuccess
+        super.init()
+        mockFileName = fileName
+        success = isSuccess
+    }
+    
     func getWorkspace(request: WorkspaceEntity.Find.Request) async throws -> WorkspaceResults.Find {
-        mockFileName = ""
         return try await apiCallMocked(bundle: Bundle.main)
     }
    
     func getWorkspacesByUserId(request: WorkspaceEntity.FindByUserId.Request) async throws -> WorkspaceResults.FindById {
-        mockFileName = "load_workspace_by_id_response"
         return try await apiCallMocked(bundle: Bundle.main)
     }
     
     func createWorkspace(request: WorkspaceEntity.Create.Request) async throws -> WorkspaceResults.Create {
-        mockFileName = ""
         return try await apiCallMocked(bundle: Bundle.main)
     }
 
     func updateWorkspace(request: WorkspaceEntity.Update.Request) async throws -> WorkspaceResults.Update {
-        mockFileName = ""
         return try await apiCallMocked(bundle: Bundle.main)
     }
     
     func updateWorkspaceAddress(request: WorkspaceEntity.UpdateAddress.Request) async throws -> WorkspaceResults.UpdateAddress {
-        mockFileName = ""
         return try await apiCallMocked(bundle: Bundle.main)
     }
     
     func deleteWorkspace(request: WorkspaceEntity.Delete.Request) async throws -> WorkspaceResults.Delete {
-        mockFileName = ""
         return try await apiCallMocked(bundle: Bundle.main)
     }
     
     func deleteWorkspaceLocation(request: WorkspaceEntity.DeleteLocation.Request) async throws -> WorkspaceResults.DeleteLocation {
-        mockFileName = ""
         return try await apiCallMocked(bundle: Bundle.main)
     }
     
     func deleteWorkspaceMember(request: WorkspaceEntity.DeleteMember.Request) async throws -> WorkspaceResults.DeleteMember {
-        mockFileName = ""
         return try await apiCallMocked(bundle: Bundle.main)
     }
     
     func addDocumentUrlToWorkspace(request: WorkspaceEntity.Document.Push.Request) async throws -> WorkspaceResults.DocumentPush {
-        mockFileName = ""
         return try await apiCallMocked(bundle: Bundle.main)
     }
     
     func removeDocumentUrlToWorkspace(request: WorkspaceEntity.Document.Delete.Request) async throws -> WorkspaceResults.DocumentDelete {
-        mockFileName = ""
         return try await apiCallMocked(bundle: Bundle.main)
     }
     
     func updateWorkspaceDefaultImage(request: WorkspaceEntity.Document.Push.Request) async throws -> WorkspaceResults.DocumentPush {
-        mockFileName = ""
         return try await apiCallMocked(bundle: Bundle.main)
     }
     
     func updateWorkspaceDefaultBackgroundImage(request: WorkspaceEntity.Document.Push.Request) async throws -> WorkspaceResults.DocumentPush {
-        mockFileName = ""
         return try await apiCallMocked(bundle: Bundle.main)
     }
     
     func pushWorkspaceImage(request: WorkspaceEntity.Document.Push.Request) async throws -> WorkspaceResults.DocumentPush {
-        mockFileName = ""
         return try await apiCallMocked(bundle: Bundle.main)
     }
     
     func pullWorkspaceImage(request: WorkspaceEntity.Document.Delete.Request) async throws -> WorkspaceResults.DocumentDelete {
-        mockFileName = ""
         return try await apiCallMocked(bundle: Bundle.main)
     }
 }

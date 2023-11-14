@@ -76,33 +76,39 @@ class InvitationRepository: ApiNetworkAsync, InvitationRepositoryProtocol {
 }
 
 class InvitationRepositoryMock: ApiNetworkMockAsync ,InvitationRepositoryProtocol {
+    var fileName: String
+    var isSuccess: Bool
+    
+    init(fileName: String, isSuccess: Bool) {
+        self.fileName = fileName
+        self.isSuccess = isSuccess
+        super.init()
+        mockFileName = fileName
+        success = isSuccess
+    }
+    
     func getInvitationsByUserId(request: InvitationEntity.GetByUserId.Request) async throws -> InvitationResult.ByUserId {
         mockFileName = "invitation_mock_success_response"
         return try await apiCallMocked(bundle: .main)
     }
     
     func getInvitationsByWorkspace(request: InvitationEntity.ByWorkspace.Request) async throws -> InvitationResult.ByWorkspace {
-        mockFileName = ""
         return try await apiCallMocked(bundle: .main)
     }
     
     func sendInvitation(request: InvitationEntity.SendInvitation.Request) async throws -> InvitationResult.SendInvitation {
-        mockFileName = ""
         return try await apiCallMocked(bundle: .main)
     }
     
     func deleteInvitationById(request: InvitationEntity.DeleteInvitation.Request) async throws -> InvitationResult.DeleteById {
-        mockFileName = ""
         return try await apiCallMocked(bundle: .main)
     }
     
     func acceptInvitation(request: InvitationEntity.AcceptInvitation.Request) async throws -> InvitationResult.AcceptInvitation {
-        mockFileName = ""
         return try await apiCallMocked(bundle: .main)
     }
     
     func rejectInvitation(request: InvitationEntity.RejectInvitation.Request) async throws -> InvitationResult.RejectInvitation {
-        mockFileName = ""
         return try await apiCallMocked(bundle: .main)
     }
 }

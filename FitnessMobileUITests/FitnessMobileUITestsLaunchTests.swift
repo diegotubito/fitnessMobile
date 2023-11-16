@@ -26,7 +26,7 @@ final class FitnessMobileUITestsLaunchTests: XCTestCase {
 
         let attachment = XCTAttachment(screenshot: app.screenshot())
         attachment.name = "Launch Screen"
-        attachment.lifetime = .keepAlways
+       
         add(attachment)
     }
 }

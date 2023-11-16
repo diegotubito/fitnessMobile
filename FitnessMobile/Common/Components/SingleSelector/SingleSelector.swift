@@ -8,17 +8,17 @@
 import SwiftUI
 
 class SingleSelectorManager: ObservableObject {
-    @Published var selectedOption: Int? = nil
+    @Published var selectedOption: String? = nil
     @Published var options: [OptionModel] = []
     
     struct OptionModel: Identifiable, Hashable {
-        let id = UUID()
+        let id: String
         let title: String
         let subtitle: String
     }
     
-    func isSelected(_ index: Int) -> Bool {
-        if selectedOption == index {
+    func isSelected(_ _id: String) -> Bool {
+        if selectedOption == _id {
             return true
         } else {
            return false
@@ -49,9 +49,9 @@ struct SingleSelectorView: View {
         static let imageForegroundColorDeselected: Color = Color(hex: "DCDFE8")!
     }
     
-    var onSelectedOption: ((Int?) -> Void)?
+    var onSelectedOption: ((String?) -> Void)?
     
-    fileprivate func mainView(index: Int, option: SingleSelectorManager.OptionModel) -> some View {
+    fileprivate func mainView(_id: String, option: SingleSelectorManager.OptionModel) -> some View {
         return HStack(alignment: .top, spacing: 0) {
             VStack(spacing: Constants.midMargin) {
                 HStack(spacing: 0) {
@@ -70,21 +70,21 @@ struct SingleSelectorView: View {
                 }
             }
             
-            Image(systemName: singleSelectorManager.isSelected(index) ? Constants.imageForSelectedOption: Constants.imageForDeselectedOption)
+            Image(systemName: singleSelectorManager.isSelected(_id) ? Constants.imageForSelectedOption: Constants.imageForDeselectedOption)
                 .resizable()
                 .frame(width: Constants.imageSize, height: Constants.imageSize)
-                .foregroundColor(singleSelectorManager.isSelected(index) ? Constants.imageForegroundColorSelected : Constants.imageForegroundColorDeselected)
+                .foregroundColor(singleSelectorManager.isSelected(_id) ? Constants.imageForegroundColorSelected : Constants.imageForegroundColorDeselected)
             
         }
         .contentShape( RoundedRectangle(cornerRadius: Constants.cornerRadius)) // Apply contentShape modifier to enable tap gesture recognition on the entire view
         .padding()
         .background(
             RoundedRectangle(cornerRadius: Constants.cornerRadius)
-                .fill(singleSelectorManager.isSelected(index) ? Constants.selectedBackgroundColor : Constants.deselectedBackgroundColor)
+                .fill(singleSelectorManager.isSelected(_id) ? Constants.selectedBackgroundColor : Constants.deselectedBackgroundColor)
         )
         .overlay(
             RoundedRectangle(cornerRadius: Constants.cornerRadius)
-                .stroke(singleSelectorManager.isSelected(index) ? Constants.selectedBorderColor: Constants.deselectedBorderColor,
+                .stroke(singleSelectorManager.isSelected(_id) ? Constants.selectedBorderColor: Constants.deselectedBorderColor,
                         lineWidth: Constants.borderWidth)
         )
     }
@@ -92,13 +92,13 @@ struct SingleSelectorView: View {
     var body: some View {
         
         VStack(spacing: Constants.midMargin) {
-            ForEach(Array(singleSelectorManager.options.enumerated()), id: \.element.id) { index, option in
-                mainView(index: index, option: option)
+            ForEach(singleSelectorManager.options) { option in
+                mainView(_id: option.id, option: option)
                     .onTapGesture {
-                        if singleSelectorManager.isSelected(index) { return }
+                        if singleSelectorManager.isSelected(option.id) { return }
                         withAnimation {
-                            self.singleSelectorManager.selectedOption = index
-                            self.onSelectedOption?(index)
+                            self.singleSelectorManager.selectedOption = option.id
+                            self.onSelectedOption?(option.id)
                         }
                     }
             }

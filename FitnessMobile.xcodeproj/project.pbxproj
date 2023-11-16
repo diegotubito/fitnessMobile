@@ -146,6 +146,8 @@
 		F1E01EE12A93D01700991010 /* StorageUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1E01EE02A93D01700991010 /* StorageUseCase.swift */; };
 		F1E01EE32A93D02300991010 /* StorageRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1E01EE22A93D02300991010 /* StorageRepository.swift */; };
 		F1E01EE52A93D02900991010 /* StorageEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1E01EE42A93D02900991010 /* StorageEntity.swift */; };
+		F1E02BAC2B057B3100267447 /* DefaultWorkspaceSelectorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1E02BAB2B057B3100267447 /* DefaultWorkspaceSelectorView.swift */; };
+		F1E02BAE2B05808600267447 /* DefaultWorkspaceSelectorViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1E02BAD2B05808600267447 /* DefaultWorkspaceSelectorViewModel.swift */; };
 		F1F637B72A886C6200FC3A31 /* TwoFactorSettingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1F637B62A886C6200FC3A31 /* TwoFactorSettingView.swift */; };
 		F1F637B92A886C9C00FC3A31 /* TwoFactorSettingViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1F637B82A886C9C00FC3A31 /* TwoFactorSettingViewModel.swift */; };
 		F1F637BC2A88798F00FC3A31 /* TwoFactorEnableInformationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1F637BB2A88798F00FC3A31 /* TwoFactorEnableInformationView.swift */; };
@@ -326,6 +328,8 @@
 		F1E01EE02A93D01700991010 /* StorageUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StorageUseCase.swift; sourceTree = "<group>"; };
 		F1E01EE22A93D02300991010 /* StorageRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StorageRepository.swift; sourceTree = "<group>"; };
 		F1E01EE42A93D02900991010 /* StorageEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StorageEntity.swift; sourceTree = "<group>"; };
+		F1E02BAB2B057B3100267447 /* DefaultWorkspaceSelectorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultWorkspaceSelectorView.swift; sourceTree = "<group>"; };
+		F1E02BAD2B05808600267447 /* DefaultWorkspaceSelectorViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultWorkspaceSelectorViewModel.swift; sourceTree = "<group>"; };
 		F1F637B62A886C6200FC3A31 /* TwoFactorSettingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TwoFactorSettingView.swift; sourceTree = "<group>"; };
 		F1F637B82A886C9C00FC3A31 /* TwoFactorSettingViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TwoFactorSettingViewModel.swift; sourceTree = "<group>"; };
 		F1F637BB2A88798F00FC3A31 /* TwoFactorEnableInformationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TwoFactorEnableInformationView.swift; sourceTree = "<group>"; };
@@ -713,6 +717,7 @@
 		F1A1D7F72B02D3DA0029DFAE /* Business */ = {
 			isa = PBXGroup;
 			children = (
+				F1E02BAA2B057B1900267447 /* WorkspaceDefaultSelector */,
 				F1A1D7FC2B02DB720029DFAE /* WorkspaceHeader */,
 				F1A1D7F82B02D3ED0029DFAE /* BusinessView.swift */,
 				F1A1D7FA2B02D4DD0029DFAE /* BusinessViewModel.swift */,
@@ -1149,6 +1154,15 @@
 			path = Storage;
 			sourceTree = "<group>";
 		};
+		F1E02BAA2B057B1900267447 /* WorkspaceDefaultSelector */ = {
+			isa = PBXGroup;
+			children = (
+				F1E02BAB2B057B3100267447 /* DefaultWorkspaceSelectorView.swift */,
+				F1E02BAD2B05808600267447 /* DefaultWorkspaceSelectorViewModel.swift */,
+			);
+			path = WorkspaceDefaultSelector;
+			sourceTree = "<group>";
+		};
 		F1F637B52A886C4B00FC3A31 /* TwoFactorSeeting */ = {
 			isa = PBXGroup;
 			children = (
@@ -1360,6 +1374,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F1E02BAE2B05808600267447 /* DefaultWorkspaceSelectorViewModel.swift in Sources */,
 				F159C3E82A9B8B7200CDAF20 /* CustomAlertView.swift in Sources */,
 				F1AD87CC2A788FE000A39752 /* LoginRepository.swift in Sources */,
 				F1F859652AEC69D700D5E7DF /* WorkspaceUseCaseSync.swift in Sources */,
@@ -1481,6 +1496,7 @@
 				F16CCD532ABA6D920037DCC6 /* SearchUserForInvitationView.swift in Sources */,
 				F1CC09602AC8F5BB00C5E0CD /* MemberDetailViewModel.swift in Sources */,
 				F1D372F32AA54A6200846DC6 /* InvitationView.swift in Sources */,
+				F1E02BAC2B057B3100267447 /* DefaultWorkspaceSelectorView.swift in Sources */,
 				F1AD87E52A7A1EE200A39752 /* PhoneTextField.swift in Sources */,
 				F1B48D482AEDBB6600EE732E /* EditDefaultImageView.swift in Sources */,
 				F16CCD502AB9283F0037DCC6 /* InvitationListViewModel.swift in Sources */,

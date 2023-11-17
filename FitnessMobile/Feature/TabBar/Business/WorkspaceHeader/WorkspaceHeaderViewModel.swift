@@ -27,6 +27,7 @@ class WorkspaceHeaderViewModel: BaseViewModel {
                 onWorkspacesDidLoad = true
                 fetchDefaultImage()
             } catch {
+                isLoading = true
                 handleError(error: error)
             }
         }
@@ -36,7 +37,10 @@ class WorkspaceHeaderViewModel: BaseViewModel {
     
     @MainActor
     func fetchDefaultImage() {
-        guard let url = defaultWorkspace?.defaultImage?.thumbnailImage?.url else { return }
+        guard let url = defaultWorkspace?.defaultImage?.thumbnailImage?.url else {
+            isLoading = false
+            return
+        }
         
         Task {
             do {

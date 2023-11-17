@@ -10,6 +10,7 @@ import SwiftUI
 struct TitleAndSubtitleWorkspaceView: View {
     @StateObject var viewmodel: WorkspaceTitleAndSubtitleViewModel
     @EnvironmentObject var settingCoordinator: SettingCoordinator
+    @EnvironmentObject var mainModalCoordinator: MainModalCoordinator
     @FocusState var focus: Focus?
     
     enum Focus {
@@ -74,7 +75,7 @@ struct TitleAndSubtitleWorkspaceView: View {
             })
             .onReceive(viewmodel.$onCreateSuccess, perform: { created in
                 if created {
-                    settingCoordinator.path.removeLast()
+                    mainModalCoordinator.modal = MainModalView(screen: .splash)
                 }
             })
             .padding()

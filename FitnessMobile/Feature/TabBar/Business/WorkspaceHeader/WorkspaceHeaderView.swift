@@ -55,10 +55,6 @@ struct WorkspaceHeaderView: View {
                     }
                     .shadow(radius: 10)
                 
-                if let defaultWorkspace = viewmodel.defaultWorkspace {
-                    DefaultImageView(defaultIamgeViewModel: DefaultImageViewModel(workspace: defaultWorkspace), size: 100, isEditable: false)
-                }
-                
                 VStack(alignment: .leading) {
                     HStack {
                         Text("Default Workspace")

@@ -52,7 +52,6 @@ struct BusinessView: View {
                     })
                     Spacer()
                 }
-                
             }
             .navigationDestination(for: BusinessCoordinator.Screen.self) { screen in
                 switch screen {
@@ -60,7 +59,6 @@ struct BusinessView: View {
                     DefaultWorkspaceSelectorView()
                 }
             }
-        
         }
 
         .environmentObject(businessCoordinator)

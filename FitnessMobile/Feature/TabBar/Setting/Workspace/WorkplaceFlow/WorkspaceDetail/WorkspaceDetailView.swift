@@ -9,6 +9,7 @@ import SwiftUI
 struct WorkspaceDetailView: View {
     @StateObject var viewmodel: WorkspaceDetailViewModel
     @EnvironmentObject var settingCoordinator: SettingCoordinator
+    @EnvironmentObject var mainModalCoordinator: MainModalCoordinator
     @State private var selectedItem: SheetItem? = nil
     @State private var showAlertDeleteWorkspace = false
     
@@ -324,7 +325,7 @@ struct WorkspaceDetailView: View {
         })
         .onReceive(viewmodel.$onDeleteSuccess) { isDeleted in
             if isDeleted {
-                settingCoordinator.path.removeLast()
+                mainModalCoordinator.modal = MainModalView(screen: .splash)
             }
         }
         //.toolbarColorScheme(.dark, for: .navigationBar)

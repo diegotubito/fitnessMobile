@@ -20,5 +20,116 @@
             landmarkType = "24">
          </BreakpointContent>
       </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "3734CBC1-080B-45B4-BC47-9DA317FC665F"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "FitnessMobile/Feature/TabBar/Setting/Workspace/WorkplaceFlow/MemberDetail/MemberDetailView.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "81"
+            endingLineNumber = "81"
+            landmarkName = "body"
+            landmarkType = "24">
+            <Locations>
+               <Location
+                  uuid = "3734CBC1-080B-45B4-BC47-9DA317FC665F - ee9de8fb912c1a7f"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #4 (Swift.Bool) -&gt; () in FitnessMobile.MemberDetailView.body.getter : some"
+                  moduleName = "FitnessMobile"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/diego/Documents/MyStuff/Fitness/FitnessMobile/FitnessMobile/Feature/TabBar/Setting/Workspace/WorkplaceFlow/MemberDetail/MemberDetailView.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "81"
+                  endingLineNumber = "81"
+                  offsetFromSymbolStart = "68">
+               </Location>
+               <Location
+                  uuid = "3734CBC1-080B-45B4-BC47-9DA317FC665F - ee9de8fb912c1a7f"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #4 (Swift.Bool) -&gt; () in FitnessMobile.MemberDetailView.body.getter : some"
+                  moduleName = "FitnessMobile"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/diego/Documents/MyStuff/Fitness/FitnessMobile/FitnessMobile/Feature/TabBar/Setting/Workspace/WorkplaceFlow/MemberDetail/MemberDetailView.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "81"
+                  endingLineNumber = "81"
+                  offsetFromSymbolStart = "164">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "59FEE5F1-B089-4244-9E8D-C40802E60FF0"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "FitnessMobile/Feature/TabBar/Setting/Workspace/WorkplaceFlow/MemberDetail/MemberDetailView.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "80"
+            endingLineNumber = "80"
+            landmarkName = "body"
+            landmarkType = "24">
+            <Locations>
+               <Location
+                  uuid = "59FEE5F1-B089-4244-9E8D-C40802E60FF0 - a0221743a0f45fc"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "FitnessMobile.MemberDetailView.body.getter : some"
+                  moduleName = "FitnessMobile"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/diego/Documents/MyStuff/Fitness/FitnessMobile/FitnessMobile/Feature/TabBar/Setting/Workspace/WorkplaceFlow/MemberDetail/MemberDetailView.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "80"
+                  endingLineNumber = "80"
+                  offsetFromSymbolStart = "1500">
+               </Location>
+               <Location
+                  uuid = "59FEE5F1-B089-4244-9E8D-C40802E60FF0 - ee9de8fb912c1a1c"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #4 (Swift.Bool) -&gt; () in FitnessMobile.MemberDetailView.body.getter : some"
+                  moduleName = "FitnessMobile"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/diego/Documents/MyStuff/Fitness/FitnessMobile/FitnessMobile/Feature/TabBar/Setting/Workspace/WorkplaceFlow/MemberDetail/MemberDetailView.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "80"
+                  endingLineNumber = "80"
+                  offsetFromSymbolStart = "56">
+               </Location>
+               <Location
+                  uuid = "59FEE5F1-B089-4244-9E8D-C40802E60FF0 - ee9de8fb912c1a1c"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #4 (Swift.Bool) -&gt; () in FitnessMobile.MemberDetailView.body.getter : some"
+                  moduleName = "FitnessMobile"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/diego/Documents/MyStuff/Fitness/FitnessMobile/FitnessMobile/Feature/TabBar/Setting/Workspace/WorkplaceFlow/MemberDetail/MemberDetailView.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "80"
+                  endingLineNumber = "80"
+                  offsetFromSymbolStart = "136">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
    </Breakpoints>
 </Bucket>

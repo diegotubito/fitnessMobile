@@ -69,6 +69,7 @@ class WorkspaceDetailViewModel: BaseViewModel {
                 let response = try await usecase.deleteWorkspace(_id: workspace._id)
                 isLoading = false
                 onDeleteSuccess = true
+                deleteWorkspaceDefaultIfNeccesary(workspaceID: response.workspace._id)
             } catch {
                 isLoading = false
                 showError = true
@@ -91,6 +92,12 @@ class WorkspaceDetailViewModel: BaseViewModel {
                 self.showError = true
                 self.handleError(error: error)
             }
+        }
+    }
+    
+    func deleteWorkspaceDefaultIfNeccesary(workspaceID: String) {
+        if DefaultWorkspace.getDefaultWorkspaceId() == workspaceID {
+            DefaultWorkspace.removeDefaultWorkspace()
         }
     }
     
